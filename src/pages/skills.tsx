@@ -16,6 +16,16 @@ const SkillsPage = () => {
 
       <br />
 
+      <h2>Dexterity</h2>
+
+      <div className="cards-container">
+        <ContentCard 
+        title="Stealth" 
+        imagePath="/skills-images/stealth_logo.png" 
+        linkTo="/skills/stealth"
+      />
+    </div>
+
       <h2>Intelligence</h2>
 
       <div className="cards-container">
