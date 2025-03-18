@@ -1,7 +1,7 @@
 .content-card {
     display: block;
     width: 200px;
-    height: 350px; /* Set a fixed total height */
+    height: 280px; /* Set a fixed total height */
     border: 1px solid #ccc;
     border-radius: 5px;
     overflow: hidden;
@@ -33,7 +33,7 @@
   
   .card-content {
     padding: 10px;
-    height: 180px; /* Fixed height for the content area */
+    height: 110px; /* Fixed height for the content area */
     overflow: hidden; /* Hide overflow content */ 
     display: flex;
     flex-direction: column;
