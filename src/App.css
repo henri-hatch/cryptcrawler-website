@@ -1,0 +1,101 @@
+/* Remove default browser margin/padding on html/body */
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #ded9b7; /* Light tan for the body background */
+  height: 100%;
+}
+
+/* Container to hold everything */
+.app-container {
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/****************************************
+ * HEADER (Top banner flush to top)
+ ****************************************/
+ .header {
+  display: flex;
+  justify-content: center;
+  /* Match body background so it flows seamlessly */
+  background-color: #ded9b7;
+  position: relative; /* Added to allow absolute positioning of children */
+}
+
+.logo-overlay {
+  position: absolute;
+  top: 20px; /* Adjust this value to control how far from top */
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 200px; /* Adjust based on your logo size */
+  z-index: 1; /* Ensures logo appears above the banner */
+}
+
+.header img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/****************************************
+ * NAVIGATION BAR (directly under header)
+ ****************************************/
+.navbar {
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+  padding: 10px 0;
+}
+
+.navbar a {
+  color: #000;
+  text-decoration: none;
+  border: 1px solid #000;
+  padding: 8px 16px;
+  margin: 0 6px;
+}
+
+/* Hover effect */
+.navbar a:hover {
+  background-color: #800000;
+  color: #fff;
+}
+
+/* Active link styling */
+.navbar a.active {
+  background-color: #800000;
+  color: #fff;
+}
+
+/****************************************
+ * MAIN LAYOUT: 3 columns
+ ****************************************/
+.main-layout {
+  display: grid;
+  grid-template-columns: 1fr minmax(200px, 900px) 1fr;
+  /* Left and right expand, center is 200px to 900px */
+}
+
+/* Left/right sidebars share same background as body */
+.left-sidebar,
+.right-sidebar {
+  background-color: #ded9b7;
+}
+
+/* Main white content column */
+.content {
+  background-color: #fff;
+  padding: 20px;
+  color: #000;  /* Add this line to ensure black text */
+}
+
+.detail-image {
+  max-width: 300px;
+  float: right;
+  margin: 0 0 20px 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
