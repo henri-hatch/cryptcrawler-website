@@ -1,6 +1,7 @@
 .content-card {
     display: block;
     width: 200px;
+    height: 250px; /* Set a fixed total height */
     border: 1px solid #ccc;
     border-radius: 5px;
     overflow: hidden;
@@ -32,6 +33,10 @@
   
   .card-content {
     padding: 10px;
+    height: 80px; /* Fixed height for the content area */
+    overflow: hidden; /* Hide overflow content */ 
+    display: flex;
+    flex-direction: column;
   }
   
   .card-content h3 {
@@ -42,6 +47,12 @@
     margin: 0;
     font-size: 0.9em;
     color: #666;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limit to 3 lines */
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
   }
   
   .cards-container {
