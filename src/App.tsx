@@ -38,8 +38,8 @@ function App() {
           <NavLink to="/game-rules" className={({isActive}) => isActive ? "active" : ""}>Game Rules</NavLink>
           <NavLink to="/tools" className={({isActive}) => isActive ? "active" : ""}>Tools</NavLink>
         </nav>
-
-        {/* MAIN 3-COLUMN LAYOUT */}
+    
+        {/* MAIN CONTENT */}
         <div className="main-layout">
           <div className="left-sidebar"></div>
           <div className="content">
