@@ -20,18 +20,20 @@ html, body {
  .header {
   display: flex;
   justify-content: center;
-  /* Match body background so it flows seamlessly */
   background-color: #ded9b7;
-  position: relative; /* Added to allow absolute positioning of children */
+  position: relative; /* Keeps this for absolute positioning of children */
 }
 
 .logo-overlay {
   position: absolute;
-  top: 20px; /* Adjust this value to control how far from top */
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
-  max-width: 200px; /* Adjust based on your logo size */
-  z-index: 1; /* Ensures logo appears above the banner */
+  transform: translate(-50%, -50%); /* Center both horizontally and vertically */
+  width: 25%; /* Width as percentage of banner width */
+  max-width: 200px; /* Maximum size cap */
+  min-width: 100px; /* Minimum size so it doesn't get too small */
+  height: auto; /* Maintain aspect ratio */
+  z-index: 1;
 }
 
 .header img {
