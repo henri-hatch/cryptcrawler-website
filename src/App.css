@@ -77,7 +77,7 @@ html, body {
  ****************************************/
 .main-layout {
   display: grid;
-  grid-template-columns: 1fr minmax(200px, 900px) 1fr;
+  grid-template-columns: 1fr minmax(200px, 930px) 1fr;
   /* Left and right expand, center is 200px to 900px */
 }
 
