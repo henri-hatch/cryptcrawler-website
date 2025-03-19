@@ -14,6 +14,7 @@ import ToolsPage from './pages/tools.tsx'
 // Classes
 import Shadow from './subpages/classes/shadow.tsx'
 import Tactician from './subpages/classes/tactician.tsx'
+import Minstrel from './subpages/classes/minstrel.tsx'
 
 // Skills
 import Persuasion from './subpages/skills/persuasion.tsx'
@@ -58,6 +59,7 @@ function App() {
               {/* Subpages */}
               <Route path="/classes/shadow" element={<Shadow />} />
               <Route path="/classes/tactician" element={<Tactician />} />
+              <Route path="/classes/minstrel" element={<Minstrel />} />
 
               <Route path="/skills/persuasion" element={<Persuasion />} />
               <Route path="/skills/bartering" element={<Bartering />} />

@@ -9,16 +9,6 @@ const Tactician = () => {
             </div>
 
             <div>
-            <h3><u>Skills</u></h3>
-            <p>Stealth, then pick to skills from the following list: Acrobatics, Deception, Insight, Lockpicking, Pickpocketing, and Persuasion.</p>
-            </div>
-
-            <div>
-            <h3><u>Kits</u></h3>
-            <p>You can use martial kits.</p>
-            </div>
-
-            <div>
             <h3><u>1st Level: Opportunity</u></h3>
             <p>It is too easy to become distracted in battle, and you seem to be the only one to notice this. You have a heroic resource called opportunity, which you can spend to activate your powerful abilities. At the start of your turn, you gain 2 opportunity. Whenever you dodge an attack, you gain 1 opportunity. All unspent opportunity disappears at the end of an encounter.</p>
             </div>

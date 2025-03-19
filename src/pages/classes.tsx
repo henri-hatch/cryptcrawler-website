@@ -7,8 +7,15 @@ const ClassesPage = () => {
       <h2>Character Classes</h2>
       <p>Choose from these distinctive character classes, each with unique abilities and playstyles.</p>
       
-      <h3>Available Classes</h3>
+      <h3>Common Classes</h3>
       <div className="cards-container">
+      <ContentCard 
+          title="Minstrel" 
+          imagePath="/class-images/minstrel_logo.png" 
+          linkTo="/classes/minstrel"
+          description="Minstrels are poets, the authors of myth, writing the very adventure the party is in."
+        /> 
+
         <ContentCard 
           title="Shadow" 
           imagePath="/class-images/shadow_logo.png" 
