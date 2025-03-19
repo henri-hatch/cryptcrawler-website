@@ -36,6 +36,11 @@ const SkillsPage = () => {
           imagePath="/skills-images/bartering_logo.png" 
           linkTo="/skills/bartering"
         />
+        <ContentCard 
+          title="Crafting" 
+          imagePath="/skills-images/crafting_logo.png" 
+          linkTo="/skills/crafting"
+        />
       </div>
 
       <br />
