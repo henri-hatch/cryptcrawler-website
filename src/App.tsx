@@ -19,6 +19,7 @@ import Tactician from './subpages/classes/tactician.tsx'
 import Persuasion from './subpages/skills/persuasion.tsx'
 import Bartering from './subpages/skills/bartering.tsx'
 import Stealth from './subpages/skills/stealth.tsx'
+import Medicine from './subpages/skills/medicine.tsx'
 
 function App() {
   return (
@@ -60,6 +61,7 @@ function App() {
               <Route path="/skills/persuasion" element={<Persuasion />} />
               <Route path="/skills/bartering" element={<Bartering />} />
               <Route path="/skills/stealth" element={<Stealth />} />
+              <Route path="/skills/medicine" element={<Medicine />} />
 
               {/* 404 */}
 
