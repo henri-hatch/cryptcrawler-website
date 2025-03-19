@@ -1,7 +1,7 @@
 const Bartering = () => {
     return (
         <>
-            <h2>Bartering</h2>
+            <h2>Appraisal</h2>
 
             <h3>Merchant</h3>
             <p><i>You are a master of the trade</i></p>

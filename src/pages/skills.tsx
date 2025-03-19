@@ -30,7 +30,7 @@ const SkillsPage = () => {
 
       <div className="cards-container">
         <ContentCard 
-          title="Bartering" 
+          title="Appraisal" 
           imagePath="/skills-images/bartering_logo.png" 
           linkTo="/skills/bartering"
         />
