@@ -10,6 +10,7 @@ const Minstrel = () => {
                 <li>You must have a CHA score of 3 or higher.</li>
                 <li>You must have the <em>deception</em>, <em>performance</em>, or <em>persuasion</em> skill.</li>
                 <li>You must know three or more languages.</li>
+                <li>You must be known by at least three different names in three different regions of the world.</li>
             </ul>
             </div>
 

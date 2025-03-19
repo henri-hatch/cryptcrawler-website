@@ -1,16 +1,17 @@
-const Tactician = () => {
+const Warden = () => {
     return (
         <>
-            <h2>Tactician</h2>
+            <h2>Warden</h2>
 
             <div>
             <h3>Prerequisites</h3>
-            <p>A tactician is a master of battle, constantly seeking for holes in the battlefield. To be a strategic mastermind, you must meet the following prerequisites.</p>
+            <p>A warden is a stern protector of the land, equipped with enough practical wisdom to roam the wilderness alone. To a vagabond in green, you must meet the following prerequisites.</p>
             <ul>
-                <li>You must have a INT score of 2 or higher.</li>
-                <li>You must have a DEX or STR score of 2 or higher.</li>
-                <li>You must have the <em>heavy armor</em>, <em>insight</em>, <em>light armor</em>, or <em>history</em> skill.</li>
-                <li>You must have prior experience commanding or planning on a battlefield.</li>
+                <li>You must have a WIS score of 2 or higher.</li>
+                <li>You must have a DEX score of 2 or higher.</li>
+                <li>You must have the <em>nature</em>, <em>stealth</em>, or <em>survival</em> skill.</li>
+                <li>You must have a sworn enemy (either singular or as a type), which you are tasked with fending against.</li>
+                <li>You must have a tie to nature, either in the form of an animal companion, trinket, or personal experience.</li>
             </ul>
             </div>
 
@@ -37,4 +38,4 @@ const Tactician = () => {
     )
 }
 
-export default Tactician;
+export default Warden;

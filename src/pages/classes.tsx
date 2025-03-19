@@ -16,6 +16,13 @@ const ClassesPage = () => {
           description="Minstrels are poets, the authors of myth, writing the very adventure the party is in."
         /> 
 
+      <ContentCard 
+          title="Paragon" 
+          imagePath="/class-images/paragon_logo.png" 
+          linkTo="/classes/paragon"
+          description="Bound by a powerful oath, Paragons seek to become the ideal they have sworn to."
+        />
+
         <ContentCard 
           title="Shadow" 
           imagePath="/class-images/shadow_logo.png" 
@@ -28,6 +35,13 @@ const ClassesPage = () => {
           imagePath="/class-images/tactician_logo.png"
           linkTo="/classes/tactician"
           description="Tacticians are the masterminds of the battlefield, using strategy and cunning to outwit their foes."
+        />
+
+        <ContentCard
+          title="Warden"
+          imagePath="/class-images/warden_logo.png"
+          linkTo="/classes/warden"
+          description="As defenders of the land, Wardens are wanderers who roam in order to protect nature from man."
         />
       </div>
     </>
