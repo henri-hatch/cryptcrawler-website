@@ -26,12 +26,12 @@ const Tactician = () => {
 
             <div>
             <h3><u>1st Level: Parry</u></h3>
-            <p>You know how to protect yourself and nearby allies. You gain the <em>parry</em> maneuver.</p>
+            <p>You know how to protect yourself and nearby allies. You gain the <em>Parry</em> maneuver.</p>
             </div>
 
             <div>
-            <h3><u>1st Level: Follow the Plan!</u></h3>
-            <p>In the midst of combat, you can shout commands to your allies. You gain the <em>follow the plan!</em> maneuver.</p>
+            <h3><u>1st Level: Tactical Invitation</u></h3>
+            <p>Distraction is the greatest poison against organization. You gain the <em>Tactical Invitation</em> maneuver.</p>
             </div>
         </>
     )
