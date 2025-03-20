@@ -21,8 +21,8 @@ const Warden = () => {
             </div>
 
             <div>
-            <h3><u>1st Level: Opportunity</u></h3>
-            <p>It is too easy to become distracted in battle, and you seem to be the only one to notice this. You have a heroic resource called opportunity, which you can spend to activate your powerful abilities. At the start of your turn, you gain 2 opportunity. Whenever you dodge an attack, you gain 1 opportunity. All unspent opportunity disappears at the end of an encounter.</p>
+            <h3><u>1st Level: Tenacity</u></h3>
+            <p>As the pressure of combat continues to rise, you find new and ruthless ways to fight. You have a heroic resource called tenacity, which you can spend to activate your powerful abilities. Outside of combat, you have tenacity equal to your WIS score. If you lose some or all of your tenacity outside of combat, it takes 10 minutes to regain it. In combat, at the start of your turn, you gain 2 tenacity. Whenever you succeed a saving throw or skill check, you gain 2 tenacity. All unspent tenacity disappears at the end of an encounter.</p>
             </div>
 
             <div>

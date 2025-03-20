@@ -21,7 +21,7 @@ const Minstrel = () => {
 
             <div>
             <h3><u>1st Level: Drama</u></h3>
-            <p>You control the narrative, coasting along the waves of tension and resolution. You have a heroic resource called drama, which you can spend to activate your powerful abilities. At the start of your turn, you gain 2 drama. Whenever a player rolls a critical failure or critical success, gain 1 drama. If a player dies, gain 10 drama. All unspent drama disappears at the end of an encounter.</p>
+            <p>You control the narrative, coasting along the waves of tension and resolution. You have a heroic resource called drama, which you can spend to activate your powerful abilities. Outside of combat, you have drama equal to your CHA score. If you lose some or all of your drama outside of combat, it takes 10 minutes to regain it. At the start of your turn, you gain 2 drama. Whenever a player rolls a critical failure or critical success, gain 1 drama. If a player dies, gain 10 drama. All unspent drama disappears at the end of an encounter.</p>
             </div>
 
             <div>
