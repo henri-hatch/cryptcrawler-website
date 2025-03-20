@@ -24,12 +24,6 @@ const Persuasion = () => {
             </div>
 
             <div>
-            <h3>Inspirational</h3>
-            <p dir="auto"><em>With either a quick strum of an instrument or an encouraging remark, you embolden your allies to further greatness.</em></p>
-            <p dir="auto">As a reaction, you can give another friendly creature within 60ft a 1d4 bonus to a roll they have made. The amount of times you can activate this feature is equal to your CHA score.</p>
-            </div>
-
-            <div>
             <h3>"He Called You Ugly Too!"</h3>
             <p dir="auto"><em>With enough antagonism, you can confuse your opponents into hitting each other.</em></p>
             <p dir="auto">[1/turn]: As an action, you can provoke a hostile creature within 60ft to attack one of it's friends. The target must make a WIS saving throw, DC 10 + your persuasion skill. On a failure, the target performs a melee attack against an adjacent creature it considers friendly. Additionally, the target becomes immune to this feature for the next day.</p>

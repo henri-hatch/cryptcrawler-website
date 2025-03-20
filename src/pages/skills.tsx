@@ -8,10 +8,16 @@ const SkillsPage = () => {
 
       <div className="cards-container">
         <ContentCard 
+          title="Performance" 
+          imagePath="/skills-images/performance_logo.png" 
+          linkTo="/skills/performance"
+          description="Look at me! Have you seen some juggle so many knifes? Yes? How about now? Still? Geez tough crowd."
+        />
+        <ContentCard 
           title="Persuasion" 
           imagePath="/skills-images/persuasion_logo.png" 
           linkTo="/skills/persuasion"
-          description="Gentlemen I know it looks bad, but have you considered... dying??"
+          description="Gentlemen I know it looks bad, but have you considered not dying? Such an incredible speech is core to Persuasion."
         />
       </div>
 

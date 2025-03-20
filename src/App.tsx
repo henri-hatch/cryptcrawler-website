@@ -24,6 +24,7 @@ import Bartering from './subpages/skills/bartering.tsx'
 import Stealth from './subpages/skills/stealth.tsx'
 import Medicine from './subpages/skills/medicine.tsx'
 import Crafting from './subpages/skills/crafting.tsx'
+import Performance from './subpages/skills/performance.tsx'
 
 function App() {
   return (
@@ -70,6 +71,7 @@ function App() {
               <Route path="/skills/stealth" element={<Stealth />} />
               <Route path="/skills/medicine" element={<Medicine />} />
               <Route path="/skills/crafting" element={<Crafting />} />
+              <Route path="/skills/performance" element={<Performance />} />
 
               {/* 404 */}
 
