@@ -26,6 +26,12 @@ import Stealth from './subpages/skills/stealth.tsx'
 import Medicine from './subpages/skills/medicine.tsx'
 import Crafting from './subpages/skills/crafting.tsx'
 import Performance from './subpages/skills/performance.tsx'
+import Survival from './subpages/skills/survival.tsx'
+import Animal_Handling from './subpages/skills/animal_handling.tsx'
+import Lockpicking from './subpages/skills/lockpicking.tsx'
+import Deception from './subpages/skills/deception.tsx'
+import Investigation from './subpages/skills/investigation.tsx'
+
 
 function App() {
   return (
@@ -74,6 +80,11 @@ function App() {
               <Route path="/skills/medicine" element={<Medicine />} />
               <Route path="/skills/crafting" element={<Crafting />} />
               <Route path="/skills/performance" element={<Performance />} />
+              <Route path="/skills/survival" element={<Survival />} />
+              <Route path="/skills/animal_handling" element={<Animal_Handling />} />
+              <Route path="/skills/lockpicking" element={<Lockpicking />} />
+              <Route path="/skills/deception" element={<Deception />} />
+              <Route path="/skills/investigation" element={<Investigation />} />
 
               {/* 404 */}
 
