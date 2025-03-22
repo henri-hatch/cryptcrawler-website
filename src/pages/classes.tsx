@@ -44,6 +44,16 @@ const ClassesPage = () => {
           description="As defenders of the land, Wardens are wanderers who roam in order to protect nature from man."
         />
       </div>
+
+      <h3>Rare Classes</h3>
+      <div className="cards-container">
+      <ContentCard 
+          title="Abnegate" 
+          imagePath="/class-images/null_logo.png" 
+          linkTo="/classes/abnegate"
+          description="Born as a twin, an Abnegate is an anti-magical anomaly, blessed with supernatural physical power rather than magical gifts."
+        /> 
+      </div>
     </>
   );
 };
