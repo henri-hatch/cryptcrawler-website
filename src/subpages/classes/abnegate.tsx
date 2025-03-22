@@ -11,7 +11,7 @@ const Abnegate = () => {
                 <li>You must have a DEX score of 2 or higher.</li>
                 <li>You must have the <em>acrobatics</em>, <em>light armor</em>, or <em>stealth</em> skill.</li>
                 <li>You must be a twin born with sorcerous blood in your family, with your sibling being a <u><a href="https://cryptcrawler-5e.pages.dev/classes/talent">Talent</a></u>.</li>
-                <li>You must be known by at least three different names in three different regions of the world.</li>
+                <li>You must be born with a physical mark, distinguishing yourself from your twin and hinting at your anomalous nature.</li>
             </ul>
             </div>
 
@@ -41,7 +41,7 @@ const Abnegate = () => {
 
             <div>
             <h3><u>1st Level: Ghost in the Machine</u></h3>
-            <p>Your magical inheritance instead manifests as incredible physical power. You do not roll for initative. Instead you may interject amidst combat, and choose to take any of your actions, movement, or reactions at the start or end of any character's turn. Your actions, movement, and reactions are restored at the start of the round.</p>
+            <p>Your magical inheritance instead manifests as incredible physical power. You do not roll for initative. Instead you may interject amidst combat, choosing to take any of your actions, movement, or reactions at the start or end of any character's turn. Your actions, movement, and reactions are restored at the start of the round.</p>
             </div>
         </>
     )
