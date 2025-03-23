@@ -34,6 +34,9 @@ import Pickpocketing from './subpages/skills/pickpocketing.tsx'
 import Intimidation from './subpages/skills/intimidation.tsx'
 import Perception from './subpages/skills/perception.tsx'
 
+// Tools
+import ManeuverCreator from './subpages/tools/maneuver_creator.tsx'
+
 function App() {
   return (
     <BrowserRouter>
@@ -88,6 +91,8 @@ function App() {
               <Route path="/skills/pickpocketing" element={<Pickpocketing />} />
               <Route path="/skills/intimidation" element={<Intimidation />} />
               <Route path="/skills/perception" element={<Perception />} />
+
+              <Route path="/tools/maneuver-creator" element={<ManeuverCreator />} />
 
               {/* 404 */}
 
