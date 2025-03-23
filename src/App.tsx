@@ -17,6 +17,7 @@ import Tactician from './subpages/classes/tactician.tsx'
 import Minstrel from './subpages/classes/minstrel.tsx'
 import Paragon from './subpages/classes/paragon.tsx'
 import Abnegate from './subpages/classes/abnegate.tsx'
+import Conduit from './subpages/classes/conduit.tsx'
 
 // Skills
 import Persuasion from './subpages/skills/persuasion.tsx'
@@ -75,7 +76,8 @@ function App() {
               <Route path="/classes/tactician" element={<Tactician />} />
               <Route path="/classes/minstrel" element={<Minstrel />} />
               <Route path="/classes/paragon" element={<Paragon />} />  
-              <Route path="/classes/abnegate" element={<Abnegate />} />              
+              <Route path="/classes/abnegate" element={<Abnegate />} />       
+              <Route path="/classes/conduit" element={<Conduit />} />                           
 
               <Route path="/skills/persuasion" element={<Persuasion />} />
               <Route path="/skills/bartering" element={<Bartering />} />

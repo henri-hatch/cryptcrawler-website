@@ -10,6 +10,13 @@ const ClassesPage = () => {
       <h3>Common Classes</h3>
       <div className="cards-container">
       <ContentCard 
+          title="Conduit" 
+          imagePath="/class-images/conduit_logo.png" 
+          linkTo="/classes/conduit"
+          description="Despite their promises, Gods and entities of beyond still interfere in the mortal world."
+        /> 
+
+      <ContentCard 
           title="Minstrel" 
           imagePath="/class-images/minstrel_logo.png" 
           linkTo="/classes/minstrel"
