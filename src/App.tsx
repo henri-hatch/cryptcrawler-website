@@ -36,7 +36,7 @@ import Intimidation from './subpages/skills/intimidation.tsx'
 import Perception from './subpages/skills/perception.tsx'
 
 // Tools
-import SpellSkillCreator from './subpages/tools/spell_skill_creator.tsx'
+import ManeuverCreator from './subpages/tools/maneuver_creator.tsx'
 
 function App() {
   return (
@@ -94,7 +94,7 @@ function App() {
               <Route path="/skills/intimidation" element={<Intimidation />} />
               <Route path="/skills/perception" element={<Perception />} />
 
-              <Route path="/tools/spell-skill-creator" element={<SpellSkillCreator />} />
+              <Route path="/tools/maneuver-creator" element={<ManeuverCreator />} />
 
               {/* 404 */}
 

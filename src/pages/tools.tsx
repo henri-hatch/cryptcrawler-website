@@ -10,8 +10,8 @@ const ToolsPage = () => {
       
       <h3>Spell & Skill Creator</h3>
       <p>Create new and custom spells and skills with ease.</p>
-      <button onClick={() => navigate('/tools/spell-skill-creator')}>
-        Launch Spell & Skill Creator
+      <button onClick={() => navigate('/tools/maneuver-creator')}>
+        Launch Maneuver Creator
       </button>
     </>
   );

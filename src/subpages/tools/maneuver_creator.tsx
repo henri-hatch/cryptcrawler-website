@@ -13,10 +13,11 @@ interface CardData {
   hitEffect: string;
   flavor: string;
   economy: string;
+  actionCost: string;
   special: string;
 }
 
-const SpellSkillCreator: React.FC = () => {
+const ManeuverCreator: React.FC = () => {
   const [cardData, setCardData] = useState<CardData | null>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   
@@ -56,7 +57,7 @@ const SpellSkillCreator: React.FC = () => {
 
   return (
     <div>
-      <h2 style={{ textAlign: 'center' }}>Spell & Skill Creator</h2>
+      <h2 style={{ textAlign: 'center' }}>Maneuver Creator</h2>
       <div style={{ 
         display: 'flex', 
         flexWrap: 'wrap', 
@@ -80,6 +81,7 @@ const SpellSkillCreator: React.FC = () => {
                   hitEffect={cardData.hitEffect}
                   flavor={cardData.flavor}
                   economy={cardData.economy}
+                  actionCost={cardData.actionCost}
                   special={cardData.special}
                 />
               </div>
@@ -94,4 +96,4 @@ const SpellSkillCreator: React.FC = () => {
   );
 };
 
-export default SpellSkillCreator;
+export default ManeuverCreator;

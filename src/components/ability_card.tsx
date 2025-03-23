@@ -9,6 +9,7 @@ interface AbilityCardProps {
   hitEffect: string;
   flavor?: string;
   economy?: string;
+  actionCost?: string; // New prop
   special?: string;
 }
 
@@ -21,6 +22,7 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
   hitEffect,
   flavor,
   economy,
+  actionCost, // Add this new prop
   special,
 }) => {
   // Get color based on usage type
@@ -32,17 +34,21 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
         return '#720a02'; // Dark Red
       case 'Feature':
         return '#324692'; // Dark Blue
-      default:
-        return '#4d4d4d';
+      case '2/encounter':
+        return '#720a02'; // Dark Red
+      case '1/day':
+        return '#4d4d4d'; // Dark Gray
+      case '1/week':
+        return '#000000'; // Black
     }
   };
 
   return (
     <div
       style={{
-        width: '700px', // Changed from 300px to 700px
+        width: '700px',
         border: '2px solid #444',
-        borderRadius: '8px',
+        borderRadius: '0',
         overflow: 'hidden',
         backgroundColor: '#fff',
         fontFamily: 'sans-serif',
@@ -55,18 +61,18 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
           color: '#fff', 
           padding: '8px',
           display: 'flex',
-          justifyContent: 'space-between', // Space between title and usage
+          justifyContent: 'space-between',
           alignItems: 'center'
         }}
       >
         <h2 style={{ 
           margin: '0', 
-          fontSize: '1.5rem', // Increased font size
-          fontWeight: 'normal' // Unbold the title
+          fontSize: '2.0rem',
+          fontWeight: 'normal'
         }}>{title}</h2>
         <p style={{ 
           margin: '0',
-          fontSize: '1.5rem', // Matched to title size
+          fontSize: '2.0rem',
           fontWeight: 'normal'
         }}>{usageType}</p>
       </div>
@@ -88,7 +94,7 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
         {/* Economy (if provided) */}
         {economy && (
           <div style={{ marginBottom: '8px' }}>
-            <strong>{economy}</strong>
+            <strong>{economy}{actionCost ? ` [${actionCost}]` : ''}</strong>
           </div>
         )}
 
@@ -101,7 +107,7 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
 
         {/* Damage (only if provided) */}
         {damage && (
-          <div style={{ marginBottom: (hitEffect || special) ? '8px' : '0' }}>
+          <div style={{ color: '#720a02', marginBottom: (hitEffect || special) ? '8px' : '0' }}>
             <strong>Damage:</strong> {damage}
           </div>
         )}

@@ -11,6 +11,7 @@ interface CardFormProps {
     hitEffect: string;
     flavor: string;
     economy: string;
+    actionCost: string; // New field
     special: string;
   }) => void;
 }
@@ -24,6 +25,7 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
   const [hitEffect, setHitEffect] = useState('');
   const [flavor, setFlavor] = useState('');
   const [economy, setEconomy] = useState('Action');
+  const [actionCost, setActionCost] = useState(''); // New state
   const [special, setSpecial] = useState('');
 
   // Available requirements
@@ -53,6 +55,7 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
       hitEffect,
       flavor,
       economy,
+      actionCost,
       special
     });
   };
@@ -75,9 +78,12 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
           value={usageType}
           onChange={(e) => setUsageType(e.target.value)}
         >
+          <option value="Feature">Feature</option>
           <option value="At Will">At Will</option>
           <option value="1/encounter">1/encounter</option>
-          <option value="Feature">Feature</option>
+          <option value="2/encounter">2/encounter</option>
+          <option value="1/day">1/day</option>
+          <option value="1/week">1/week</option>
         </select>
       </label>
 
@@ -91,7 +97,7 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
       </label>
 
       <label>
-        Economy:
+        Action Type:
         <select
           value={economy}
           onChange={(e) => setEconomy(e.target.value)}
@@ -99,8 +105,19 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
           <option value="Action">Action</option>
           <option value="Bonus Action">Bonus Action</option>
           <option value="Reaction">Reaction</option>
-          <option value="">None</option>
+          <option value="Free">Free Action</option>
+          <option value="Passive">Passive</option>
         </select>
+      </label>
+
+      <label>
+        Action Cost:
+        <input
+          type="text"
+          value={actionCost}
+          onChange={(e) => setActionCost(e.target.value)}
+          placeholder="e.g. 2 opportunity, 3 drama (optional)"
+        />
       </label>
 
       <label>
@@ -141,7 +158,7 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
       </label>
 
       <label>
-        On Hit:
+        Hit:
         <textarea
           value={hitEffect}
           onChange={(e) => setHitEffect(e.target.value)}
