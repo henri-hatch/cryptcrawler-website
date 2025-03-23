@@ -13,6 +13,12 @@ const SkillsPage = () => {
           linkTo="/skills/deception"
           description="Spiders aren't the only creatures to weave webs. Create complex lies and get away with it with Deception."
         />
+      <ContentCard 
+          title="Intimidation" 
+          imagePath="/skills-images/intimidation_logo.png" 
+          linkTo="/skills/intimidation"
+          description="There is nothing quite like the thrill of threatening someone. Some how you always seem to get your way."
+        />
         <ContentCard 
           title="Performance" 
           imagePath="/skills-images/performance_logo.png" 
@@ -37,6 +43,12 @@ const SkillsPage = () => {
         imagePath="/skills-images/lockpicking_logo.png" 
         linkTo="/skills/lockpicking"
         description="I'm in. All the best stuff is often found behind locked doors. You are able to crack open locked containers with ease."
+      />
+      <ContentCard 
+        title="Pickpocketing" 
+        imagePath="/skills-images/pickpocketing_logo.png" 
+        linkTo="/skills/pickpocketing"
+        description="As another face in the crowd you can easily swipe the coinpurses of those around you."
       />
         <ContentCard 
         title="Stealth" 
@@ -87,6 +99,12 @@ const SkillsPage = () => {
           imagePath="/skills-images/medicine_logo.png" 
           linkTo="/skills/medicine"
           description="Adventuring is never safe. Everyone needs a doctor, and you are better than nothing."
+        />
+        <ContentCard 
+          title="Perception" 
+          imagePath="/skills-images/perception_logo.png" 
+          linkTo="/skills/perception"
+          description="You can see danger coming from a mile away. Observation is the greatest tool in a warrior's toolbox."
         />
         <ContentCard 
           title="Survival" 

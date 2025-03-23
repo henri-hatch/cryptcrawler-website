@@ -31,13 +31,6 @@ const Survival = () => {
             </div>
 
             <div>
-            <h3>Scout's Warning</h3>
-            <p dir="auto"><em>You visually or audibly warn your allies of danger.</em></p>
-            <p dir="auto">You and all friendly creatures within 30ft of you gain a +5 bonus to initiative, while you are conscious and not surprised.</p>
-            </div>
-
-
-            <div>
             <h3>Snare Specialist</h3>
             <p dir="auto"><em>As a veteran ranger, you are able to construct clever rope traps to entangle and restrain your foes.</em></p>
             <p dir="auto">You can spend 1 minutes and 10gp worth of materials to create a ensnaring trap on a flat surface. When a creature steps on the trap, they must make a DEX saving throw, DC 8 + your WIS score + your skill modifier. If they fail, they become restrained until the succeed the saving throw. at the start of their turn. You can conceal a trap by covering with nearby foliage or debris. A creature have a passive perception of, or roll higher than 10 + your crafting skill score to detect the trap.</p>

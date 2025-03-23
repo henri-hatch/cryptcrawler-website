@@ -31,7 +31,9 @@ import Animal_Handling from './subpages/skills/animal_handling.tsx'
 import Lockpicking from './subpages/skills/lockpicking.tsx'
 import Deception from './subpages/skills/deception.tsx'
 import Investigation from './subpages/skills/investigation.tsx'
-
+import Pickpocketing from './subpages/skills/pickpocketing.tsx'
+import Intimidation from './subpages/skills/intimidation.tsx'
+import Perception from './subpages/skills/perception.tsx'
 
 function App() {
   return (
@@ -85,6 +87,9 @@ function App() {
               <Route path="/skills/lockpicking" element={<Lockpicking />} />
               <Route path="/skills/deception" element={<Deception />} />
               <Route path="/skills/investigation" element={<Investigation />} />
+              <Route path="/skills/pickpocketing" element={<Pickpocketing />} />
+              <Route path="/skills/intimidation" element={<Intimidation />} />
+              <Route path="/skills/perception" element={<Perception />} />
 
               {/* 404 */}
 
