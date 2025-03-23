@@ -11,6 +11,9 @@ interface CardData {
   target: string;
   damage: string;
   hitEffect: string;
+  flavor: string;
+  economy: string;
+  special: string; // New field
 }
 
 const SpellSkillCreator: React.FC = () => {
@@ -36,30 +39,36 @@ const SpellSkillCreator: React.FC = () => {
   };
 
   return (
-    <div style={{ display: 'flex', gap: '2rem' }}>
-      <div>
-        <h2>Spell & Skill Creator</h2>
-        <CardForm onSubmit={handleFormSubmit} />
-      </div>
+    <div>
+      <h2>Spell & Skill Creator</h2>
+      
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2rem' }}>
+        <div>
+          <CardForm onSubmit={handleFormSubmit} />
+        </div>
 
-      <div>
-        {cardData && (
-          <>
-            <div ref={cardRef}>
-              <AbilityCard
-                title={cardData.title}
-                usageType={cardData.usageType}
-                requirements={cardData.requirements}
-                target={cardData.target}
-                damage={cardData.damage}
-                hitEffect={cardData.hitEffect}
-              />
-            </div>
-            <button onClick={handleDownload} style={{ marginTop: '1rem' }}>
-              Download as PNG
-            </button>
-          </>
-        )}
+        <div>
+          {cardData && (
+            <>
+              <div ref={cardRef}>
+                <AbilityCard
+                  title={cardData.title}
+                  usageType={cardData.usageType}
+                  requirements={cardData.requirements}
+                  target={cardData.target}
+                  damage={cardData.damage}
+                  hitEffect={cardData.hitEffect}
+                  flavor={cardData.flavor}
+                  economy={cardData.economy}
+                  special={cardData.special}
+                />
+              </div>
+              <button onClick={handleDownload} style={{ marginTop: '1rem' }}>
+                Download as PNG
+              </button>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
