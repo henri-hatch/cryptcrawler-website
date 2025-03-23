@@ -15,7 +15,6 @@ import ToolsPage from './pages/tools.tsx'
 import Shadow from './subpages/classes/shadow.tsx'
 import Tactician from './subpages/classes/tactician.tsx'
 import Minstrel from './subpages/classes/minstrel.tsx'
-import Warden from './subpages/classes/warden.tsx'
 import Paragon from './subpages/classes/paragon.tsx'
 import Abnegate from './subpages/classes/abnegate.tsx'
 
@@ -72,7 +71,6 @@ function App() {
               <Route path="/classes/shadow" element={<Shadow />} />
               <Route path="/classes/tactician" element={<Tactician />} />
               <Route path="/classes/minstrel" element={<Minstrel />} />
-              <Route path="/classes/warden" element={<Warden />} />
               <Route path="/classes/paragon" element={<Paragon />} />  
               <Route path="/classes/abnegate" element={<Abnegate />} />              
 

@@ -36,13 +36,6 @@ const ClassesPage = () => {
           linkTo="/classes/tactician"
           description="Tacticians are the masterminds of the battlefield, using strategy and cunning to outwit their foes."
         />
-
-        <ContentCard
-          title="Warden"
-          imagePath="/class-images/warden_logo.png"
-          linkTo="/classes/warden"
-          description="As defenders of the land, Wardens are wanderers who roam in order to protect nature from man."
-        />
       </div>
 
       <h3>Rare Classes</h3>
