@@ -1,16 +1,18 @@
+import { useNavigate } from 'react-router-dom';
+
 const ToolsPage = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <h2>Tools & Resources</h2>
       <p>Helpful tools to enhance your CryptCrawler experience.</p>
       
-      <h3>Character Builder</h3>
-      <p>Create and manage your character sheets digitally.</p>
-      <button disabled>Launch Character Builder</button>
-      
-      <h3>Dice Roller</h3>
-      <p>Roll virtual dice for your game sessions.</p>
-      <button disabled>Open Dice Roller</button>
+      <h3>Spell & Skill Creator</h3>
+      <p>Create new and custom spells and skills with ease.</p>
+      <button onClick={() => navigate('/tools/spell-skill-creator')}>
+        Launch Spell & Skill Creator
+      </button>
     </>
   );
 };

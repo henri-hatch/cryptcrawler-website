@@ -35,6 +35,9 @@ import Pickpocketing from './subpages/skills/pickpocketing.tsx'
 import Intimidation from './subpages/skills/intimidation.tsx'
 import Perception from './subpages/skills/perception.tsx'
 
+// Tools
+import SpellSkillCreator from './subpages/tools/spell_skill_creator.tsx'
+
 function App() {
   return (
     <BrowserRouter>
@@ -90,6 +93,8 @@ function App() {
               <Route path="/skills/pickpocketing" element={<Pickpocketing />} />
               <Route path="/skills/intimidation" element={<Intimidation />} />
               <Route path="/skills/perception" element={<Perception />} />
+
+              <Route path="/tools/spell-skill-creator" element={<SpellSkillCreator />} />
 
               {/* 404 */}
 
