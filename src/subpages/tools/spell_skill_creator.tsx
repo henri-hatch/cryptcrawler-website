@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import domtoimage from 'dom-to-image';
 
 import CardForm from '../../components/card_form';
@@ -13,12 +13,28 @@ interface CardData {
   hitEffect: string;
   flavor: string;
   economy: string;
-  special: string; // New field
+  special: string;
 }
 
 const SpellSkillCreator: React.FC = () => {
   const [cardData, setCardData] = useState<CardData | null>(null);
   const cardRef = useRef<HTMLDivElement>(null);
+  
+  // Add this effect to change the content container class
+  useEffect(() => {
+    // Find the content div and replace its class
+    const contentDiv = document.querySelector('.content');
+    if (contentDiv) {
+      contentDiv.className = 'content-wide';
+    }
+    
+    // Cleanup function to restore the original class when component unmounts
+    return () => {
+      if (contentDiv) {
+        contentDiv.className = 'content';
+      }
+    };
+  }, []);
 
   const handleFormSubmit = (values: CardData) => {
     setCardData(values);
@@ -40,14 +56,18 @@ const SpellSkillCreator: React.FC = () => {
 
   return (
     <div>
-      <h2>Spell & Skill Creator</h2>
-      
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2rem' }}>
-        <div>
+      <h2 style={{ textAlign: 'center' }}>Spell & Skill Creator</h2>
+      <div style={{ 
+        display: 'flex', 
+        flexWrap: 'wrap', 
+        gap: '2rem', 
+        justifyContent: 'center' 
+      }}>
+        <div style={{ flex: '0 0 auto', minWidth: '350px' }}>
           <CardForm onSubmit={handleFormSubmit} />
         </div>
 
-        <div>
+        <div style={{ flex: '0 0 auto' }}>
           {cardData && (
             <>
               <div ref={cardRef}>

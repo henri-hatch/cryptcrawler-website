@@ -80,18 +80,17 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
 
       {/* Content area with padding */}
       <div style={{ padding: '8px' }}>
+        {/* Requirements Row */}
+        <div style={{ marginBottom: '8px' }}>
+          <strong>{usageType} ✦ {requirements.length > 0 ? requirements.join(', ') : 'None'}</strong>
+        </div>
+
         {/* Economy (if provided) */}
         {economy && (
           <div style={{ marginBottom: '8px' }}>
             <strong>{economy}</strong>
           </div>
         )}
-
-        {/* Requirements Row */}
-        <div style={{ marginBottom: '8px' }}>
-          <strong>Requirements:</strong>{' '}
-          {requirements.length > 0 ? requirements.join(', ') : 'None'}
-        </div>
 
         {/* Target (only if provided) */}
         {target && (

@@ -29,9 +29,11 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
   // Available requirements
   const requirementOptions = [
     { value: 'Martial', label: 'Martial' },
-    { value: 'Weapon', label: 'Weapon' },
     { value: 'Spell', label: 'Spell' },
     { value: 'Melee', label: 'Melee' },
+    { value: 'Magic', label: 'Magic' },
+    { value: 'Ranged', label: 'Ranged' },
+    { value: 'Weapon', label: 'Weapon' },
   ];
 
   // Handle multi-select for requirements

@@ -94,6 +94,17 @@ html, body {
   color: #000;  /* Add this line to ensure black text */
 }
 
+/* Extra wide content for the spell creator page */
+.content-wide {
+  background-color: #fff;
+  padding: 20px;
+  color: #000;
+  max-width: 1200px;  /* Wider than the default 930px */
+  width: 100%;
+  margin: 0 auto;
+  grid-column: 1 / -1;  /* Span all columns */
+}
+
 .detail-image {
   max-width: 300px;
   float: right;
