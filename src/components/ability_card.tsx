@@ -9,7 +9,7 @@ interface AbilityCardProps {
   hitEffect: string;
   flavor?: string;
   economy?: string;
-  actionCost?: string; // New prop
+  actionCost?: string;
   special?: string;
 }
 
