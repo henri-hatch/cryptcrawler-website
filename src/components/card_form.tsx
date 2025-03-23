@@ -5,13 +5,14 @@ interface CardFormProps {
   onSubmit: (values: {
     title: string;
     usageType: string;
-    requirements: string[];
+    requirements: string; // Changed from string[] to string
     target: string;
+    trigger: string;
     damage: string;
     hitEffect: string;
     flavor: string;
     economy: string;
-    actionCost: string; // New field
+    actionCost: string;
     special: string;
   }) => void;
 }
@@ -19,30 +20,15 @@ interface CardFormProps {
 const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
   const [title, setTitle] = useState('');
   const [usageType, setUsageType] = useState('At Will');
-  const [requirements, setRequirements] = useState<string[]>([]);
+  const [requirements, setRequirements] = useState(''); // Changed from string[] to string
   const [target, setTarget] = useState('');
+  const [trigger, setTrigger] = useState('');
   const [damage, setDamage] = useState('');
   const [hitEffect, setHitEffect] = useState('');
   const [flavor, setFlavor] = useState('');
   const [economy, setEconomy] = useState('Action');
-  const [actionCost, setActionCost] = useState(''); // New state
+  const [actionCost, setActionCost] = useState('');
   const [special, setSpecial] = useState('');
-
-  // Available requirements
-  const requirementOptions = [
-    { value: 'Martial', label: 'Martial' },
-    { value: 'Spell', label: 'Spell' },
-    { value: 'Melee', label: 'Melee' },
-    { value: 'Magic', label: 'Magic' },
-    { value: 'Ranged', label: 'Ranged' },
-    { value: 'Weapon', label: 'Weapon' },
-  ];
-
-  // Handle multi-select for requirements
-  const handleRequirementsChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedOptions = Array.from(e.target.selectedOptions, option => option.value);
-    setRequirements(selectedOptions);
-  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,6 +37,7 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
       usageType, 
       requirements, 
       target, 
+      trigger,
       damage, 
       hitEffect,
       flavor,
@@ -122,19 +109,12 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
 
       <label>
         Requirements:
-        <select 
-          multiple 
-          value={requirements} 
-          onChange={handleRequirementsChange}
-          className="multi-select"
-        >
-          {requirementOptions.map(option => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-        <small className="tip">Hold Ctrl/Cmd to select multiple</small>
+        <input
+          type="text"
+          value={requirements}
+          onChange={(e) => setRequirements(e.target.value)}
+          placeholder="e.g. Martial, Weapon, Melee (comma separated)"
+        />
       </label>
 
       <label>
@@ -146,6 +126,18 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
           placeholder="e.g. Melee, Ranged 30ft, etc. (optional)"
         />
       </label>
+
+      {/* Conditionally render trigger field only when Reaction is selected */}
+      {economy === 'Reaction' && (
+        <label>
+          Trigger:
+          <textarea
+            value={trigger}
+            onChange={(e) => setTrigger(e.target.value)}
+            placeholder="What triggers this reaction?"
+          />
+        </label>
+      )}
 
       <label>
         Damage:

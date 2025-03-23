@@ -3,8 +3,9 @@ import React from 'react';
 interface AbilityCardProps {
   title: string;
   usageType: string;
-  requirements: string[];
+  requirements: string; // Changed from string[] to string
   target: string;
+  trigger?: string;
   damage: string;
   hitEffect: string;
   flavor?: string;
@@ -18,11 +19,12 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
   usageType,
   requirements,
   target,
+  trigger,
   damage,
   hitEffect,
   flavor,
   economy,
-  actionCost, // Add this new prop
+  actionCost,
   special,
 }) => {
   // Get color based on usage type
@@ -88,7 +90,7 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
       <div style={{ padding: '8px' }}>
         {/* Requirements Row */}
         <div style={{ marginBottom: '8px' }}>
-          <strong>{usageType} ✦ {requirements.length > 0 ? requirements.join(', ') : 'None'}</strong>
+          <strong>{usageType} ✦ {requirements || 'None'}</strong>
         </div>
 
         {/* Economy (if provided) */}
@@ -100,8 +102,15 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
 
         {/* Target (only if provided) */}
         {target && (
-          <div style={{ marginBottom: (damage || hitEffect || special) ? '8px' : '0' }}>
+          <div style={{ marginBottom: (trigger || damage || hitEffect || special) ? '8px' : '0' }}>
             <strong>Target:</strong> {target}
+          </div>
+        )}
+
+        {/* Trigger (only if provided and economy is Reaction) */}
+        {economy === 'Reaction' && trigger && (
+          <div style={{ marginBottom: (damage || hitEffect || special) ? '8px' : '0' }}>
+            <strong>Trigger:</strong> {trigger}
           </div>
         )}
 

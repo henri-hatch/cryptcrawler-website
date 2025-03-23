@@ -7,8 +7,9 @@ import AbilityCard from '../../components/ability_card';
 interface CardData {
   title: string;
   usageType: string;
-  requirements: string[];
+  requirements: string;
   target: string;
+  trigger: string;
   damage: string;
   hitEffect: string;
   flavor: string;
@@ -77,6 +78,7 @@ const ManeuverCreator: React.FC = () => {
                   usageType={cardData.usageType}
                   requirements={cardData.requirements}
                   target={cardData.target}
+                  trigger={cardData.trigger}
                   damage={cardData.damage}
                   hitEffect={cardData.hitEffect}
                   flavor={cardData.flavor}
