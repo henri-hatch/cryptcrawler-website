@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface AbilityCardProps {
   title: string;
@@ -27,6 +27,29 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
   actionCost,
   special,
 }) => {
+  const [cardWidth, setCardWidth] = useState('700px');
+  const [fontSize, setFontSize] = useState('2.0rem');
+  
+  // Add responsive sizing based on screen width
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setCardWidth('100%');
+        setFontSize('1.5rem');
+      } else {
+        setCardWidth('700px');
+        setFontSize('2.0rem');
+      }
+    };
+    
+    handleResize(); // Run once on mount
+    window.addEventListener('resize', handleResize);
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   // Get color based on usage type
   const getHeaderColor = () => {
     switch (usageType) {
@@ -48,12 +71,14 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
   return (
     <div
       style={{
-        width: '700px',
+        width: cardWidth, // Now dynamic
         border: '2px solid #444',
         borderRadius: '0',
         overflow: 'hidden',
         backgroundColor: '#fff',
         fontFamily: 'sans-serif',
+        maxWidth: '100%', // Ensure it doesn't overflow container
+        margin: '0 auto', // Center on mobile
       }}
     >
       {/* Title / Usage Row with flex layout */}
@@ -64,17 +89,18 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
           padding: '8px',
           display: 'flex',
           justifyContent: 'space-between',
-          alignItems: 'center'
+          alignItems: 'center',
+          flexWrap: 'wrap', // Allow wrapping on very small screens
         }}
       >
         <h2 style={{ 
           margin: '0', 
-          fontSize: '2.0rem',
+          fontSize: fontSize, // Now dynamic
           fontWeight: 'normal'
         }}>{title}</h2>
         <p style={{ 
           margin: '0',
-          fontSize: '2.0rem',
+          fontSize: fontSize, // Now dynamic
           fontWeight: 'normal'
         }}>{usageType}</p>
       </div>
