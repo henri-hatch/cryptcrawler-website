@@ -9,7 +9,7 @@ interface CardFormProps {
     target: string;
     trigger: string;
     savingThrowActive: string;
-    savingThrowPassive: string;
+    savingThrowDC: string; // Changed from savingThrowPassive
     damage: string;
     hitEffect: string;
     success: string;
@@ -28,7 +28,7 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
   const [target, setTarget] = useState('');
   const [trigger, setTrigger] = useState('');
   const [savingThrowActive, setSavingThrowActive] = useState('');
-  const [savingThrowPassive, setSavingThrowPassive] = useState('');
+  const [savingThrowDC, setSavingThrowDC] = useState(''); // Changed from savingThrowPassive
   const [damage, setDamage] = useState('');
   const [hitEffect, setHitEffect] = useState('');
   const [success, setSuccess] = useState('');
@@ -47,7 +47,7 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
       target, 
       trigger,
       savingThrowActive,
-      savingThrowPassive,
+      savingThrowDC, // Changed from savingThrowPassive
       damage, 
       hitEffect,
       success,
@@ -154,15 +154,13 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
               <option key={`active-${score}`} value={score}>{score}</option>
             ))}
           </select>
-          <span className="vs-text">vs</span>
-          <select
-            value={savingThrowPassive}
-            onChange={(e) => setSavingThrowPassive(e.target.value)}
-          >
-            {abilityScores.map(score => (
-              <option key={`passive-${score}`} value={score}>{score}</option>
-            ))}
-          </select>
+          <span className="vs-text">vs DC</span>
+          <input
+            type="text"
+            value={savingThrowDC}
+            onChange={(e) => setSavingThrowDC(e.target.value)}
+            placeholder="17 or 'Spell Save'"
+          />
         </div>
       </label>
 

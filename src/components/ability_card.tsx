@@ -7,7 +7,7 @@ interface AbilityCardProps {
   target: string;
   trigger?: string;
   savingThrowActive?: string; // New prop
-  savingThrowPassive?: string; // New prop
+  savingThrowDC?: string; // Changed from savingThrowPassive
   damage: string;
   hitEffect: string;
   success?: string; // New prop for successful saving throw
@@ -25,7 +25,7 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
   target,
   trigger,
   savingThrowActive,
-  savingThrowPassive,
+  savingThrowDC, // Changed from savingThrowPassive
   damage,
   hitEffect,
   success, // Add new prop
@@ -148,13 +148,13 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
           </div>
         )}
 
-        {/* Saving Throw (only if both active and passive are provided) */}
-        {savingThrowActive && savingThrowPassive && (
+        {/* Modified Saving Throw display */}
+        {savingThrowActive && savingThrowDC && (
           <div style={{ 
             color: '#720a02', 
             marginBottom: (damage || hitEffect || special) ? '8px' : '0'
           }}>
-            <strong>Saving Throw:</strong> {savingThrowActive} vs {savingThrowPassive}
+            <strong>Saving Throw:</strong> {savingThrowActive} vs DC {savingThrowDC}
           </div>
         )}
 
