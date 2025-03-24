@@ -29,9 +29,18 @@ const Minstrel = () => {
             <p>The story you tell is so compelling, it can totally entrance your audience. You gain the <em>Captivation</em> maneuver.</p>
             </div>
 
+
+            <div>
+            <img src="/manuever-images/Captivation.png" alt="Captivation" style={{ width: '75%', height: 'auto'}} />
+            </div>
+
             <div>
             <h3><u>1st Level: Plot Twist</u></h3>
             <p>In the midst of a story, you can alter the narrative by twisting the plot. You gain access to the <em>Plot Twist</em> maneuver.</p>
+            </div>
+
+            <div>
+            <img src="/manuever-images/Plot Twist.png" alt="Plot Twist" style={{ width: '75%', height: 'auto'}} />
             </div>
         </>
     )

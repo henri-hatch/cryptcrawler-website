@@ -15,13 +15,8 @@ const Tactician = () => {
             </div>
 
             <div>
-            <h3><u>Health</u></h3>
-            <p>At 1st level, your DHP and your SHP is 10 + your WIL. Each time you level-up, your SHP increases by 5 + your WIL.</p>
-            </div>
-
-            <div>
             <h3><u>1st Level: Opportunity</u></h3>
-            <p>It is too easy to become distracted in battle, and you seem to be the only one to notice this. You have a heroic resource called opportunity, which you can spend to activate your powerful abilities. Outside of combat, you have opportunity equal to your INT score. If you lose some or all of your opportunity outside of combat, it takes 10 minutes to regain it. At the start of your turn, you gain 2 opportunity. Whenever you dodge or perfect block an attack, you gain 1 opportunity. All unspent opportunity disappears at the end of an encounter.</p>
+            <p>It is too easy to become distracted in battle, and you seem to be the only one to notice this. You have a heroic resource called opportunity, which you can spend to activate your powerful abilities. Outside of combat, you have opportunity equal to your INT score. If you lose some or all of your opportunity outside of combat, it takes 10 minutes to regain it. At the start of your turn, you gain 2 opportunity. Whenever you use the <em>Parry</em>, you gain 1 opportunity. All unspent opportunity disappears at the end of an encounter.</p>
             </div>
 
             <div>

@@ -16,17 +16,24 @@ const Shadow = () => {
            
             <div>
             <h3><u>1st Level: Insight</u></h3>
-            <p>As you lurk on the perimeter, you gather information which you can exploit. You have a heroic resource called insight, which you can spend to activate your powerful abilities. Outside of combat, you have insight equal to your DEX score. If you lose some or all of your insight outside of combat, it takes 10 minutes to regain it. In combat, at the start of your turn, you gain 2 insight. Whenever you hit a creature with a critical hit, you gain 1 insight. All unspent insight disappears at the end of an encounter.</p>
+            <p>As you lurk on the perimeter, you gather information which you can exploit. You have a heroic resource called insight, which you can spend to activate your powerful abilities. Outside of combat, you have insight equal to your DEX score. If you lose some or all of your insight outside of combat, it takes 10 minutes to regain it. In combat, at the start of your turn, you gain 2 insight. Whenever you dodge an attack, you gain 1 insight. All unspent insight disappears at the end of an encounter.</p>
             </div>
 
             <div>
             <h3><u>1st Level: Hesitation Is Weakness</u></h3>
             <p>Patience is power, you strike when you want to. You gain the <em>Hesitation Is Weakness</em> maneuver.</p>
             </div>
+            <div>
+            <img src="/manuever-images/Hesitation Is Weakness.png" alt="Hesitation Is Weakness" style={{ width: '75%', height: 'auto'}} />
+            </div>
 
             <div>
             <h3><u>1st Level: Shadow Step</u></h3>
             <p>Mustering the dark power within, you are consumed by black smoke, teleporting you away. You gain the <em>Shadow Step</em> maneuver.</p>
+            </div>
+
+            <div>
+            <img src="/manuever-images/Shadow Step.png" alt="Shadow Step" style={{ width: '75%', height: 'auto'}} />
             </div>
         </>
     )
