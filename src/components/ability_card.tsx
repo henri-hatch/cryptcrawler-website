@@ -3,11 +3,15 @@ import React, { useEffect, useState } from 'react';
 interface AbilityCardProps {
   title: string;
   usageType: string;
-  requirements: string; // Changed from string[] to string
+  requirements: string;
   target: string;
   trigger?: string;
+  savingThrowActive?: string; // New prop
+  savingThrowPassive?: string; // New prop
   damage: string;
   hitEffect: string;
+  success?: string; // New prop for successful saving throw
+  fail?: string; // New prop for failed saving throw
   flavor?: string;
   economy?: string;
   actionCost?: string;
@@ -20,8 +24,12 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
   requirements,
   target,
   trigger,
+  savingThrowActive,
+  savingThrowPassive,
   damage,
   hitEffect,
+  success, // Add new prop
+  fail, // Add new prop
   flavor,
   economy,
   actionCost,
@@ -140,6 +148,16 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
           </div>
         )}
 
+        {/* Saving Throw (only if both active and passive are provided) */}
+        {savingThrowActive && savingThrowPassive && (
+          <div style={{ 
+            color: '#720a02', 
+            marginBottom: (damage || hitEffect || special) ? '8px' : '0'
+          }}>
+            <strong>Saving Throw:</strong> {savingThrowActive} vs {savingThrowPassive}
+          </div>
+        )}
+
         {/* Damage (only if provided) */}
         {damage && (
           <div style={{ color: '#720a02', marginBottom: (hitEffect || special) ? '8px' : '0' }}>
@@ -149,8 +167,28 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
 
         {/* Hit Effect (only if provided) */}
         {hitEffect && (
-          <div style={{ marginBottom: special ? '8px' : '0' }}>
+          <div style={{ marginBottom: (success || fail || special) ? '8px' : '0' }}>
             <strong>On Hit:</strong> {hitEffect}
+          </div>
+        )}
+        
+        {/* Success (only if provided) - indented */}
+        {success && (
+          <div style={{ 
+            marginBottom: fail ? '8px' : (special ? '8px' : '0'),
+            paddingLeft: '20px' // Indentation
+          }}>
+            <strong>Success:</strong> {success}
+          </div>
+        )}
+
+        {/* Fail (only if provided) - indented */}
+        {fail && (
+          <div style={{ 
+            marginBottom: special ? '8px' : '0',
+            paddingLeft: '20px' // Indentation
+          }}>
+            <strong>Fail:</strong> {fail}
           </div>
         )}
         

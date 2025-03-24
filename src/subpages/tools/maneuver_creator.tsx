@@ -10,8 +10,12 @@ interface CardData {
   requirements: string;
   target: string;
   trigger: string;
+  savingThrowActive: string;
+  savingThrowPassive: string;
   damage: string;
   hitEffect: string;
+  success: string; // New field
+  fail: string; // New field
   flavor: string;
   economy: string;
   actionCost: string;
@@ -79,8 +83,12 @@ const ManeuverCreator: React.FC = () => {
                   requirements={cardData.requirements}
                   target={cardData.target}
                   trigger={cardData.trigger}
+                  savingThrowActive={cardData.savingThrowActive}
+                  savingThrowPassive={cardData.savingThrowPassive}
                   damage={cardData.damage}
                   hitEffect={cardData.hitEffect}
+                  success={cardData.success}
+                  fail={cardData.fail}
                   flavor={cardData.flavor}
                   economy={cardData.economy}
                   actionCost={cardData.actionCost}

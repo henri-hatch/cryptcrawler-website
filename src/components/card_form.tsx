@@ -5,11 +5,15 @@ interface CardFormProps {
   onSubmit: (values: {
     title: string;
     usageType: string;
-    requirements: string; // Changed from string[] to string
+    requirements: string;
     target: string;
     trigger: string;
+    savingThrowActive: string;
+    savingThrowPassive: string;
     damage: string;
     hitEffect: string;
+    success: string;
+    fail: string;
     flavor: string;
     economy: string;
     actionCost: string;
@@ -20,11 +24,15 @@ interface CardFormProps {
 const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
   const [title, setTitle] = useState('');
   const [usageType, setUsageType] = useState('At Will');
-  const [requirements, setRequirements] = useState(''); // Changed from string[] to string
+  const [requirements, setRequirements] = useState('');
   const [target, setTarget] = useState('');
   const [trigger, setTrigger] = useState('');
+  const [savingThrowActive, setSavingThrowActive] = useState('');
+  const [savingThrowPassive, setSavingThrowPassive] = useState('');
   const [damage, setDamage] = useState('');
   const [hitEffect, setHitEffect] = useState('');
+  const [success, setSuccess] = useState('');
+  const [fail, setFail] = useState('');
   const [flavor, setFlavor] = useState('');
   const [economy, setEconomy] = useState('Action');
   const [actionCost, setActionCost] = useState('');
@@ -38,14 +46,21 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
       requirements, 
       target, 
       trigger,
+      savingThrowActive,
+      savingThrowPassive,
       damage, 
       hitEffect,
+      success,
+      fail,
       flavor,
       economy,
       actionCost,
       special
     });
   };
+
+  // Define the ability score options
+  const abilityScores = ['', 'STR', 'DEX', 'INT', 'WIL', 'WIS', 'CHA'];
 
   return (
     <form onSubmit={handleSubmit} className="card-form">
@@ -127,6 +142,30 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
         />
       </label>
 
+      {/* Add the new Saving Throw fields after the Target field */}
+      <label>
+        Saving Throw:
+        <div className="saving-throw-container">
+          <select
+            value={savingThrowActive}
+            onChange={(e) => setSavingThrowActive(e.target.value)}
+          >
+            {abilityScores.map(score => (
+              <option key={`active-${score}`} value={score}>{score}</option>
+            ))}
+          </select>
+          <span className="vs-text">vs</span>
+          <select
+            value={savingThrowPassive}
+            onChange={(e) => setSavingThrowPassive(e.target.value)}
+          >
+            {abilityScores.map(score => (
+              <option key={`passive-${score}`} value={score}>{score}</option>
+            ))}
+          </select>
+        </div>
+      </label>
+
       {/* Conditionally render trigger field only when Reaction is selected */}
       {economy === 'Reaction' && (
         <label>
@@ -155,6 +194,25 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
           value={hitEffect}
           onChange={(e) => setHitEffect(e.target.value)}
           placeholder="What effect happens on a hit? (optional)"
+        />
+      </label>
+
+      {/* Add the new Success and Fail fields right after Hit */}
+      <label>
+        Success:
+        <textarea
+          value={success}
+          onChange={(e) => setSuccess(e.target.value)}
+          placeholder="What happens on a successful save? (optional)"
+        />
+      </label>
+
+      <label>
+        Fail:
+        <textarea
+          value={fail}
+          onChange={(e) => setFail(e.target.value)}
+          placeholder="What happens on a failed save? (optional)"
         />
       </label>
 
