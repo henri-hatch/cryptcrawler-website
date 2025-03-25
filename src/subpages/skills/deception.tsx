@@ -17,6 +17,10 @@ const Deception = () => {
             <p dir="auto">You gain the <em>Cutting Words</em> manuever.</p>
             </div>
 
+            <div>
+            <img src="/manuever-images/Cutting Words.png" alt="Cutting Words" style={{ width: '75%', height: 'auto'}} />
+            </div>
+
         </>
     )
 };
