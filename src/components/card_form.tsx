@@ -82,6 +82,7 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
         >
           <option value="Feature">Feature</option>
           <option value="At Will">At Will</option>
+          <option value="1/turn">1/turn</option>
           <option value="1/encounter">1/encounter</option>
           <option value="2/encounter">2/encounter</option>
           <option value="1/day">1/day</option>

@@ -63,6 +63,8 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
     switch (usageType) {
       case 'At Will':
         return '#307f00'; // Forest Green
+      case '1/turn':
+        return '#720a02'; // Dark Red
       case '1/encounter':
         return '#720a02'; // Dark Red
       case 'Feature':
