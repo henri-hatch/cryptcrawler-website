@@ -107,7 +107,7 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
           <option value="Action">Action</option>
           <option value="Bonus Action">Bonus Action</option>
           <option value="Reaction">Reaction</option>
-          <option value="Free">Free Action</option>
+          <option value="Free Action">Free Action</option>
           <option value="Passive">Passive</option>
         </select>
       </label>
