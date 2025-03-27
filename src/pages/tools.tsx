@@ -13,6 +13,12 @@ const ToolsPage = () => {
       <button onClick={() => navigate('/tools/maneuver-creator')}>
         Launch Maneuver Creator
       </button>
+
+      <h3>Dice Roller</h3>
+      <p>Roll virtual dice for your game sessions.</p>
+      <button onClick={() => navigate('/tools/dice-roller')}>
+        Open Dice Roller
+      </button>
     </>
   );
 };

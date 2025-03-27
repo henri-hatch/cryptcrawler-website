@@ -1,0 +1,285 @@
+.dice-roller {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    font-family: sans-serif;
+  }
+  
+  .dice-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .dice-button {
+    background-color: #800000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    position: relative;
+    width: 55px;
+    height: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 4px;
+    transition: transform 0.2s;
+  }
+  
+  .dice-button:hover {
+    transform: translateY(-2px);
+  }
+  
+  .roll-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 10px;
+  }
+  
+  .roll-button {
+    background-color: #324692;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 24px;
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .roll-button:hover {
+    background-color: #4059b9;
+  }
+  
+  .total-display {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  .dice-area {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+    min-height: 150px;
+  }
+  
+  .die {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s;
+    border: 1px solid rgba(120, 120, 120, 0.5);
+  }
+  
+  .die:hover {
+    transform: translateY(-5px);
+  }
+
+  .die-value-placeholder {
+    height: 1.5rem;
+    display: inline-block;
+  }
+  
+  /* Die shapes */
+  .d4 {
+    background-color: #ff5252;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    transform-origin: center 66%;
+  }
+  
+  .d6 {
+    background-color: #4caf50;
+  }
+  
+  .d8 {
+    background-color: #2196f3;
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  }
+  
+  .d10 {
+    background-color: #9c27b0;
+    clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
+  }
+  
+  .d12 {
+    background-color: #ff9800;
+    clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 90%, 0% 70%, 0% 35%, 20% 10%);
+  }
+  
+  .d20 {
+    background-color: #03a9f4;
+    clip-path: polygon(50% 0%, 100% 30%, 100% 70%, 50% 100%, 0% 70%, 0% 30%);
+  }
+  
+  .d100 {
+    background-color: #607d8b;
+    border-radius: 50%;
+    font-size: 0.9rem;
+  }
+  
+  .die-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    z-index: 2;
+  }
+  
+  .d100 .die-value {
+    font-size: 1.2rem;
+  }
+  
+  .die-type {
+    position: absolute;
+    bottom: 3px;
+    width: 100%;
+    text-align: center;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  /* Rolling animation */
+  .rolling {
+    animation: roll 0.6s cubic-bezier(0.2, 0, 0.8, 1);
+  }
+  
+  @keyframes roll {
+    0% {
+      transform: rotate(0deg) scale(1);
+    }
+    10% {
+      transform: rotate(45deg) scale(1.1); /* Quick acceleration with slight grow */
+    }
+    90% {
+      transform: rotate(340deg) scale(1.05); /* Start slowing down */
+    }
+    100% {
+      transform: rotate(360deg) scale(1);
+    }
+  }
+  
+  .instructions {
+    margin-top: 40px;
+    color: #666;
+    font-style: italic;
+  }
+  
+  /* Dice button shapes */
+  .dice-button.d4 {
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  }
+  
+  .dice-button.d8 {
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  }
+  
+  .dice-button.d10 {
+    clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
+  }
+  
+  .dice-button.d12 {
+    clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 90%, 0% 70%, 0% 35%, 20% 10%);
+  }
+  
+  .dice-button.d20 {
+    clip-path: polygon(50% 0%, 100% 30%, 100% 70%, 50% 100%, 0% 70%, 0% 30%); 
+  }
+  
+  .dice-button.d100 {
+    border-radius: 50%;
+  }
+
+  /* Dice button shapes - make sure all buttons are maroon */
+  .dice-button.d4,
+  .dice-button.d6,
+  .dice-button.d8,
+  .dice-button.d10,
+  .dice-button.d12,
+  .dice-button.d20,
+  .dice-button.d100 {
+    background-color: #800000; /* Force all buttons to use maroon color */
+  }
+  
+  /* Keep the shapes but override the background colors */
+  .dice-button.d4 {
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  }
+  
+  .dice-button.d8 {
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  }
+  
+  .dice-button.d10 {
+    clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
+  }
+  
+  .dice-button.d12 {
+    clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 90%, 0% 70%, 0% 35%, 20% 10%);
+  }
+  
+  .dice-button.d20 {
+    clip-path: polygon(50% 0%, 100% 30%, 100% 70%, 50% 100%, 0% 70%, 0% 30%); 
+  }
+  
+  .dice-button.d100 {
+    border-radius: 50%;
+  }
+  
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .dice-roller {
+      padding: 10px;
+    }
+  
+    .dice-buttons {
+      gap: 4px;
+    }
+  
+    .dice-button {
+      width: 45px; /* Smaller on mobile */
+      height: 45px; /* Smaller on mobile */
+      font-size: 0.9rem;
+    }
+  
+    .roll-button {
+      padding: 10px 20px;
+      font-size: 1.2rem;
+    }
+  
+    .total-display {
+      font-size: 1.2rem;
+    }
+  
+    .die {
+      width: 50px;
+      height: 50px;
+    }
+  
+    .die-value {
+      font-size: 1.2rem;
+    }
+  
+    .d100 .die-value {
+      font-size: 1rem;
+    }
+  
+    .instructions {
+      font-size: 0.9rem;
+    }
+  }

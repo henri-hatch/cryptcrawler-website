@@ -37,6 +37,7 @@ import Perception from './subpages/skills/perception.tsx'
 
 // Tools
 import ManeuverCreator from './subpages/tools/maneuver_creator.tsx'
+import DiceRoller from './subpages/tools/dice_roller.tsx'
 
 function App() {
   return (
@@ -95,6 +96,7 @@ function App() {
               <Route path="/skills/perception" element={<Perception />} />
 
               <Route path="/tools/maneuver-creator" element={<ManeuverCreator />} />
+              <Route path="/tools/dice-roller" element={<DiceRoller />} />
 
               {/* 404 */}
 
