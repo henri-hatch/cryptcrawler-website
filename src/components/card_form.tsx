@@ -60,7 +60,7 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
   };
 
   // Define the ability score options
-  const abilityScores = ['', 'STR', 'DEX', 'INT', 'WIL', 'WIS', 'CHA'];
+  const abilityScores = ['', 'MIG', 'FIN', 'REA', 'FOR', 'INT', 'PRE'];
 
   return (
     <form onSubmit={handleSubmit} className="card-form">
