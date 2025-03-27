@@ -150,47 +150,50 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
           </div>
         )}
 
-        {/* Modified Saving Throw display */}
+        {/* Saving Throw (only if both active and DC are provided) */}
         {savingThrowActive && savingThrowDC && (
           <div style={{ 
             color: '#720a02', 
-            marginBottom: (damage || hitEffect || special) ? '8px' : '0'
+            marginBottom: (success || fail) ? '8px' : (damage || hitEffect || special) ? '8px' : '0'
           }}>
             <strong>Saving Throw:</strong> {savingThrowActive} vs DC {savingThrowDC}
           </div>
         )}
-
-        {/* Damage (only if provided) */}
-        {damage && (
-          <div style={{ color: '#720a02', marginBottom: (hitEffect || special) ? '8px' : '0' }}>
-            <strong>Damage:</strong> {damage}
-          </div>
-        )}
-
-        {/* Hit Effect (only if provided) */}
-        {hitEffect && (
-          <div style={{ marginBottom: (success || fail || special) ? '8px' : '0' }}>
-            <strong>On Hit:</strong> {hitEffect}
-          </div>
-        )}
         
-        {/* Success (only if provided) - indented */}
+        {/* Success (only if provided) - indented under Saving Throw */}
         {success && (
           <div style={{ 
-            marginBottom: fail ? '8px' : (special ? '8px' : '0'),
+            marginBottom: fail ? '8px' : (damage || hitEffect || special) ? '8px' : '0',
             paddingLeft: '20px' // Indentation
           }}>
             <strong>Success:</strong> {success}
           </div>
         )}
 
-        {/* Fail (only if provided) - indented */}
+        {/* Fail (only if provided) - indented under Saving Throw */}
         {fail && (
           <div style={{ 
-            marginBottom: special ? '8px' : '0',
+            marginBottom: (damage || hitEffect || special) ? '8px' : '0',
             paddingLeft: '20px' // Indentation
           }}>
             <strong>Fail:</strong> {fail}
+          </div>
+        )}
+
+        {/* Damage (only if provided) */}
+        {damage && (
+          <div style={{ 
+            color: '#720a02', 
+            marginBottom: hitEffect || special ? '8px' : '0' 
+          }}>
+            <strong>Damage:</strong> {damage}
+          </div>
+        )}
+
+        {/* Hit Effect (only if provided) */}
+        {hitEffect && (
+          <div style={{ marginBottom: special ? '8px' : '0' }}>
+            <strong>On Hit:</strong> {hitEffect}
           </div>
         )}
         
