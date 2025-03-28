@@ -4,7 +4,7 @@ import '../components/content_card.css';
 const SkillsPage = () => {
   return (
     <>
-      <h2>Charisma</h2>
+      <h2>Presence</h2>
 
       <div className="cards-container">
       <ContentCard 
@@ -35,7 +35,7 @@ const SkillsPage = () => {
 
       <br />
 
-      <h2>Dexterity</h2>
+      <h2>Finesse</h2>
 
       <div className="cards-container">
       <ContentCard 
@@ -60,7 +60,7 @@ const SkillsPage = () => {
 
       <br />
 
-      <h2>Intelligence</h2>
+      <h2>Reason</h2>
 
       <div className="cards-container">
         <ContentCard 
@@ -85,7 +85,7 @@ const SkillsPage = () => {
 
       <br />
 
-      <h2>Wisdom</h2>
+      <h2>Intuition</h2>
 
       <div className="cards-container">
       <ContentCard 
