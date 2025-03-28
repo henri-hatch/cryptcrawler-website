@@ -1,7 +1,9 @@
 .content-card {
-  display: block;
+  display: flex;
+  flex-direction: column;
   width: 200px;
-  height: 280px;
+  height: auto; /* Changed from fixed height to auto */
+  min-height: 280px; /* Added min-height instead */
   border: 1px solid #ccc;
   border-radius: 5px;
   overflow: hidden;
@@ -9,6 +11,12 @@
   color: inherit;
   transition: transform 0.2s, box-shadow 0.2s;
   margin: 10px;
+  position: relative; /* For proper positioning of the button */
+}
+
+.content-card.expanded {
+  z-index: 10; /* Bring expanded card to front */
+  height: auto;
 }
 
 .content-card:hover {
@@ -31,19 +39,22 @@
   object-fit: contain;
 }
 
+/* Update card content styles */
 .card-content {
   padding: 10px;
-  height: 110px;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
+  height: auto; /* Changed from fixed height */
+  min-height: 110px; /* Added min-height instead */
+  flex-grow: 1;
 }
 
 .card-content h3 {
   margin: 0 0 5px 0;
 }
 
-.card-content p {
+/* Styles for truncated description */
+.truncated-description {
   margin: 0;
   font-size: 0.9em;
   color: #666;
@@ -53,12 +64,60 @@
   -webkit-line-clamp: 3;
   line-clamp: 3;
   -webkit-box-orient: vertical;
+  transition: all 0.3s ease;
+  max-height: 4.5em; /* Approx 3 lines */
+}
+
+/* Styles for expanded description */
+.expanded-description {
+  margin: 0;
+  font-size: 0.9em;
+  color: #666;
+  max-height: none;
+  -webkit-line-clamp: unset;
+  line-clamp: unset;
+  overflow: visible;
+}
+
+/* Update the read-more button to be a subtle arrow */
+.read-more-btn {
+  align-self: center;
+  background-color: transparent;
+  color: #666;
+  border: none;
+  width: 24px;
+  height: 24px;
+  margin-top: 5px;
+  font-size: 1.2em;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+/* Remove hover background color change */
+.read-more-btn:hover {
+  background-color: transparent;
+  color: #800000;
 }
 
 .cards-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start; /* Changed from center to flex-start */
+  align-items: flex-start; /* Keep tops aligned */
+}
+
+/* Race card specific styles */
+.race-card {
+  width: 232px;
+  height: auto; /* Changed from fixed height to auto */
+  min-height: 312px; /* Added min-height instead */
+}
+
+.race-card .card-image-container {
+  height: 232px;
 }
 
 /* Make cards more responsive on small screens */
@@ -71,6 +130,7 @@
     width: 180px;
     height: 260px;
     margin: 8px;
+    min-height: 260px;
   }
   
   .card-image-container {
@@ -80,6 +140,16 @@
   .card-content {
     height: 100px;
   }
+  
+  .race-card {
+    width: 210px;
+    height: 290px;
+    min-height: 290px;
+  }
+  
+  .race-card .card-image-container {
+    height: 210px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -87,6 +157,7 @@
     width: 160px;
     height: 240px;
     margin: 5px;
+    min-height: 240px;
   }
   
   .card-image-container {
@@ -104,5 +175,15 @@
   
   .card-content p {
     font-size: 0.8em;
+  }
+  
+  .race-card {
+    width: 180px;
+    height: 260px;
+    min-height: 260px;
+  }
+  
+  .race-card .card-image-container {
+    height: 180px;
   }
 }
