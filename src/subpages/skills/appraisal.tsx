@@ -1,4 +1,4 @@
-const Bartering = () => {
+const Appraisal = () => {
     return (
         <>
             <h2>Appraisal</h2>
@@ -10,4 +10,4 @@ const Bartering = () => {
     )
 };
 
-export default Bartering;
+export default Appraisal;

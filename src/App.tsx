@@ -5,7 +5,7 @@ import './App.css'
 import HomePage from './pages/home.tsx'
 import SkillsPage from './pages/skills.tsx'
 import ClassesPage from './pages/classes.tsx'
-import RacesPage from './pages/races.tsx'
+import AncestriesPage from './pages/ancestries.tsx'
 import GameRulesPage from './pages/game_rules.tsx'
 import ToolsPage from './pages/tools.tsx'
 
@@ -19,9 +19,31 @@ import Paragon from './subpages/classes/paragon.tsx'
 import Abnegate from './subpages/classes/abnegate.tsx'
 import Conduit from './subpages/classes/conduit.tsx'
 
+// Ancestries
+import Changeling from './subpages/ancestries/changeling.tsx'
+import Draeling from './subpages/ancestries/draeling.tsx'
+import Dragonborn from './subpages/ancestries/dragonborn.tsx'
+import Dwarf from './subpages/ancestries/dwarf.tsx'
+import Elf from './subpages/ancestries/elf.tsx'
+import Githyanki from './subpages/ancestries/githyanki.tsx'
+import Goblin from './subpages/ancestries/goblin.tsx'
+import HalfElf from './subpages/ancestries/half-elf.tsx'
+import HalfOrc from './subpages/ancestries/half-orc.tsx'
+import Halfling from './subpages/ancestries/halfling.tsx'
+import Harengon from './subpages/ancestries/harengon.tsx'
+import Hobgoblin from './subpages/ancestries/hobgoblin.tsx'
+import Human from './subpages/ancestries/human.tsx'
+import Kenku from './subpages/ancestries/kenku.tsx'
+import Kobold from './subpages/ancestries/kobold.tsx'
+import Lizardfolk from './subpages/ancestries/lizardfolk.tsx'
+import Mul from './subpages/ancestries/mul.tsx'
+import Orc from './subpages/ancestries/orc.tsx'
+import Tabaxi from './subpages/ancestries/tabaxi.tsx'
+import Warforged from './subpages/ancestries/warforged.tsx'
+
 // Skills
 import Persuasion from './subpages/skills/persuasion.tsx'
-import Bartering from './subpages/skills/bartering.tsx'
+import Appraisal from './subpages/skills/appraisal.tsx'
 import Stealth from './subpages/skills/stealth.tsx'
 import Medicine from './subpages/skills/medicine.tsx'
 import Crafting from './subpages/skills/crafting.tsx'
@@ -54,7 +76,7 @@ function App() {
           <NavLink to="/" className={({isActive}) => isActive ? "active" : ""}>Home</NavLink>
           <NavLink to="/skills" className={({isActive}) => isActive ? "active" : ""}>Skills</NavLink>
           <NavLink to="/classes" className={({isActive}) => isActive ? "active" : ""}>Classes</NavLink>
-          <NavLink to="/races" className={({isActive}) => isActive ? "active" : ""}>Races</NavLink>
+          <NavLink to="/ancestries" className={({isActive}) => isActive ? "active" : ""}>Ancestries</NavLink>
           <NavLink to="/game-rules" className={({isActive}) => isActive ? "active" : ""}>Game Rules</NavLink>
           <NavLink to="/tools" className={({isActive}) => isActive ? "active" : ""}>Tools</NavLink>
         </nav>
@@ -68,20 +90,45 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/skills" element={<SkillsPage />} />
               <Route path="/classes" element={<ClassesPage />} />
-              <Route path="/races" element={<RacesPage />} />
+              <Route path="/ancestries" element={<AncestriesPage />} />
               <Route path="/game-rules" element={<GameRulesPage />} />
               <Route path="/tools" element={<ToolsPage />} />
 
               {/* Subpages */}
+
+              {/* Classes */}
               <Route path="/classes/shadow" element={<Shadow />} />
               <Route path="/classes/tactician" element={<Tactician />} />
               <Route path="/classes/minstrel" element={<Minstrel />} />
-              <Route path="/classes/paragon" element={<Paragon />} />  
-              <Route path="/classes/abnegate" element={<Abnegate />} />       
-              <Route path="/classes/conduit" element={<Conduit />} />                           
+              <Route path="/classes/paragon" element={<Paragon />} />
+              <Route path="/classes/abnegate" element={<Abnegate />} />
+              <Route path="/classes/conduit" element={<Conduit />} />
 
+              {/* Ancestries */}
+              <Route path="/ancestries/changeling" element={<Changeling />} />
+              <Route path="/ancestries/draeling" element={<Draeling />} />
+              <Route path="/ancestries/dragonborn" element={<Dragonborn />} />
+              <Route path="/ancestries/dwarf" element={<Dwarf />} />
+              <Route path="/ancestries/elf" element={<Elf />} />
+              <Route path="/ancestries/githyanki" element={<Githyanki />} />
+              <Route path="/ancestries/goblin" element={<Goblin />} />
+              <Route path="/ancestries/half-elf" element={<HalfElf />} />
+              <Route path="/ancestries/half-orc" element={<HalfOrc />} />
+              <Route path="/ancestries/halfling" element={<Halfling />} />
+              <Route path="/ancestries/harengon" element={<Harengon />} />
+              <Route path="/ancestries/hobgoblin" element={<Hobgoblin />} />
+              <Route path="/ancestries/human" element={<Human />} />
+              <Route path="/ancestries/kenku" element={<Kenku />} />
+              <Route path="/ancestries/kobold" element={<Kobold />} />
+              <Route path="/ancestries/lizardfolk" element={<Lizardfolk />} />
+              <Route path="/ancestries/mul" element={<Mul />} />
+              <Route path="/ancestries/orc" element={<Orc />} />
+              <Route path="/ancestries/tabaxi" element={<Tabaxi />} />
+              <Route path="/ancestries/warforged" element={<Warforged />} />
+
+              {/* Skills */}
               <Route path="/skills/persuasion" element={<Persuasion />} />
-              <Route path="/skills/bartering" element={<Bartering />} />
+              <Route path="/skills/appraisal" element={<Appraisal />} />
               <Route path="/skills/stealth" element={<Stealth />} />
               <Route path="/skills/medicine" element={<Medicine />} />
               <Route path="/skills/crafting" element={<Crafting />} />
@@ -95,6 +142,7 @@ function App() {
               <Route path="/skills/intimidation" element={<Intimidation />} />
               <Route path="/skills/perception" element={<Perception />} />
 
+              {/* Tools */}
               <Route path="/tools/maneuver-creator" element={<ManeuverCreator />} />
               <Route path="/tools/dice-roller" element={<DiceRoller />} />
 

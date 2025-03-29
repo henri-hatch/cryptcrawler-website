@@ -65,8 +65,8 @@ const SkillsPage = () => {
       <div className="cards-container">
         <ContentCard 
           title="Appraisal" 
-          imagePath="/skills-images/bartering_logo.png" 
-          linkTo="/skills/bartering"
+          imagePath="/skills-images/appraisal_logo.png" 
+          linkTo="/skills/appraisal"
           description="Some see trash, but you see treasure. Increase your purchasing power with the Appraisal skill."
         />
         <ContentCard 
