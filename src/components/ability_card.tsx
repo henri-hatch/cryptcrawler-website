@@ -81,14 +81,14 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
   return (
     <div
       style={{
-        width: cardWidth, // Now dynamic
+        width: cardWidth, 
         border: '2px solid #444',
         borderRadius: '0',
         overflow: 'hidden',
         backgroundColor: '#fff',
-        fontFamily: 'sans-serif',
-        maxWidth: '100%', // Ensure it doesn't overflow container
-        margin: '0 auto', // Center on mobile
+        fontFamily: 'sans-serif', // Explicitly keep sans-serif for maneuver cards
+        maxWidth: '100%',
+        margin: '0 auto',
       }}
     >
       {/* Title / Usage Row with flex layout */}

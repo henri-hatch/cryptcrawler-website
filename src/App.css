@@ -6,11 +6,19 @@ html, body {
   min-height: 100%;
   height: 100%;
   width: 100%;
+  font-family: 'Fraunces', serif; /* Add Fraunces as primary font */
+}
+
+/* Add to App.css for better font rendering */
+*, *::before, *::after {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-smooth: always;
 }
 
 /* Container to hold everything */
 .app-container {
-  font-family: Arial, sans-serif;
+  font-family: 'Fraunces', serif;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
