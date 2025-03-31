@@ -56,6 +56,9 @@ import Investigation from './subpages/skills/investigation.tsx'
 import Pickpocketing from './subpages/skills/pickpocketing.tsx'
 import Intimidation from './subpages/skills/intimidation.tsx'
 import Perception from './subpages/skills/perception.tsx'
+import Insight from './subpages/skills/insight.tsx'
+import History from './subpages/skills/history.tsx'
+import Acrobatics from './subpages/skills/acrobatics.tsx'
 
 // Tools
 import ManeuverCreator from './subpages/tools/maneuver_creator.tsx'
@@ -141,6 +144,9 @@ function App() {
               <Route path="/skills/pickpocketing" element={<Pickpocketing />} />
               <Route path="/skills/intimidation" element={<Intimidation />} />
               <Route path="/skills/perception" element={<Perception />} />
+              <Route path="/skills/insight" element={<Insight />} />
+              <Route path="/skills/history" element={<History />} />
+              <Route path="/skills/acrobatics" element={<Acrobatics />} />
 
               {/* Tools */}
               <Route path="/tools/maneuver-creator" element={<ManeuverCreator />} />

@@ -1,12 +1,20 @@
 const Performance = () => {
     return (
+        <>
+            <h2>Performance</h2>
+            
+            <br />
 
-        <div>
-        <h3>Inspirational</h3>
-        <p dir="auto"><em>With either a quick strum of an instrument or an encouraging remark, you embolden your allies to further greatness.</em></p>
-        <p dir="auto">As a reaction, you can give another friendly creature within 60ft a 1d4 bonus to a roll they have made. The amount of times you can activate this feature is equal to your CHA score.</p>
-        </div>
-        
+            <div>
+            <h3>Inspirational</h3>
+            <p dir="auto"><em>With a quick strum or word, you inspire those around you.</em></p>
+            <p dir="auto">You gain the <em>Inspiration</em> maneuver.</p>
+            </div>
+
+            <div>
+            <img src="/manuever-images/Inspiration.png" alt="Inspiration" style={{ width: '75%', height: 'auto'}} />
+            </div>
+        </>
     )
 };
 

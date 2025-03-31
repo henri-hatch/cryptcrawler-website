@@ -39,6 +39,12 @@ const SkillsPage = () => {
 
       <div className="cards-container">
       <ContentCard 
+        title="Acrobatics" 
+        imagePath="/skills-images/acrobatics_logo.png" 
+        linkTo="/skills/acrobatics"
+        description="You have to move fast. The best way to commit crimes is to never be caught. Evade the guards with the acrobatics skill."
+      />
+      <ContentCard 
         title="Lockpicking" 
         imagePath="/skills-images/lockpicking_logo.png" 
         linkTo="/skills/lockpicking"
@@ -76,6 +82,12 @@ const SkillsPage = () => {
           description="Bombs are less of a science and more of an art. Increase your utility with the Crafting skill."
         />
         <ContentCard 
+          title="History" 
+          imagePath="/skills-images/history_logo.png" 
+          linkTo="/skills/history"
+          description="Having a nose for books allows you to know a lot about the world. Expand your mind with the History skill."
+        />
+        <ContentCard 
           title="Investigation" 
           imagePath="/skills-images/investigation_logo.png" 
           linkTo="/skills/investigation"
@@ -93,6 +105,12 @@ const SkillsPage = () => {
           imagePath="/skills-images/animalhandling_logo.png" 
           linkTo="/skills/animal_handling"
           description="Everyone needs a friend, and you tend to find them outside. Animals flock to you and your charm."
+        />
+        <ContentCard 
+          title="Insight" 
+          imagePath="/skills-images/insight_logo.png" 
+          linkTo="/skills/insight"
+          description="The hardest thing to read are the thoughts of another. Peer into the machinations of your enemies with the Insight skill."
         />
         <ContentCard 
           title="Medicine" 
