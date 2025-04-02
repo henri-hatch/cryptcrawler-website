@@ -1,0 +1,247 @@
+.character-creator {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .form-step {
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .form-input, .form-select {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px;
+    margin: 20px 0;
+    font-size: 1.2rem;
+    border: 2px solid #800000;
+    border-radius: 5px;
+    background-color: white;
+  }
+  
+  .form-content {
+    position: relative;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  
+  /* Slide animations */
+  .form-content.slide-forward {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+  
+  .form-content.slide-backward {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  
+  /* Progress bar */
+  .progress-bar {
+    height: 8px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    margin: 20px 0;
+    overflow: hidden;
+  }
+  
+  .progress {
+    height: 100%;
+    background-color: #800000;
+    transition: width 0.3s ease;
+  }
+  
+  /* Step indicators */
+  .step-indicators {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+  }
+  
+  .step-indicator {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .step-indicator.active {
+    background-color: #800000;
+  }
+  
+  /* Navigation buttons */
+  .form-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+  }
+  
+  .button-previous,
+  .button-next,
+  .button-finish {
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .button-previous {
+    background-color: #e0e0e0;
+    color: #333;
+  }
+  
+  .button-next {
+    background-color: #800000;
+    color: white;
+  }
+  
+  .button-finish {
+    background-color: #800000;
+    color: white;
+  }
+  
+  .button-previous:hover {
+    background-color: #cccccc;
+  }
+  
+  .button-next:hover,
+  .button-finish:hover {
+    background-color: #600000;
+  }
+  
+  .button-next:disabled,
+  .button-finish:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+  }
+  
+  /* Styling for stat allocation section */
+  .stat-allocation {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+  }
+  
+  .stat-row label {
+    font-weight: bold;
+    min-width: 100px;
+  }
+  
+  .stat-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  
+  .stat-button {
+    padding: 5px 10px;
+    background-color: #e0e0e0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  .stat-button.selected {
+    background-color: #800000;
+    color: white;
+  }
+  
+  .stat-button.clear {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+  }
+  
+  .stat-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  /* Available stats section */
+  .available-stats {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  .stat-values {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+  
+  .stat-value {
+    padding: 8px 12px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  .stat-value .count {
+    font-size: 0.8em;
+    color: #6c757d;
+  }
+  
+  /* Summary step */
+  .summary-step {
+    text-align: left;
+    width: 100%;
+  }
+  
+  .summary-content {
+    max-width: 500px;
+    margin: 0 auto;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .summary-content h3 {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+    margin-top: 15px;
+  }
+  
+  .summary-content ul {
+    list-style-type: none;
+    padding-left: 10px;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 600px) {
+    .stat-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    
+    .stat-buttons {
+      width: 100%;
+    }
+    
+    .button-previous, 
+    .button-next,
+    .button-finish {
+      padding: 8px 16px;
+      font-size: 1rem;
+    }
+  }

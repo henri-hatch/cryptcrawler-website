@@ -63,6 +63,8 @@ import Acrobatics from './subpages/skills/acrobatics.tsx'
 // Tools
 import ManeuverCreator from './subpages/tools/maneuver_creator.tsx'
 import DiceRoller from './subpages/tools/dice_roller.tsx'
+import CharacterCreator from './subpages/tools/character_creator.tsx'
+import CharacterManager from './subpages/tools/character_manager.tsx'
 
 function App() {
   return (
@@ -151,6 +153,8 @@ function App() {
               {/* Tools */}
               <Route path="/tools/maneuver-creator" element={<ManeuverCreator />} />
               <Route path="/tools/dice-roller" element={<DiceRoller />} />
+              <Route path="/tools/character-creator" element={<CharacterCreator />} />
+              <Route path="/tools/character-manager" element={<CharacterManager />} />
 
               {/* 404 */}
 
