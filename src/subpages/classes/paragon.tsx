@@ -5,13 +5,21 @@ const Paragon = () => {
 
             <div>
             <h3>Prerequisites</h3>
-            <p>A paragon is a warrior of deep conviction, bound by and powered by a magical oath. To be an oathkeeper, you must meet the following prerequisites.</p>
+            <p>A Paragon is a warrior of deep conviction, bound by and powered by a magical oath. To be an oathkeeper, you must meet the following prerequisites.</p>
             <ul>
-                <li>You must have a CHA score of 2 or higher.</li>
-                <li>You must have a STR score of 2 or higher.</li>
-                <li>You must have the <em>heavy armor</em>, <em>insight</em>, <em>persuasion</em>, or <em>religion</em> skill.</li>
-                <li>You must have an oath, which you made at the lowest moment in your life. This oath is the source of your power, and your conviction to keep it fuels your magical abilities and supernatural feats. Breaking your oath can cause you to lose your abilities.</li>
-                <li>You must have an personal ideal for your oath: either something you believe perfectly embodies your oath, or something which is the total opposite of it.</li>
+                <li>A duty that you don't have the power to fulfill.</li>
+                <li>Have a personal code of conduct, with a clear sense of right and wrong.</li>
+            </ul>
+            </div>
+
+            <div>
+            <h3>Breakthrough</h3>
+            <p>As a Paragon, <em>breakthrough</em> opportunities often involve:</p>
+            <ul>
+                <li>Swearing an oath.</li>
+                <li>Seeing your view of the world directly challenged.</li>
+                <li>Keeping a promise, even if it does not benefit you.</li>
+                <li>Failing to keep a promise you made (perhaps one made to yourself).</li>
             </ul>
             </div>
 

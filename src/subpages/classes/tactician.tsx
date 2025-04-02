@@ -5,12 +5,24 @@ const Tactician = () => {
 
             <div>
             <h3>Prerequisites</h3>
-            <p>A tactician is a master of battle, constantly seeking for holes in the battlefield. To be a strategic mastermind, you must meet the following prerequisites.</p>
+            <p>A Tactician is a master of battle, constantly seeking for holes in the battlefield. To be a strategic mastermind, you must meet the following prerequisites.</p>
             <ul>
-                <li>You must have a INT score of 2 or higher.</li>
-                <li>You must have a DEX or STR score of 2 or higher.</li>
-                <li>You must have the <em>heavy armor</em>, <em>insight</em>, <em>light armor</em>, or <em>history</em> skill.</li>
-                <li>You must have prior experience commanding or planning on a battlefield.</li>
+                <li>Win a battle.</li>
+                <li>Earn the respect or support of your comrades in arms.</li>
+                <li>Earn the respect or fear from one of your enemies.</li>
+            </ul>
+            </div>
+
+
+            <div>
+            <h3>Breakthrough</h3>
+            <p>As a Tactician, <em>breakthrough</em> opportunities often involve:</p>
+            <ul>
+                <li>Beat otherwise impossible odds.</li>
+                <li>Executing your plan perfectly.</li>
+                <li>Risk your life for the sake of one of your comrades.</li>
+                <li>Revealing to your opponent that you were one step ahead all along.</li>
+
             </ul>
             </div>
 

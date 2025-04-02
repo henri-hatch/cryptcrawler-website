@@ -7,17 +7,22 @@ const Abnegate = () => {
             <h3>Prerequisites</h3>
             <p>An Abnegate is an anti-magical anomaly. When twins are born into a sorcerous family, one inherits the magical powers of a Talent while the other is totally immune to magic. To be a walking Godblind, you must meet the following prerequisites.</p>
             <ul>
-                <li>You must have a INT score of 2 or higher.</li>
-                <li>You must have a DEX score of 2 or higher.</li>
-                <li>You must have the <em>acrobatics</em>, <em>light armor</em>, or <em>stealth</em> skill.</li>
-                <li>You must be a twin born with sorcerous blood in your family, with your sibling being a <u><a href="https://cryptcrawler-5e.pages.dev/classes/talent">Talent</a></u>.</li>
-                <li>You must be born with a physical mark, distinguishing yourself from your twin and hinting at your anomalous nature.</li>
+                <li>Be a twin born with sorcerous blood in your family, with your sibling potentially being a <u><a href="https://cryptcrawler-5e.pages.dev/classes/talent">Talent</a></u>.</li>
+                <li>Have a physical mark, distinguishing yourself from your twin and hinting at your anomalous nature.</li>
+                <li>Struggle with spellcasting, not being as efficient as your sibling.</li>
             </ul>
             </div>
 
             <div>
-            <h3><u>Health</u></h3>
-            <p>At 1st level, your DHP and your SHP is 7 + your WIL. Each time you level-up, your SHP increases by 4 + your WIL.</p>
+            <h3>Breakthrough</h3>
+            <p>As a Abnegate, <em>breakthrough</em> opportunities often involve:</p>
+            <ul>
+                <li>Having a psychic encounter.</li>
+                <li>Seeing your twin in mortal danger.</li>
+                <li>A psychological break or realization.</li>
+                <li>Coming to grips with your anomalous nature.</li>
+
+            </ul>
             </div>
 
             <div>

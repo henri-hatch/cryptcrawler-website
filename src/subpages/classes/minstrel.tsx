@@ -5,12 +5,22 @@ const Minstrel = () => {
 
             <div>
             <h3>Prerequisites</h3>
-            <p>A minstrel is a fantastical storyteller, interweaving different narratives into one cohesive tale. To be a master of myth and legend, you must meet the following prerequisites.</p>
+            <p>A Minstrel is a fantastical storyteller, interweaving different narratives into one cohesive tale. To be a master of myth and legend, you must meet the following prerequisites.</p>
             <ul>
-                <li>You must have a CHA score of 3 or higher.</li>
-                <li>You must have the <em>deception</em>, <em>performance</em>, or <em>persuasion</em> skill.</li>
-                <li>You must know three or more languages.</li>
-                <li>You must be known by at least three different names in three different regions of the world.</li>
+                <li>Have a story to tell.</li>
+                <li>Have a well-established reputation that precedes you.</li>
+                <li>You must be known by many different names.</li>
+            </ul>
+            </div>
+
+            <div>
+            <h3>Breakthrough</h3>
+            <p>As a Minstrel, <em>breakthrough</em> opportunities often involve:</p>
+            <ul>
+                <li>Moving a crowd to action.</li>
+                <li>Earn the love or ire of a group of people.</li>
+                <li>Find a lesson to learn in tragedy.</li>
+                <li>Experience something so fantastical that no one would believe you.</li>
             </ul>
             </div>
 

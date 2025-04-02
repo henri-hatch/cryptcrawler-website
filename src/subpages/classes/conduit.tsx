@@ -7,10 +7,20 @@ const Conduit = () => {
             <h3>Prerequisites</h3>
             <p>A Conduit is an individual chosen by a higher power to be their representative in the physical world. To be a herald of greater power, you must meet the following prerequisites.</p>
             <ul>
-                <li>You must have a WIS score of 3 or higher.</li>
-                <li>You must have the <em>arcana</em>, <em>history</em>, <em>insight</em>, or <em>religion</em> skill.</li>
-                <li>You must have a connection with an extraplanar entity, whether God or otherwise, who has given you magical power.</li>
-                <li>There must be a price to pay in exchange for this power: which has been paid already or is still to be revealed.</li>
+                <li>Form a connection with an extraplanar entity, whether God or otherwise.</li>
+                <li>Pay a price with your connected entity in exchange for this power.</li>
+                <li>Follow a condition or instruction set by your connected entity.</li>
+            </ul>
+            </div>
+
+            <div>
+            <h3>Breakthrough</h3>
+            <p>As a Conduit, <em>breakthrough</em> opportunities often involve:</p>
+            <ul>
+                <li>Swearing fealty to your connected entity.</li>
+                <li>A desperate situation in which you need your connected entity's power.</li>
+                <li>Your connected entity directly interferes with your life.</li>
+                <li>A personal encounter with your connected entity.</li>
             </ul>
             </div>
 
