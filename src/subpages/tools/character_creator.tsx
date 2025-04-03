@@ -38,6 +38,7 @@ interface Character {
   library: any[];
   inventory: any[];
   inventory_capacity: number;
+  current_inventory_weight: number;
   origin: string[];
 }
 
@@ -83,6 +84,7 @@ const DEFAULT_CHARACTER: Character = {
   library: [],
   inventory: [],
   inventory_capacity: 50,
+  current_inventory_weight: 0,
   origin: []
 };
 
