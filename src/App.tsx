@@ -8,6 +8,7 @@ import ClassesPage from './pages/classes.tsx'
 import AncestriesPage from './pages/ancestries.tsx'
 import GameRulesPage from './pages/game_rules.tsx'
 import ToolsPage from './pages/tools.tsx'
+import SearchDatabasePage from './pages/search_database.tsx'
 
 // Import subpages
 
@@ -84,6 +85,7 @@ function App() {
           <NavLink to="/ancestries" className={({isActive}) => isActive ? "active" : ""}>Ancestries</NavLink>
           <NavLink to="/game-rules" className={({isActive}) => isActive ? "active" : ""}>Game Rules</NavLink>
           <NavLink to="/tools" className={({isActive}) => isActive ? "active" : ""}>Tools</NavLink>
+          <NavLink to="/search-database" className={({isActive}) => isActive ? "active" : ""}>Search Database</NavLink>
         </nav>
     
         {/* MAIN CONTENT */}
@@ -92,12 +94,14 @@ function App() {
           <div className="content">
             <Routes>
               {/* Main pages */}
+              
               <Route path="/" element={<HomePage />} />
               <Route path="/skills" element={<SkillsPage />} />
               <Route path="/classes" element={<ClassesPage />} />
               <Route path="/ancestries" element={<AncestriesPage />} />
               <Route path="/game-rules" element={<GameRulesPage />} />
               <Route path="/tools" element={<ToolsPage />} />
+              <Route path="/search-database" element={<SearchDatabasePage />} />
 
               {/* Subpages */}
 

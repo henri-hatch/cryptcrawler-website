@@ -4,7 +4,8 @@ interface ClassData {
     description: string;
     imagePath: string;
     pageRoute: string;
-    category: "common" | "rare";
+    class_category: "common" | "rare";
+    category: string[];
 }
   
 const classData: ClassData[] = [
@@ -14,7 +15,8 @@ const classData: ClassData[] = [
       description: "Despite their promises, Gods and entities of beyond still interfere in the mortal world.",
       imagePath: "/class-images/conduit_logo.png",
       pageRoute: "/classes/conduit",
-      category: "common",
+      class_category: "common",
+      category: ["class"]
     },
     {
       id: "minstrel",
@@ -22,7 +24,8 @@ const classData: ClassData[] = [
       description: "Minstrels are poets, the authors of myth, writing the very adventure the party is in.",
       imagePath: "/class-images/minstrel_logo.png",
       pageRoute: "/classes/minstrel",
-      category: "common",
+      class_category: "common",
+      category: ["class"]
     },
     {
       id: "paragon",
@@ -30,7 +33,8 @@ const classData: ClassData[] = [
       description: "Bound by a powerful oath, Paragons seek to become the ideal they have sworn to.",
       imagePath: "/class-images/paragon_logo.png",
       pageRoute: "/classes/paragon",
-      category: "common",
+      class_category: "common",
+      category: ["class"]
     },
     {
       id: "shadow",
@@ -38,7 +42,8 @@ const classData: ClassData[] = [
       description: "Masters of thievery and sneak, Shadows excel from, well, the shadows.",
       imagePath: "/class-images/shadow_logo.png",
       pageRoute: "/classes/shadow",
-      category: "common",
+      class_category: "common",
+      category: ["class"]
     },
     {
       id: "tactician",
@@ -46,7 +51,8 @@ const classData: ClassData[] = [
       description: "Tacticians are the masterminds of the battlefield, using strategy and cunning to outwit their foes.",
       imagePath: "/class-images/tactician_logo.png",
       pageRoute: "/classes/tactician",
-      category: "common",
+      class_category: "common",
+      category: ["class"]
     },
     {
       id: "abnegate",
@@ -54,7 +60,8 @@ const classData: ClassData[] = [
       description: "Born as a twin, an Abnegate is an anti-magical anomaly, blessed with supernatural physical power rather than magical gifts.",
       imagePath: "/class-images/null_logo.png",
       pageRoute: "/classes/abnegate",
-      category: "rare",
+      class_category: "rare",
+      category: ["class"]
     }
   ];
   

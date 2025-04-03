@@ -3,7 +3,7 @@ import './character_creator.css';
 import ContentCard from '../../components/content_card';
 import ancestryData from '../../data/ancestry_data';
 import skillData from '../../data/skill_data';
-import originData from '../../data/origin_data';
+import originData, { getEquipmentDetails } from '../../data/origin_data';
 
 // Core data types
 interface CharacterStats {
@@ -135,10 +135,12 @@ const CharacterCreator: React.FC = () => {
 
   // Helper function to find origin item by ID
   const findOriginItem = (itemId: string) => {
-    for (const category of ['equipment', 'quirks', 'histories'] as const) {
-      const item = originData[category].find(i => i.id === itemId);
-      if (item) return { item, category };
+    // First check if it's equipment
+    if (originData.equipment.some(item => item.id === itemId)) {
+      const equipmentDetails = getEquipmentDetails(itemId);
+      return equipmentDetails ? { item: equipmentDetails, category: 'equipment' } : { item: null, category: null };
     }
+    
     return { item: null, category: null };
   };
 
@@ -149,7 +151,7 @@ const CharacterCreator: React.FC = () => {
       case 1: return character.ancestry !== '';
       case 2: return character.alignment !== '';
       case 3: return Object.values(allocatedStats).every(val => val !== null);
-      case 4: return true; // Origin is optional
+      case 4: return true;
       case 5: return character.skills[0].skill_id !== '';
       default: return true;
     }
@@ -393,22 +395,47 @@ const CharacterCreator: React.FC = () => {
       
       case 4: // Origin
         // Render origin selection lists
-        const renderOriginItem = (item: any) => (
-          <div 
-            key={item.id} 
-            className={`origin-item ${character.origin.includes(item.id) ? 'selected' : ''}`}
-            onClick={() => handleOriginItemSelect(item.id, item.cost)}
-          >
-            <div className="origin-item-content">
-              <span className="origin-item-name">{item.name}</span>
-              <span className="origin-item-cost">{item.cost} {item.cost === 1 ? 'point' : 'points'}</span>
+        const renderOriginItem = (item: any, category: string) => {
+          // For equipment items, get full details from item_data
+          if (category === 'equipment') {
+            const equipmentDetails = getEquipmentDetails(item.id);
+            if (!equipmentDetails) return null;
+            
+            return (
+              <div 
+                key={item.id} 
+                className={`origin-item ${character.origin.includes(item.id) ? 'selected' : ''}`}
+                onClick={() => handleOriginItemSelect(item.id, equipmentDetails.origin_cost)}
+              >
+                <div className="origin-item-content">
+                  <span className="origin-item-name">{equipmentDetails.name}</span>
+                  <span className="origin-item-cost">{equipmentDetails.origin_cost} point</span>
+                </div>
+                <div className="origin-item-tooltip">
+                  {equipmentDetails.description}
+                </div>
+                {character.origin.includes(item.id) && <div className="selection-indicator">✓</div>}
+              </div>
+            );
+          }
+          
+          return (
+            <div 
+              key={item.id} 
+              className={`origin-item ${character.origin.includes(item.id) ? 'selected' : ''}`}
+              onClick={() => handleOriginItemSelect(item.id, item.origin_cost)}
+            >
+              <div className="origin-item-content">
+                <span className="origin-item-name">{item.name}</span>
+                <span className="origin-item-cost">{item.origin_cost} {item.origin_cost === 1 ? 'point' : 'points'}</span>
+              </div>
+              <div className="origin-item-tooltip">
+                {item.description}
+              </div>
+              {character.origin.includes(item.id) && <div className="selection-indicator">✓</div>}
             </div>
-            <div className="origin-item-tooltip">
-              {item.description}
-            </div>
-            {character.origin.includes(item.id) && <div className="selection-indicator">✓</div>}
-          </div>
-        );
+          );
+        };
 
         return (
           <div className="form-step origin-selection-step">
@@ -422,7 +449,7 @@ const CharacterCreator: React.FC = () => {
               <div className="origin-list">
                 <h3>Equipment</h3>
                 <div className="origin-items-container">
-                  {originData.equipment.map(item => renderOriginItem(item))}
+                  {originData.equipment.map(item => renderOriginItem(item, 'equipment'))}
                 </div>
               </div>
               
@@ -430,7 +457,7 @@ const CharacterCreator: React.FC = () => {
               <div className="origin-list">
                 <h3>Quirks</h3>
                 <div className="origin-items-container">
-                  {originData.quirks.map(item => renderOriginItem(item))}
+                  {originData.quirks.map(item => renderOriginItem(item, 'quirks'))}
                 </div>
               </div>
               
@@ -438,7 +465,7 @@ const CharacterCreator: React.FC = () => {
               <div className="origin-list">
                 <h3>History</h3>
                 <div className="origin-items-container">
-                  {originData.histories.map(item => renderOriginItem(item))}
+                  {originData.histories.map(item => renderOriginItem(item, 'histories'))}
                 </div>
               </div>
             </div>
@@ -451,7 +478,7 @@ const CharacterCreator: React.FC = () => {
                     const { item, category } = findOriginItem(itemId);
                     return item ? (
                       <li key={itemId}>
-                        <strong>{item.name}</strong> ({category}) - {item.cost} point
+                        <strong>{item.name}</strong> ({category}) - {item.origin_cost} point
                       </li>
                     ) : null;
                   })
@@ -473,7 +500,7 @@ const CharacterCreator: React.FC = () => {
                   <h3>{category.charAt(0).toUpperCase() + category.slice(1)}</h3>
                   <div className="skill-cards-container">
                     {skillData
-                      .filter(skill => skill.category === category)
+                      .filter(skill => skill.skill_category === category)
                       .map(skill => (
                         <ContentCard
                           key={skill.id}

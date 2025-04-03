@@ -4,10 +4,10 @@ import '../components/content_card.css';
 
 const SkillsPage = () => {
   // Filter skills by category
-  const presenceSkills = skillData.filter(skill => skill.category === "presence");
-  const finesseSkills = skillData.filter(skill => skill.category === "finesse");
-  const reasonSkills = skillData.filter(skill => skill.category === "reason");
-  const intuitionSkills = skillData.filter(skill => skill.category === "intuition");
+  const presenceSkills = skillData.filter(skill => skill.skill_category === "presence");
+  const finesseSkills = skillData.filter(skill => skill.skill_category === "finesse");
+  const reasonSkills = skillData.filter(skill => skill.skill_category === "reason");
+  const intuitionSkills = skillData.filter(skill => skill.skill_category === "intuition");
   
   return (
     <>
