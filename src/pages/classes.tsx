@@ -4,8 +4,8 @@ import '../components/content_card.css';
 
 const ClassesPage = () => {
   // Filter classes by category
-  const commonClasses = classData.filter(classItem => classItem.category === "common");
-  const rareClasses = classData.filter(classItem => classItem.category === "rare");
+  const commonClasses = classData.filter(classItem => classItem.class_category === "common");
+  const rareClasses = classData.filter(classItem => classItem.class_category === "rare");
   
   return (
     <>
