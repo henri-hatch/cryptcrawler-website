@@ -3,8 +3,9 @@ import './character_creator.css';
 import ContentCard from '../../components/content_card';
 import ancestryData from '../../data/ancestry_data';
 import skillData from '../../data/skill_data';
+import originData from '../../data/origin_data';
 
-// Define types for our character data
+// Core data types
 interface CharacterStats {
   might: number;
   finesse: number;
@@ -37,56 +38,76 @@ interface Character {
   library: any[];
   inventory: any[];
   inventory_capacity: number;
+  origin: string[];
 }
 
+// Alignment data definition
+const ALIGNMENTS = [
+  { id: 'Lawful Good', name: 'Lawful Good', abbreviation: 'LG', description: 'Honor and compassion' },
+  { id: 'Neutral Good', name: 'Neutral Good', abbreviation: 'NG', description: 'Goodness above all' },
+  { id: 'Chaotic Good', name: 'Chaotic Good', abbreviation: 'CG', description: 'Freedom and kindness' },
+  { id: 'Lawful Neutral', name: 'Lawful Neutral', abbreviation: 'LN', description: 'Order above all else' },
+  { id: 'True Neutral', name: 'True Neutral', abbreviation: 'N', description: 'Balance in all things' },
+  { id: 'Chaotic Neutral', name: 'Chaotic Neutral', abbreviation: 'CN', description: 'Freedom above all' },
+  { id: 'Lawful Evil', name: 'Lawful Evil', abbreviation: 'LE', description: 'Methodical domination' },
+  { id: 'Neutral Evil', name: 'Neutral Evil', abbreviation: 'NE', description: 'Selfish ambition' },
+  { id: 'Chaotic Evil', name: 'Chaotic Evil', abbreviation: 'CE', description: 'Destructive freedom' }
+];
+
+// Skill categories
+const SKILL_CATEGORIES = ["presence", "finesse", "reason", "intuition"];
+
+// Default character values
+const DEFAULT_CHARACTER: Character = {
+  name: '',
+  ancestry: '',
+  alignment: 'True Neutral',
+  stats: {
+    might: 0,
+    finesse: 0,
+    fortitude: 0,
+    reason: 0,
+    intuition: 0,
+    presence: 0
+  },
+  skills: [{skill_id: '', skill_name: ''}],
+  dodge: '1d12',
+  block: '1d4',
+  max_hitpoints: 25,
+  current_hitpoints: 25,
+  class: 'hero',
+  level: 1,
+  initiative: 0,
+  movement: 30,
+  wounds: 0,
+  library: [],
+  inventory: [],
+  inventory_capacity: 50,
+  origin: []
+};
+
+const DEFAULT_ALLOCATED_STATS = {
+  might: null,
+  finesse: null,
+  fortitude: null,
+  reason: null,
+  intuition: null,
+  presence: null
+};
+
 const CharacterCreator: React.FC = () => {
-  // Track which step we're on
+  // Core state
   const [currentStep, setCurrentStep] = useState(0);
+  const [character, setCharacter] = useState<Character>(DEFAULT_CHARACTER);
+  const [allocatedStats, setAllocatedStats] = useState<{[key: string]: number | null}>(DEFAULT_ALLOCATED_STATS);
+  const [originPoints, setOriginPoints] = useState(5);
   
-  // Animation state
+  // UI state
   const [animating, setAnimating] = useState(false);
   const [animationDirection, setAnimationDirection] = useState('forward');
   
-  // Available stat values to allocate
+  // Stats configuration
   const availableStatValues = [3, 3, 2, 1, 1, 0];
-  
-  // Initialize character data with defaults
-  const [character, setCharacter] = useState<Character>({
-    name: '',
-    ancestry: '',
-    alignment: 'True Neutral',
-    stats: {
-      might: 0,
-      finesse: 0,
-      fortitude: 0,
-      reason: 0,
-      intuition: 0,
-      presence: 0
-    },
-    skills: [{skill_id: '', skill_name: ''}],
-    dodge: '1d12',
-    block: '1d4',
-    max_hitpoints: 25,
-    current_hitpoints: 25,
-    class: 'hero',
-    level: 1,
-    initiative: 0,
-    movement: 30,
-    wounds: 0,
-    library: [],
-    inventory: [],
-    inventory_capacity: 50
-  });
-  
-  // Track which stats have been allocated
-  const [allocatedStats, setAllocatedStats] = useState<{[key: string]: number | null}>({
-    might: null,
-    finesse: null,
-    fortitude: null,
-    reason: null,
-    intuition: null,
-    presence: null
-  });
   
   // Update derived values when stats change
   useEffect(() => {
@@ -99,39 +120,40 @@ const CharacterCreator: React.FC = () => {
     }
   }, [allocatedStats.finesse, allocatedStats.might]);
   
-  // Use wide content layout
+  // Set wide content layout
   useEffect(() => {
     const contentDiv = document.querySelector('.content');
     if (contentDiv) {
       contentDiv.className = 'content-wide';
     }
-    
     return () => {
-      if (contentDiv) {
-        contentDiv.className = 'content';
-      }
+      if (contentDiv) contentDiv.className = 'content';
     };
   }, []);
 
-  // Validate current step before proceeding
+  // Helper function to find origin item by ID
+  const findOriginItem = (itemId: string) => {
+    for (const category of ['equipment', 'quirks', 'histories'] as const) {
+      const item = originData[category].find(i => i.id === itemId);
+      if (item) return { item, category };
+    }
+    return { item: null, category: null };
+  };
+
+  // Step validation
   const validateCurrentStep = () => {
     switch (currentStep) {
-      case 0: // Name
-        return character.name.trim() !== '';
-      case 1: // Ancestry
-        return character.ancestry !== '';
-      case 2: // Alignment
-        return character.alignment !== '';
-      case 3: // Stats
-        return Object.values(allocatedStats).every(val => val !== null);
-      case 4: // Skill
-        return character.skills[0].skill_id !== '';
-      default:
-        return true;
+      case 0: return character.name.trim() !== '';
+      case 1: return character.ancestry !== '';
+      case 2: return character.alignment !== '';
+      case 3: return Object.values(allocatedStats).every(val => val !== null);
+      case 4: return true; // Origin is optional
+      case 5: return character.skills[0].skill_id !== '';
+      default: return true;
     }
   };
 
-  // Handle next button click
+  // Navigation handlers
   const handleNext = () => {
     if (validateCurrentStep()) {
       setAnimationDirection('forward');
@@ -143,7 +165,6 @@ const CharacterCreator: React.FC = () => {
     }
   };
   
-  // Handle previous button click
   const handlePrevious = () => {
     if (currentStep > 0) {
       setAnimationDirection('backward');
@@ -155,26 +176,21 @@ const CharacterCreator: React.FC = () => {
     }
   };
   
-  // Handle name change
+  // Input handlers
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCharacter(prev => ({
-      ...prev,
-      name: e.target.value
-    }));
+    setCharacter(prev => ({ ...prev, name: e.target.value }));
   };
   
-  // Handle ancestry selection
   const handleAncestrySelection = (ancestryId: string) => {
-    setCharacter(prev => ({
-      ...prev,
-      ancestry: ancestryId
-    }));
+    setCharacter(prev => ({ ...prev, ancestry: ancestryId }));
   };
   
-  // Replace handleSkillChange with handleSkillSelection
+  const handleAlignmentSelection = (alignmentId: string) => {
+    setCharacter(prev => ({ ...prev, alignment: alignmentId }));
+  };
+  
   const handleSkillSelection = (skillId: string) => {
     const selectedSkill = skillData.find(skill => skill.id === skillId);
-    
     setCharacter(prev => ({
       ...prev,
       skills: [{ 
@@ -184,39 +200,49 @@ const CharacterCreator: React.FC = () => {
     }));
   };
   
-  // Handle stat allocation
   const handleStatAllocation = (statName: keyof CharacterStats, value: number | null) => {
-    setAllocatedStats(prev => ({
-      ...prev,
-      [statName]: value
-    }));
-    
+    setAllocatedStats(prev => ({ ...prev, [statName]: value }));
     setCharacter(prev => ({
       ...prev,
-      stats: {
-        ...prev.stats,
-        [statName]: value !== null ? value : 0
-      }
+      stats: { ...prev.stats, [statName]: value !== null ? value : 0 }
     }));
+  };
+  
+  const handleOriginItemSelect = (itemId: string, itemCost: number) => {
+    if (character.origin.includes(itemId)) {
+      // Deselect item
+      setCharacter(prev => ({
+        ...prev,
+        origin: prev.origin.filter(id => id !== itemId)
+      }));
+      setOriginPoints(prev => prev + itemCost);
+    } else if (originPoints >= itemCost) {
+      // Select item if enough points
+      setCharacter(prev => ({
+        ...prev,
+        origin: [...prev.origin, itemId]
+      }));
+      setOriginPoints(prev => prev - itemCost);
+    }
   };
   
   // Calculate available stat values
   const getAvailableStatValues = () => {
     const usedValues = Object.values(allocatedStats).filter(val => val !== null) as number[];
     
-    // Count occurrences of each stat value
+    // Count occurrences
     const valueCounts: Record<number, number> = {};
     usedValues.forEach(value => {
       valueCounts[value] = (valueCounts[value] || 0) + 1;
     });
     
-    // Count total allowed for each value
+    // Count total allowed
     const totalAllowedCounts: Record<number, number> = {};
     availableStatValues.forEach(value => {
       totalAllowedCounts[value] = (totalAllowedCounts[value] || 0) + 1;
     });
     
-    // Calculate remaining available values
+    // Calculate remaining available
     const availableCounts: Record<number, number> = {};
     availableStatValues.forEach(value => {
       const used = valueCounts[value] || 0;
@@ -227,7 +253,7 @@ const CharacterCreator: React.FC = () => {
     return availableCounts;
   };
   
-  // Export character as JSON
+  // Export character data
   const exportCharacter = () => {
     const finalCharacter = {
       ...character,
@@ -246,10 +272,10 @@ const CharacterCreator: React.FC = () => {
     URL.revokeObjectURL(url);
   };
   
-  // Render form content based on currentStep
+  // Render step content
   const renderStepContent = () => {
     switch (currentStep) {
-      case 0:
+      case 0: // Name
         return (
           <div className="form-step">
             <h2>What is your character's name?</h2>
@@ -263,7 +289,7 @@ const CharacterCreator: React.FC = () => {
           </div>
         );
       
-      case 1:
+      case 1: // Ancestry
         return (
           <div className="form-step ancestry-selection-step">
             <h2>What is your character's ancestry?</h2>
@@ -271,6 +297,7 @@ const CharacterCreator: React.FC = () => {
               {ancestryData.map(ancestry => (
                 <ContentCard
                   key={ancestry.id}
+                  id={ancestry.id}
                   title={ancestry.name}
                   imagePath={ancestry.imagePath}
                   description={ancestry.description}
@@ -284,38 +311,16 @@ const CharacterCreator: React.FC = () => {
           </div>
         );
       
-      case 2:
-        // Define alignment data
-        const alignments = [
-          { id: 'Lawful Good', name: 'Lawful Good', abbreviation: 'LG', description: 'Honor and compassion' },
-          { id: 'Neutral Good', name: 'Neutral Good', abbreviation: 'NG', description: 'Goodness above all' },
-          { id: 'Chaotic Good', name: 'Chaotic Good', abbreviation: 'CG', description: 'Freedom and kindness' },
-          { id: 'Lawful Neutral', name: 'Lawful Neutral', abbreviation: 'LN', description: 'Order above all else' },
-          { id: 'True Neutral', name: 'True Neutral', abbreviation: 'N', description: 'Balance in all things' },
-          { id: 'Chaotic Neutral', name: 'Chaotic Neutral', abbreviation: 'CN', description: 'Freedom above all' },
-          { id: 'Lawful Evil', name: 'Lawful Evil', abbreviation: 'LE', description: 'Methodical domination' },
-          { id: 'Neutral Evil', name: 'Neutral Evil', abbreviation: 'NE', description: 'Selfish ambition' },
-          { id: 'Chaotic Evil', name: 'Chaotic Evil', abbreviation: 'CE', description: 'Destructive freedom' }
-        ];
-        
-        // Handler for alignment selection
-        const handleAlignmentCardSelect = (alignmentId: string) => {
-          setCharacter(prev => ({
-            ...prev,
-            alignment: alignmentId
-          }));
-        };
-        
+      case 2: // Alignment
         return (
           <div className="form-step alignment-selection-step">
             <h2>What is your character's alignment?</h2>
-            
             <div className="alignment-grid">
-              {alignments.map((alignment) => (
+              {ALIGNMENTS.map(alignment => (
                 <div 
                   key={alignment.id}
                   className={`alignment-card ${character.alignment === alignment.id ? 'selected' : ''}`}
-                  onClick={() => handleAlignmentCardSelect(alignment.id)}
+                  onClick={() => handleAlignmentSelection(alignment.id)}
                 >
                   {character.alignment === alignment.id && <div className="selection-indicator">✓</div>}
                   <h3>{alignment.name}</h3>
@@ -327,7 +332,7 @@ const CharacterCreator: React.FC = () => {
           </div>
         );
       
-      case 3:
+      case 3: // Stats
         const availableCounts = getAvailableStatValues();
         const statKeys = Object.keys(character.stats) as Array<keyof CharacterStats>;
         
@@ -351,15 +356,12 @@ const CharacterCreator: React.FC = () => {
             <div className="stat-allocation">
               {statKeys.map(statKey => {
                 const currentValue = allocatedStats[statKey];
-                
                 return (
                   <div key={statKey} className="stat-row">
                     <label>{statKey.charAt(0).toUpperCase() + statKey.slice(1)}</label>
-                    
                     <div className="stat-buttons">
                       {[...new Set(availableStatValues)].map(value => {
                         const isDisabled = currentValue !== value && (availableCounts[value] || 0) <= 0;
-                        
                         return (
                           <button
                             key={value}
@@ -371,7 +373,6 @@ const CharacterCreator: React.FC = () => {
                           </button>
                         );
                       })}
-                      
                       {currentValue !== null && (
                         <button
                           className="stat-button clear"
@@ -388,13 +389,84 @@ const CharacterCreator: React.FC = () => {
           </div>
         );
       
-      case 4:
+      case 4: // Origin
+        // Render origin selection lists
+        const renderOriginItem = (item: any) => (
+          <div 
+            key={item.id} 
+            className={`origin-item ${character.origin.includes(item.id) ? 'selected' : ''}`}
+            onClick={() => handleOriginItemSelect(item.id, item.cost)}
+          >
+            <div className="origin-item-content">
+              <span className="origin-item-name">{item.name}</span>
+              <span className="origin-item-cost">{item.cost} {item.cost === 1 ? 'point' : 'points'}</span>
+            </div>
+            <div className="origin-item-tooltip">
+              {item.description}
+            </div>
+            {character.origin.includes(item.id) && <div className="selection-indicator">✓</div>}
+          </div>
+        );
+
+        return (
+          <div className="form-step origin-selection-step">
+            <h2>Create Your Origin</h2>
+            <p className="points-display">
+              Origin Points: <span className="points-value">{originPoints}</span>
+            </p>
+            
+            <div className="origin-lists-container">
+              {/* Equipment Column */}
+              <div className="origin-list">
+                <h3>Equipment</h3>
+                <div className="origin-items-container">
+                  {originData.equipment.map(item => renderOriginItem(item))}
+                </div>
+              </div>
+              
+              {/* Quirks Column */}
+              <div className="origin-list">
+                <h3>Quirks</h3>
+                <div className="origin-items-container">
+                  {originData.quirks.map(item => renderOriginItem(item))}
+                </div>
+              </div>
+              
+              {/* History Column */}
+              <div className="origin-list">
+                <h3>History</h3>
+                <div className="origin-items-container">
+                  {originData.histories.map(item => renderOriginItem(item))}
+                </div>
+              </div>
+            </div>
+      
+            <div className="selected-origins">
+              <h4>Selected Origins:</h4>
+              <ul>
+                {character.origin.length > 0 ? (
+                  character.origin.map(itemId => {
+                    const { item, category } = findOriginItem(itemId);
+                    return item ? (
+                      <li key={itemId}>
+                        <strong>{item.name}</strong> ({category}) - {item.cost} point
+                      </li>
+                    ) : null;
+                  })
+                ) : (
+                  <li>No origins selected</li>
+                )}
+              </ul>
+            </div>
+          </div>
+        );
+      
+      case 5: // Skills
         return (
           <div className="form-step skill-selection-step">
             <h2>What is your character's starting skill?</h2>
-            
             <div className="skill-categories">
-              {["presence", "finesse", "reason", "intuition"].map(category => (
+              {SKILL_CATEGORIES.map(category => (
                 <div key={category} className="skill-category">
                   <h3>{category.charAt(0).toUpperCase() + category.slice(1)}</h3>
                   <div className="skill-cards-container">
@@ -420,7 +492,7 @@ const CharacterCreator: React.FC = () => {
           </div>
         );
       
-      case 5:
+      case 6: // Summary
         return (
           <div className="form-step summary-step">
             <h2>Character Summary</h2>
@@ -437,6 +509,22 @@ const CharacterCreator: React.FC = () => {
               <p><strong>Starting Skill:</strong> {character.skills[0]?.skill_name}</p>
               <p><strong>Initiative:</strong> {character.initiative}</p>
               <p><strong>Inventory Capacity:</strong> {character.inventory_capacity}</p>
+              
+              <h3>Origin:</h3>
+              <ul>
+                {character.origin.length > 0 ? (
+                  character.origin.map(itemId => {
+                    const { item, category } = findOriginItem(itemId);
+                    return item ? (
+                      <li key={itemId}>
+                        <strong>{item.name}</strong> ({category})
+                      </li>
+                    ) : null;
+                  })
+                ) : (
+                  <li>No origins selected</li>
+                )}
+              </ul>
             </div>
           </div>
         );
@@ -454,20 +542,18 @@ const CharacterCreator: React.FC = () => {
       <div className="progress-bar">
         <div 
           className="progress" 
-          style={{ width: `${(currentStep / 5) * 100}%` }}
+          style={{ width: `${(currentStep / 6) * 100}%` }}
         ></div>
       </div>
       
       {/* Step indicators */}
       <div className="step-indicators">
-        {[0, 1, 2, 3, 4, 5].map(step => (
+        {[0, 1, 2, 3, 4, 5, 6].map(step => (
           <div 
             key={step} 
             className={`step-indicator ${currentStep >= step ? 'active' : ''}`}
             onClick={() => {
-              if (step < currentStep) {
-                setCurrentStep(step);
-              }
+              if (step < currentStep) setCurrentStep(step);
             }}
           ></div>
         ))}
@@ -490,7 +576,7 @@ const CharacterCreator: React.FC = () => {
           </button>
         )}
         
-        {currentStep < 5 ? (
+        {currentStep < 6 ? (
           <button 
             onClick={handleNext}
             className="button-next"

@@ -5,9 +5,9 @@ interface ClassData {
     imagePath: string;
     pageRoute: string;
     category: "common" | "rare";
-  }
+}
   
-  const classData: ClassData[] = [
+const classData: ClassData[] = [
     {
       id: "conduit",
       name: "Conduit",
