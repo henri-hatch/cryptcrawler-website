@@ -307,6 +307,7 @@
 
 .skill-category {
   margin-bottom: 20px;
+  padding: 0 5px;
 }
 
 .skill-category h3 {
@@ -319,7 +320,7 @@
 .skill-cards-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start; /* Change from center to flex-start */
   gap: 10px;
 }
 
@@ -388,4 +389,75 @@
 /* Optional: add a slight transition for smoother expansion */
 .content-card .card-content p {
   transition: max-height 0.3s ease;
+}
+
+/* Alignment grid styles */
+.alignment-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.alignment-card {
+  border: 2px solid #e0e0e0;
+  border-radius: 5px;
+  padding: 15px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  background-color: #f9f9f9;
+}
+
+.alignment-card h3 {
+  margin-top: 0;
+  color: #800000;
+}
+
+.alignment-card p {
+  font-size: 0.85rem;
+  margin-bottom: 5px;
+}
+
+.alignment-card.selected {
+  border-color: #800000;
+  background-color: #fff0f0;
+  box-shadow: 0 0 10px rgba(128, 0, 0, 0.2);
+}
+
+.alignment-card .selection-indicator {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  background-color: #800000;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Grid row labels */
+.alignment-row-label {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 10px;
+  font-weight: bold;
+}
+
+.alignment-column-labels {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 600px;
+  margin: 0 auto 5px;
+  text-align: center;
+  font-weight: bold;
 }

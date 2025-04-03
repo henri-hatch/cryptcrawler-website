@@ -171,14 +171,6 @@ const CharacterCreator: React.FC = () => {
     }));
   };
   
-  // Handle alignment change
-  const handleAlignmentChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setCharacter(prev => ({
-      ...prev,
-      alignment: e.target.value
-    }));
-  };
-  
   // Replace handleSkillChange with handleSkillSelection
   const handleSkillSelection = (skillId: string) => {
     const selectedSkill = skillData.find(skill => skill.id === skillId);
@@ -293,24 +285,45 @@ const CharacterCreator: React.FC = () => {
         );
       
       case 2:
+        // Define alignment data
+        const alignments = [
+          { id: 'Lawful Good', name: 'Lawful Good', abbreviation: 'LG', description: 'Honor and compassion' },
+          { id: 'Neutral Good', name: 'Neutral Good', abbreviation: 'NG', description: 'Goodness above all' },
+          { id: 'Chaotic Good', name: 'Chaotic Good', abbreviation: 'CG', description: 'Freedom and kindness' },
+          { id: 'Lawful Neutral', name: 'Lawful Neutral', abbreviation: 'LN', description: 'Order above all else' },
+          { id: 'True Neutral', name: 'True Neutral', abbreviation: 'N', description: 'Balance in all things' },
+          { id: 'Chaotic Neutral', name: 'Chaotic Neutral', abbreviation: 'CN', description: 'Freedom above all' },
+          { id: 'Lawful Evil', name: 'Lawful Evil', abbreviation: 'LE', description: 'Methodical domination' },
+          { id: 'Neutral Evil', name: 'Neutral Evil', abbreviation: 'NE', description: 'Selfish ambition' },
+          { id: 'Chaotic Evil', name: 'Chaotic Evil', abbreviation: 'CE', description: 'Destructive freedom' }
+        ];
+        
+        // Handler for alignment selection
+        const handleAlignmentCardSelect = (alignmentId: string) => {
+          setCharacter(prev => ({
+            ...prev,
+            alignment: alignmentId
+          }));
+        };
+        
         return (
-          <div className="form-step">
+          <div className="form-step alignment-selection-step">
             <h2>What is your character's alignment?</h2>
-            <select
-              value={character.alignment}
-              onChange={handleAlignmentChange}
-              className="form-select"
-            >
-              <option value="Lawful Good">Lawful Good (LG)</option>
-              <option value="Neutral Good">Neutral Good (NG)</option>
-              <option value="Chaotic Good">Chaotic Good (CG)</option>
-              <option value="Lawful Neutral">Lawful Neutral (LN)</option>
-              <option value="True Neutral">True Neutral (N)</option>
-              <option value="Chaotic Neutral">Chaotic Neutral (CN)</option>
-              <option value="Lawful Evil">Lawful Evil (LE)</option>
-              <option value="Neutral Evil">Neutral Evil (NE)</option>
-              <option value="Chaotic Evil">Chaotic Evil (CE)</option>
-            </select>
+            
+            <div className="alignment-grid">
+              {alignments.map((alignment) => (
+                <div 
+                  key={alignment.id}
+                  className={`alignment-card ${character.alignment === alignment.id ? 'selected' : ''}`}
+                  onClick={() => handleAlignmentCardSelect(alignment.id)}
+                >
+                  {character.alignment === alignment.id && <div className="selection-indicator">✓</div>}
+                  <h3>{alignment.name}</h3>
+                  <p>{alignment.abbreviation}</p>
+                  <p>{alignment.description}</p>
+                </div>
+              ))}
+            </div>
           </div>
         );
       
