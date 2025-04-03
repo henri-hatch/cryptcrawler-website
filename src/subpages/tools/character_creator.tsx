@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './character_creator.css';
+import ContentCard from '../../components/content_card';
+import ancestryData from '../../data/ancestry_data';
 
 // Define types for our character data
 interface CharacterStats {
@@ -115,7 +117,7 @@ const CharacterCreator: React.FC = () => {
       case 0: // Name
         return character.name.trim() !== '';
       case 1: // Ancestry
-        return character.ancestry.trim() !== '';
+        return character.ancestry !== '';
       case 2: // Alignment
         return character.alignment !== '';
       case 3: // Stats
@@ -159,11 +161,11 @@ const CharacterCreator: React.FC = () => {
     }));
   };
   
-  // Handle ancestry change
-  const handleAncestryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Handle ancestry selection
+  const handleAncestrySelection = (ancestryId: string) => {
     setCharacter(prev => ({
       ...prev,
-      ancestry: e.target.value
+      ancestry: ancestryId
     }));
   };
   
@@ -264,15 +266,22 @@ const CharacterCreator: React.FC = () => {
       
       case 1:
         return (
-          <div className="form-step">
+          <div className="form-step ancestry-selection-step">
             <h2>What is your character's ancestry?</h2>
-            <input
-              type="text"
-              value={character.ancestry}
-              onChange={handleAncestryChange}
-              placeholder="Enter character ancestry"
-              className="form-input"
-            />
+            <div className="ancestry-cards-container">
+              {ancestryData.map(ancestry => (
+                <ContentCard
+                  key={ancestry.id}
+                  title={ancestry.name}
+                  imagePath={ancestry.imagePath}
+                  description={ancestry.description}
+                  isSelectable={true}
+                  isSelected={character.ancestry === ancestry.id}
+                  onSelect={() => handleAncestrySelection(ancestry.id)}
+                  className={`race-card ancestry-card ${character.ancestry === ancestry.id ? 'selected' : ''}`}
+                />
+              ))}
+            </div>
           </div>
         );
       
