@@ -292,3 +292,100 @@
       margin: 5px 0;
     }
   }
+
+  /* Add styling for the skill selection step */
+.skill-selection-step {
+  width: 100%;
+  max-width: 1000px;
+}
+
+.skill-categories {
+  max-height: 500px;
+  overflow-y: auto;
+  padding: 0 10px;
+}
+
+.skill-category {
+  margin-bottom: 20px;
+}
+
+.skill-category h3 {
+  text-transform: capitalize;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.skill-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.skill-card {
+  width: 200px;
+  min-height: 200px;
+  margin: 5px;
+}
+
+.skill-card .card-image-container {
+  height: 100px;
+}
+
+.skill-card .card-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.skill-card .card-content h3 {
+  font-size: 1rem;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.skill-card .truncated-description {
+  max-height: 60px;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .skill-categories {
+    max-height: 400px;
+  }
+  
+  .skill-cards-container {
+    justify-content: space-between;
+  }
+  
+  .skill-card {
+    width: 48%;
+    margin: 3px;
+  }
+}
+
+@media (max-width: 480px) {
+  .skill-card {
+    width: 100%;
+    margin: 5px 0;
+  }
+}
+
+/* Make cards align to their top edge rather than stretching */
+.ancestry-cards-container,
+.skill-cards-container {
+  align-items: flex-start;
+}
+
+/* Allow expanded descriptions to grow as needed */
+.ancestry-selection-step .content-card.expanded .expanded-description,
+.skill-selection-step .content-card.expanded .expanded-description {
+  max-height: none !important;
+  overflow: visible;
+}
+
+/* Optional: add a slight transition for smoother expansion */
+.content-card .card-content p {
+  transition: max-height 0.3s ease;
+}

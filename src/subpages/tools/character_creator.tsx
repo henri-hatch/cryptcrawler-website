@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './character_creator.css';
 import ContentCard from '../../components/content_card';
 import ancestryData from '../../data/ancestry_data';
+import skillData from '../../data/skill_data';
 
 // Define types for our character data
 interface CharacterStats {
@@ -14,6 +15,7 @@ interface CharacterStats {
 }
 
 interface Skill {
+  skill_id: string;
   skill_name: string;
 }
 
@@ -61,7 +63,7 @@ const CharacterCreator: React.FC = () => {
       intuition: 0,
       presence: 0
     },
-    skills: [{skill_name: ''}],
+    skills: [{skill_id: '', skill_name: ''}],
     dodge: '1d12',
     block: '1d4',
     max_hitpoints: 25,
@@ -123,7 +125,7 @@ const CharacterCreator: React.FC = () => {
       case 3: // Stats
         return Object.values(allocatedStats).every(val => val !== null);
       case 4: // Skill
-        return character.skills[0].skill_name.trim() !== '';
+        return character.skills[0].skill_id !== '';
       default:
         return true;
     }
@@ -177,11 +179,16 @@ const CharacterCreator: React.FC = () => {
     }));
   };
   
-  // Handle skill change
-  const handleSkillChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Replace handleSkillChange with handleSkillSelection
+  const handleSkillSelection = (skillId: string) => {
+    const selectedSkill = skillData.find(skill => skill.id === skillId);
+    
     setCharacter(prev => ({
       ...prev,
-      skills: [{ skill_name: e.target.value }]
+      skills: [{ 
+        skill_id: skillId,
+        skill_name: selectedSkill?.name || ''
+      }]
     }));
   };
   
@@ -370,15 +377,33 @@ const CharacterCreator: React.FC = () => {
       
       case 4:
         return (
-          <div className="form-step">
+          <div className="form-step skill-selection-step">
             <h2>What is your character's starting skill?</h2>
-            <input
-              type="text"
-              value={character.skills[0]?.skill_name || ''}
-              onChange={handleSkillChange}
-              placeholder="Enter character's starting skill"
-              className="form-input"
-            />
+            
+            <div className="skill-categories">
+              {["presence", "finesse", "reason", "intuition"].map(category => (
+                <div key={category} className="skill-category">
+                  <h3>{category.charAt(0).toUpperCase() + category.slice(1)}</h3>
+                  <div className="skill-cards-container">
+                    {skillData
+                      .filter(skill => skill.category === category)
+                      .map(skill => (
+                        <ContentCard
+                          key={skill.id}
+                          id={skill.id}
+                          title={skill.name}
+                          imagePath={skill.imagePath}
+                          description={skill.description}
+                          isSelectable={true}
+                          isSelected={character.skills[0].skill_id === skill.id}
+                          onSelect={() => handleSkillSelection(skill.id)}
+                          className={`skill-card ${character.skills[0].skill_id === skill.id ? 'selected' : ''}`}
+                        />
+                      ))}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         );
       
@@ -388,7 +413,7 @@ const CharacterCreator: React.FC = () => {
             <h2>Character Summary</h2>
             <div className="summary-content">
               <p><strong>Name:</strong> {character.name}</p>
-              <p><strong>Ancestry:</strong> {character.ancestry}</p>
+              <p><strong>Ancestry:</strong> {ancestryData.find(a => a.id === character.ancestry)?.name || character.ancestry}</p>
               <p><strong>Alignment:</strong> {character.alignment}</p>
               <h3>Stats:</h3>
               <ul>
