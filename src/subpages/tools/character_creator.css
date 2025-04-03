@@ -1,0 +1,593 @@
+/* CSS Variables */
+:root {
+  --primary: #800000;
+  --primary-hover: #600000;
+  --light-bg: #f9f9f9;
+  --border-color: #ddd;
+  --light-gray: #e0e0e0;
+  --medium-gray: #ccc;
+  --dark-text: #333;
+  --shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  --card-radius: 5px;
+  --tooltip-bg: rgba(0, 0, 0, 0.8);
+}
+
+/* Base Layout */
+.character-creator {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.form-step {
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.form-input, .form-select {
+  width: 100%;
+  max-width: 400px;
+  padding: 12px;
+  margin: 20px 0;
+  font-size: 1.2rem;
+  border: 2px solid var(--primary);
+  border-radius: var(--card-radius);
+  background-color: white;
+}
+
+.form-content {
+  position: relative;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Animations */
+.form-content.slide-forward {
+  transform: translateX(100px);
+  opacity: 0;
+}
+
+.form-content.slide-backward {
+  transform: translateX(-100px);
+  opacity: 0;
+}
+
+/* Progress Navigation */
+.progress-bar {
+  height: 8px;
+  background-color: var(--light-gray);
+  border-radius: 4px;
+  margin: 20px 0;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  background-color: var(--primary);
+  transition: width 0.3s ease;
+}
+
+.step-indicators {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+.step-indicator {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--light-gray);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.step-indicator.active {
+  background-color: var(--primary);
+}
+
+/* Buttons */
+.form-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.button-previous, .button-next, .button-finish {
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: var(--card-radius);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.button-previous {
+  background-color: var(--light-gray);
+  color: var(--dark-text);
+}
+
+.button-next, .button-finish {
+  background-color: var(--primary);
+  color: white;
+}
+
+.button-previous:hover {
+  background-color: var(--medium-gray);
+}
+
+.button-next:hover, .button-finish:hover {
+  background-color: var(--primary-hover);
+}
+
+.button-next:disabled, .button-finish:disabled {
+  background-color: var(--medium-gray);
+  color: #666;
+  cursor: not-allowed;
+}
+
+/* Stats Step */
+.stat-allocation {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.stat-row label {
+  font-weight: bold;
+  min-width: 100px;
+}
+
+.stat-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.stat-button {
+  padding: 5px 10px;
+  background-color: var(--light-gray);
+  border: 1px solid var(--medium-gray);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.stat-button.selected {
+  background-color: var(--primary);
+  color: white;
+}
+
+.stat-button.clear {
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+.stat-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.available-stats {
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-radius: var(--card-radius);
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.stat-values {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.stat-value {
+  padding: 8px 12px;
+  background-color: #e9ecef;
+  border-radius: var(--card-radius);
+  text-align: center;
+}
+
+.stat-value .count {
+  font-size: 0.8em;
+  color: #6c757d;
+}
+
+/* Alignment Step */
+.alignment-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.alignment-column-labels {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 600px;
+  margin: 0 auto 5px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.alignment-card {
+  border: 2px solid var(--light-gray);
+  border-radius: var(--card-radius);
+  padding: 15px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  background-color: var(--light-bg);
+}
+
+.alignment-card h3 {
+  margin-top: 0;
+  color: var(--primary);
+}
+
+.alignment-card p {
+  font-size: 0.85rem;
+  margin-bottom: 5px;
+}
+
+.alignment-card.selected {
+  border-color: var(--primary);
+  background-color: #fff0f0;
+  box-shadow: 0 0 10px rgba(128, 0, 0, 0.2);
+}
+
+/* Card Components - Shared */
+.ancestry-cards-container, .skill-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+  align-items: flex-start;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.ancestry-cards-container {
+  justify-content: center;
+  max-height: 500px;
+}
+
+.skill-cards-container {
+  justify-content: flex-start;
+}
+
+/* Card component specific overrides */
+.ancestry-selection-step .content-card {
+  width: 220px;
+  min-height: 220px;
+  margin: 10px;
+}
+
+.skill-card {
+  width: 200px;
+  min-height: 200px;
+  margin: 5px;
+}
+
+.skill-card .card-image-container {
+  height: 100px;
+}
+
+.skill-card .card-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.skill-card .card-content h3 {
+  font-size: 1rem;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.skill-card .truncated-description {
+  max-height: 60px;
+}
+
+.ancestry-selection-step .content-card .truncated-description {
+  max-height: 80px;
+  overflow: hidden;
+}
+
+.content-card .card-content p {
+  transition: max-height 0.3s ease;
+}
+
+/* Category layouts */
+.skill-selection-step, .ancestry-selection-step, .origin-selection-step {
+  width: 100%;
+}
+
+.skill-selection-step {
+  max-width: 1000px;
+}
+
+.ancestry-selection-step {
+  max-width: 900px;
+}
+
+.skill-categories {
+  max-height: 500px;
+  overflow-y: auto;
+  padding: 0 10px;
+}
+
+.skill-category {
+  margin-bottom: 20px;
+  padding: 0 5px;
+}
+
+.skill-category h3 {
+  text-transform: capitalize;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--light-gray);
+}
+
+/* Origin Step */
+.origin-selection-step {
+  max-width: 1000px;
+}
+
+.points-display {
+  font-size: 1.2rem;
+  margin: 10px 0 15px;
+  padding: 5px 10px;
+  background-color: #f0f0f0;
+  border-radius: var(--card-radius);
+  display: inline-block;
+}
+
+.points-value {
+  font-weight: bold;
+  color: var(--primary);
+  margin-left: 5px;
+}
+
+.origin-lists-container {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+  justify-content: space-between;
+}
+
+.origin-list {
+  flex: 1;
+  border: 1px solid var(--border-color);
+  border-radius: var(--card-radius);
+  padding: 10px;
+  background-color: var(--light-bg);
+  position: relative; /* Create containing block for tooltips */
+}
+
+.origin-list h3 {
+  text-align: center;
+  margin-top: 0;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 8px;
+  color: var(--primary);
+}
+
+.origin-items-container {
+  height: 350px;
+  overflow-y: auto;
+  padding: 5px;
+}
+
+/* Update the origin-item styles to create proper stacking on hover */
+.origin-item {
+  position: relative;
+  padding: 10px;
+  margin: 5px 0;
+  background-color: white;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 1; /* Base z-index */
+}
+
+.origin-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+  z-index: 100; /* Increase z-index on hover to bring item and its tooltip above others */
+}
+
+.origin-item.selected {
+  background-color: #fff0f0;
+  border-color: var(--primary);
+}
+
+.origin-item-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.origin-item-name {
+  font-weight: bold;
+}
+
+.origin-item-cost {
+  color: var(--primary);
+  font-size: 0.9rem;
+}
+
+/* Update tooltip to have higher z-index */
+.origin-item-tooltip {
+  display: none;
+  position: absolute;
+  left: auto;
+  right: auto;
+  top: 100%;
+  width: 200px;
+  max-width: 100%;
+  background-color: var(--tooltip-bg);
+  color: white;
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  z-index: 101; /* Even higher than the hovered item */
+  transform: translateY(5px);
+  pointer-events: none; /* Prevent the tooltip from blocking mouse events */
+}
+
+.origin-item:hover .origin-item-tooltip {
+  display: block;
+}
+
+/* Center tooltips on mobile */
+@media (max-width: 800px) {
+  .origin-item-tooltip {
+    left: 50%;
+    transform: translateX(-50%) translateY(5px);
+  }
+}
+
+/* Make sure tooltips don't extend past the right edge */
+.origin-list {
+  position: relative; /* Create containing block for tooltips */
+}
+
+/* Handle tooltips near the right edge */
+.origin-items-container > div:nth-last-child(-n+3) .origin-item-tooltip {
+  right: 0;
+  left: auto;
+}
+
+/* Handle tooltips near the left edge */
+.origin-items-container > div:nth-child(-n+3) .origin-item-tooltip {
+  left: 0;
+  right: auto;
+}
+
+.selection-indicator {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  background-color: var(--primary);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.selected-origins {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: var(--light-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--card-radius);
+}
+
+.selected-origins h4 {
+  margin-top: 0;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+  color: var(--primary);
+}
+
+.selected-origins ul {
+  list-style-type: none;
+  padding-left: 10px;
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+  .stat-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .stat-buttons {
+    width: 100%;
+  }
+  
+  .button-previous, 
+  .button-next,
+  .button-finish {
+    padding: 8px 16px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .ancestry-cards-container {
+    max-height: 00px;
+  }
+  
+  .ancestry-selection-step .content-card {
+    width: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ancestry-selection-step .content-card {
+    width: 100%;
+    margin: 5px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .skill-categories {
+    max-height: 400px;
+  }
+  
+  .skill-cards-container {
+    justify-content: space-between;
+  }
+  
+  .skill-card {
+    width: 48%;
+    margin: 3px;
+  }
+}
+
+@media (max-width: 480px) {
+  .skill-card {
+    width: 100%;
+    margin: 5px 0;
+  }
+}
+
+@media (max-width: 800px) {
+  .origin-lists-container {
+    flex-direction: column;
+  }
+  
+  .origin-items-container {
+    height: 200px;
+  }
+  
+  .origin-item-tooltip {
+    left: 0;
+    top: 100%;
+    width: 100%;
+  }
+}

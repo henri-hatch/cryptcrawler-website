@@ -15,6 +15,12 @@
   position: relative; /* For proper positioning of the button */
 }
 
+/* Selection state for cards */
+.content-card.selected {
+  border: 2px solid #800000;
+  box-shadow: 0 0 10px rgba(128, 0, 0, 0.4);
+}
+
 .content-card.expanded {
   z-index: 10; /* Bring expanded card to front */
   height: auto;
@@ -123,6 +129,23 @@
   object-fit: cover; /* This will scale and crop to fill the container */
 }
 
+/* Selection indicator checkmark */
+.selection-indicator {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  background-color: #800000;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
 /* Make cards more responsive on small screens */
 @media (max-width: 768px) {
   .cards-container {
@@ -143,18 +166,6 @@
   .card-content {
     height: 100px;
   }
-  
-  /* Remove these specific race card mobile overrides
-  .race-card {
-    width: 210px;
-    height: 290px;
-    min-height: 290px;
-  }
-  
-  .race-card .card-image-container {
-    height: 210px;
-  }
-  */
 }
 
 @media (max-width: 480px) {
@@ -181,16 +192,4 @@
   .card-content p {
     font-size: 0.8em;
   }
-  
-  /* Remove these specific race card mobile overrides
-  .race-card {
-    width: 180px;
-    height: 260px;
-    min-height: 260px;
-  }
-  
-  .race-card .card-image-container {
-    height: 180px;
-  }
-  */
 }

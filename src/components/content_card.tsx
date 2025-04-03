@@ -1,20 +1,35 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import './content_card.css';
 
 interface ContentCardProps {
   title: string;
   imagePath: string;
-  linkTo: string;
+  linkTo?: string; // Make optional
   description?: string;
   className?: string;
+  id?: string; // Add id for data tracking
+  isSelectable?: boolean; // Add selectable mode
+  isSelected?: boolean; // Track selection state
+  onSelect?: () => void; // Handle selection
 }
 
-const ContentCard: React.FC<ContentCardProps> = ({ title, imagePath, linkTo, description, className }) => {
+const ContentCard: React.FC<ContentCardProps> = ({ 
+  title, 
+  imagePath, 
+  linkTo, 
+  description, 
+  className,
+  id,
+  isSelectable = false,
+  isSelected = false,
+  onSelect
+}) => {
   const [expanded, setExpanded] = useState(false);
   const [isOverflowing, setIsOverflowing] = useState(false);
   const descriptionRef = useRef<HTMLParagraphElement>(null);
   
-  // Check if description is overflowing (needs arrow button)
+  // Check if description is overflowing
   useEffect(() => {
     if (descriptionRef.current) {
       const isTextOverflowing = 
@@ -23,17 +38,19 @@ const ContentCard: React.FC<ContentCardProps> = ({ title, imagePath, linkTo, des
     }
   }, [description]);
 
-  // Handle the arrow button click
+  // Handle expand button click
   const handleExpandClick = (e: React.MouseEvent) => {
-    e.preventDefault(); // Prevent the Link from navigating
-    e.stopPropagation(); // Stop event bubbling
+    e.preventDefault();
+    e.stopPropagation();
     setExpanded(!expanded);
   };
 
-  return (
-    <Link to={linkTo} className={`content-card ${className || ''} ${expanded ? 'expanded' : ''}`}>
+  // Card content
+  const cardContent = (
+    <>
       <div className="card-image-container">
         <img src={imagePath} alt={title} />
+        {isSelected && <div className="selection-indicator">✓</div>}
       </div>
       <div className="card-content">
         <h3>{title}</h3>
@@ -49,7 +66,6 @@ const ContentCard: React.FC<ContentCardProps> = ({ title, imagePath, linkTo, des
               <button 
                 className="read-more-btn" 
                 onClick={handleExpandClick}
-                aria-label={expanded ? "Show less" : "Show more"}
               >
                 {expanded ? '⮝' : '⮟'}
               </button>
@@ -57,8 +73,33 @@ const ContentCard: React.FC<ContentCardProps> = ({ title, imagePath, linkTo, des
           </>
         )}
       </div>
-    </Link>
+    </>
   );
+
+  // Render as clickable div or link
+  if (isSelectable) {
+    return (
+      <div 
+        id={id}
+        className={`content-card ${className || ''} ${expanded ? 'expanded' : ''} ${isSelected ? 'selected' : ''}`}
+        onClick={onSelect}
+        data-testid={`ancestry-card-${id}`} // Optional: helpful for testing
+      >
+        {cardContent}
+      </div>
+    );
+  } else {
+    return (
+      <Link 
+        id={id}
+        to={linkTo || '#'} 
+        className={`content-card ${className || ''} ${expanded ? 'expanded' : ''}`}
+        data-testid={`ancestry-link-${id}`} // Optional: helpful for testing
+      >
+        {cardContent}
+      </Link>
+    );
+  }
 };
 
 export default ContentCard;
