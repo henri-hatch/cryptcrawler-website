@@ -1,0 +1,289 @@
+/* Search Database Page Styles */
+
+.search-database-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Search Controls */
+  .search-controls {
+    margin-bottom: 30px;
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .search-bar {
+    margin-bottom: 20px;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1.1rem;
+    border: 2px solid #800000;
+    border-radius: 5px;
+    background-color: white;
+    transition: all 0.3s ease;
+  }
+  
+  .search-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(128, 0, 0, 0.3);
+  }
+  
+  /* Category Filters */
+  .category-filters h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .category-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .category-button {
+    padding: 8px 15px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+  }
+  
+  .category-button:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .category-button.selected {
+    background-color: #800000;
+    color: white;
+    border-color: #800000;
+  }
+  
+  /* Results Stats */
+  .search-results-stats {
+    margin-bottom: 20px;
+    font-style: italic;
+    color: #666;
+  }
+  
+  /* Results Container */
+  .search-results {
+    margin-bottom: 30px;
+  }
+  
+  .cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  /* Search result card styling - updated for consistency */
+  .search-card {
+    width: 220px;
+    height: auto;
+    min-height: 280px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  /* Override any specific styling from other card types */
+  .search-card.skill-card {
+    width: 220px !important; /* Force consistent width */
+    min-height: 280px !important; /* Force consistent height */
+  }
+  
+  .search-card .card-image-container {
+    height: 150px !important; /* Force consistent image height */
+  }
+  
+  /* Fix the issue with expand arrows making cards uneven */
+  .search-card .card-content {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    min-height: 110px;
+    position: relative;
+    padding-bottom: 30px; /* Space for the expand button */
+  }
+  
+  /* Position the read more button at a consistent spot */
+  .search-card .read-more-btn {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 0;
+  }
+  
+  /* Consistent truncated description height */
+  .search-card .truncated-description {
+    min-height: 4.5em;
+    max-height: 4.5em;
+  }
+  
+  .search-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .ancestry-card {
+    border-left: 4px solid #4caf50;
+  }
+  
+  .class-card {
+    border-left: 4px solid #2196f3;
+  }
+  
+  .skill-card {
+    border-left: 4px solid #ff9800;
+  }
+  
+  .item-card {
+    border-left: 4px solid #9c27b0;
+  }
+  
+  /* Show More Button */
+  .show-more-container {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+  }
+  
+  .show-more-button {
+    padding: 10px 25px;
+    background-color: #800000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .show-more-button:hover {
+    background-color: #600000;
+  }
+  
+  /* No Results */
+  .no-results {
+    padding: 40px;
+    text-align: center;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    color: #666;
+  }
+  
+  /* Modal for displaying item details */
+  .item-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .item-modal-content {
+    background-color: white;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 700px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  .item-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .item-modal-header h2 {
+    margin: 0;
+    color: #800000;
+  }
+  
+  .modal-close-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+  }
+  
+  .modal-close-button:hover {
+    color: #800000;
+  }
+  
+  .item-modal-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .item-modal-image {
+    text-align: center;
+  }
+  
+  .item-modal-image img {
+    max-width: 100%;
+    max-height: 300px;
+    object-fit: contain;
+  }
+  
+  .item-details {
+    line-height: 1.6;
+  }
+  
+  .item-description {
+    margin-top: 0;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .search-bar {
+      margin-bottom: 15px;
+    }
+    
+    .search-input {
+      padding: 10px;
+      font-size: 1rem;
+    }
+    
+    .category-buttons {
+      gap: 8px;
+    }
+    
+    .category-button {
+      padding: 6px 12px;
+      font-size: 0.85rem;
+    }
+    
+    .search-card {
+      width: 100%;
+      max-width: 300px;
+    }
+    
+    .item-modal-content {
+      width: 95%;
+    }
+    
+    .item-modal-body {
+      flex-direction: column;
+    }
+  }
