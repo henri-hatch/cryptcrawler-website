@@ -2,16 +2,16 @@
 .content-card {
   display: flex;
   flex-direction: column;
-  width: 200px;
+  width: 180px; /* Reduced from 200px to allow 4 cards per row */
   height: auto; /* Changed from fixed height to auto */
-  min-height: 280px; /* Added min-height instead */
+  min-height: 260px; /* Reduced slightly for consistency */
   border: 1px solid #ccc;
   border-radius: 5px;
   overflow: hidden;
   text-decoration: none;
   color: inherit;
   transition: transform 0.2s, box-shadow 0.2s;
-  margin: 10px;
+  margin: 8px; /* Reduced from 10px to create tighter spacing */
   position: relative; /* For proper positioning of the button */
 }
 
@@ -114,8 +114,9 @@
 .cards-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start; /* Changed from center to flex-start */
+  justify-content: flex-start !important; /* Added !important to override any other styles */
   align-items: flex-start; /* Keep tops aligned */
+  width: 100%;
 }
 
 /* Special styling for race card images - fill and crop */
@@ -149,13 +150,13 @@
 /* Make cards more responsive on small screens */
 @media (max-width: 768px) {
   .cards-container {
-    justify-content: center; /* Keep center alignment only on mobile */
+    justify-content: flex-start !important; /* Override the center alignment */
   }
   
   .content-card {
-    width: 180px;
+    width: 170px; /* Slightly smaller on medium screens */
     height: 260px;
-    margin: 8px;
+    margin: 6px;
     min-height: 260px;
   }
   

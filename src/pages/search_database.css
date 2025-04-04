@@ -73,59 +73,75 @@
     color: #666;
   }
   
-  /* Results Container */
+  /* Results Container - updated to ensure consistent alignment */
   .search-results {
     margin-bottom: 30px;
   }
   
-  .cards-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
+  .search-results .cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 15px;
+    justify-content: start;
+    align-items: start;
   }
   
-  /* Search result card styling - updated for consistency */
+  /* Make all search cards exactly the same size and structure */
   .search-card {
-    width: 220px;
-    height: auto;
-    min-height: 280px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 260px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
   }
   
-  /* Override any specific styling from other card types */
-  .search-card.skill-card {
-    width: 220px !important; /* Force consistent width */
-    min-height: 280px !important; /* Force consistent height */
-  }
-  
+  /* Ensure image containers are identical */
   .search-card .card-image-container {
-    height: 150px !important; /* Force consistent image height */
+    height: 130px !important;
+    flex-shrink: 0 !important;
   }
   
-  /* Fix the issue with expand arrows making cards uneven */
+  /* Ensure content areas are identical */
   .search-card .card-content {
-    display: flex;
-    flex-direction: column;
-    height: auto;
-    min-height: 110px;
-    position: relative;
-    padding-bottom: 30px; /* Space for the expand button */
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 10px !important;
+    height: auto !important;
+    position: relative !important;
+    overflow: hidden !important;
   }
   
-  /* Position the read more button at a consistent spot */
-  .search-card .read-more-btn {
-    position: absolute;
-    bottom: 5px;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-top: 0;
+  /* Consistent heading size */
+  .search-card .card-content h3 {
+    margin-top: 0 !important;
+    margin-bottom: 8px !important;
+    font-size: 16px !important;
+    line-height: 1.2 !important;
   }
   
-  /* Consistent truncated description height */
+  /* Consistent description area */
   .search-card .truncated-description {
-    min-height: 4.5em;
-    max-height: 4.5em;
+    flex: 1 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+    margin: 0 !important;
+  }
+  
+  /* Position read more button */
+  .search-card .read-more-btn {
+    position: absolute !important;
+    bottom: 5px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    margin: 0 !important;
   }
   
   .search-card:hover {
@@ -285,5 +301,15 @@
     
     .item-modal-body {
       flex-direction: column;
+    }
+
+    .search-results .cards-container {
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+  }
+
+  @media (max-width: 480px) {
+    .search-results .cards-container {
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     }
   }
