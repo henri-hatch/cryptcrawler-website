@@ -1,364 +1,242 @@
-/* Search Database Page Styles */
+/* Import variables */
+@import '../styles/variables.css';
 
+/* Layout */
 .search-database-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  /* Search Controls */
-  .search-controls {
-    margin-bottom: 30px;
-    background-color: rgba(0, 0, 0, 0.05);
-    padding: 20px;
-    border-radius: 10px;
-    width: auto; /* Let it adapt to container */
-    box-sizing: border-box; /* Include padding in width */
-  }
-  
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Search Controls */
+.search-controls {
+  margin-bottom: 30px;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  border-radius: 10px;
+  width: auto;
+  box-sizing: border-box;
+}
+
+.search-bar {
+  margin-bottom: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 1.1rem;
+  border: 2px solid var(--primary);
+  border-radius: var(--card-radius);
+  background-color: white;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.search-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(128, 0, 0, 0.3);
+}
+
+/* Category Filters */
+.category-filters h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: var(--dark-text);
+}
+
+.category-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.category-button {
+  padding: 8px 15px;
+  background-color: #e0e0e0; /* Darker background (was #f0f0f0) */
+  border: 1px solid #bbb; /* Darker border (was using var(--border-color) which is #ddd) */
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+  font-weight: 500; /* Add slightly bolder text */
+  color: #333; /* Explicitly set text color to dark */
+}
+
+.category-button:hover {
+  background-color: #cccccc; /* Darker hover state (was #e0e0e0) */
+  border-color: #999; /* Darker border on hover */
+}
+
+.category-button.selected {
+  background-color: var(--primary);
+  color: white;
+  border-color: var(--primary);
+  font-weight: 600; /* Make selected text slightly bolder */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2); /* Add subtle shadow for depth */
+}
+
+/* Results Stats */
+.search-results-stats {
+  margin-bottom: 20px;
+  font-style: italic;
+  color: var(--dark-gray);
+}
+
+/* Search Results Container - Grid Layout */
+.search-results {
+  margin-bottom: 30px;
+}
+
+.search-results .cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 15px;
+  align-items: start;
+}
+
+/* Show More Button */
+.show-more-container {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+}
+
+.show-more-button {
+  padding: 10px 25px;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.show-more-button:hover {
+  background-color: var(--primary-hover);
+}
+
+/* No Results */
+.no-results {
+  padding: 40px;
+  text-align: center;
+  background-color: var(--light-bg);
+  border-radius: 10px;
+  color: var(--dark-gray);
+}
+
+/* Modal for displaying item details */
+.item-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: var(--z-modal);
+}
+
+.item-modal-content {
+  background-color: white;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 700px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.item-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.item-modal-header h2 {
+  margin: 0;
+  color: var(--primary);
+}
+
+.modal-close-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--dark-gray);
+}
+
+.modal-close-button:hover {
+  color: var(--primary);
+}
+
+.item-modal-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.item-modal-image {
+  text-align: center;
+}
+
+.item-modal-image img {
+  max-width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+}
+
+.item-details {
+  line-height: 1.6;
+}
+
+.item-description {
+  margin-top: 0;
+}
+
+/* Responsive design - simplified */
+@media (max-width: 768px) {
   .search-bar {
-    margin-bottom: 20px;
-    width: 100%; /* Full width of parent */
-    box-sizing: border-box;
+    margin-bottom: 15px;
   }
   
   .search-input {
-    width: 100%;
-    padding: 12px 15px;
-    font-size: 1.1rem;
-    border: 2px solid #800000;
-    border-radius: 5px;
-    background-color: white;
-    transition: all 0.3s ease;
-    box-sizing: border-box; /* Include padding and border in width */
-  }
-  
-  .search-input:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(128, 0, 0, 0.3);
-  }
-  
-  /* Category Filters */
-  .category-filters h3 {
-    margin-top: 0;
-    margin-bottom: 15px;
-    color: #333;
+    padding: 10px;
+    font-size: 1rem;
   }
   
   .category-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+    gap: 8px;
   }
   
   .category-button {
-    padding: 8px 15px;
-    background-color: #f0f0f0;
-    border: 1px solid #ddd;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-size: 0.9rem;
-  }
-  
-  .category-button:hover {
-    background-color: #e0e0e0;
-  }
-  
-  .category-button.selected {
-    background-color: #800000;
-    color: white;
-    border-color: #800000;
-  }
-  
-  /* Results Stats */
-  .search-results-stats {
-    margin-bottom: 20px;
-    font-style: italic;
-    color: #666;
-  }
-  
-  /* Results Container - updated to ensure consistent alignment */
-  .search-results {
-    margin-bottom: 30px;
-  }
-  
-  .search-results .cards-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 15px;
-    justify-content: start;
-    align-items: start !important; /* This is the key - align to top */
-    position: relative; /* Create proper stacking context */
-  }
-  
-  /* Make all search cards exactly the same size and structure */
-  .search-card {
-    width: 100% !important;
-    height: auto !important;
-    min-height: 260px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    margin: 0 !important;
-    box-sizing: border-box !important;
-    z-index: 1;  /* Base z-index */
-    transition: transform 0.2s ease, box-shadow 0.2s ease !important; /* Add z-index to transition */
-    position: relative !important;
-  }
-  
-  .search-card.expanded {
-    z-index: 10; /* Higher z-index when expanded */
-    position: relative;
-  }
-  
-  /* Ensure image containers are identical */
-  .search-card .card-image-container {
-    height: 130px !important;
-    flex-shrink: 0 !important;
-  }
-  
-  /* Ensure content areas are identical */
-  .search-card .card-content {
-    flex: 1 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    padding: 10px !important;
-    height: auto !important;
-    position: relative !important;
-    overflow: hidden !important;
-    padding-bottom: 30px !important; /* Make space for read more button */
-  }
-  
-  /* Consistent heading size */
-  .search-card .card-content h3 {
-    margin-top: 0 !important;
-    margin-bottom: 8px !important;
-    font-size: 16px !important;
-    line-height: 1.2 !important;
-  }
-  
-  /* Consistent description area */
-  .search-card .truncated-description {
-    flex: 1 !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    display: -webkit-box !important;
-    -webkit-line-clamp: 3 !important;
-    line-clamp: 3 !important;
-    -webkit-box-orient: vertical !important;
-    font-size: 14px !important;
-    line-height: 1.4 !important;
-    margin: 0 !important;
-  }
-  
-  /* Fix expanded description to not push against other cards */
-  .search-card .expanded-description {
-    position: relative !important; /* Change from absolute to relative */
-    background-color: transparent !important; /* Remove background color */
-    border: none !important; /* Remove border */
-    box-shadow: none !important; /* Remove shadow */
-    padding: 0 !important; /* Remove extra padding */
-    z-index: 50 !important;
-    width: 100% !important; /* Let width be determined by left/right */
-    box-sizing: border-box !important;
-    left: auto !important; /* Align with card edge, accounting for border */
-    right: auto !important; /* Align with card edge, accounting for border */
-    top: auto !important;  /* Position below the card content */
-    max-height: none !important;
-    overflow: visible !important;
-    margin-top: 0 !important; /* Remove margin */
-    transition: max-height 0.3s ease !important;
-    font-size: 14px !important;
-    line-height: 1.4 !important;
-    border-bottom-left-radius: 5px !important;
-    border-bottom-right-radius: 5px !important;
-  }
-  
-  /* Position read more button */
-  .search-card .read-more-btn {
-    position: absolute !important;
-    bottom: 5px !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    margin: 0 !important;
-    z-index: 10 !important; /* Ensure it's above the expanded text */
-  }
-  
-  .search-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    z-index: 5; /* Higher than base but lower than expanded */
-  }
-  
-  .search-card .card-content p {
-    transition: max-height 0.3s ease;
-  }
-  
-  .search-card.expanded .card-content {
-    padding-bottom: 40px !important; /* A bit more space for the button */
-  }
-  
-  .ancestry-card {
-    border-left: 4px solid #4caf50;
-  }
-  
-  .class-card {
-    border-left: 4px solid #2196f3;
-  }
-  
-  .skill-card {
-    border-left: 4px solid #ff9800;
-  }
-  
-  .item-card {
-    border-left: 4px solid #9c27b0;
-  }
-  
-  /* Show More Button */
-  .show-more-container {
-    display: flex;
-    justify-content: center;
-    margin: 30px 0;
-  }
-  
-  .show-more-button {
-    padding: 10px 25px;
-    background-color: #800000;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
-  }
-  
-  .show-more-button:hover {
-    background-color: #600000;
-  }
-  
-  /* No Results */
-  .no-results {
-    padding: 40px;
-    text-align: center;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    color: #666;
-  }
-  
-  /* Modal for displaying item details */
-  .item-modal-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+    padding: 6px 12px;
+    font-size: 0.85rem;
   }
   
   .item-modal-content {
-    background-color: white;
-    border-radius: 10px;
-    width: 90%;
-    max-width: 700px;
-    max-height: 90vh;
-    overflow-y: auto;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  }
-  
-  .item-modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    border-bottom: 1px solid #eee;
-  }
-  
-  .item-modal-header h2 {
-    margin: 0;
-    color: #800000;
-  }
-  
-  .modal-close-button {
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    color: #666;
-  }
-  
-  .modal-close-button:hover {
-    color: #800000;
+    width: 95%;
   }
   
   .item-modal-body {
-    padding: 20px;
-    display: flex;
     flex-direction: column;
-    gap: 20px;
-  }
-  
-  .item-modal-image {
-    text-align: center;
-  }
-  
-  .item-modal-image img {
-    max-width: 100%;
-    max-height: 300px;
-    object-fit: contain;
-  }
-  
-  .item-details {
-    line-height: 1.6;
-  }
-  
-  .item-description {
-    margin-top: 0;
-  }
-  
-  /* Responsive design */
-  @media (max-width: 768px) {
-    .search-bar {
-      margin-bottom: 15px;
-    }
-    
-    .search-input {
-      padding: 10px;
-      font-size: 1rem;
-    }
-    
-    .category-buttons {
-      gap: 8px;
-    }
-    
-    .category-button {
-      padding: 6px 12px;
-      font-size: 0.85rem;
-    }
-    
-    .search-card {
-      width: 100%;
-      max-width: 300px;
-    }
-    
-    .item-modal-content {
-      width: 95%;
-    }
-    
-    .item-modal-body {
-      flex-direction: column;
-    }
-
-    .search-results .cards-container {
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    }
   }
 
-  @media (max-width: 480px) {
-    .search-results .cards-container {
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    }
+  .search-results .cards-container {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   }
+}
+
+@media (max-width: 480px) {
+  .search-results .cards-container {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+}

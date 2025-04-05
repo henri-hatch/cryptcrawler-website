@@ -1,16 +1,5 @@
-/* CSS Variables */
-:root {
-  --primary: #800000;
-  --primary-hover: #600000;
-  --light-bg: #f9f9f9;
-  --border-color: #ddd;
-  --light-gray: #e0e0e0;
-  --medium-gray: #ccc;
-  --dark-text: #333;
-  --shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
-  --card-radius: 5px;
-  --tooltip-bg: rgba(0, 0, 0, 0.8);
-}
+/* Import variables */
+@import '../../styles/variables.css';
 
 /* Base Layout */
 .character-creator {
@@ -177,7 +166,7 @@
 }
 
 .available-stats {
-  background-color: #f8f9fa;
+  background-color: var(--light-bg);
   padding: 10px;
   border-radius: var(--card-radius);
   margin-bottom: 20px;
@@ -246,19 +235,18 @@
 
 .alignment-card.selected {
   border-color: var(--primary);
-  background-color: #fff0f0;
+  background-color: var(--primary-light);
   box-shadow: 0 0 10px rgba(128, 0, 0, 0.2);
 }
 
-/* Card Components - Shared */
+/* Specific card containers for character creator */
 .ancestry-cards-container, .skill-cards-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 20px;
   align-items: flex-start;
   overflow-y: auto;
   padding: 10px;
+  margin-top: 20px;
 }
 
 .ancestry-cards-container {
@@ -268,79 +256,6 @@
 
 .skill-cards-container {
   justify-content: flex-start;
-}
-
-/* Card component specific overrides */
-.ancestry-selection-step .content-card {
-  width: 220px;
-  min-height: 220px;
-  margin: 10px;
-}
-
-.skill-card {
-  width: 200px;
-  min-height: 200px;
-  margin: 5px;
-}
-
-.skill-card .card-image-container {
-  height: 100px;
-}
-
-.skill-card .card-image-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.skill-card .card-content h3 {
-  font-size: 1rem;
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-.skill-card .truncated-description {
-  max-height: 60px;
-}
-
-.ancestry-selection-step .content-card .truncated-description {
-  max-height: 80px;
-  overflow: hidden;
-}
-
-.content-card .card-content p {
-  transition: max-height 0.3s ease;
-}
-
-/* Category layouts */
-.skill-selection-step, .ancestry-selection-step, .origin-selection-step {
-  width: 100%;
-}
-
-.skill-selection-step {
-  max-width: 1000px;
-}
-
-.ancestry-selection-step {
-  max-width: 900px;
-}
-
-.skill-categories {
-  max-height: 500px;
-  overflow-y: auto;
-  padding: 0 10px;
-}
-
-.skill-category {
-  margin-bottom: 20px;
-  padding: 0 5px;
-}
-
-.skill-category h3 {
-  text-transform: capitalize;
-  margin-bottom: 10px;
-  padding-bottom: 5px;
-  border-bottom: 1px solid var(--light-gray);
 }
 
 /* Origin Step */
@@ -376,13 +291,13 @@
   border-radius: var(--card-radius);
   padding: 10px;
   background-color: var(--light-bg);
-  position: relative; /* Create containing block for tooltips */
+  position: relative;
 }
 
 .origin-list h3 {
   text-align: center;
   margin-top: 0;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid var(--medium-gray);
   padding-bottom: 8px;
   color: var(--primary);
 }
@@ -393,7 +308,6 @@
   padding: 5px;
 }
 
-/* Update the origin-item styles to create proper stacking on hover */
 .origin-item {
   position: relative;
   padding: 10px;
@@ -403,17 +317,17 @@
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.2s ease;
-  z-index: 1; /* Base z-index */
+  z-index: var(--z-base);
 }
 
 .origin-item:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow);
-  z-index: 100; /* Increase z-index on hover to bring item and its tooltip above others */
+  z-index: var(--z-hover);
 }
 
 .origin-item.selected {
-  background-color: #fff0f0;
+  background-color: var(--primary-light);
   border-color: var(--primary);
 }
 
@@ -432,7 +346,6 @@
   font-size: 0.9rem;
 }
 
-/* Update tooltip to have higher z-index */
 .origin-item-tooltip {
   display: none;
   position: absolute;
@@ -446,55 +359,23 @@
   padding: 8px;
   border-radius: 4px;
   font-size: 0.85rem;
-  z-index: 101; /* Even higher than the hovered item */
+  z-index: var(--z-tooltip);
   transform: translateY(5px);
-  pointer-events: none; /* Prevent the tooltip from blocking mouse events */
+  pointer-events: none;
 }
 
 .origin-item:hover .origin-item-tooltip {
   display: block;
 }
 
-/* Center tooltips on mobile */
-@media (max-width: 800px) {
-  .origin-item-tooltip {
-    left: 50%;
-    transform: translateX(-50%) translateY(5px);
-  }
-}
-
-/* Make sure tooltips don't extend past the right edge */
-.origin-list {
-  position: relative; /* Create containing block for tooltips */
-}
-
-/* Handle tooltips near the right edge */
 .origin-items-container > div:nth-last-child(-n+3) .origin-item-tooltip {
   right: 0;
   left: auto;
 }
 
-/* Handle tooltips near the left edge */
 .origin-items-container > div:nth-child(-n+3) .origin-item-tooltip {
   left: 0;
   right: auto;
-}
-
-.selection-indicator {
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  width: 20px;
-  height: 20px;
-  background-color: var(--primary);
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 14px;
-  font-weight: bold;
 }
 
 .selected-origins {
@@ -507,7 +388,7 @@
 
 .selected-origins h4 {
   margin-top: 0;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid var(--medium-gray);
   padding-bottom: 5px;
   color: var(--primary);
 }
@@ -518,44 +399,27 @@
 }
 
 /* Responsive styles */
-@media (max-width: 600px) {
-  .stat-row {
+@media (max-width: 800px) {
+  .origin-lists-container {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
   }
   
-  .stat-buttons {
-    width: 100%;
+  .origin-items-container {
+    height: 200px;
   }
   
-  .button-previous, 
-  .button-next,
-  .button-finish {
-    padding: 8px 16px;
-    font-size: 1rem;
+  .origin-item-tooltip {
+    left: 50%;
+    transform: translateX(-50%) translateY(5px);
+  }
+  
+  .skill-categories {
+    max-height: 400px;
   }
 }
 
 @media (max-width: 768px) {
   .ancestry-cards-container {
-    max-height: 00px;
-  }
-  
-  .ancestry-selection-step .content-card {
-    width: 200px;
-  }
-}
-
-@media (max-width: 480px) {
-  .ancestry-selection-step .content-card {
-    width: 100%;
-    margin: 5px 0;
-  }
-}
-
-@media (max-width: 768px) {
-  .skill-categories {
     max-height: 400px;
   }
   
@@ -569,25 +433,27 @@
   }
 }
 
-@media (max-width: 480px) {
-  .skill-card {
+@media (max-width: 600px) {
+  .stat-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .stat-buttons {
     width: 100%;
-    margin: 5px 0;
+  }
+  
+  .button-previous, .button-next, .button-finish {
+    padding: 8px 16px;
+    font-size: 1rem;
   }
 }
 
-@media (max-width: 800px) {
-  .origin-lists-container {
-    flex-direction: column;
-  }
-  
-  .origin-items-container {
-    height: 200px;
-  }
-  
-  .origin-item-tooltip {
-    left: 0;
-    top: 100%;
+@media (max-width: 480px) {
+  .skill-card,
+  .ancestry-selection-step .content-card {
     width: 100%;
+    margin: 5px 0;
   }
 }

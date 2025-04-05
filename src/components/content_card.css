@@ -1,37 +1,51 @@
-/* Standard card styling applies to all cards now */
+/* Import variables */
+@import '../styles/variables.css';
+
+/* Card container layout */
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  gap: var(--card-gap);
+}
+
+/* Base card styling - applies to all content cards */
 .content-card {
   display: flex;
   flex-direction: column;
-  width: 180px; /* Reduced from 200px to allow 4 cards per row */
-  height: auto; /* Changed from fixed height to auto */
-  min-height: 260px; /* Reduced slightly for consistency */
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  width: 180px;
+  height: auto;
+  min-height: 260px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--card-radius);
   overflow: hidden;
   text-decoration: none;
   color: inherit;
-  transition: transform 0.2s, box-shadow 0.2s;
-  margin: 8px; /* Reduced from 10px to create tighter spacing */
-  position: relative; /* For proper positioning of the button */
-}
-
-/* Selection state for cards */
-.content-card.selected {
-  border: 2px solid #800000;
-  box-shadow: 0 0 10px rgba(128, 0, 0, 0.4);
-}
-
-.content-card.expanded {
-  z-index: 10; /* Bring expanded card to front */
-  height: auto;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  background-color: var(--content-bg);
+  z-index: var(--z-base);
 }
 
 .content-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  box-shadow: var(--hover-shadow);
+  z-index: var(--z-hover);
 }
 
-/* Default image container */
+.content-card.expanded {
+  z-index: var(--z-expanded);
+}
+
+/* Card selection state */
+.content-card.selected {
+  border: 2px solid var(--primary);
+  box-shadow: 0 0 10px rgba(128, 0, 0, 0.4);
+}
+
+/* Image container */
 .card-image-container {
   height: 150px;
   overflow: hidden;
@@ -41,103 +55,97 @@
   background-color: #f5f5f5;
 }
 
-/* Default image styling - contain within bounds */
 .card-image-container img {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
 }
 
-/* Update card content styles */
+/* Content section */
 .card-content {
   padding: 10px;
+  padding-bottom: 30px; /* Increase padding to make room for the button */
   display: flex;
   flex-direction: column;
-  height: auto; /* Changed from fixed height */
-  min-height: 110px; /* Added min-height instead */
+  min-height: 110px;
   flex-grow: 1;
+  position: relative;
 }
 
 .card-content h3 {
   margin: 0 0 5px 0;
+  font-size: 1rem;
 }
 
-/* Styles for truncated description */
+/* Description text states */
 .truncated-description {
   margin: 0;
   font-size: 0.9em;
-  color: #666;
+  color: var(--dark-gray);
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   line-clamp: 3;
   -webkit-box-orient: vertical;
-  transition: all 0.3s ease;
-  max-height: 4.5em; /* Approx 3 lines */
+  transition: max-height 0.3s ease;
+  max-height: 4.5em;
 }
 
-/* Styles for expanded description */
 .expanded-description {
   margin: 0;
   font-size: 0.9em;
-  color: #666;
+  color: var(--dark-gray);
   max-height: none;
   -webkit-line-clamp: unset;
   line-clamp: unset;
   overflow: visible;
 }
 
-/* Update the read-more button to be a subtle arrow */
+/* Expand/collapse button - position at bottom of content area */
 .read-more-btn {
   align-self: center;
   background-color: transparent;
-  color: #666;
+  color: var(--dark-gray);
   border: none;
   width: 24px;
   height: 24px;
-  margin-top: 5px;
   font-size: 1.2em;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0;
+  
+  /* Position at the bottom of the card content area */
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  
+  /* Add a small circular background */
+  background-color: white;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  z-index: 3; /* Ensure it's above the card content */
 }
 
-/* Remove hover background color change */
+/* Add a hover effect to the button */
 .read-more-btn:hover {
-  background-color: transparent;
-  color: #800000;
+  background-color: var(--primary-light);
+  color: var(--primary);
+  border-color: var(--primary);
 }
 
-.cards-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start !important; /* Added !important to override any other styles */
-  align-items: flex-start; /* Keep tops aligned */
-  width: 100%;
-}
-
-/* Special styling for race card images - fill and crop */
-.race-card .card-image-container {
-  height: 150px; /* Same height as other cards */
-}
-
-.race-card .card-image-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* This will scale and crop to fill the container */
-}
-
-/* Selection indicator checkmark */
+/* Selection indicator */
 .selection-indicator {
   position: absolute;
   top: 10px;
   right: 10px;
   width: 30px;
   height: 30px;
-  background-color: #800000;
+  background-color: var(--primary);
   color: white;
   border-radius: 50%;
   display: flex;
@@ -145,19 +153,51 @@
   align-items: center;
   font-size: 18px;
   font-weight: bold;
+  z-index: 2;
 }
 
-/* Make cards more responsive on small screens */
-@media (max-width: 768px) {
+/* Card type variations */
+/* Ancestry cards - special image treatment */
+.race-card .card-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Category accent colors for search database */
+.ancestry-card {
+  border-left: 4px solid var(--ancestry-accent);
+}
+
+.class-card {
+  border-left: 4px solid var(--class-accent);
+}
+
+.skill-card {
+  border-left: 4px solid var(--skill-accent);
+}
+
+.item-card {
+  border-left: 4px solid var(--item-accent);
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
   .cards-container {
-    justify-content: flex-start !important; /* Override the center alignment */
+    justify-content: space-between;
   }
   
   .content-card {
-    width: 170px; /* Slightly smaller on medium screens */
-    height: 260px;
-    margin: 6px;
-    min-height: 260px;
+    width: 22%; /* ~4 per row with gap */
+    min-width: 160px;
+  }
+}
+
+@media (max-width: 768px) {
+  .content-card {
+    width: 31%; /* ~3 per row with gap */
+    min-width: 160px;
+    min-height: 240px;
   }
   
   .card-image-container {
@@ -165,32 +205,30 @@
   }
   
   .card-content {
-    height: 100px;
+    padding: 8px;
+    min-height: 100px;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 576px) {
   .content-card {
-    width: 160px;
-    height: 240px;
-    margin: 5px;
-    min-height: 240px;
+    width: 47%; /* ~2 per row with gap */
+    margin: 5px auto;
   }
-  
-  .card-image-container {
-    height: 120px;
-  }
-  
-  .card-content {
-    padding: 8px;
-    height: 90px;
+}
+
+@media (max-width: 400px) {
+  .content-card {
+    width: 100%;
+    max-width: 220px;
+    margin: 5px auto;
   }
   
   .card-content h3 {
-    font-size: 0.9em;
+    font-size: 0.95em;
   }
   
-  .card-content p {
-    font-size: 0.8em;
+  .truncated-description {
+    font-size: 0.85em;
   }
 }

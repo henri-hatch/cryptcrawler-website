@@ -1,0 +1,42 @@
+:root {
+  /* Color palette */
+  --primary: #800000;
+  --primary-hover: #600000;
+  --primary-light: #fff0f0;
+  
+  /* Neutrals */
+  --body-bg: #ded9b7;
+  --content-bg: #fff;
+  --light-bg: #f9f9f9;
+  --light-gray: #e0e0e0;
+  --medium-gray: #ccc;
+  --dark-gray: #666;
+  --dark-text: #333;
+  --black: #000;
+  
+  /* Border styles */
+  --border-color: #ddd;
+  --card-radius: 5px;
+  
+  /* Effects */
+  --shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  --hover-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  --tooltip-bg: rgba(0, 0, 0, 0.8);
+  
+  /* Category accent colors */
+  --ancestry-accent: #4caf50;
+  --class-accent: #2196f3;
+  --skill-accent: #ff9800;
+  --item-accent: #9c27b0;
+  
+  /* Spacing */
+  --card-gap: 15px;
+  --content-padding: 20px;
+  
+  /* Z-index layers */
+  --z-base: 1;
+  --z-hover: 5;
+  --z-expanded: 10;
+  --z-tooltip: 100;
+  --z-modal: 1000;
+}
