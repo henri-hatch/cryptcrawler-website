@@ -135,10 +135,22 @@ const CharacterCreator: React.FC = () => {
 
   // Helper function to find origin item by ID
   const findOriginItem = (itemId: string) => {
-    // First check if it's equipment
+    // Check if it's equipment
     if (originData.equipment.some(item => item.id === itemId)) {
       const equipmentDetails = getEquipmentDetails(itemId);
       return equipmentDetails ? { item: equipmentDetails, category: 'equipment' } : { item: null, category: null };
+    }
+    
+    // Check if it's a quirk
+    const quirk = originData.quirks.find(item => item.id === itemId);
+    if (quirk) {
+      return { item: quirk, category: 'quirk' };
+    }
+    
+    // Check if it's a history
+    const history = originData.histories.find(item => item.id === itemId);
+    if (history) {
+      return { item: history, category: 'history' };
     }
     
     return { item: null, category: null };
