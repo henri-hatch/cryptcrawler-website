@@ -12,10 +12,14 @@
     background-color: rgba(0, 0, 0, 0.05);
     padding: 20px;
     border-radius: 10px;
+    width: auto; /* Let it adapt to container */
+    box-sizing: border-box; /* Include padding in width */
   }
   
   .search-bar {
     margin-bottom: 20px;
+    width: 100%; /* Full width of parent */
+    box-sizing: border-box;
   }
   
   .search-input {
@@ -26,6 +30,7 @@
     border-radius: 5px;
     background-color: white;
     transition: all 0.3s ease;
+    box-sizing: border-box; /* Include padding and border in width */
   }
   
   .search-input:focus {
@@ -83,18 +88,27 @@
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 15px;
     justify-content: start;
-    align-items: start;
+    align-items: start !important; /* This is the key - align to top */
+    position: relative; /* Create proper stacking context */
   }
   
   /* Make all search cards exactly the same size and structure */
   .search-card {
     width: 100% !important;
-    height: 100% !important;
+    height: auto !important;
     min-height: 260px !important;
     display: flex !important;
     flex-direction: column !important;
     margin: 0 !important;
     box-sizing: border-box !important;
+    z-index: 1;  /* Base z-index */
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important; /* Add z-index to transition */
+    position: relative !important;
+  }
+  
+  .search-card.expanded {
+    z-index: 10; /* Higher z-index when expanded */
+    position: relative;
   }
   
   /* Ensure image containers are identical */
@@ -112,6 +126,7 @@
     height: auto !important;
     position: relative !important;
     overflow: hidden !important;
+    padding-bottom: 30px !important; /* Make space for read more button */
   }
   
   /* Consistent heading size */
@@ -129,10 +144,34 @@
     text-overflow: ellipsis !important;
     display: -webkit-box !important;
     -webkit-line-clamp: 3 !important;
+    line-clamp: 3 !important;
     -webkit-box-orient: vertical !important;
     font-size: 14px !important;
     line-height: 1.4 !important;
     margin: 0 !important;
+  }
+  
+  /* Fix expanded description to not push against other cards */
+  .search-card .expanded-description {
+    position: relative !important; /* Change from absolute to relative */
+    background-color: transparent !important; /* Remove background color */
+    border: none !important; /* Remove border */
+    box-shadow: none !important; /* Remove shadow */
+    padding: 0 !important; /* Remove extra padding */
+    z-index: 50 !important;
+    width: 100% !important; /* Let width be determined by left/right */
+    box-sizing: border-box !important;
+    left: auto !important; /* Align with card edge, accounting for border */
+    right: auto !important; /* Align with card edge, accounting for border */
+    top: auto !important;  /* Position below the card content */
+    max-height: none !important;
+    overflow: visible !important;
+    margin-top: 0 !important; /* Remove margin */
+    transition: max-height 0.3s ease !important;
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+    border-bottom-left-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
   }
   
   /* Position read more button */
@@ -142,11 +181,21 @@
     left: 50% !important;
     transform: translateX(-50%) !important;
     margin: 0 !important;
+    z-index: 10 !important; /* Ensure it's above the expanded text */
   }
   
   .search-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    z-index: 5; /* Higher than base but lower than expanded */
+  }
+  
+  .search-card .card-content p {
+    transition: max-height 0.3s ease;
+  }
+  
+  .search-card.expanded .card-content {
+    padding-bottom: 40px !important; /* A bit more space for the button */
   }
   
   .ancestry-card {
