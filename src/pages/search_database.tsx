@@ -212,7 +212,7 @@ const SearchDatabasePage = () => {
                   description={item.description}
                   isSelectable={(item.dataSource === 'item' && !item.pageRoute) || item.dataSource === 'maneuver'}
                   onSelect={() => handleCardClick(item)}
-                  className={`search-card ${item.dataSource}-card`}
+                  className={`search-card ${item.dataSource}-card ${item.dataSource === 'ancestry' ? 'race-card' : ''}`}
                 />
               );
             })}

@@ -17,8 +17,7 @@
   display: flex;
   flex-direction: column;
   width: 180px;
-  height: auto;
-  min-height: 260px;
+  height: 300px;
   border: 1px solid var(--border-color);
   border-radius: var(--card-radius);
   overflow: hidden;
@@ -43,6 +42,7 @@
 
 .content-card.expanded {
   z-index: var(--z-expanded);
+  height: auto;
 }
 
 /* Card selection state */
@@ -70,17 +70,25 @@
 /* Content section */
 .card-content {
   padding: 10px;
-  padding-bottom: 30px; /* Increase padding to make room for the button */
+  padding-bottom: 35px;
   display: flex;
   flex-direction: column;
   min-height: 110px;
   flex-grow: 1;
   position: relative;
+  overflow: hidden;
 }
 
 .card-content h3 {
   margin: 0 0 5px 0;
   font-size: 1rem;
+  line-height: 1.2;
+  overflow: visible;
+  text-overflow: clip;
+  display: block;
+  -webkit-line-clamp: initial;
+  line-clamp: initial;
+  -webkit-box-orient: initial;
 }
 
 /* Description text states */
@@ -91,11 +99,11 @@
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
   -webkit-box-orient: vertical;
   transition: max-height 0.3s ease;
-  max-height: 4.5em;
+  max-height: 6em;
 }
 
 .expanded-description {
@@ -111,30 +119,28 @@
 /* Expand/collapse button - position at bottom of content area */
 .read-more-btn {
   align-self: center;
-  background-color: transparent;
+  background-color: white;
   color: var(--dark-gray);
-  border: none;
-  width: 24px;
-  height: 24px;
-  font-size: 1.2em;
+  border: 1px solid var(--border-color);
+  width: 28px;
+  height: 28px;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0;
   
-  /* Position at the bottom of the card content area */
+  /* Position even closer to the bottom edge */
   position: absolute;
-  bottom: 3px;
+  bottom: 5px;
   left: 50%;
   transform: translateX(-50%);
   
   /* Add a small circular background */
-  background-color: white;
   border-radius: 50%;
-  border: 1px solid var(--border-color);
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
   z-index: 3; /* Ensure it's above the card content */
+  transition: all 0.2s ease;
 }
 
 /* Add a hover effect to the button */
@@ -142,6 +148,12 @@
   background-color: var(--primary-light);
   color: var(--primary);
   border-color: var(--primary);
+}
+
+/* Ensure the SVG is centered within the button */
+.read-more-btn svg {
+  display: block;
+  margin: 0 auto;
 }
 
 /* Selection indicator */
@@ -196,6 +208,7 @@
   .content-card {
     width: 22%; /* ~4 per row with gap */
     min-width: 160px;
+    height: 280px; /* Increased from 250px */
   }
 }
 
@@ -203,7 +216,7 @@
   .content-card {
     width: 31%; /* ~3 per row with gap */
     min-width: 160px;
-    min-height: 240px;
+    height: 260px; /* Increased from 240px */
   }
   
   .card-image-container {
@@ -212,7 +225,11 @@
   
   .card-content {
     padding: 8px;
-    min-height: 100px;
+    padding-bottom: 35px; /* Adjust bottom padding for smaller screens */
+  }
+  
+  .read-more-btn {
+    bottom: 5px; /* Position closer to bottom on smaller screens */
   }
 }
 
@@ -220,6 +237,7 @@
   .content-card {
     width: 47%; /* ~2 per row with gap */
     margin: 5px auto;
+    height: 250px; /* Increased from 230px */
   }
 }
 
@@ -228,13 +246,32 @@
     width: 100%;
     max-width: 220px;
     margin: 5px auto;
+    height: 240px; /* Increased from 220px */
   }
   
   .card-content h3 {
     font-size: 0.95em;
+    /* Make consistent with main title styles */
+    overflow: visible;
+    text-overflow: clip;
+    display: block;
+    -webkit-line-clamp: initial;
+    line-clamp: initial;
+    -webkit-box-orient: initial;
   }
   
   .truncated-description {
     font-size: 0.85em;
+    -webkit-line-clamp: 3; /* Increased from 2 to 3 lines */
+    line-clamp: 3;
+    max-height: 4.5em; /* Increased to allow more text */
+  }
+  
+  .card-content {
+    padding-bottom: 40px; /* Ensure enough spacing for button on mobile */
+  }
+  
+  .read-more-btn {
+    bottom: 10px; /* Consistent positioning on mobile */
   }
 }

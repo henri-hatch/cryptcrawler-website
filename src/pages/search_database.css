@@ -5,7 +5,6 @@
 .search-database-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
 }
 
 /* Search Controls */
@@ -16,6 +15,13 @@
   border-radius: 10px;
   width: auto;
   box-sizing: border-box;
+}
+
+/* Special styling for ancestry cards in search database */
+.search-card.ancestry-card .card-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .search-bar {
