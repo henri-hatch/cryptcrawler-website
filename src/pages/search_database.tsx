@@ -4,6 +4,7 @@ import ancestryData from '../data/ancestry_data';
 import classData from '../data/class_data';
 import skillData from '../data/skill_data';
 import itemData from '../data/item_data';
+import maneuverData from '../data/maneuver_data';
 import '../components/content_card.css';
 import './search_database.css';
 
@@ -28,6 +29,7 @@ const SearchDatabasePage = () => {
   const [visibleResults, setVisibleResults] = useState(20);
   const [showModal, setShowModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState<any>(null);
+  const [copySuccess, setCopySuccess] = useState(false);
   
   // Update the allData useMemo to use type assertions
   const allData = useMemo<SearchableItem[]>(() => {
@@ -35,7 +37,8 @@ const SearchDatabasePage = () => {
       ...ancestryData.map(item => ({ ...item, dataSource: 'ancestry' })),
       ...classData.map(item => ({ ...item, dataSource: 'class' })),
       ...skillData.map(item => ({ ...item, dataSource: 'skill' })),
-      ...itemData.map(item => ({ ...item, dataSource: 'item' }))
+      ...itemData.map(item => ({ ...item, dataSource: 'item' })),
+      ...maneuverData.map(item => ({ ...item, dataSource: 'maneuver' }))
     ] as SearchableItem[];
   }, []);
   
@@ -99,11 +102,56 @@ const SearchDatabasePage = () => {
     setVisibleResults(prev => prev + 20);
   };
 
-  // Handle card click for items without page routes
+  // Handle card click for items and maneuvers
   const handleCardClick = (item: any) => {
-    if (item.dataSource === 'item' && !item.pageRoute) {
+    if ((item.dataSource === 'item' && !item.pageRoute) || item.dataSource === 'maneuver') {
       setSelectedItem(item);
       setShowModal(true);
+    }
+  };
+
+  // Function to copy maneuver image to clipboard
+  const copyManeuverToClipboard = async (imageUrl: string) => {
+    try {
+      // Create a canvas element
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      const img = new Image();
+      
+      // Wait for the image to load
+      await new Promise<void>((resolve) => {
+        img.onload = () => {
+          // Set canvas dimensions to match the image
+          canvas.width = img.width;
+          canvas.height = img.height;
+          
+          // Draw the image on the canvas
+          ctx?.drawImage(img, 0, 0);
+          resolve();
+        };
+        img.crossOrigin = "anonymous"; // This is important for CORS issues
+        img.src = imageUrl;
+      });
+      
+      // Convert canvas to blob and copy to clipboard
+      canvas.toBlob(async (blob) => {
+        if (blob) {
+          try {
+            // Modern clipboard API
+            await navigator.clipboard.write([
+              new ClipboardItem({
+                [blob.type]: blob
+              })
+            ]);
+            setCopySuccess(true);
+            setTimeout(() => setCopySuccess(false), 2000); // Reset after 2 seconds
+          } catch (err) {
+            console.error('Failed to copy image: ', err);
+          }
+        }
+      });
+    } catch (err) {
+      console.error('Error copying to clipboard: ', err);
     }
   };
 
@@ -162,6 +210,7 @@ const SearchDatabasePage = () => {
                   imagePath={imageSource}
                   linkTo={item.pageRoute}
                   description={item.description}
+                  isSelectable={(item.dataSource === 'item' && !item.pageRoute) || item.dataSource === 'maneuver'}
                   onSelect={() => handleCardClick(item)}
                   className={`search-card ${item.dataSource}-card`}
                 />
@@ -193,30 +242,43 @@ const SearchDatabasePage = () => {
             </div>
             
             <div className="item-modal-body">
-              {selectedItem.imagePath && (
-                <div className="item-modal-image">
-                  <img src={selectedItem.imagePath} alt={selectedItem.name} />
+              {selectedItem.dataSource === 'maneuver' ? (
+                /* Maneuver Modal - Just show the image for easy copying */
+                <div className="maneuver-modal-image">
+                  <img 
+                    src={selectedItem.maneuverImage} 
+                    alt={selectedItem.name} 
+                    style={{ width: '100%', height: 'auto', cursor: 'pointer' }}
+                    title="Click to copy to clipboard"
+                    onClick={() => copyManeuverToClipboard(selectedItem.maneuverImage)}
+                  />
+                  {copySuccess && <p className="copy-success">Copied to clipboard!</p>}
                 </div>
+              ) : (
+                /* Item Modal - Show details formatted as requested */
+                <>
+                  {selectedItem.imagePath && (
+                    <div className="item-modal-image">
+                      <img src={selectedItem.imagePath} alt={selectedItem.name} />
+                    </div>
+                  )}
+                  
+                  <div className="item-details">
+                    {selectedItem.gpCost !== undefined && selectedItem.weight !== undefined && (
+                      <p className="item-stats"><strong>Cost:</strong> {selectedItem.gpCost} gp | <strong>Weight:</strong> {selectedItem.weight} lbs</p>
+                    )}
+                    
+                    <p className="item-description">{selectedItem.description}</p>
+                    
+                    {selectedItem.category && (
+                      <p className="item-categories"><strong>Categories:</strong> {Array.isArray(selectedItem.category) 
+                        ? selectedItem.category.join(', ') 
+                        : selectedItem.category}
+                      </p>
+                    )}
+                  </div>
+                </>
               )}
-              
-              <div className="item-details">
-                <p className="item-description">{selectedItem.description}</p>
-                
-                {selectedItem.gpCost !== undefined && (
-                  <p><strong>Cost:</strong> {selectedItem.gpCost} gp</p>
-                )}
-                
-                {selectedItem.weight !== undefined && (
-                  <p><strong>Weight:</strong> {selectedItem.weight} lbs</p>
-                )}
-                
-                {selectedItem.category && (
-                  <p><strong>Categories:</strong> {Array.isArray(selectedItem.category) 
-                    ? selectedItem.category.join(', ') 
-                    : selectedItem.category}
-                  </p>
-                )}
-              </div>
             </div>
           </div>
         </div>

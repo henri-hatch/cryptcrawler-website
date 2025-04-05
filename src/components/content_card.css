@@ -30,6 +30,11 @@
   z-index: var(--z-base);
 }
 
+/* Add pointer cursor for selectable cards */
+.content-card.selectable {
+  cursor: pointer;
+}
+
 .content-card:hover {
   transform: translateY(-5px);
   box-shadow: var(--hover-shadow);

@@ -1,4 +1,10 @@
+import maneuverData from '../../data/maneuver_data';
+
 const Tactician = () => {
+    // Find the maneuver data
+    const parryManeuver = maneuverData.find(maneuver => maneuver.id === 'parry');
+    const tacticalInvitationManeuver = maneuverData.find(maneuver => maneuver.id === 'tactical-invitation');
+    
     return (
         <>
             <h2>Tactician</h2>
@@ -36,7 +42,13 @@ const Tactician = () => {
             <p>You know how to protect yourself and nearby allies. You gain the <em>Parry</em> maneuver.</p>
             </div>
             <div>
-            <img src="/manuever-images/Parry.png" alt="Parry" style={{ width: '75%', height: 'auto'}} />
+            {parryManeuver && (
+                <img 
+                    src={parryManeuver.maneuverImage} 
+                    alt={parryManeuver.name} 
+                    style={{ width: '75%', height: 'auto'}} 
+                />
+            )}
             </div>
 
             <div>
@@ -44,7 +56,13 @@ const Tactician = () => {
             <p>Distraction is the greatest poison against organization. You gain the <em>Tactical Invitation</em> maneuver.</p>
             </div>
             <div>
-            <img src="/manuever-images/Tactical Invitation.png" alt="Tactical Invitation" style={{ width: '75%', height: 'auto'}} />
+            {tacticalInvitationManeuver && (
+                <img 
+                    src={tacticalInvitationManeuver.maneuverImage} 
+                    alt={tacticalInvitationManeuver.name} 
+                    style={{ width: '75%', height: 'auto'}} 
+                />
+            )}
             </div>
         </>
     )

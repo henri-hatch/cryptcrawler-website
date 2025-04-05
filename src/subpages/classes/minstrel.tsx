@@ -1,4 +1,10 @@
+import maneuverData from '../../data/maneuver_data';
+
 const Minstrel = () => {
+    // Find the maneuver data
+    const captivationManeuver = maneuverData.find(maneuver => maneuver.id === 'captivation');
+    const plotTwistManeuver = maneuverData.find(maneuver => maneuver.id === 'plot-twist');
+    
     return (
         <>
             <h2>Minstrel</h2>
@@ -39,9 +45,14 @@ const Minstrel = () => {
             <p>The story you tell is so compelling, it can totally entrance your audience. You gain the <em>Captivation</em> maneuver.</p>
             </div>
 
-
             <div>
-            <img src="/manuever-images/Captivation.png" alt="Captivation" style={{ width: '75%', height: 'auto'}} />
+            {captivationManeuver && (
+                <img 
+                    src={captivationManeuver.maneuverImage} 
+                    alt={captivationManeuver.name} 
+                    style={{ width: '75%', height: 'auto'}} 
+                />
+            )}
             </div>
 
             <div>
@@ -50,7 +61,13 @@ const Minstrel = () => {
             </div>
 
             <div>
-            <img src="/manuever-images/Plot Twist.png" alt="Plot Twist" style={{ width: '75%', height: 'auto'}} />
+            {plotTwistManeuver && (
+                <img 
+                    src={plotTwistManeuver.maneuverImage} 
+                    alt={plotTwistManeuver.name} 
+                    style={{ width: '75%', height: 'auto'}} 
+                />
+            )}
             </div>
         </>
     )

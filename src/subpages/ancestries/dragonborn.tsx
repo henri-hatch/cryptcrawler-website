@@ -1,4 +1,13 @@
+import maneuverData from '../../data/maneuver_data';
+
 const Dragonborn = () => {
+    // Find the maneuver data
+    const breathAcidManeuver = maneuverData.find(maneuver => maneuver.id === 'breath-weapon-acid');
+    const breathFireManeuver = maneuverData.find(maneuver => maneuver.id === 'breath-weapon-fire');
+    const breathIceManeuver = maneuverData.find(maneuver => maneuver.id === 'breath-weapon-ice');
+    const breathLightningManeuver = maneuverData.find(maneuver => maneuver.id === 'breath-weapon-lightning');
+    const sharpenedClawsManeuver = maneuverData.find(maneuver => maneuver.id === 'sharpened-claws');
+    
     return (
         <>
             <h2>Dragonborn</h2>
@@ -10,11 +19,34 @@ const Dragonborn = () => {
             <h3><u>Breath Weapon</u></h3>
             <p>Gain one of the following <em>permanent</em> manuevers.</p>
             <ul>            
-                <img src="/manuever-images/Breath Weapon (Acid).png" alt="Acid Breath Weapon" style={{ width: '75%', height: 'auto'}} />
-                <img src="/manuever-images/Breath Weapon (Fire).png" alt="Fire Breath Weapon" style={{ width: '75%', height: 'auto'}} />
-                <img src="/manuever-images/Breath Weapon (Ice).png" alt="Ice Breath Weapon" style={{ width: '75%', height: 'auto'}} />
-                <img src="/manuever-images/Breath Weapon (Lightning).png" alt="Lightning Breath Weapon" style={{ width: '75%', height: 'auto'}} />
-
+                {breathAcidManeuver && (
+                    <img 
+                        src={breathAcidManeuver.maneuverImage} 
+                        alt={breathAcidManeuver.name} 
+                        style={{ width: '75%', height: 'auto'}}
+                    />
+                )}
+                {breathFireManeuver && (
+                    <img 
+                        src={breathFireManeuver.maneuverImage} 
+                        alt={breathFireManeuver.name} 
+                        style={{ width: '75%', height: 'auto'}}
+                    />
+                )}
+                {breathIceManeuver && (
+                    <img 
+                        src={breathIceManeuver.maneuverImage} 
+                        alt={breathIceManeuver.name} 
+                        style={{ width: '75%', height: 'auto'}}
+                    />
+                )}
+                {breathLightningManeuver && (
+                    <img 
+                        src={breathLightningManeuver.maneuverImage} 
+                        alt={breathLightningManeuver.name} 
+                        style={{ width: '75%', height: 'auto'}}
+                    />
+                )}
             </ul>
             </div>
 
@@ -28,7 +60,13 @@ const Dragonborn = () => {
             <p>Due to your natural weapons, you always have weapons at your disposal. You <em>permanently</em> gain the <em>Sharpened Claws</em> manuever.</p>
 
             <div>
-            <img src="/manuever-images/Sharpened Claws.png" alt="Sharpened Claws" style={{ width: '75%', height: 'auto'}} />
+            {sharpenedClawsManeuver && (
+                <img 
+                    src={sharpenedClawsManeuver.maneuverImage} 
+                    alt={sharpenedClawsManeuver.name} 
+                    style={{ width: '75%', height: 'auto'}} 
+                />
+            )}
             </div>
 
             </div>

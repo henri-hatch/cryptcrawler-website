@@ -81,7 +81,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
     return (
       <div 
         id={id}
-        className={`content-card ${className || ''} ${expanded ? 'expanded' : ''} ${isSelected ? 'selected' : ''}`}
+        className={`content-card selectable ${className || ''} ${expanded ? 'expanded' : ''} ${isSelected ? 'selected' : ''}`}
         onClick={onSelect}
         data-testid={`ancestry-card-${id}`} // Optional: helpful for testing
       >

@@ -1,4 +1,10 @@
+import maneuverData from '../../data/maneuver_data';
+
 const Shadow = () => {
+    // Find the maneuver data
+    const hesitationManeuver = maneuverData.find(maneuver => maneuver.id === 'hesitation-is-weakness');
+    const shadowStepManeuver = maneuverData.find(maneuver => maneuver.id === 'shadow-step');
+    
     return (
         <>
             <div>
@@ -34,7 +40,13 @@ const Shadow = () => {
             <p>Patience is power, you strike when you want to. You gain the <em>Hesitation Is Weakness</em> maneuver.</p>
             </div>
             <div>
-            <img src="/manuever-images/Hesitation Is Weakness.png" alt="Hesitation Is Weakness" style={{ width: '75%', height: 'auto'}} />
+            {hesitationManeuver && (
+                <img 
+                    src={hesitationManeuver.maneuverImage} 
+                    alt={hesitationManeuver.name} 
+                    style={{ width: '75%', height: 'auto'}} 
+                />
+            )}
             </div>
 
             <div>
@@ -43,7 +55,13 @@ const Shadow = () => {
             </div>
 
             <div>
-            <img src="/manuever-images/Shadow Step.png" alt="Shadow Step" style={{ width: '75%', height: 'auto'}} />
+            {shadowStepManeuver && (
+                <img 
+                    src={shadowStepManeuver.maneuverImage} 
+                    alt={shadowStepManeuver.name} 
+                    style={{ width: '75%', height: 'auto'}} 
+                />
+            )}
             </div>
         </>
     )

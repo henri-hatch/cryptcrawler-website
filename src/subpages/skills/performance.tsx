@@ -1,4 +1,9 @@
+import maneuverData from '../../data/maneuver_data';
+
 const Performance = () => {
+    // Find the maneuver data
+    const inspirationManeuver = maneuverData.find(maneuver => maneuver.id === 'inspiration');
+    
     return (
         <>
             <h2>Performance</h2>
@@ -11,9 +16,15 @@ const Performance = () => {
             <p dir="auto">You gain the <em>Inspiration</em> maneuver.</p>
             </div>
 
-            <div>
-            <img src="/manuever-images/Inspiration.png" alt="Inspiration" style={{ width: '75%', height: 'auto'}} />
-            </div>
+            {inspirationManeuver && (
+                <div>
+                    <img 
+                        src={inspirationManeuver.maneuverImage} 
+                        alt={inspirationManeuver.name} 
+                        style={{ width: '75%', height: 'auto'}} 
+                    />
+                </div>
+            )}
         </>
     )
 };
