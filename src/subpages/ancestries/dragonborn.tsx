@@ -1,4 +1,5 @@
 import maneuverData from '../../data/maneuver_data';
+import { ManeuverLink } from '../../components/maneuver_modal';
 
 const Dragonborn = () => {
     // Find the maneuver data
@@ -20,32 +21,24 @@ const Dragonborn = () => {
             <p>Gain one of the following <em>permanent</em> manuevers.</p>
             <ul>            
                 {breathAcidManeuver && (
-                    <img 
-                        src={breathAcidManeuver.maneuverImage} 
-                        alt={breathAcidManeuver.name} 
-                        style={{ width: '75%', height: 'auto'}}
-                    />
+                    <li>
+                        <ManeuverLink maneuver={breathAcidManeuver} />
+                    </li>
                 )}
                 {breathFireManeuver && (
-                    <img 
-                        src={breathFireManeuver.maneuverImage} 
-                        alt={breathFireManeuver.name} 
-                        style={{ width: '75%', height: 'auto'}}
-                    />
+                    <li>
+                        <ManeuverLink maneuver={breathFireManeuver} />
+                    </li>
                 )}
                 {breathIceManeuver && (
-                    <img 
-                        src={breathIceManeuver.maneuverImage} 
-                        alt={breathIceManeuver.name} 
-                        style={{ width: '75%', height: 'auto'}}
-                    />
+                    <li>
+                        <ManeuverLink maneuver={breathIceManeuver} />
+                    </li>
                 )}
                 {breathLightningManeuver && (
-                    <img 
-                        src={breathLightningManeuver.maneuverImage} 
-                        alt={breathLightningManeuver.name} 
-                        style={{ width: '75%', height: 'auto'}}
-                    />
+                    <li>
+                        <ManeuverLink maneuver={breathLightningManeuver} />
+                    </li>
                 )}
             </ul>
             </div>
@@ -61,11 +54,9 @@ const Dragonborn = () => {
 
             <div>
             {sharpenedClawsManeuver && (
-                <img 
-                    src={sharpenedClawsManeuver.maneuverImage} 
-                    alt={sharpenedClawsManeuver.name} 
-                    style={{ width: '75%', height: 'auto'}} 
-                />
+                <p>
+                    <ManeuverLink maneuver={sharpenedClawsManeuver} />
+                </p>
             )}
             </div>
 

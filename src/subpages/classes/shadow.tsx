@@ -1,9 +1,9 @@
 import maneuverData from '../../data/maneuver_data';
+import { ManeuverLink } from '../../components/maneuver_modal';
 
 const Shadow = () => {
-    // Find the maneuver data
-    const hesitationManeuver = maneuverData.find(maneuver => maneuver.id === 'hesitation-is-weakness');
-    const shadowStepManeuver = maneuverData.find(maneuver => maneuver.id === 'shadow-step');
+        const hesitationManeuver = maneuverData.find(m => m.id === "hesitation-is-weakness");
+    const shadowStepManeuver = maneuverData.find(m => m.id === "shadow-step");
     
     return (
         <>
@@ -41,11 +41,7 @@ const Shadow = () => {
             </div>
             <div>
             {hesitationManeuver && (
-                <img 
-                    src={hesitationManeuver.maneuverImage} 
-                    alt={hesitationManeuver.name} 
-                    style={{ width: '75%', height: 'auto'}} 
-                />
+                <p><ManeuverLink maneuver={hesitationManeuver} /></p>
             )}
             </div>
 
@@ -56,11 +52,7 @@ const Shadow = () => {
 
             <div>
             {shadowStepManeuver && (
-                <img 
-                    src={shadowStepManeuver.maneuverImage} 
-                    alt={shadowStepManeuver.name} 
-                    style={{ width: '75%', height: 'auto'}} 
-                />
+                <p><ManeuverLink maneuver={shadowStepManeuver} /></p>
             )}
             </div>
         </>

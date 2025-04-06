@@ -1,14 +1,14 @@
 import maneuverData from '../../data/maneuver_data';
+import { ManeuverLink } from '../../components/maneuver_modal';
 
 const Tactician = () => {
-    // Find the maneuver data
-    const parryManeuver = maneuverData.find(maneuver => maneuver.id === 'parry');
-    const tacticalInvitationManeuver = maneuverData.find(maneuver => maneuver.id === 'tactical-invitation');
-    
+    const parryManeuver = maneuverData.find(m => m.id === "parry");
+    const tacticalInvitationManeuver = maneuverData.find(m => m.id === "tactical-invitation");
+
     return (
         <>
             <h2>Tactician</h2>
-
+            
             <div>
             <h3>Prerequisites</h3>
             <p>A Tactician is a master of battle, constantly seeking for holes in the battlefield. To be a strategic mastermind, you must meet the following prerequisites.</p>
@@ -19,7 +19,7 @@ const Tactician = () => {
             </ul>
             </div>
 
-
+            
             <div>
             <h3>Breakthrough</h3>
             <p>As a Tactician, <em>breakthrough</em> opportunities often involve:</p>
@@ -36,18 +36,14 @@ const Tactician = () => {
             <h3><u>1st Level: Opportunity</u></h3>
             <p>It is too easy to become distracted in battle, and you seem to be the only one to notice this. You have a heroic resource called opportunity, which you can spend to activate your powerful abilities. Outside of combat, you have opportunity equal to your INT score. If you lose some or all of your opportunity outside of combat, it takes 10 minutes to regain it. At the start of your turn, you gain 2 opportunity. Whenever you use the <em>Parry</em>, you gain 1 opportunity. All unspent opportunity disappears at the end of an encounter.</p>
             </div>
-
+            
             <div>
             <h3><u>1st Level: Parry</u></h3>
             <p>You know how to protect yourself and nearby allies. You gain the <em>Parry</em> maneuver.</p>
             </div>
             <div>
             {parryManeuver && (
-                <img 
-                    src={parryManeuver.maneuverImage} 
-                    alt={parryManeuver.name} 
-                    style={{ width: '75%', height: 'auto'}} 
-                />
+                <p><ManeuverLink maneuver={parryManeuver} /></p>
             )}
             </div>
 
@@ -57,15 +53,11 @@ const Tactician = () => {
             </div>
             <div>
             {tacticalInvitationManeuver && (
-                <img 
-                    src={tacticalInvitationManeuver.maneuverImage} 
-                    alt={tacticalInvitationManeuver.name} 
-                    style={{ width: '75%', height: 'auto'}} 
-                />
+                <p><ManeuverLink maneuver={tacticalInvitationManeuver} /></p>
             )}
             </div>
         </>
     )
-}
+};
 
 export default Tactician;

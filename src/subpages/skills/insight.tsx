@@ -1,7 +1,9 @@
 import maneuverData from '../../data/maneuver_data';
+import { ManeuverLink } from '../../components/maneuver_modal';
 
 const Insight = () => {
-    const lieDetectorManeuver = maneuverData.find(maneuver => maneuver.id === 'lie-detector');
+    const lieDetectorManeuver = maneuverData.find(m => m.id === "lie-detector");
+
     return (
         <>
             <h2>Insight</h2>
@@ -16,11 +18,7 @@ const Insight = () => {
 
             <div>
                 {lieDetectorManeuver && (
-                    <img
-                        src={lieDetectorManeuver.maneuverImage}
-                        alt={lieDetectorManeuver.name}
-                        style={{ width: '75%', height: 'auto' }}
-                    />
+                    <p><ManeuverLink maneuver={lieDetectorManeuver} /></p>
                 )}
             </div>
 

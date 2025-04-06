@@ -1,9 +1,9 @@
 import maneuverData from '../../data/maneuver_data';
+import { ManeuverLink } from '../../components/maneuver_modal';
 
 const Minstrel = () => {
-    // Find the maneuver data
-    const captivationManeuver = maneuverData.find(maneuver => maneuver.id === 'captivation');
-    const plotTwistManeuver = maneuverData.find(maneuver => maneuver.id === 'plot-twist');
+        const captivationManeuver = maneuverData.find(m => m.id === "captivation");
+    const plotTwistManeuver = maneuverData.find(m => m.id === "plot-twist");
     
     return (
         <>
@@ -47,11 +47,7 @@ const Minstrel = () => {
 
             <div>
             {captivationManeuver && (
-                <img 
-                    src={captivationManeuver.maneuverImage} 
-                    alt={captivationManeuver.name} 
-                    style={{ width: '75%', height: 'auto'}} 
-                />
+                <p><ManeuverLink maneuver={captivationManeuver} /></p>
             )}
             </div>
 
@@ -62,11 +58,7 @@ const Minstrel = () => {
 
             <div>
             {plotTwistManeuver && (
-                <img 
-                    src={plotTwistManeuver.maneuverImage} 
-                    alt={plotTwistManeuver.name} 
-                    style={{ width: '75%', height: 'auto'}} 
-                />
+                <p><ManeuverLink maneuver={plotTwistManeuver} /></p>
             )}
             </div>
         </>

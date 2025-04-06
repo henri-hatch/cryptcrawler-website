@@ -1,7 +1,9 @@
 import maneuverData from '../../data/maneuver_data';
+import { ManeuverLink } from '../../components/maneuver_modal';
 
 const Acrobatics = () => {
-    const evasionManeuver = maneuverData.find(maneuver => maneuver.id === 'evasion');
+    const evasionManeuver = maneuverData.find(m => m.id === "evasion");
+
     return (
         <>
             <h2>Acrobatics</h2>
@@ -16,11 +18,7 @@ const Acrobatics = () => {
 
             <div>   
                 {evasionManeuver && (
-                    <img
-                        src={evasionManeuver.maneuverImage}
-                        alt={evasionManeuver.name}
-                        style={{ width: '75%', height: 'auto' }}
-                    />
+                    <p><ManeuverLink maneuver={evasionManeuver} /></p>
                 )}
             </div>
 

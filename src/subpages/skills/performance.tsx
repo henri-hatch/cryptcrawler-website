@@ -1,8 +1,8 @@
 import maneuverData from '../../data/maneuver_data';
+import { ManeuverLink } from '../../components/maneuver_modal';
 
 const Performance = () => {
-    // Find the maneuver data
-    const inspirationManeuver = maneuverData.find(maneuver => maneuver.id === 'inspiration');
+        const inspirationManeuver = maneuverData.find(m => m.id === "inspiration");
     
     return (
         <>
@@ -18,11 +18,7 @@ const Performance = () => {
 
             {inspirationManeuver && (
                 <div>
-                    <img 
-                        src={inspirationManeuver.maneuverImage} 
-                        alt={inspirationManeuver.name} 
-                        style={{ width: '75%', height: 'auto'}} 
-                    />
+                    <p><ManeuverLink maneuver={inspirationManeuver} /></p>
                 </div>
             )}
         </>

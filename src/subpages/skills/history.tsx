@@ -1,7 +1,9 @@
 import maneuverData from '../../data/maneuver_data';
+import { ManeuverLink } from '../../components/maneuver_modal';
 
 const History = () => {
-    const bookWormManeuver = maneuverData.find(maneuver => maneuver.id === 'book-worm');
+    const bookWormManeuver = maneuverData.find(m => m.id === "book-worm");
+
     return (
         <>
             <h2>History</h2>
@@ -16,11 +18,7 @@ const History = () => {
 
             <div>
                 {bookWormManeuver && (
-                    <img
-                        src={bookWormManeuver.maneuverImage}
-                        alt={bookWormManeuver.name}
-                        style={{ width: '75%', height: 'auto' }}
-                    />
+                    <p><ManeuverLink maneuver={bookWormManeuver} /></p>
                 )}
             </div>
         </>
