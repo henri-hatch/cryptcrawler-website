@@ -37,23 +37,12 @@ const Shadow = () => {
 
             <div>
             <h3><u>1st Level: Hesitation Is Weakness</u></h3>
-            <p>Patience is power, you strike when you want to. You gain the <em>Hesitation Is Weakness</em> maneuver.</p>
-            </div>
-            <div>
-            {hesitationManeuver && (
-                <p><ManeuverLink maneuver={hesitationManeuver} /></p>
-            )}
+            {hesitationManeuver && (<p>Patience is power, you strike when you want to. You gain the <ManeuverLink maneuver={hesitationManeuver}/> maneuver.</p>)}
             </div>
 
             <div>
             <h3><u>1st Level: Shadow Step</u></h3>
-            <p>Mustering the dark power within, you are consumed by black smoke, teleporting you away. You gain the <em>Shadow Step</em> maneuver.</p>
-            </div>
-
-            <div>
-            {shadowStepManeuver && (
-                <p><ManeuverLink maneuver={shadowStepManeuver} /></p>
-            )}
+            {shadowStepManeuver && (<p>Mustering the dark power within, you are consumed by black smoke, teleporting you away. You gain the <ManeuverLink maneuver={shadowStepManeuver}/> maneuver.</p>)}
             </div>
         </>
     )
