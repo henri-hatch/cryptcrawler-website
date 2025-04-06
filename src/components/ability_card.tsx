@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 interface AbilityCardProps {
   title: string;
   usageType: string;
-  requirements: string;
+  tags: string;
   target: string;
   trigger?: string;
   savingThrowActive?: string; // New prop
@@ -21,7 +21,7 @@ interface AbilityCardProps {
 const AbilityCard: React.FC<AbilityCardProps> = ({
   title,
   usageType,
-  requirements,
+  tags,
   target,
   trigger,
   savingThrowActive,
@@ -100,17 +100,17 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          flexWrap: 'wrap', // Allow wrapping on very small screens
+          flexWrap: 'wrap',
         }}
       >
         <h2 style={{ 
           margin: '0', 
-          fontSize: fontSize, // Now dynamic
+          fontSize: fontSize,
           fontWeight: 'normal'
         }}>{title}</h2>
         <p style={{ 
           margin: '0',
-          fontSize: fontSize, // Now dynamic
+          fontSize: fontSize,
           fontWeight: 'normal'
         }}>{usageType}</p>
       </div>
@@ -124,9 +124,9 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
 
       {/* Content area with padding */}
       <div style={{ padding: '8px' }}>
-        {/* Requirements Row */}
+        {/* Tags Row */}
         <div style={{ marginBottom: '8px' }}>
-          <strong>{usageType} ✦ {requirements || 'None'}</strong>
+          <strong>{usageType} ✦ {tags || 'None'}</strong>
         </div>
 
         {/* Economy (if provided) */}

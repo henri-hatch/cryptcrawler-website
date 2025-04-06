@@ -69,10 +69,10 @@ export const ManeuverModalProvider: React.FC<{ children: ReactNode }> = ({ child
             
             // Show copy success notification
             setCopySuccess(true);
-            console.log("Copy success set to true"); // Debug logging
+            console.log("Copy success set to true");
             setTimeout(() => {
               setCopySuccess(false);
-              console.log("Copy success set back to false"); // Debug logging
+              console.log("Copy success set back to false");
             }, 2000);
             
           } catch (err) {

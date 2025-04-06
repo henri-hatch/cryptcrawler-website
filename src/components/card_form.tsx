@@ -5,7 +5,7 @@ interface CardFormProps {
   onSubmit: (values: {
     title: string;
     usageType: string;
-    requirements: string;
+    tags: string;
     target: string;
     trigger: string;
     savingThrowActive: string;
@@ -24,7 +24,7 @@ interface CardFormProps {
 const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
   const [title, setTitle] = useState('');
   const [usageType, setUsageType] = useState('At Will');
-  const [requirements, setRequirements] = useState('');
+  const [tags, setTags] = useState('');
   const [target, setTarget] = useState('');
   const [trigger, setTrigger] = useState('');
   const [savingThrowActive, setSavingThrowActive] = useState('');
@@ -43,11 +43,11 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
     onSubmit({ 
       title, 
       usageType, 
-      requirements, 
+      tags, 
       target, 
       trigger,
       savingThrowActive,
-      savingThrowDC, // Changed from savingThrowPassive
+      savingThrowDC,
       damage, 
       hitEffect,
       success,
@@ -124,11 +124,11 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
       </label>
 
       <label>
-        Requirements:
+        Tags:
         <input
           type="text"
-          value={requirements}
-          onChange={(e) => setRequirements(e.target.value)}
+          value={tags}
+          onChange={(e) => setTags(e.target.value)}
           placeholder="e.g. Martial, Weapon, Melee (comma separated)"
         />
       </label>
