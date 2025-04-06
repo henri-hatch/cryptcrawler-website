@@ -78,6 +78,13 @@ const maneuverData: ManeuverData[] = [
     category: ["maneuver"]
   },
   {
+    id: "favor-for-a-neighbor",
+    name: "Favor for a Neighbor",
+    description: "Hartkin communities are incredibly close and trusting, happy to help those in need.",
+    maneuverImage: "/manuever-images/Favor for a Neighbor.png",
+    category: ["maneuver"]
+  },
+  {
     id: "hesitation-is-weakness",
     name: "Hesitation Is Weakness",
     description: "Strike when your opponent least expects it, using their moment of indecision against them.",
@@ -124,6 +131,13 @@ const maneuverData: ManeuverData[] = [
     name: "Plot Twist",
     description: "In the midst of a story, alter the narrative by introducing an unexpected turn of events.",
     maneuverImage: "/manuever-images/Plot Twist.png",
+    category: ["maneuver"]
+  },
+  {
+    id: "sense-undead",
+    name: "Sense Undead",
+    description: "You always get an ominous feeling whenever undead are near.",
+    maneuverImage: "/manuever-images/Sense Undead.png",
     category: ["maneuver"]
   },
   {

@@ -5,7 +5,7 @@ import '../components/content_card.css';
 const AncestriesPage = () => {
   // Filter ancestries by category
   const commonAncestries = ancestryData.filter(ancestry => 
-    ["human", "elf", "dwarf", "draeling", "halfling", "dragonborn"].includes(ancestry.id)
+    ["human", "elf", "dwarf", "draeling", "hartkin", "dragonborn"].includes(ancestry.id)
   );
   
   const exoticAncestries = ancestryData.filter(ancestry => 

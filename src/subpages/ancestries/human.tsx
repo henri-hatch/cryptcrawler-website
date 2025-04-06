@@ -2,6 +2,8 @@ import maneuverData from '../../data/maneuver_data';
 
 const Human = () => {
     const humanDetermination = maneuverData.find(m => m.id === "human-determination");
+    const senseUndead = maneuverData.find(maneuver => maneuver.id === 'sense-undead');
+
     return (
         <>
             <h2>Human</h2>
@@ -16,7 +18,7 @@ const Human = () => {
 
             <div>
             <h3><u>Human Inheritance</u></h3>
-            <p>Humans are the only species capable of having offspring with other species. You may choose one non-<u>darkvision</u> feature from another ancestry, or gain the <em>Human Determination</em> manuever.</p>
+            <p>Humans are the only species capable of having offspring with other species. You may choose one non-<u>darkvision</u> feature from another ancestry, or <em>permanently</em> gain the <em>Human Determination</em> manuever.</p>
             </div>
 
             <div>
@@ -31,10 +33,16 @@ const Human = () => {
 
             <div>
             <h3><u>Sense Undead</u></h3>
-            <p>Humans, unlike other ancestries in Keldon, know when an undead creature enters their proximity. You gain the <u>Sense Undead</u> title.</p>
-            <ul>
-                <li>You are gain a creeping, cold, or ominous sensation whenever there is an undead creature within a 60ft radius of you.</li>
-            </ul>
+            <p>Humans, unlike other ancestries in Keldon, know when an undead creature enters their proximity. You <em>permanently</em> gain the <u>Sense Undead</u> manuever.</p>
+            </div>
+            <div>
+                {senseUndead && (
+                    <img
+                        src={senseUndead.maneuverImage}
+                        alt={senseUndead.name}
+                        style={{ width: '75%', height: 'auto' }}
+                    />
+                )}
             </div>
 
         </>
