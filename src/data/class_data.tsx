@@ -55,6 +55,15 @@ const classData: ClassData[] = [
       category: ["class"]
     },
     {
+      id: "talent",
+      name: "Talent",
+      description: "Born with incredible untapped magical power, Talents are spellcasters who control their magic through their emotional state.",
+      imagePath: "/class-images/talent_logo.png",
+      pageRoute: "/classes/talent",
+      class_category: "common",
+      category: ["class"]
+    },
+    {
       id: "abnegate",
       name: "Abnegate",
       description: "Born as a twin, an Abnegate is an anti-magical anomaly, blessed with supernatural physical power rather than magical gifts.",

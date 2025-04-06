@@ -20,6 +20,7 @@ import Minstrel from './subpages/classes/minstrel.tsx'
 import Paragon from './subpages/classes/paragon.tsx'
 import Abnegate from './subpages/classes/abnegate.tsx'
 import Conduit from './subpages/classes/conduit.tsx'
+import Talent from './subpages/classes/talent.tsx'
 
 // Ancestries
 import Changeling from './subpages/ancestries/changeling.tsx'
@@ -114,6 +115,7 @@ function App() {
                 <Route path="/classes/paragon" element={<Paragon />} />
                 <Route path="/classes/abnegate" element={<Abnegate />} />
                 <Route path="/classes/conduit" element={<Conduit />} />
+                <Route path="/classes/talent" element={<Talent />} />
 
                 {/* Ancestries */}
                 <Route path="/ancestries/changeling" element={<Changeling />} />

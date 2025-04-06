@@ -120,6 +120,13 @@ const maneuverData: ManeuverData[] = [
     category: ["maneuver"]
   },
   {
+    id: "metamagic",
+    name: "Metamagic",
+    description: "Use your weapon to deflect an incoming attack, reducing the damage you take.",
+    maneuverImage: "/manuever-images/Metamagic.png",
+    category: ["maneuver"]
+  },
+  {
     id: "parry",
     name: "Parry",
     description: "Use your weapon to deflect an incoming attack, reducing the damage you take.",
@@ -166,6 +173,13 @@ const maneuverData: ManeuverData[] = [
     name: "Stampede of Steel",
     description: "Unleash a flurry of blows against multiple enemies, overwhelming them with speed and precision.",
     maneuverImage: "/manuever-images/Stampede of Steel.png",
+    category: ["maneuver"]
+  },
+  {
+    id: "sorcery",
+    name: "Sorcery",
+    description: "As a fountain of magic power, your spells manifest through concentrated will alone.",
+    maneuverImage: "/manuever-images/Sorcery.png",
     category: ["maneuver"]
   },
   {
