@@ -31,7 +31,7 @@ import Githyanki from './subpages/ancestries/githyanki.tsx'
 import Goblin from './subpages/ancestries/goblin.tsx'
 import HalfElf from './subpages/ancestries/half-elf.tsx'
 import HalfOrc from './subpages/ancestries/half-orc.tsx'
-import Halfling from './subpages/ancestries/halfling.tsx'
+import Hartkin from './subpages/ancestries/hartkin.tsx'
 import Harengon from './subpages/ancestries/harengon.tsx'
 import Hobgoblin from './subpages/ancestries/hobgoblin.tsx'
 import Human from './subpages/ancestries/human.tsx'
@@ -125,7 +125,7 @@ function App() {
                 <Route path="/ancestries/goblin" element={<Goblin />} />
                 <Route path="/ancestries/half-elf" element={<HalfElf />} />
                 <Route path="/ancestries/half-orc" element={<HalfOrc />} />
-                <Route path="/ancestries/halfling" element={<Halfling />} />
+                <Route path="/ancestries/hartkin" element={<Hartkin />} />
                 <Route path="/ancestries/harengon" element={<Harengon />} />
                 <Route path="/ancestries/hobgoblin" element={<Hobgoblin />} />
                 <Route path="/ancestries/human" element={<Human />} />

@@ -41,11 +41,11 @@ interface AncestryData {
       category: ["ancestry"]
     },
     {
-      id: "halfling",
-      name: "Halfling",
-      description: "A quiet and content people with a streak of trickery, halflings are admired by their neighbors. Created by the trickster god Ados, Halflings enjoy games of chance, riddles, and mysteries. They often form their own peaceful communities.",
+      id: "hartkin",
+      name: "Hartkin",
+      description: "A quiet and content people with a streak of trickery, hartkin are admired by their neighbors. Created by the trickster god Ados, hartkin enjoy games of chance, riddles, and mysteries. They often form their own peaceful communities.",
       imagePath: "/ancestry-images/halfling_logo.png",
-      pageRoute: "/ancestries/halfling",
+      pageRoute: "/ancestries/hartkin",
       category: ["ancestry"]
     },
     {
