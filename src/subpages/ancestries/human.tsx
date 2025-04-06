@@ -1,4 +1,7 @@
+import maneuverData from '../../data/maneuver_data';
+
 const Human = () => {
+    const humanDetermination = maneuverData.find(m => m.id === "human-determination");
     return (
         <>
             <h2>Human</h2>
@@ -17,7 +20,13 @@ const Human = () => {
             </div>
 
             <div>
-            <img src="/manuever-images/Human Determination.png" alt="Human Determination" style={{ width: '75%', height: 'auto'}} />
+                {humanDetermination && (
+                    <img
+                        src={humanDetermination.maneuverImage}
+                        alt={humanDetermination.name}
+                        style={{ width: '75%', height: 'auto' }}
+                    />
+                )}
             </div>
 
             <div>

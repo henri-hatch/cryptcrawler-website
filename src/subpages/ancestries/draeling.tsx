@@ -1,4 +1,7 @@
+import maneuverData from '../../data/maneuver_data';
+
 const Draeling = () => {
+    const command = maneuverData.find(maneuver => maneuver.id === 'command');
     return (
         <>
             <h2>Draeling</h2>
@@ -17,7 +20,13 @@ const Draeling = () => {
             </div>
 
             <div>
-            <img src="/manuever-images/Command.png" alt="Command" style={{ width: '75%', height: 'auto'}} />
+            {command && (
+                <img
+                    src={command.maneuverImage} 
+                    alt={command.name} 
+                    style={{ width: '75%', height: 'auto' }}
+                />
+            )}
             </div>
 
             <div>

@@ -1,4 +1,7 @@
+import maneuverData from '../../data/maneuver_data';
+
 const Insight = () => {
+    const lieDetectorManeuver = maneuverData.find(maneuver => maneuver.id === 'lie-detector');
     return (
         <>
             <h2>Insight</h2>
@@ -12,7 +15,13 @@ const Insight = () => {
             </div>
 
             <div>
-            <img src="/manuever-images/Lie Detector.png" alt="Lie Detector" style={{ width: '75%', height: 'auto'}} />
+                {lieDetectorManeuver && (
+                    <img
+                        src={lieDetectorManeuver.maneuverImage}
+                        alt={lieDetectorManeuver.name}
+                        style={{ width: '75%', height: 'auto' }}
+                    />
+                )}
             </div>
 
         </>

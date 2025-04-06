@@ -1,4 +1,7 @@
+import maneuverData from '../../data/maneuver_data';
+
 const Deception = () => {
+    const cuttingWordsManeuver = maneuverData.find(maneuver => maneuver.id === 'cutting-words');
     return (
         <>
             <h2>Deception</h2>
@@ -18,7 +21,13 @@ const Deception = () => {
             </div>
 
             <div>
-            <img src="/manuever-images/Cutting Words.png" alt="Cutting Words" style={{ width: '75%', height: 'auto'}} />
+                {cuttingWordsManeuver && (
+                    <img
+                        src={cuttingWordsManeuver.maneuverImage}
+                        alt={cuttingWordsManeuver.name}
+                        style={{ width: '75%', height: 'auto' }}
+                    />
+                )}
             </div>
 
         </>

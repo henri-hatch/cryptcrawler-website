@@ -1,4 +1,7 @@
+import maneuverData from '../../data/maneuver_data';
+
 const History = () => {
+    const bookWormManeuver = maneuverData.find(maneuver => maneuver.id === 'book-worm');
     return (
         <>
             <h2>History</h2>
@@ -12,7 +15,13 @@ const History = () => {
             </div>
 
             <div>
-            <img src="/manuever-images/Book Worm.png" alt="Book Worm" style={{ width: '75%', height: 'auto'}} />
+                {bookWormManeuver && (
+                    <img
+                        src={bookWormManeuver.maneuverImage}
+                        alt={bookWormManeuver.name}
+                        style={{ width: '75%', height: 'auto' }}
+                    />
+                )}
             </div>
         </>
     )

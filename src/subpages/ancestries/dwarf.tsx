@@ -1,4 +1,7 @@
+import maneuverData from '../../data/maneuver_data';
+
 const Dwarf = () => {
+    const stampedeOfSteel = maneuverData.find(m => m.id === "stampede-of-steel");
     return (
         <>
             <h2>Dwarf</h2>
@@ -22,7 +25,13 @@ const Dwarf = () => {
             </div>
 
             <div>
-            <img src="/manuever-images/Stampede of Steel.png" alt="Stampede of Steel" style={{ width: '75%', height: 'auto'}} />
+            {stampedeOfSteel && (
+                <img
+                    src={stampedeOfSteel.maneuverImage}
+                    alt={stampedeOfSteel.name}
+                    style={{ width: '75%', height: 'auto' }}
+                />
+            )}
             </div>
 
             <div>

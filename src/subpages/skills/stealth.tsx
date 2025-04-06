@@ -1,4 +1,11 @@
+import maneuverData from '../../data/maneuver_data';
+
 const Stealth = () => {
+    const cunningDodgeManeuver = maneuverData.find(maneuver => maneuver.id === 'cunning-dodge');
+    const evasionManeuver = maneuverData.find(maneuver => maneuver.id === 'evasion');
+    const improvisedCoverManeuver = maneuverData.find(maneuver => maneuver.id === 'improvised-cover');
+    const sneakAttackManeuver = maneuverData.find(maneuver => maneuver.id === 'sneak-attack');
+    const steadyShotManeuver = maneuverData.find(maneuver => maneuver.id === 'steady-shot');
     return (
         <>
             <h2>Stealth</h2>
@@ -9,7 +16,13 @@ const Stealth = () => {
             <h3>Cunning Dodge</h3>
             </div>
             <div>
-            <img src="/manuever-images/Cunning Dodge.png" alt="Cunning Dodge" style={{ width: '75%', height: 'auto'}} />
+                {cunningDodgeManeuver && (
+                    <img
+                        src={cunningDodgeManeuver.maneuverImage}
+                        alt={cunningDodgeManeuver.name}
+                        style={{ width: '75%', height: 'auto' }}
+                    />
+                )}
             </div>
 
             <hr style={{ opacity: 0.2 }} />
@@ -18,7 +31,13 @@ const Stealth = () => {
             <h3>Evasion</h3>
             </div>
             <div>
-            <img src="/manuever-images/Evasion.png" alt="Evasion" style={{ width: '75%', height: 'auto'}} />
+                {evasionManeuver && (
+                    <img
+                        src={evasionManeuver.maneuverImage}
+                        alt={evasionManeuver.name}
+                        style={{ width: '75%', height: 'auto' }}
+                    />
+                )}
             </div>
 
             <hr style={{ opacity: 0.2 }} />
@@ -27,7 +46,13 @@ const Stealth = () => {
             <h3>Improvised Cover</h3>
             </div>
             <div>
-            <img src="/manuever-images/Improvised Cover.png" alt="Improvised Cover" style={{ width: '75%', height: 'auto'}} />
+                {improvisedCoverManeuver && (
+                    <img
+                        src={improvisedCoverManeuver.maneuverImage}
+                        alt={improvisedCoverManeuver.name}
+                        style={{ width: '75%', height: 'auto' }}
+                    />
+                )}
             </div>
 
             <hr style={{ opacity: 0.2 }} />
@@ -36,7 +61,13 @@ const Stealth = () => {
             <h3>Sneak Attack</h3>
             </div>
             <div>
-            <img src="/manuever-images/Sneak Attack.png" alt="Sneak Attack" style={{ width: '75%', height: 'auto'}} />
+                {sneakAttackManeuver && (
+                    <img
+                        src={sneakAttackManeuver.maneuverImage}
+                        alt={sneakAttackManeuver.name}
+                        style={{ width: '75%', height: 'auto' }}
+                    />
+                )}
             </div>
 
             <hr style={{ opacity: 0.2 }} />
@@ -45,7 +76,13 @@ const Stealth = () => {
             <h3>Steady Shot</h3>
             </div>
             <div>
-            <img src="/manuever-images/Steady Shot.png" alt="Steady Shot" style={{ width: '75%', height: 'auto'}} />
+                {steadyShotManeuver && (
+                    <img
+                        src={steadyShotManeuver.maneuverImage}
+                        alt={steadyShotManeuver.name}
+                        style={{ width: '75%', height: 'auto' }}
+                    />
+                )}
             </div>
         </>
     )

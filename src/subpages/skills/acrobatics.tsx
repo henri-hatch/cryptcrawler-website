@@ -1,4 +1,7 @@
+import maneuverData from '../../data/maneuver_data';
+
 const Acrobatics = () => {
+    const evasionManeuver = maneuverData.find(maneuver => maneuver.id === 'evasion');
     return (
         <>
             <h2>Acrobatics</h2>
@@ -11,8 +14,14 @@ const Acrobatics = () => {
             <p dir="auto">You gain the <em>Evasion</em> manuever.</p>
             </div>
 
-            <div>
-            <img src="/manuever-images/Evasion.png" alt="Evasion" style={{ width: '75%', height: 'auto'}} />
+            <div>   
+                {evasionManeuver && (
+                    <img
+                        src={evasionManeuver.maneuverImage}
+                        alt={evasionManeuver.name}
+                        style={{ width: '75%', height: 'auto' }}
+                    />
+                )}
             </div>
 
         </>
