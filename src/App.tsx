@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, NavLink, Navigate } from 'react-router-dom'
 import './App.css'
+import { ManeuverModalProvider } from './components/maneuver_modal'
 
 // Import pages
 import HomePage from './pages/home.tsx'
@@ -70,104 +71,106 @@ import CharacterManager from './subpages/tools/character_manager.tsx'
 function App() {
   return (
     <BrowserRouter>
-      <div className="app-container">
-        {/* TOP BANNER */}
-        <header className="header">
-          <img src="/banner.png" alt="CryptCrawler 5e Banner" />
-          <img src="/CryptCrawlerLogo.png" alt="CryptCrawler Logo" className="logo-overlay" />
-        </header>
+      <ManeuverModalProvider>
+        <div className="app-container">
+          {/* TOP BANNER */}
+          <header className="header">
+            <img src="/banner.png" alt="CryptCrawler 5e Banner" />
+            <img src="/CryptCrawlerLogo.png" alt="CryptCrawler Logo" className="logo-overlay" />
+          </header>
 
-        {/* NAVIGATION BAR */}
-        <nav className="navbar">
-          <NavLink to="/" className={({isActive}) => isActive ? "active" : ""}>Home</NavLink>
-          <NavLink to="/skills" className={({isActive}) => isActive ? "active" : ""}>Skills</NavLink>
-          <NavLink to="/classes" className={({isActive}) => isActive ? "active" : ""}>Classes</NavLink>
-          <NavLink to="/ancestries" className={({isActive}) => isActive ? "active" : ""}>Ancestries</NavLink>
-          <NavLink to="/game-rules" className={({isActive}) => isActive ? "active" : ""}>Game Rules</NavLink>
-          <NavLink to="/tools" className={({isActive}) => isActive ? "active" : ""}>Tools</NavLink>
-          <NavLink to="/search-database" className={({isActive}) => isActive ? "active" : ""}>Search Database</NavLink>
-        </nav>
-    
-        {/* MAIN CONTENT */}
-        <div className="main-layout">
-          <div className="left-sidebar"></div>
-          <div className="content">
-            <Routes>
-              {/* Main pages */}
-              
-              <Route path="/" element={<HomePage />} />
-              <Route path="/skills" element={<SkillsPage />} />
-              <Route path="/classes" element={<ClassesPage />} />
-              <Route path="/ancestries" element={<AncestriesPage />} />
-              <Route path="/game-rules" element={<GameRulesPage />} />
-              <Route path="/tools" element={<ToolsPage />} />
-              <Route path="/search-database" element={<SearchDatabasePage />} />
+          {/* NAVIGATION BAR */}
+          <nav className="navbar">
+            <NavLink to="/" className={({isActive}) => isActive ? "active" : ""}>Home</NavLink>
+            <NavLink to="/skills" className={({isActive}) => isActive ? "active" : ""}>Skills</NavLink>
+            <NavLink to="/classes" className={({isActive}) => isActive ? "active" : ""}>Classes</NavLink>
+            <NavLink to="/ancestries" className={({isActive}) => isActive ? "active" : ""}>Ancestries</NavLink>
+            <NavLink to="/game-rules" className={({isActive}) => isActive ? "active" : ""}>Game Rules</NavLink>
+            <NavLink to="/tools" className={({isActive}) => isActive ? "active" : ""}>Tools</NavLink>
+            <NavLink to="/search-database" className={({isActive}) => isActive ? "active" : ""}>Search Database</NavLink>
+          </nav>
+      
+          {/* MAIN CONTENT */}
+          <div className="main-layout">
+            <div className="left-sidebar"></div>
+            <div className="content">
+              <Routes>
+                {/* Main pages */}
+                
+                <Route path="/" element={<HomePage />} />
+                <Route path="/skills" element={<SkillsPage />} />
+                <Route path="/classes" element={<ClassesPage />} />
+                <Route path="/ancestries" element={<AncestriesPage />} />
+                <Route path="/game-rules" element={<GameRulesPage />} />
+                <Route path="/tools" element={<ToolsPage />} />
+                <Route path="/search-database" element={<SearchDatabasePage />} />
 
-              {/* Subpages */}
+                {/* Subpages */}
 
-              {/* Classes */}
-              <Route path="/classes/shadow" element={<Shadow />} />
-              <Route path="/classes/tactician" element={<Tactician />} />
-              <Route path="/classes/minstrel" element={<Minstrel />} />
-              <Route path="/classes/paragon" element={<Paragon />} />
-              <Route path="/classes/abnegate" element={<Abnegate />} />
-              <Route path="/classes/conduit" element={<Conduit />} />
+                {/* Classes */}
+                <Route path="/classes/shadow" element={<Shadow />} />
+                <Route path="/classes/tactician" element={<Tactician />} />
+                <Route path="/classes/minstrel" element={<Minstrel />} />
+                <Route path="/classes/paragon" element={<Paragon />} />
+                <Route path="/classes/abnegate" element={<Abnegate />} />
+                <Route path="/classes/conduit" element={<Conduit />} />
 
-              {/* Ancestries */}
-              <Route path="/ancestries/changeling" element={<Changeling />} />
-              <Route path="/ancestries/draeling" element={<Draeling />} />
-              <Route path="/ancestries/dragonborn" element={<Dragonborn />} />
-              <Route path="/ancestries/dwarf" element={<Dwarf />} />
-              <Route path="/ancestries/elf" element={<Elf />} />
-              <Route path="/ancestries/githyanki" element={<Githyanki />} />
-              <Route path="/ancestries/goblin" element={<Goblin />} />
-              <Route path="/ancestries/half-elf" element={<HalfElf />} />
-              <Route path="/ancestries/half-orc" element={<HalfOrc />} />
-              <Route path="/ancestries/hartkin" element={<Hartkin />} />
-              <Route path="/ancestries/harengon" element={<Harengon />} />
-              <Route path="/ancestries/hobgoblin" element={<Hobgoblin />} />
-              <Route path="/ancestries/human" element={<Human />} />
-              <Route path="/ancestries/kenku" element={<Kenku />} />
-              <Route path="/ancestries/kobold" element={<Kobold />} />
-              <Route path="/ancestries/lizardfolk" element={<Lizardfolk />} />
-              <Route path="/ancestries/mul" element={<Mul />} />
-              <Route path="/ancestries/orc" element={<Orc />} />
-              <Route path="/ancestries/tabaxi" element={<Tabaxi />} />
-              <Route path="/ancestries/warforged" element={<Warforged />} />
+                {/* Ancestries */}
+                <Route path="/ancestries/changeling" element={<Changeling />} />
+                <Route path="/ancestries/draeling" element={<Draeling />} />
+                <Route path="/ancestries/dragonborn" element={<Dragonborn />} />
+                <Route path="/ancestries/dwarf" element={<Dwarf />} />
+                <Route path="/ancestries/elf" element={<Elf />} />
+                <Route path="/ancestries/githyanki" element={<Githyanki />} />
+                <Route path="/ancestries/goblin" element={<Goblin />} />
+                <Route path="/ancestries/half-elf" element={<HalfElf />} />
+                <Route path="/ancestries/half-orc" element={<HalfOrc />} />
+                <Route path="/ancestries/hartkin" element={<Hartkin />} />
+                <Route path="/ancestries/harengon" element={<Harengon />} />
+                <Route path="/ancestries/hobgoblin" element={<Hobgoblin />} />
+                <Route path="/ancestries/human" element={<Human />} />
+                <Route path="/ancestries/kenku" element={<Kenku />} />
+                <Route path="/ancestries/kobold" element={<Kobold />} />
+                <Route path="/ancestries/lizardfolk" element={<Lizardfolk />} />
+                <Route path="/ancestries/mul" element={<Mul />} />
+                <Route path="/ancestries/orc" element={<Orc />} />
+                <Route path="/ancestries/tabaxi" element={<Tabaxi />} />
+                <Route path="/ancestries/warforged" element={<Warforged />} />
 
-              {/* Skills */}
-              <Route path="/skills/persuasion" element={<Persuasion />} />
-              <Route path="/skills/appraisal" element={<Appraisal />} />
-              <Route path="/skills/stealth" element={<Stealth />} />
-              <Route path="/skills/medicine" element={<Medicine />} />
-              <Route path="/skills/crafting" element={<Crafting />} />
-              <Route path="/skills/performance" element={<Performance />} />
-              <Route path="/skills/survival" element={<Survival />} />
-              <Route path="/skills/animal_handling" element={<Animal_Handling />} />
-              <Route path="/skills/lockpicking" element={<Lockpicking />} />
-              <Route path="/skills/deception" element={<Deception />} />
-              <Route path="/skills/investigation" element={<Investigation />} />
-              <Route path="/skills/pickpocketing" element={<Pickpocketing />} />
-              <Route path="/skills/intimidation" element={<Intimidation />} />
-              <Route path="/skills/perception" element={<Perception />} />
-              <Route path="/skills/insight" element={<Insight />} />
-              <Route path="/skills/history" element={<History />} />
-              <Route path="/skills/acrobatics" element={<Acrobatics />} />
+                {/* Skills */}
+                <Route path="/skills/persuasion" element={<Persuasion />} />
+                <Route path="/skills/appraisal" element={<Appraisal />} />
+                <Route path="/skills/stealth" element={<Stealth />} />
+                <Route path="/skills/medicine" element={<Medicine />} />
+                <Route path="/skills/crafting" element={<Crafting />} />
+                <Route path="/skills/performance" element={<Performance />} />
+                <Route path="/skills/survival" element={<Survival />} />
+                <Route path="/skills/animal_handling" element={<Animal_Handling />} />
+                <Route path="/skills/lockpicking" element={<Lockpicking />} />
+                <Route path="/skills/deception" element={<Deception />} />
+                <Route path="/skills/investigation" element={<Investigation />} />
+                <Route path="/skills/pickpocketing" element={<Pickpocketing />} />
+                <Route path="/skills/intimidation" element={<Intimidation />} />
+                <Route path="/skills/perception" element={<Perception />} />
+                <Route path="/skills/insight" element={<Insight />} />
+                <Route path="/skills/history" element={<History />} />
+                <Route path="/skills/acrobatics" element={<Acrobatics />} />
 
-              {/* Tools */}
-              <Route path="/tools/maneuver-creator" element={<ManeuverCreator />} />
-              <Route path="/tools/dice-roller" element={<DiceRoller />} />
-              <Route path="/tools/character-creator" element={<CharacterCreator />} />
-              <Route path="/tools/character-manager" element={<CharacterManager />} />
+                {/* Tools */}
+                <Route path="/tools/maneuver-creator" element={<ManeuverCreator />} />
+                <Route path="/tools/dice-roller" element={<DiceRoller />} />
+                <Route path="/tools/character-creator" element={<CharacterCreator />} />
+                <Route path="/tools/character-manager" element={<CharacterManager />} />
 
-              {/* 404 */}
+                {/* 404 */}
 
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+            </div>
+            <div className="right-sidebar"></div>
           </div>
-          <div className="right-sidebar"></div>
         </div>
-      </div>
+      </ManeuverModalProvider>
     </BrowserRouter>
   )
 }

@@ -1,11 +1,13 @@
 import maneuverData from '../../data/maneuver_data';
+import { ManeuverLink } from '../../components/maneuver_modal';
 
 const Stealth = () => {
-    const cunningDodgeManeuver = maneuverData.find(maneuver => maneuver.id === 'cunning-dodge');
-    const evasionManeuver = maneuverData.find(maneuver => maneuver.id === 'evasion');
-    const improvisedCoverManeuver = maneuverData.find(maneuver => maneuver.id === 'improvised-cover');
-    const sneakAttackManeuver = maneuverData.find(maneuver => maneuver.id === 'sneak-attack');
-    const steadyShotManeuver = maneuverData.find(maneuver => maneuver.id === 'steady-shot');
+    const cunningDodgeManeuver = maneuverData.find(m => m.id === "cunning-dodge");
+    const evasionManeuver = maneuverData.find(m => m.id === "evasion");
+    const improvisedCoverManeuver = maneuverData.find(m => m.id === "improvised-cover");
+    const sneakAttackManeuver = maneuverData.find(m => m.id === "sneak-attack");
+    const steadyShotManeuver = maneuverData.find(m => m.id === "steady-shot");
+
     return (
         <>
             <h2>Stealth</h2>
@@ -17,11 +19,7 @@ const Stealth = () => {
             </div>
             <div>
                 {cunningDodgeManeuver && (
-                    <img
-                        src={cunningDodgeManeuver.maneuverImage}
-                        alt={cunningDodgeManeuver.name}
-                        style={{ width: '75%', height: 'auto' }}
-                    />
+                    <p><ManeuverLink maneuver={cunningDodgeManeuver} /></p>
                 )}
             </div>
 
@@ -32,11 +30,7 @@ const Stealth = () => {
             </div>
             <div>
                 {evasionManeuver && (
-                    <img
-                        src={evasionManeuver.maneuverImage}
-                        alt={evasionManeuver.name}
-                        style={{ width: '75%', height: 'auto' }}
-                    />
+                    <p><ManeuverLink maneuver={evasionManeuver} /></p>
                 )}
             </div>
 
@@ -47,11 +41,7 @@ const Stealth = () => {
             </div>
             <div>
                 {improvisedCoverManeuver && (
-                    <img
-                        src={improvisedCoverManeuver.maneuverImage}
-                        alt={improvisedCoverManeuver.name}
-                        style={{ width: '75%', height: 'auto' }}
-                    />
+                    <p><ManeuverLink maneuver={improvisedCoverManeuver} /></p>
                 )}
             </div>
 
@@ -62,11 +52,7 @@ const Stealth = () => {
             </div>
             <div>
                 {sneakAttackManeuver && (
-                    <img
-                        src={sneakAttackManeuver.maneuverImage}
-                        alt={sneakAttackManeuver.name}
-                        style={{ width: '75%', height: 'auto' }}
-                    />
+                    <p><ManeuverLink maneuver={sneakAttackManeuver} /></p>
                 )}
             </div>
 
@@ -77,11 +63,7 @@ const Stealth = () => {
             </div>
             <div>
                 {steadyShotManeuver && (
-                    <img
-                        src={steadyShotManeuver.maneuverImage}
-                        alt={steadyShotManeuver.name}
-                        style={{ width: '75%', height: 'auto' }}
-                    />
+                    <p><ManeuverLink maneuver={steadyShotManeuver} /></p>
                 )}
             </div>
         </>

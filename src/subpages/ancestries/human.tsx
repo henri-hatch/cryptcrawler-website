@@ -1,4 +1,5 @@
 import maneuverData from '../../data/maneuver_data';
+import { ManeuverLink } from '../../components/maneuver_modal';
 
 const Human = () => {
     const humanDetermination = maneuverData.find(m => m.id === "human-determination");
@@ -23,11 +24,7 @@ const Human = () => {
 
             <div>
                 {humanDetermination && (
-                    <img
-                        src={humanDetermination.maneuverImage}
-                        alt={humanDetermination.name}
-                        style={{ width: '75%', height: 'auto' }}
-                    />
+                    <p><ManeuverLink maneuver={humanDetermination} /></p>
                 )}
             </div>
 

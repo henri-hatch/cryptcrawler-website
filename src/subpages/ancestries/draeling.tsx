@@ -1,7 +1,9 @@
 import maneuverData from '../../data/maneuver_data';
+import { ManeuverLink } from '../../components/maneuver_modal';
 
 const Draeling = () => {
-    const command = maneuverData.find(maneuver => maneuver.id === 'command');
+    const command = maneuverData.find(m => m.id === "command");
+
     return (
         <>
             <h2>Draeling</h2>
@@ -20,13 +22,9 @@ const Draeling = () => {
             </div>
 
             <div>
-            {command && (
-                <img
-                    src={command.maneuverImage} 
-                    alt={command.name} 
-                    style={{ width: '75%', height: 'auto' }}
-                />
-            )}
+                {command && (
+                    <p><ManeuverLink maneuver={command} /></p>
+                )}
             </div>
 
             <div>

@@ -1,4 +1,5 @@
 import maneuverData from '../../data/maneuver_data';
+import { ManeuverLink } from '../../components/maneuver_modal';
 
 const Dwarf = () => {
     const stampedeOfSteel = maneuverData.find(m => m.id === "stampede-of-steel");
@@ -26,11 +27,7 @@ const Dwarf = () => {
 
             <div>
             {stampedeOfSteel && (
-                <img
-                    src={stampedeOfSteel.maneuverImage}
-                    alt={stampedeOfSteel.name}
-                    style={{ width: '75%', height: 'auto' }}
-                />
+                <p><ManeuverLink maneuver={stampedeOfSteel}/></p>
             )}
             </div>
 
