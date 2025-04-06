@@ -242,7 +242,7 @@
 /* Specific card containers for character creator */
 .ancestry-cards-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 180px); /* Fixed width columns */
+  grid-template-columns: repeat(auto-fit, 200px); /* Fixed width columns */
   grid-auto-rows: max-content; /* This is crucial - allows rows to adjust height based on content */
   justify-content: space-between; /* Distribute space between cards */
   gap: var(--card-gap);
@@ -305,7 +305,7 @@
 
 .skill-cards-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 180px); /* Fixed width columns */
+  grid-template-columns: repeat(auto-fit, 200px); /* Fixed width columns */
   grid-auto-rows: max-content; /* Added to match ancestry container behavior */
   justify-content: space-between; /* Distribute space between cards */
   gap: var(--card-gap);

@@ -4,7 +4,7 @@
 /* Card container layout - improved spacing */
 .cards-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 180px); /* Fixed width columns */
+  grid-template-columns: repeat(auto-fit, 200px); /* Fixed width columns */
   justify-content: space-between; /* Distribute space between cards */
   gap: var(--card-gap);
   align-items: start;
@@ -16,8 +16,8 @@
 .content-card {
   display: flex;
   flex-direction: column;
-  width: 180px;
-  height: 300px;
+  width: 200px;
+  height: 320px;
   border: 1px solid var(--border-color);
   border-radius: var(--card-radius);
   overflow: hidden;
