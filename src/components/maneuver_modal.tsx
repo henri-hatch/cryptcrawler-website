@@ -66,8 +66,15 @@ export const ManeuverModalProvider: React.FC<{ children: ReactNode }> = ({ child
                 [blob.type]: blob
               })
             ]);
+            
+            // Show copy success notification
             setCopySuccess(true);
-            setTimeout(() => setCopySuccess(false), 2000); // Reset after 2 seconds
+            console.log("Copy success set to true"); // Debug logging
+            setTimeout(() => {
+              setCopySuccess(false);
+              console.log("Copy success set back to false"); // Debug logging
+            }, 2000);
+            
           } catch (err) {
             console.error('Failed to copy image: ', err);
           }
@@ -100,7 +107,7 @@ export const ManeuverModalProvider: React.FC<{ children: ReactNode }> = ({ child
                   title="Click to copy to clipboard"
                   onClick={() => copyManeuverToClipboard(selectedManeuver.maneuverImage)}
                 />
-                {copySuccess && <p className="copy-success">Copied to clipboard!</p>}
+                {copySuccess && <div className="copy-success">Copied to clipboard!</div>}
               </div>
             </div>
           </div>

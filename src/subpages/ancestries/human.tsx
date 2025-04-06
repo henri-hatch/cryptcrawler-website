@@ -34,11 +34,7 @@ const Human = () => {
             </div>
             <div>
                 {senseUndead && (
-                    <img
-                        src={senseUndead.maneuverImage}
-                        alt={senseUndead.name}
-                        style={{ width: '75%', height: 'auto' }}
-                    />
+                    <p><ManeuverLink maneuver={senseUndead} /></p>
                 )}
             </div>
 

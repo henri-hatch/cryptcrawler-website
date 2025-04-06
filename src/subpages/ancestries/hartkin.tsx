@@ -1,4 +1,5 @@
 import maneuverData from '../../data/maneuver_data';
+import { ManeuverLink } from '../../components/maneuver_modal';
 
 const Hartkin = () => {
     const favorforaNeighbor = maneuverData.find(m => m.id === "favor-for-a-neighbor");
@@ -21,11 +22,7 @@ const Hartkin = () => {
 
             <div>
                 {favorforaNeighbor && (
-                    <img
-                        src={favorforaNeighbor.maneuverImage}
-                        alt={favorforaNeighbor.name}
-                        style={{ width: '75%', height: 'auto' }}
-                    />
+                    <ManeuverLink maneuver={favorforaNeighbor} />
                 )}
             </div>
 

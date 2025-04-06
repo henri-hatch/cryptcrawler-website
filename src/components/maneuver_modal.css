@@ -1,3 +1,5 @@
+@import '../styles/variables.css';
+
 .maneuver-modal-backdrop {
   position: fixed;
   top: 0;
@@ -8,17 +10,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: var(--z-modal);
 }
 
 .maneuver-modal-content {
-  background-color: #fff;
-  border-radius: 4px;
+  background-color: var(--content-bg);
+  border-radius: var(--card-radius);
   max-width: 80%;
   width: 600px;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow);
 }
 
 .maneuver-modal-header {
@@ -26,12 +28,13 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .maneuver-modal-header h2 {
   margin: 0;
   font-size: 1.5rem;
+  color: var(--dark-text);
 }
 
 .modal-close-button {
@@ -40,23 +43,37 @@
   font-size: 1.5rem;
   cursor: pointer;
   padding: 0;
-  color: #666;
+  color: var(--dark-gray);
 }
 
 .maneuver-modal-body {
   padding: 1rem;
+  position: relative;
+}
+
+.maneuver-modal-image {
+  position: relative;
 }
 
 .copy-success {
   position: absolute;
-  bottom: 10px;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
-  background-color: #4caf50;
+  transform: translate(-50%, -50%);
+  background-color: var(--ancestry-accent);
   color: white;
-  padding: 8px 16px;
-  border-radius: 4px;
+  padding: 8px 12px;
+  border-radius: var(--card-radius);
+  width: 140px;
+  min-height: 20px;
+  line-height: 20px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: var(--shadow);
+  z-index: 10;
   animation: fadeOut 2s forwards;
+  pointer-events: none;
 }
 
 @keyframes fadeOut {
@@ -66,7 +83,7 @@
 }
 
 .maneuver-link {
-  color: #720a02;
+  color: var(--primary);
   font-style: italic;
   cursor: pointer;
   text-decoration: underline;
