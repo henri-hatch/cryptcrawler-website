@@ -71,6 +71,20 @@ const maneuverData: ManeuverData[] = [
     category: ["maneuver"]
   },
   {
+    id: "deep-pockets",
+    name: "Deep Pockets",
+    description: "Your pockets can hold more than they should.",
+    maneuverImage: "/manuever-images/Deep Pockets.png",
+    category: ["maneuver"]
+  },
+  {
+    id: "expeditious-retreat",
+    name: "Expeditious Retreat",
+    description: "When things get bad, you know when to run.",
+    maneuverImage: "/manuever-images/Expeditious Retreat.png",
+    category: ["maneuver"]
+  },
+  {
     id: "evasion",
     name: "Evasion",
     description: "Your reflexes allow you to dodge out of the way of certain area effects.",
@@ -96,6 +110,13 @@ const maneuverData: ManeuverData[] = [
     name: "Human Determination",
     description: "Call upon your innate human resilience to push beyond your normal limits.",
     maneuverImage: "/manuever-images/Human Determination.png",
+    category: ["maneuver"]
+  },
+  {
+    id: "i-know-a-guy",
+    name: "I Know A Guy!",
+    description: "You create a NPC out of thin air who you apparently met before.",
+    maneuverImage: "/manuever-images/I Know A Guy!.png",
     category: ["maneuver"]
   },
   {
@@ -127,6 +148,13 @@ const maneuverData: ManeuverData[] = [
     category: ["maneuver"]
   },
   {
+    id: "midas-touch",
+    name: "Midas Touch",
+    description: "Fortune favors those who take it.",
+    maneuverImage: "/manuever-images/Midas Touch.png",
+    category: ["maneuver"]
+  },
+  {
     id: "parry",
     name: "Parry",
     description: "Use your weapon to deflect an incoming attack, reducing the damage you take.",
@@ -148,6 +176,13 @@ const maneuverData: ManeuverData[] = [
     category: ["maneuver"]
   },
   {
+    id: "sideswipe",
+    name: "Sideswipe",
+    description: "Some call it dishonorable, you call it winning.",
+    maneuverImage: "/manuever-images/Sideswipe.png",
+    category: ["maneuver"]
+  },
+  {
     id: "shadow-step",
     name: "Shadow Step",
     description: "Harness the shadows to teleport to a nearby location, vanishing in a cloud of dark smoke.",
@@ -159,6 +194,13 @@ const maneuverData: ManeuverData[] = [
     name: "Sharpened Claws",
     description: "Sharpen your natural weapons for a devastating strike against your foes.",
     maneuverImage: "/manuever-images/Sharpened Claws.png",
+    category: ["maneuver"]
+  },
+  {
+    id: "spider-climb",
+    name: "Spider Climb",
+    description: "With your intense training, you are able to climb sheer surfaces with ease.",
+    maneuverImage: "/manuever-images/Spider Climb.png",
     category: ["maneuver"]
   },
   {
