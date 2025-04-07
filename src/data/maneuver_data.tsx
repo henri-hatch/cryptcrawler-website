@@ -99,6 +99,13 @@ const maneuverData: ManeuverData[] = [
     category: ["maneuver"]
   },
   {
+    id: "goad",
+    name: "Goad",
+    description: "Projecting your presence out, you force your target's attention on you.",
+    maneuverImage: "/manuever-images/Goad.png",
+    category: ["maneuver"]
+  },
+  {
     id: "hesitation-is-weakness",
     name: "Hesitation Is Weakness",
     description: "Strike when your opponent least expects it, using their moment of indecision against them.",
@@ -183,6 +190,13 @@ const maneuverData: ManeuverData[] = [
     category: ["maneuver"]
   },
   {
+    id: "silent-takedown",
+    name: "Silent Takedown",
+    description: "Leaping from the shadows, you attack a target, silently eliminating them with a single strike.",
+    maneuverImage: "/manuever-images/Silent Takedown.png",
+    category: ["maneuver"]
+  },
+  {
     id: "shadow-step",
     name: "Shadow Step",
     description: "Harness the shadows to teleport to a nearby location, vanishing in a cloud of dark smoke.",
@@ -237,7 +251,14 @@ const maneuverData: ManeuverData[] = [
     description: "Create a distraction that disrupts enemy organization and lures them into a vulnerable position.",
     maneuverImage: "/manuever-images/Tactical Invitation.png",
     category: ["maneuver"]
-  }
+  },
+  {
+    id: "trip-attack",
+    name: "Trip Attack",
+    description: "Your natural sense of balance allows you to easily trip the less gifted.",
+    maneuverImage: "/manuever-images/Trip Attack.png",
+    category: ["maneuver"]
+  },
 ];
 
 export default maneuverData;
