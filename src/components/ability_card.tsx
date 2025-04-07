@@ -6,12 +6,12 @@ interface AbilityCardProps {
   tags: string;
   target: string;
   trigger?: string;
-  savingThrowActive?: string; // New prop
-  savingThrowDC?: string; // Changed from savingThrowPassive
+  savingThrowActive?: string;
+  savingThrowDC?: string;
   damage: string;
   hitEffect: string;
-  success?: string; // New prop for successful saving throw
-  fail?: string; // New prop for failed saving throw
+  success?: string;
+  fail?: string;
   flavor?: string;
   economy?: string;
   actionCost?: string;
@@ -25,11 +25,11 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
   target,
   trigger,
   savingThrowActive,
-  savingThrowDC, // Changed from savingThrowPassive
+  savingThrowDC,
   damage,
   hitEffect,
-  success, // Add new prop
-  fail, // Add new prop
+  success,
+  fail,
   flavor,
   economy,
   actionCost,
