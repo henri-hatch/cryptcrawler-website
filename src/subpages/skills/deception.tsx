@@ -1,5 +1,4 @@
-import maneuverData from '../../data/maneuver_data';
-import { ManeuverLink } from '../../components/maneuver_modal';
+import SkillTemplate from '../../components/skill_template';
 
 const Deception = () => {
     const cuttingWordsManeuver = maneuverData.find(m => m.id === "cutting-words");

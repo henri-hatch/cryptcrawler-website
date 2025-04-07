@@ -1,3 +1,5 @@
+import SkillTemplate from '../../components/skill_template';
+
 const Intimidation = () => {
     return (
         <>

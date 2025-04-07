@@ -1,73 +1,23 @@
-import maneuverData from '../../data/maneuver_data';
-import { ManeuverLink } from '../../components/maneuver_modal';
+import SkillTemplate from '../../components/skill_template';
+import { createManeuverSkillSlot } from '../../utils/skill_utils';
 
 const Stealth = () => {
-    const cunningDodgeManeuver = maneuverData.find(m => m.id === "cunning-dodge");
-    const evasionManeuver = maneuverData.find(m => m.id === "evasion");
-    const improvisedCoverManeuver = maneuverData.find(m => m.id === "improvised-cover");
-    const sneakAttackManeuver = maneuverData.find(m => m.id === "sneak-attack");
-    const steadyShotManeuver = maneuverData.find(m => m.id === "steady-shot");
-
+    // Create row1 with the 5 existing maneuvers using our utility function
+    const row1 = [
+        createManeuverSkillSlot("cunning-dodge"),
+        createManeuverSkillSlot("evasion"),
+        createManeuverSkillSlot("improvised-cover"),
+        createManeuverSkillSlot("sneak-attack"),
+        createManeuverSkillSlot("steady-shot")
+    ];
+    
     return (
-        <>
-            <h2>Stealth</h2>
-            
-            <br />
-
-            <div>
-            <h3>Cunning Dodge</h3>
-            </div>
-            <div>
-                {cunningDodgeManeuver && (
-                    <p><ManeuverLink maneuver={cunningDodgeManeuver} /></p>
-                )}
-            </div>
-
-            <hr style={{ opacity: 0.2 }} />
-
-            <div>
-            <h3>Evasion</h3>
-            </div>
-            <div>
-                {evasionManeuver && (
-                    <p><ManeuverLink maneuver={evasionManeuver} /></p>
-                )}
-            </div>
-
-            <hr style={{ opacity: 0.2 }} />
-
-            <div>
-            <h3>Improvised Cover</h3>
-            </div>
-            <div>
-                {improvisedCoverManeuver && (
-                    <p><ManeuverLink maneuver={improvisedCoverManeuver} /></p>
-                )}
-            </div>
-
-            <hr style={{ opacity: 0.2 }} />
-
-            <div>
-            <h3>Sneak Attack</h3>
-            </div>
-            <div>
-                {sneakAttackManeuver && (
-                    <p><ManeuverLink maneuver={sneakAttackManeuver} /></p>
-                )}
-            </div>
-
-            <hr style={{ opacity: 0.2 }} />
-
-            <div>
-            <h3>Steady Shot</h3>
-            </div>
-            <div>
-                {steadyShotManeuver && (
-                    <p><ManeuverLink maneuver={steadyShotManeuver} /></p>
-                )}
-            </div>
-        </>
-    )
+        <SkillTemplate 
+            skillName="Stealth" 
+            row1={row1}
+            // row2 and row3 will use the default "aa" placeholders
+        />
+    );
 };
 
 export default Stealth;
