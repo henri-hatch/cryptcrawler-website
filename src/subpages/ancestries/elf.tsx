@@ -1,4 +1,20 @@
+import maneuverData from '../../data/maneuver_data';
+import { ManeuverLink } from '../../components/maneuver_modal';
+
 const Elf = () => {
+    const mistyStepManeuver = maneuverData.find(m => m.id === "misty-step");
+    const underdarkVenomManeuver = maneuverData.find(m => m.id === "underdark-venom");
+    const frenziedChargeManeuver = maneuverData.find(m => m.id === "frenzied-charge");
+    const detectMagicManeuver = maneuverData.find(m => m.id === "detect-magic");
+    const bladeDanceManeuver = maneuverData.find(m => m.id === "blade-dance");
+    const goadManeuver = maneuverData.find(m => m.id === "goad");
+    const snowblindManeuver = maneuverData.find(m => m.id === "snowblind");
+    const eurekaManeuver = maneuverData.find(m => m.id === "eureka!");
+    const anticipatedDefenseManeuver = maneuverData.find(m => m.id === "anticipated-defense");
+
+
+
+
     return (
         <>
             <h2>Elf</h2>
@@ -20,15 +36,15 @@ const Elf = () => {
             <h3><u>Unique Lineage</u></h3>
             <p>Elfs fall one of ten unique lineages, each with their own unique magical blessings. Choose one of the following linages and gain its benefits:</p>
             <ul>
-                <li><b>Blood elf</b>. You gain the <em>Frenzied Charge</em> manuever.</li>
-                <li><b>Dark elf</b>. You gain the <em>Blade Dance</em> manuever.</li>
-                <li><b>Drow</b>. You gain the <em>Poisonous Blade</em> manuever.</li>
-                <li><b>High elf</b>. You gain the <em>Detect Magic</em> manuever.</li>
-                <li><b>Moon elf</b>. You gain the <em>Misty Step</em> manuever.</li>
-                <li><b>Red elf</b>. You gain the <em>Boisterous Jeer</em> manuever.</li>
-                <li><b>Snow elf</b>. You gain the <em>Snowblind</em> manuever.</li>
-                <li><b>Sun elf</b>. You gain the <em>Eureka!</em> manuever.</li>
-                <li><b>Wood elf</b>. You gain the <em>Without A Trace</em> manuever.</li>
+                {frenziedChargeManeuver && (<li><b>Blood elf</b>. You gain the <ManeuverLink maneuver={frenziedChargeManeuver}/> maneuver.</li>)}
+                {bladeDanceManeuver && (<li><b>Dark elf</b>. You gain the <ManeuverLink maneuver={bladeDanceManeuver}/> maneuver.</li>)}
+                {underdarkVenomManeuver && (<li><b>Drow</b>. You gain the <ManeuverLink maneuver={underdarkVenomManeuver}/> maneuver.</li>)}
+                {detectMagicManeuver && (<li><b>Drow</b>. You gain the <ManeuverLink maneuver={detectMagicManeuver}/> maneuver.</li>)}
+                {mistyStepManeuver && (<li><b>Moon elf</b>. You gain the <ManeuverLink maneuver={mistyStepManeuver}/> maneuver.</li>)}
+                {goadManeuver && (<li><b>Red elf</b>. You gain the <ManeuverLink maneuver={goadManeuver}/> maneuver.</li>)}
+                {snowblindManeuver && (<li><b>Snow elf</b>. You gain the <ManeuverLink maneuver={snowblindManeuver}/> maneuver.</li>)}
+                {eurekaManeuver && (<li><b>Sun elf</b>. You gain the <ManeuverLink maneuver={eurekaManeuver}/> maneuver.</li>)}
+                {anticipatedDefenseManeuver && (<li><b>Wood elf</b>. You gain the <ManeuverLink maneuver={anticipatedDefenseManeuver}/> maneuver.</li>)}
             </ul>
             </div>
         </>

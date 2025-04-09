@@ -8,6 +8,20 @@ interface ManeuverData {
 
 const maneuverData: ManeuverData[] = [
   {
+    id: "anticipated-defense",
+    name: "Anticipated Defense",
+    description: "Prepared for anything, you can nimbly avoid an oncoming attack.",
+    maneuverImage: "/manuever-images/Anticipated Defense.png",
+    category: ["maneuver"]
+  },
+  {
+    id: "blade-dance",
+    name: "Blade Dance",
+    description: "With nimble dexterity, you can move and spin around your opponent as you fight.",
+    maneuverImage: "/manuever-images/Blade Dance.png",
+    category: ["maneuver"]
+  },
+  {
     id: "book-worm",
     name: "Book Worm",
     description: "Tap into your extensive knowledge to gain an advantage on your next skill check.",
@@ -78,6 +92,20 @@ const maneuverData: ManeuverData[] = [
     category: ["maneuver"]
   },
   {
+    id: "detect-magic",
+    name: "Detect Magic",
+    description: "Swirling with arcane magic, all magic is sparkles with light that only you can see.",
+    maneuverImage: "/manuever-images/Detect Magic.png",
+    category: ["maneuver"]
+  },  
+  {
+    id: "eureka!",
+    name: "Eureka!",
+    description: "Your analytical mind allows you to draw connections to things normally unrelated.",
+    maneuverImage: "/manuever-images/Eureka!.png",
+    category: ["maneuver"]
+  },
+  {
     id: "expeditious-retreat",
     name: "Expeditious Retreat",
     description: "When things get bad, you know when to run.",
@@ -96,6 +124,13 @@ const maneuverData: ManeuverData[] = [
     name: "Favor for a Neighbor",
     description: "Hartkin communities are incredibly close and trusting, happy to help those in need.",
     maneuverImage: "/manuever-images/Favor for a Neighbor.png",
+    category: ["maneuver"]
+  },
+  {
+    id: "frenzied-charge",
+    name: "Frenzied Charge",
+    description: "Barreling forward you swing your weapon in a series of crazed arcs, hitting anything in your path.",
+    maneuverImage: "/manuever-images/Frenzied Charge.png",
     category: ["maneuver"]
   },
   {
@@ -134,6 +169,13 @@ const maneuverData: ManeuverData[] = [
     category: ["maneuver"]
   },
   {
+    id: "infravision",
+    name: "Infravision",
+    description: "Your eyes allow you to see more kinds of light than most of mortalkind.",
+    maneuverImage: "/manuever-images/Infravision.png",
+    category: ["maneuver"]
+  },
+  {
     id: "inspiration",
     name: "Inspiration",
     description: "Your words or music inspire allies to greater heights of achievement.",
@@ -159,6 +201,13 @@ const maneuverData: ManeuverData[] = [
     name: "Midas Touch",
     description: "Fortune favors those who take it.",
     maneuverImage: "/manuever-images/Midas Touch.png",
+    category: ["maneuver"]
+  },
+  {
+    id: "misty-step",
+    name: "Misty Step",
+    description: "Stepping into the Astral Plane, you blink from one location to another.",
+    maneuverImage: "/manuever-images/Misty Step.png",
     category: ["maneuver"]
   },
   {
@@ -211,6 +260,13 @@ const maneuverData: ManeuverData[] = [
     category: ["maneuver"]
   },
   {
+    id: "snowblind",
+    name: "Snowblind",
+    description: "Due to the incredibly cold and dark climate of your enviornment, you can naturally see infared.",
+    maneuverImage: "/manuever-images/Snowblind.png",
+    category: ["maneuver"]
+  },
+  {
     id: "spider-climb",
     name: "Spider Climb",
     description: "With your intense training, you are able to climb sheer surfaces with ease.",
@@ -257,6 +313,13 @@ const maneuverData: ManeuverData[] = [
     name: "Trip Attack",
     description: "Your natural sense of balance allows you to easily trip the less gifted.",
     maneuverImage: "/manuever-images/Trip Attack.png",
+    category: ["maneuver"]
+  },
+  {
+    id: "underdark-venom",
+    name: "Underdark Venom",
+    description: "You coat your weapon with a powerful venom, the recipe of which is closely guarded.",
+    maneuverImage: "/manuever-images/Underdark Venom.png",
     category: ["maneuver"]
   },
 ];

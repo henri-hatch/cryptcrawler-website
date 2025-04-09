@@ -2,7 +2,7 @@ import maneuverData from '../../data/maneuver_data';
 import { ManeuverLink } from '../../components/maneuver_modal';
 
 const Draeling = () => {
-    const command = maneuverData.find(m => m.id === "command");
+    const commandManeuver = maneuverData.find(m => m.id === "command");
 
     return (
         <>
@@ -18,13 +18,7 @@ const Draeling = () => {
 
             <div>
             <h3><u>Black Birthright</u></h3>
-            <p>With your strong infernal ancestry, you can enforce your will on others. You gain the <em>Command</em> manuever.</p>
-            </div>
-
-            <div>
-                {command && (
-                    <p><ManeuverLink maneuver={command} /></p>
-                )}
+            {commandManeuver && (<p>With your strong infernal ancestry, you can enforce your will on others. You <em>permanently</em> gain the  <ManeuverLink maneuver={commandManeuver}/> maneuver.</p>)}
             </div>
 
             <div>

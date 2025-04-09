@@ -2,7 +2,7 @@ import maneuverData from '../../data/maneuver_data';
 import { ManeuverLink } from '../../components/maneuver_modal';
 
 const Shadow = () => {
-        const hesitationManeuver = maneuverData.find(m => m.id === "hesitation-is-weakness");
+    const hesitationManeuver = maneuverData.find(m => m.id === "hesitation-is-weakness");
     const shadowStepManeuver = maneuverData.find(m => m.id === "shadow-step");
     
     return (
