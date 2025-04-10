@@ -4,7 +4,7 @@ import SkillTemplate from '../../components/skill_template';
 const Intimidation = () => {
     const row1 = [
         createManeuverSkillSlot ("goad"),
-        createTextSkillSlot ("", "+1 presence score"),
+        createTextSkillSlot ("+1 presence score"),
 
     ]
     return (
