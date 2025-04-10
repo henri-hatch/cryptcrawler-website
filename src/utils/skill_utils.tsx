@@ -8,6 +8,13 @@ export interface SkillSlot {
   content: React.ReactNode;
 }
 
+// Interface for circle skill slots in row4 of the SkillTemplate
+export interface CircleSkillSlot {
+  image?: string;
+  link?: string;
+  alt?: string;
+}
+
 /**
  * Creates a skill slot with a maneuver link if the maneuver exists
  * @param title The title for the skill slot (will not be displayed for maneuvers)
@@ -32,9 +39,9 @@ export const createManeuverSkillSlot = (maneuverId: string): SkillSlot => {
  * @param content The text content for the skill slot
  * @returns A SkillSlot object
  */
-export const createTextSkillSlot = (title: string, content: string): SkillSlot => {
+export const createTextSkillSlot = (content: string): SkillSlot => {
   return {
-    title,
+    title: '',
     content
   };
 };
@@ -64,4 +71,36 @@ export const createPlaceholderRow = (count: number = 5): SkillSlot[] => {
     title: `Placeholder ${i+1}`,
     content: "aa"
   }));
+};
+
+/**
+ * Creates a circle skill slot with an image and link to a subpage
+ * @param imageUrl The URL of the image to display in the circle (usually from public/skills-images)
+ * @param linkUrl The URL route to the subpage
+ * @param altText Optional alt text for the image
+ * @returns A CircleSkillSlot object
+ */
+export const createCircleSkillSlot = (
+  imageUrl: string,
+  linkUrl: string,
+  altText?: string
+): CircleSkillSlot => {
+  return {
+    image: imageUrl,
+    link: linkUrl,
+    alt: altText
+  };
+};
+
+/**
+ * Creates a row of circle skill slots
+ * @param circleSlotsData Array of objects with image, link, and optional alt text
+ * @returns An array of CircleSkillSlot objects
+ */
+export const createCircleRow = (
+  circleSlotsData: { imageUrl: string; linkUrl: string; altText?: string }[]
+): CircleSkillSlot[] => {
+  return circleSlotsData.map(({ imageUrl, linkUrl, altText }) => 
+    createCircleSkillSlot(imageUrl, linkUrl, altText)
+  );
 };

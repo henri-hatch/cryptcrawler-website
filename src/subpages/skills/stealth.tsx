@@ -9,7 +9,7 @@ const Stealth = () => {
         createManeuverSkillSlot("silent-takedown"),
         createManeuverSkillSlot("sneak-attack"),
         createManeuverSkillSlot("steady-shot"),
-        createTextSkillSlot ("", "+10ft movement"),
+        createTextSkillSlot ("+10ft movement"),
     ];
     
     return (

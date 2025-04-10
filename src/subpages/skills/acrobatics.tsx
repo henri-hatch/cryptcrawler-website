@@ -7,7 +7,7 @@ const Acrobatics = () => {
         createManeuverSkillSlot ("expeditious-retreat"),
         createManeuverSkillSlot ("spider-climb"),
         createManeuverSkillSlot ("trip-attack"),
-        createTextSkillSlot ("", "+1d12 dodge rating"),
+        createTextSkillSlot ("+1d12 dodge rating"),
     ]
     const row3 = [
         createManeuverSkillSlot ("evasion")

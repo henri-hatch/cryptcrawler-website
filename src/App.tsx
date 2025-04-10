@@ -63,6 +63,9 @@ import Insight from './subpages/skills/insight.tsx'
 import History from './subpages/skills/history.tsx'
 import Acrobatics from './subpages/skills/acrobatics.tsx'
 
+// Masteries
+import LordGuyLol from './subpages/masteries/lord_guy_lol.tsx'
+
 // Tools
 import ManeuverCreator from './subpages/tools/maneuver_creator.tsx'
 import DiceRoller from './subpages/tools/dice_roller.tsx'
@@ -157,6 +160,9 @@ function App() {
                 <Route path="/skills/insight" element={<Insight />} />
                 <Route path="/skills/history" element={<History />} />
                 <Route path="/skills/acrobatics" element={<Acrobatics />} />
+
+                {/* Masteries */}
+                <Route path="/skills/persuasion/lord-guy-lol" element={<LordGuyLol />} />
 
                 {/* Tools */}
                 <Route path="/tools/maneuver-creator" element={<ManeuverCreator />} />
