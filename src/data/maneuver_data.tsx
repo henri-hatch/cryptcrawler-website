@@ -71,6 +71,13 @@ const maneuverData: ManeuverData[] = [
     category: ["maneuver"]
   },
   {
+    id: "confounding-strike",
+    name: "Confounding Strike",
+    description: "With rapid and chaotic movements you cause your opponent to swing and hit their ally.",
+    maneuverImage: "/manuever-images/Confounding Strike.png",
+    category: ["maneuver"]
+  },
+  {
     id: "cunning-dodge",
     name: "Cunning Dodge",
     description: "Use your quick reflexes to evade an incoming attack at the last moment.",
