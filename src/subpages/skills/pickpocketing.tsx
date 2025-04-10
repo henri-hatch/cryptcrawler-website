@@ -6,8 +6,8 @@ const Pickpocketing = () => {
         createManeuverSkillSlot ("deep-pockets"),
         createManeuverSkillSlot ("sideswipe"),
         createManeuverSkillSlot ("midas-touch"),
-        createTextSkillSlot ("", "+1d12 dodge rating"),
-        createTextSkillSlot ("", "+1 finesse score")
+        createTextSkillSlot ("+1d12 dodge rating"),
+        createTextSkillSlot ("+1 finesse score")
     ]
     return (
         <SkillTemplate 
