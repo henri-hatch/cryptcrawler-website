@@ -9,7 +9,9 @@ interface CardFormProps {
     target: string;
     trigger: string;
     savingThrowActive: string;
-    savingThrowDC: string; // Changed from savingThrowPassive
+    savingThrowDC: string;
+    abilityCheckActive: string;
+    abilityCheckAgainst: string;
     damage: string;
     hitEffect: string;
     success: string;
@@ -28,7 +30,9 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
   const [target, setTarget] = useState('');
   const [trigger, setTrigger] = useState('');
   const [savingThrowActive, setSavingThrowActive] = useState('');
-  const [savingThrowDC, setSavingThrowDC] = useState(''); // Changed from savingThrowPassive
+  const [savingThrowDC, setSavingThrowDC] = useState('');
+  const [abilityCheckActive, setAbilityCheckActive] = useState('');
+  const [abilityCheckAgainst, setAbilityCheckAgainst] = useState('');
   const [damage, setDamage] = useState('');
   const [hitEffect, setHitEffect] = useState('');
   const [success, setSuccess] = useState('');
@@ -48,6 +52,8 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
       trigger,
       savingThrowActive,
       savingThrowDC,
+      abilityCheckActive,
+      abilityCheckAgainst,
       damage, 
       hitEffect,
       success,
@@ -110,6 +116,8 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
           <option value="Reaction">Reaction</option>
           <option value="Free Action">Free Action</option>
           <option value="Passive">Passive</option>
+          <option value="Short Rest">Short Rest</option>
+          <option value="Long Rest">Long Rest</option>
         </select>
       </label>
 
@@ -162,6 +170,30 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
             onChange={(e) => setSavingThrowDC(e.target.value)}
             placeholder="17 or 'Spell Save'"
           />
+        </div>
+      </label>
+
+      {/* Add the new Ability Check fields after the Saving Throw fields */}
+      <label>
+        Ability Check:
+        <div className="ability-check-container">
+          <select
+            value={abilityCheckActive}
+            onChange={(e) => setAbilityCheckActive(e.target.value)}
+          >
+            {abilityScores.map(score => (
+              <option key={`active-${score}`} value={score}>{score}</option>
+            ))}
+          </select>
+          <span className="vs-text">vs</span>
+          <select
+            value={abilityCheckAgainst}
+            onChange={(e) => setAbilityCheckAgainst(e.target.value)}
+          >
+            {abilityScores.map(score => (
+              <option key={`against-${score}`} value={score}>{score}</option>
+            ))}
+          </select>
         </div>
       </label>
 

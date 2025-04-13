@@ -8,6 +8,8 @@ interface AbilityCardProps {
   trigger?: string;
   savingThrowActive?: string;
   savingThrowDC?: string;
+  abilityCheckActive?: string;
+  abilityCheckAgainst?: string;
   damage: string;
   hitEffect: string;
   success?: string;
@@ -26,6 +28,8 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
   trigger,
   savingThrowActive,
   savingThrowDC,
+  abilityCheckActive,
+  abilityCheckAgainst,
   damage,
   hitEffect,
   success,
@@ -160,7 +164,17 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
           </div>
         )}
         
-        {/* Success (only if provided) - indented under Saving Throw */}
+        {/* Ability Check (only if both active and against are provided) */}
+        {abilityCheckActive && abilityCheckAgainst && (
+          <div style={{ 
+            color: '#720a02', 
+            marginBottom: (success || fail) ? '8px' : (damage || hitEffect || special) ? '8px' : '0'
+          }}>
+            <strong>Ability Check:</strong> {abilityCheckActive} vs {abilityCheckAgainst}
+          </div>
+        )}
+        
+        {/* Success (only if provided) - indented under Saving Throw or Ability Check */}
         {success && (
           <div style={{ 
             marginBottom: fail ? '8px' : (damage || hitEffect || special) ? '8px' : '0',

@@ -62,3 +62,13 @@
 .saving-throw-container select {
   flex: 1;
 }
+
+.ability-check-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ability-check-container select {
+  flex: 1;
+}
