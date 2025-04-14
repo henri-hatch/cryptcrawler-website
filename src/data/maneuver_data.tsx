@@ -15,6 +15,20 @@ const maneuverData: ManeuverData[] = [
     category: ["maneuver"]
   },
   {
+    id: "bargainer",
+    name: "Bargainer",
+    description: "You know how to play the merchant's game.",
+    maneuverImage: "/manuever-images/Bargainer.png",
+    category: ["maneuver"]
+  },
+  {
+    id: "beacon-of-hope",
+    name: "Beacon of Hope",
+    description: "Errupting with radiant energy you damage your foes while healing your friends.",
+    maneuverImage: "/manuever-images/Beacon of Hope.png",
+    category: ["maneuver"]
+  },
+  {
     id: "blade-dance",
     name: "Blade Dance",
     description: "With nimble dexterity, you can move and spin around your opponent as you fight.",
@@ -85,6 +99,13 @@ const maneuverData: ManeuverData[] = [
     category: ["maneuver"]
   },
   {
+    id: "create-mechanical-companion",
+    name: "Create Mechanical Companion",
+    description: "With plenty of tinkering, you can create a metal friend to accompany you in your travels.",
+    maneuverImage: "/manuever-images/Create Mechanical Companion.png",
+    category: ["maneuver"]
+  },
+  {
     id: "cutting-words",
     name: "Cutting Words",
     description: "Distract and demoralize your opponent with a well-timed insult or jest.",
@@ -104,7 +125,14 @@ const maneuverData: ManeuverData[] = [
     description: "Swirling with arcane magic, all magic is sparkles with light that only you can see.",
     maneuverImage: "/manuever-images/Detect Magic.png",
     category: ["maneuver"]
-  },  
+  }, 
+  {
+    id: "discovered-weakness",
+    name: "Discovered Weakness",
+    description: "Analyzing your enemy, you discover a hidden weakness.",
+    maneuverImage: "/manuever-images/Discovered Weakness.png",
+    category: ["maneuver"]
+  }, 
   {
     id: "eureka!",
     name: "Eureka!",
@@ -141,10 +169,24 @@ const maneuverData: ManeuverData[] = [
     category: ["maneuver"]
   },
   {
+    id: "gadget-specialist",
+    name: "Gadget Specialist",
+    description: "As great as you are you can't be everywhere at once.",
+    maneuverImage: "/manuever-images/Gadget Specialist.png",
+    category: ["maneuver"]
+  },
+  {
     id: "goad",
     name: "Goad",
     description: "Projecting your presence out, you force your target's attention on you.",
     maneuverImage: "/manuever-images/Goad.png",
+    category: ["maneuver"]
+  },
+  {
+    id: "he-called-you-ugly-too",
+    name: "He Called You Ugly Too!",
+    description: "With enough antagonism, you can confuse your opponents into hitting each other.",
+    maneuverImage: "/manuever-images/He Called You Ugly Too!.png",
     category: ["maneuver"]
   },
   {
@@ -169,6 +211,27 @@ const maneuverData: ManeuverData[] = [
     category: ["maneuver"]
   },
   {
+    id: "improvised-bandage",
+    name: "Improvised Bandage",
+    description: "Although not your finest work, something is better than nothing right now.",
+    maneuverImage: "/manuever-images/Improvised Bandage.png",
+    category: ["maneuver"]
+  },
+  {
+    id: "improvised-flash-bomb",
+    name: "Improvised Flash Bomb",
+    description: "Combining together some materials you have on-hand, you create an improvised bomb.",
+    maneuverImage: "/manuever-images/Improvised Flash Bomb.png",
+    category: ["maneuver"]
+  },
+  {
+    id: "improvised-fire-bomb",
+    name: "Improvised Fire Bomb",
+    description: "Combining together some materials you have on-hand, you create an improvised bomb.",
+    maneuverImage: "/manuever-images/Improvised Fire Bomb.png",
+    category: ["maneuver"]
+  },
+  {
     id: "improvised-cover",
     name: "Improvised Cover",
     description: "Quickly create cover from nearby objects to protect yourself from attacks.",
@@ -187,6 +250,27 @@ const maneuverData: ManeuverData[] = [
     name: "Inspiration",
     description: "Your words or music inspire allies to greater heights of achievement.",
     maneuverImage: "/manuever-images/Inspiration.png",
+    category: ["maneuver"]
+  },
+  {
+    id: "item-fusion",
+    name: "Item Fusion",
+    description: "Through technical experimentation, you can fuse two items together.",
+    maneuverImage: "/manuever-images/Item Fusion.png",
+    category: ["maneuver"]
+  }, 
+  {
+    id: "know-your-enemy",
+    name: "Know Your Enemy",
+    description: "Taking in your environment, you can analyze your opponent's strengths and weaknesses.",
+    maneuverImage: "/manuever-images/Know Your Enemy.png",
+    category: ["maneuver"]
+  },
+  {
+    id: "loot-goblin",
+    name: "Loot Goblin",
+    description: "Plundering is always more fun with friends!",
+    maneuverImage: "/manuever-images/Loot Goblin.png",
     category: ["maneuver"]
   },
   {
@@ -218,6 +302,13 @@ const maneuverData: ManeuverData[] = [
     category: ["maneuver"]
   },
   {
+    id: "not-surprised",
+    name: "Not Surprised",
+    description: "Never caught flat-footed, nothing really surprises you now.",
+    maneuverImage: "/manuever-images/Not Surprised.png",
+    category: ["maneuver"]
+  },
+  {
     id: "parry",
     name: "Parry",
     description: "Use your weapon to deflect an incoming attack, reducing the damage you take.",
@@ -229,6 +320,13 @@ const maneuverData: ManeuverData[] = [
     name: "Plot Twist",
     description: "In the midst of a story, alter the narrative by introducing an unexpected turn of events.",
     maneuverImage: "/manuever-images/Plot Twist.png",
+    category: ["maneuver"]
+  },
+  {
+    id: "premeditation",
+    name: "Premeditation",
+    description: "You simulate your actions before hand, weighing their effectiveness before acting.",
+    maneuverImage: "/manuever-images/Premeditation.png",
     category: ["maneuver"]
   },
   {
@@ -292,6 +390,13 @@ const maneuverData: ManeuverData[] = [
     name: "Stampede of Steel",
     description: "Unleash a flurry of blows against multiple enemies, overwhelming them with speed and precision.",
     maneuverImage: "/manuever-images/Stampede of Steel.png",
+    category: ["maneuver"]
+  },
+  {
+    id: "summon animal companion",
+    name: "Summon Animal Companion",
+    description: "With your deep connect with animals, you are always followed by a loyal animal spirit that aids you in your adventuring.",
+    maneuverImage: "/manuever-images/Summon Animal Companion.png",
     category: ["maneuver"]
   },
   {

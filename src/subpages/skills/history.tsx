@@ -1,9 +1,11 @@
 import SkillTemplate from '../../components/skill_template';
-import { createManeuverSkillSlot } from '../../utils/skill_utils';
+import { createManeuverSkillSlot, createTextSkillSlot } from '../../utils/skill_utils';
 
 const History = () => {
     const row1 = [
-        createManeuverSkillSlot("book-worm")
+        createManeuverSkillSlot("book-worm"),
+        createManeuverSkillSlot("discovered-weakness"),
+        createTextSkillSlot("+1 language")
     ]
 
     return (

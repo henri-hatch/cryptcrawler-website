@@ -3,6 +3,7 @@ import { createManeuverSkillSlot } from '../../utils/skill_utils';
 
 const Insight = () => {
     const row1 = [
+        createManeuverSkillSlot("know-your-enemy"),
         createManeuverSkillSlot("lie-detector")
     ]
 
