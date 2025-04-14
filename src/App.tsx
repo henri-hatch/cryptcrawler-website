@@ -65,7 +65,7 @@ import History from './subpages/skills/history.tsx'
 import Acrobatics from './subpages/skills/acrobatics.tsx'
 
 // Skills Subpages
-import CraftingSpells from './subpages/skill_subpages/crafting_spells.tsx'
+import ArcanaSpells from './subpages/skill_subpages/arcana_spells.tsx'
 
 // Masteries
 import LordGuyLol from './subpages/masteries/lord_guy_lol.tsx'
@@ -167,7 +167,7 @@ function App() {
                 <Route path="/skills/acrobatics" element={<Acrobatics />} />
 
                 {/* Skills Subpages */}
-                <Route path="/skills/crafting/crafting-spells" element={<CraftingSpells />} />
+                <Route path="/skills/crafting/arcana-spells" element={<ArcanaSpells />} />
 
                 {/* Masteries */}
                 <Route path="/skills/persuasion/lord-guy-lol" element={<LordGuyLol />} />

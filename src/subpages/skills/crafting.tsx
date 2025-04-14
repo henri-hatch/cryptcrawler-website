@@ -7,7 +7,7 @@ const Crafting = () => {
         createManeuverSkillSlot("eureka!"),
         createManeuverSkillSlot("improvised-flash-bomb"),
         createManeuverSkillSlot("item-fusion"),
-        createLinkSkillSlot("Gain a Crafting Spell", "/skills/crafting/crafting-spells"),
+        createLinkSkillSlot("Tier I Arcana Spell", "/skills/crafting/arcana-spells"),
     ]
     const row2 = [
         createManeuverSkillSlot("gadget-specialist"),

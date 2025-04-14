@@ -281,6 +281,13 @@ const maneuverData: ManeuverData[] = [
     category: ["maneuver"]
   },
   {
+    id: "magic-missile",
+    name: "Magic Missile",
+    description: "Concentrating raw magical force into three darts, you launch them in rapid succession at your targets.",
+    maneuverImage: "/manuever-images/Magic Missile.png",
+    category: ["maneuver"]
+  },
+  {
     id: "metamagic",
     name: "Metamagic",
     description: "Use your weapon to deflect an incoming attack, reducing the damage you take.",
