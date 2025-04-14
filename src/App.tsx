@@ -43,6 +43,7 @@ import Mul from './subpages/ancestries/mul.tsx'
 import Orc from './subpages/ancestries/orc.tsx'
 import Tabaxi from './subpages/ancestries/tabaxi.tsx'
 import Warforged from './subpages/ancestries/warforged.tsx'
+import Gnome from './subpages/ancestries/gnome.tsx'
 
 // Skills
 import Persuasion from './subpages/skills/persuasion.tsx'
@@ -141,6 +142,7 @@ function App() {
                 <Route path="/ancestries/orc" element={<Orc />} />
                 <Route path="/ancestries/tabaxi" element={<Tabaxi />} />
                 <Route path="/ancestries/warforged" element={<Warforged />} />
+                <Route path="/ancestries/gnome" element={<Gnome />} />
 
                 {/* Skills */}
                 <Route path="/skills/persuasion" element={<Persuasion />} />

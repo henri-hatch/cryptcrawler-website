@@ -9,7 +9,7 @@ const AncestriesPage = () => {
   );
   
   const exoticAncestries = ancestryData.filter(ancestry => 
-    ["tabaxi", "harengon", "warforged", "kobold", "githyanki", "kenku"].includes(ancestry.id)
+    ["tabaxi", "harengon", "warforged", "gnome",  "kobold", "githyanki", "kenku"].includes(ancestry.id)
   );
   
   const monstrousAncestries = ancestryData.filter(ancestry => 

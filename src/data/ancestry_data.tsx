@@ -65,6 +65,14 @@ interface AncestryData {
       category: ["ancestry"]
     },
     {
+      id: "gnome",
+      name: "Gnome",
+      description: "Ostracized from the surface world, Gnomes are semi-aquatic creatures hiding in caves and coves under Keldon. For the vast majority of Gnomish history, they have been oppressed and enslaved by many surface-dwellers. Recently, many nations have made an active effort to include Gnomes in common society.",
+      imagePath: "/ancestry-images/gnome_logo.png",
+      pageRoute: "/ancestries/gnome",
+      category: ["ancestry"]
+    },
+    {
       id: "harengon",
       name: "Harengon",
       description: "The creation of an ancient order of alchemists, the Harengon were made as slaves. Their enslavement was broken by a massive slave revolt, which earned the Harengon their freedom. The majority of the Harengon population lives in the Wyrlands, making them only a myth to those of the eastern continents.",
