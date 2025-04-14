@@ -1,6 +1,3 @@
-import maneuverData from '../../data/maneuver_data';
-import { ManeuverLink } from '../../components/maneuver_modal';
-
 const Gnome = () => {
     return (
         <>

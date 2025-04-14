@@ -1,5 +1,5 @@
 import SkillTemplate from '../../components/skill_template';
-import { createCircleSkillSlot, createManeuverSkillSlot } from '../../utils/skill_utils';
+import { createManeuverSkillSlot } from '../../utils/skill_utils';
 
 
 const Perception = () => {

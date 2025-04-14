@@ -1,4 +1,4 @@
-import { createManeuverSkillSlot, createTextSkillSlot } from '../../utils/skill_utils';
+import { createManeuverSkillSlot } from '../../utils/skill_utils';
 import SkillTemplate from '../../components/skill_template';
 
 const Animal_Handling = () => {
