@@ -1,6 +1,7 @@
 import React from 'react';
 import maneuverData from '../data/maneuver_data.tsx';
 import { ManeuverLink } from '../components/maneuver_modal';
+import { Link } from 'react-router-dom';
 
 // Interface for skill slot used in the SkillTemplate
 export interface SkillSlot {
@@ -103,4 +104,26 @@ export const createCircleRow = (
   return circleSlotsData.map(({ imageUrl, linkUrl, altText }) => 
     createCircleSkillSlot(imageUrl, linkUrl, altText)
   );
+};
+
+/**
+ * Creates a skill slot with a navigation link to a subpage
+ * @param linkText The text to display for the link
+ * @param linkUrl The URL route to navigate to
+ * @param title Optional title for the skill slot
+ * @returns A SkillSlot object
+ */
+export const createLinkSkillSlot = (
+  linkText: string,
+  linkUrl: string,
+  title: string = ''
+): SkillSlot => {
+  return {
+    title,
+    content: (
+      <Link to={linkUrl} className="skill-link">
+        {linkText}
+      </Link>
+    )
+  };
 };

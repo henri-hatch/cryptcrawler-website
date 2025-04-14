@@ -2,7 +2,7 @@ import maneuverData from '../../data/maneuver_data';
 import { ManeuverLink } from '../../components/maneuver_modal';
 
 const Minstrel = () => {
-        const captivationManeuver = maneuverData.find(m => m.id === "captivation");
+    const captivationManeuver = maneuverData.find(m => m.id === "captivation");
     const plotTwistManeuver = maneuverData.find(m => m.id === "plot-twist");
     
     return (

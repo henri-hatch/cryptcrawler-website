@@ -4,7 +4,7 @@ import { createManeuverSkillSlot } from '../../utils/skill_utils';
 const Deception = () => {
     const row1 = [
         createManeuverSkillSlot("confounding-strike"),
-        createManeuverSkillSlot("cutting-words")
+        createManeuverSkillSlot("cutting-words"),
     ]
 
     return (

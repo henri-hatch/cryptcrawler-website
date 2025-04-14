@@ -1,4 +1,4 @@
-import { createManeuverSkillSlot, createTextSkillSlot } from '../../utils/skill_utils';
+import { createLinkSkillSlot, createManeuverSkillSlot } from '../../utils/skill_utils';
 import SkillTemplate from '../../components/skill_template';
 
 const Crafting = () => {
@@ -7,6 +7,7 @@ const Crafting = () => {
         createManeuverSkillSlot("eureka!"),
         createManeuverSkillSlot("improvised-flash-bomb"),
         createManeuverSkillSlot("item-fusion"),
+        createLinkSkillSlot("Gain a Crafting Spell", "/skills/crafting/crafting-spells"),
     ]
     const row2 = [
         createManeuverSkillSlot("gadget-specialist"),
