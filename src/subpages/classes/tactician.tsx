@@ -2,6 +2,7 @@ import maneuverData from '../../data/maneuver_data';
 import { ManeuverLink } from '../../components/maneuver_modal';
 
 const Tactician = () => {
+    const attackOfOpportunityManeuver = maneuverData.find(m => m.id === "attack-of-opportunity");
     const parryManeuver = maneuverData.find(m => m.id === "parry");
     const tacticalInvitationManeuver = maneuverData.find(m => m.id === "tactical-invitation");
 
@@ -38,23 +39,24 @@ const Tactician = () => {
             </div>
             
             <div>
-            <h3><u>1st Level: Parry</u></h3>
-            <p>You know how to protect yourself and nearby allies. You gain the <em>Parry</em> maneuver.</p>
-            </div>
-            <div>
-            {parryManeuver && (
-                <p><ManeuverLink maneuver={parryManeuver} /></p>
-            )}
+                <h3>1st Level: Attack of Opportunity</h3>
+                {attackOfOpportunityManeuver && (
+                    <p>You gently stop your decent, allowing you to reach the ground unharmed. You gain the <ManeuverLink maneuver={attackOfOpportunityManeuver} /> maneuver.</p>
+                )}
             </div>
 
             <div>
-            <h3><u>1st Level: Tactical Invitation</u></h3>
-            <p>Distraction is the greatest poison against organization. You gain the <em>Tactical Invitation</em> maneuver.</p>
+                <h3>1st Level: Parry</h3>
+                {parryManeuver && (
+                    <p>You know how to protect yourself and nearby allies. You gain the <ManeuverLink maneuver={parryManeuver} /> maneuver.</p>
+                )}
             </div>
+
             <div>
-            {tacticalInvitationManeuver && (
-                <p><ManeuverLink maneuver={tacticalInvitationManeuver} /></p>
-            )}
+                <h3>2nd Level: Tactical Invitation</h3>
+                {tacticalInvitationManeuver && (
+                    <p>Distraction is the greatest poison against organization. You gain the <ManeuverLink maneuver={tacticalInvitationManeuver} /> maneuver.</p>
+                )}
             </div>
         </>
     )

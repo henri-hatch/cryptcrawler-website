@@ -15,6 +15,13 @@ const maneuverData: ManeuverData[] = [
     category: ["maneuver"]
   },
   {
+    id: "attack-of-opportunity",
+    name: "Attack of Opportunity",
+    description: "With a quick swing, you can attack a foe that is moving away from you.",
+    maneuverImage: "/manuever-images/Attack of Opportunity.png",
+    category: ["maneuver"]
+  },
+  {
     id: "bargainer",
     name: "Bargainer",
     description: "You know how to play the merchant's game.",
@@ -78,6 +85,13 @@ const maneuverData: ManeuverData[] = [
     category: ["maneuver"]
   },
   {
+    id: "chainfire",
+    name: "Chainfire",
+    description: "You ignite a foe with righteous flame, which explodes out consuming those around them.",
+    maneuverImage: "/manuever-images/Chainfire.png",
+    category: ["maneuver"]
+  },
+  {
     id: "command",
     name: "Command",
     description: "Issue a one-word command that a creature must obey if it fails its saving throw.",
@@ -89,6 +103,13 @@ const maneuverData: ManeuverData[] = [
     name: "Confounding Strike",
     description: "With rapid and chaotic movements you cause your opponent to swing and hit their ally.",
     maneuverImage: "/manuever-images/Confounding Strike.png",
+    category: ["maneuver"]
+  },
+  {
+    id: "chromantic-orb",
+    name: "Chromantic Orb",
+    description: "An orb of arcane energy that shifts colors as it flies.",
+    maneuverImage: "/manuever-images/Chromantic Orb.png",
     category: ["maneuver"]
   },
   {
@@ -162,6 +183,20 @@ const maneuverData: ManeuverData[] = [
     category: ["maneuver"]
   },
   {
+    id: "feather-fall",
+    name: "Feather Fall",
+    description: "You gently stop your decent, allowing you to reach the ground unharmed.",
+    maneuverImage: "/manuever-images/Feather Fall.png",
+    category: ["maneuver"]
+  },
+  {
+    id: "firebolt",
+    name: "Firebolt",
+    description: "Coalescing pure flame, you concentrate it into a dart of power to fire at your foe.",
+    maneuverImage: "/manuever-images/Firebolt.png",
+    category: ["maneuver"]
+  },
+  {
     id: "frenzied-charge",
     name: "Frenzied Charge",
     description: "Barreling forward you swing your weapon in a series of crazed arcs, hitting anything in your path.",
@@ -203,6 +238,13 @@ const maneuverData: ManeuverData[] = [
     maneuverImage: "/manuever-images/Human Determination.png",
     category: ["maneuver"]
   },
+  {
+    id: "identify",
+    name: "Identify",
+    description: "Delving into the history of a magical item, you learn its properties.",
+    maneuverImage: "/manuever-images/Identify.png",
+    category: ["maneuver"]
+  }, 
   {
     id: "i-know-a-guy",
     name: "I Know A Guy!",
@@ -264,6 +306,20 @@ const maneuverData: ManeuverData[] = [
     name: "Know Your Enemy",
     description: "Taking in your environment, you can analyze your opponent's strengths and weaknesses.",
     maneuverImage: "/manuever-images/Know Your Enemy.png",
+    category: ["maneuver"]
+  },
+  {
+    id: "lamias-duplicant",
+    name: "Lamia's Duplicant",
+    description: "Creating a icy-duplicate, you wreath it with your own appearance.",
+    maneuverImage: "/manuever-images/Lamia's Duplicant.png",
+    category: ["maneuver"]
+  },
+  {
+    id: "leopolds-magic-card",
+    name: "Leopold's Magic Card",
+    description: "Imbuing a playing card with chaotic energy, you can throw it at a foe.",
+    maneuverImage: "/manuever-images/Leopold's Magic Card.png",
     category: ["maneuver"]
   },
   {
