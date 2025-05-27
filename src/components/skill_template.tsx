@@ -6,9 +6,8 @@ interface SkillSlot {
   content: ReactNode;
 }
 
-interface CircleSkillSlot {
-  image?: string;
-  link?: string;
+interface MasterySkillSlot {
+  maneuver?: React.ReactNode;
   alt?: string;
 }
 
@@ -17,7 +16,7 @@ interface SkillTemplateProps {
   row1?: SkillSlot[];
   row2?: SkillSlot[];
   row3?: SkillSlot[];
-  row4?: CircleSkillSlot[];
+  row4?: MasterySkillSlot[];
 }
 
 const SkillTemplate: React.FC<SkillTemplateProps> = ({ 
@@ -25,7 +24,7 @@ const SkillTemplate: React.FC<SkillTemplateProps> = ({
   row1 = Array(5).fill({ title: '', content: 'aa' }),
   row2 = Array(5).fill({ title: '', content: 'aa' }),
   row3 = Array(5).fill({ title: '', content: 'aa' }),
-  row4 = Array(3).fill({ image: '', link: '', alt: '' })
+  row4 = Array(3).fill({})
 }) => {
   // Ensure each row has exactly 5 items
   const ensureRowLength = (row: SkillSlot[]) => {
@@ -35,10 +34,10 @@ const SkillTemplate: React.FC<SkillTemplateProps> = ({
     return row.slice(0, 5);
   };
 
-  // Ensure row4 has exactly 3 items
-  const ensureCircleRowLength = (row: CircleSkillSlot[]) => {
+  // Ensure bottom row has exactly 3 slots
+  const ensureCircleRowLength = (row: MasterySkillSlot[]) => {
     if (row.length < 3) {
-      return [...row, ...Array(3 - row.length).fill({ image: '', link: '', alt: '' })];
+      return [...row, ...Array(3 - row.length).fill({})];
     }
     return row.slice(0, 3);
   };
@@ -91,40 +90,19 @@ const SkillTemplate: React.FC<SkillTemplateProps> = ({
         </div>
       </div>
 
-      {/* Bottom Circles (Row 4) */}
+      {/* Bottom Mastery Row: only show image when maneuver exists, else placeholder circle */}
       <div className="skill-circles">
-        {normalizedRow4.map((circle, index) => (
-          circle.link ? (
-            <a 
-              key={`circle-${index}`} 
-              href={circle.link} 
-              className="skill-circle-link"
-              aria-label={circle.alt || `Circle ${index + 1}`}
-            >
-              <div className="skill-circle">
-                {circle.image && (
-                  <img 
-                    src={circle.image} 
-                    alt={circle.alt || `Circle ${index + 1}`} 
-                    className="skill-circle-image" 
-                  />
-                )}
-              </div>
-            </a>
-          ) : (
-            <div 
-              key={`circle-${index}`} 
-              className="skill-circle" 
-              aria-label={circle.alt || `Circle ${index + 1}`}
-            >
-              {circle.image && (
-                <img 
-                  src={circle.image} 
-                  alt={circle.alt || `Circle ${index + 1}`} 
-                  className="skill-circle-image" 
-                />
-              )}
+        {normalizedRow4.map((slot, index) => (
+          slot.maneuver ? (
+            <div key={`circle-${index}`} className="skill-circle-item">
+              {slot.maneuver}
             </div>
+          ) : (
+            <div
+              key={`circle-${index}`}
+              className="skill-circle placeholder"
+              aria-label={slot.alt || `Circle ${index + 1}`}
+            />
           )
         ))}
       </div>

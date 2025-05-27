@@ -1,4 +1,4 @@
-import { createCircleSkillSlot, createLinkSkillSlot } from '../../utils/skill_utils';
+import { createMasterySkillSlot, createLinkSkillSlot } from '../../utils/skill_utils';
 import SkillTemplate from '../../components/skill_template';
 
 const Arcana = () => {
@@ -28,7 +28,7 @@ const Arcana = () => {
     
     ]
     const row4 = [
-            createCircleSkillSlot("/mastery-images/ArchmageMastery.png", "/skills/arcana/archmage-mastery", "Archmage"),
+            createMasterySkillSlot("/mastery-images/ArchmageMastery.png", "/skills/arcana/archmage-mastery", "Archmage"),
     ]
     return (
         <SkillTemplate 

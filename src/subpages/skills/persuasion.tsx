@@ -1,5 +1,5 @@
 import SkillTemplate from '../../components/skill_template';
-import { createCircleSkillSlot, createManeuverSkillSlot } from '../../utils/skill_utils';
+import { createMasterySkillSlot, createManeuverSkillSlot } from '../../utils/skill_utils';
 
 const Persuasion = () => {
     const row1 = [
@@ -12,7 +12,7 @@ const Persuasion = () => {
     ]
 
     const row4 = [
-        createCircleSkillSlot("/mastery-images/ChargedAffairesMastery.png", "/skills/persuasion/lord-guy-lol", "Lord Guy-Lol"),
+        createMasterySkillSlot("charge-daffaires", "/mastery-images/mastery-logos/ChargedAffairesMastery.png", "Charge d'Affaires"),
     ]
     return (
         <SkillTemplate 

@@ -5,6 +5,7 @@ import classData from '../data/class_data';
 import skillData from '../data/skill_data';
 import itemData from '../data/item_data';
 import maneuverData from '../data/maneuver_data';
+import masteryData from '../data/mastery_data';
 import { useManeuverModal } from '../components/maneuver_modal';
 import '../components/content_card.css';
 import './search_database.css';
@@ -18,6 +19,7 @@ interface SearchableItem {
   imagePath?: string;
   pageRoute?: string;
   maneuverImage?: string;
+  masteryImage?: string;
   gpCost?: number;
   weight?: number;
 }
@@ -39,7 +41,8 @@ const SearchDatabasePage = () => {
       ...classData.map(item => ({ ...item, dataSource: 'class' })),
       ...skillData.map(item => ({ ...item, dataSource: 'skill' })),
       ...itemData.map(item => ({ ...item, dataSource: 'item' })),
-      ...maneuverData.map(item => ({ ...item, dataSource: 'maneuver' }))
+      ...maneuverData.map(item => ({ ...item, dataSource: 'maneuver' })),
+      ...masteryData.map(item => ({ ...item, dataSource: 'mastery' })),
     ] as SearchableItem[];
   }, []);
   
@@ -105,9 +108,9 @@ const SearchDatabasePage = () => {
 
   // Handle card click for items and maneuvers
   const handleCardClick = (item: any) => {
-    if (item.dataSource === 'maneuver') {
-      // Use the global modal for maneuvers
-      openModal(item);
+    if (item.dataSource === 'maneuver' || item.dataSource === 'mastery') {
+      // Use the global modal for maneuvers and masteries
+      openModal(item.id);
     } else if (item.dataSource === 'item' && !item.pageRoute) {
       // Keep the original modal for items
       setSelectedItem(item);
@@ -118,7 +121,7 @@ const SearchDatabasePage = () => {
   return (
     <div className="search-database-container">
       <h2>Search CryptCrawler Database</h2>
-      <p>Explore ancestries, classes, skills, items, and more in the CryptCrawler database.</p>
+      <p>Explore ancestries, classes, skills, items, masteries, and more in the CryptCrawler database.</p>
       
       <div className="search-controls">
         <div className="search-bar">
@@ -160,22 +163,24 @@ const SearchDatabasePage = () => {
           <div className="cards-container">
             {displayResults.map((item, index) => {
               // Get the appropriate image path
-              const imageSource = item.imagePath || item.maneuverImage || `/category-icons/${item.dataSource}.png`;
+              const imageSource = item.imagePath 
+                || (item.dataSource === 'mastery' ? item.masteryImage : item.maneuverImage) 
+                || `/category-icons/${item.dataSource}.png`;
 
-              return (
-                <ContentCard 
-                  key={`${item.dataSource}-${item.id}-${index}`}
-                  id={item.id}
-                  title={item.name}
-                  imagePath={imageSource}
-                  linkTo={item.pageRoute}
-                  description={item.description}
-                  isSelectable={(item.dataSource === 'item' && !item.pageRoute) || item.dataSource === 'maneuver'}
-                  onSelect={() => handleCardClick(item)}
-                  className={`search-card ${item.dataSource}-card ${item.dataSource === 'ancestry' ? 'race-card' : ''}`}
+               return (
+                 <ContentCard 
+                   key={`${item.dataSource}-${item.id}-${index}`}
+                   id={item.id}
+                   title={item.name}
+                   imagePath={imageSource}
+                   linkTo={item.pageRoute}
+                   description={item.description}
+                   isSelectable={(item.dataSource === 'item' && !item.pageRoute) || item.dataSource === 'maneuver' || item.dataSource === 'mastery'}
+                   onSelect={() => handleCardClick(item)}
+                   className={`search-card ${item.dataSource}-card ${item.dataSource === 'ancestry' ? 'race-card' : ''}`}
                 />
-              );
-            })}
+               );
+             })}
           </div>
         ) : (
           <div className="no-results">

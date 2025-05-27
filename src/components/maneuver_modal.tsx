@@ -1,5 +1,7 @@
 import React, { useState, createContext, useContext, ReactNode } from 'react';
 import './maneuver_modal.css';
+import maneuverData from '../data/maneuver_data';
+import masteryData from '../data/mastery_data';
 
 // Interface for the Maneuver object
 interface Maneuver {
@@ -12,7 +14,7 @@ interface Maneuver {
 
 // Context to manage the modal state globally
 interface ManeuverModalContextType {
-  openModal: (maneuver: Maneuver) => void;
+  openModal: (id: string) => void;
   closeModal: () => void;
 }
 
@@ -24,9 +26,28 @@ export const ManeuverModalProvider: React.FC<{ children: ReactNode }> = ({ child
   const [selectedManeuver, setSelectedManeuver] = useState<Maneuver | null>(null);
   const [copySuccess, setCopySuccess] = useState(false);
 
-  const openModal = (maneuver: Maneuver) => {
-    setSelectedManeuver(maneuver);
-    setShowModal(true);
+  const openModal = (id: string) => {
+    // Try mastery first
+    const mastery = masteryData.find(m => m.id === id);
+    if (mastery) {
+      setSelectedManeuver({
+        id: mastery.id,
+        name: mastery.name,
+        description: mastery.description,
+        maneuverImage: mastery.masteryImage,
+        category: mastery.category
+      });
+      setShowModal(true);
+      return;
+    }
+    // Fallback to maneuvers
+    const mani = maneuverData.find(m => m.id === id);
+    if (mani) {
+      setSelectedManeuver(mani);
+      setShowModal(true);
+      return;
+    }
+    console.warn(`No maneuver or mastery found for id: ${id}`);
   };
 
   const closeModal = () => {
@@ -129,15 +150,12 @@ export const useManeuverModal = () => {
 // Component to display a clickable maneuver text link
 export const ManeuverLink: React.FC<{ maneuver: Maneuver }> = ({ maneuver }) => {
   const { openModal } = useManeuverModal();
-  
   return (
-    <span 
+    <span
       className="maneuver-link"
-      onClick={() => openModal(maneuver)}
+      onClick={() => openModal(maneuver.id)}
     >
       {maneuver.name}
     </span>
   );
 };
-
-export default ManeuverModalProvider;

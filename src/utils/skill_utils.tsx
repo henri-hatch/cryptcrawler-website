@@ -1,6 +1,7 @@
 import React from 'react';
 import maneuverData from '../data/maneuver_data.tsx';
-import { ManeuverLink } from '../components/maneuver_modal';
+import masteryData from '../data/mastery_data.tsx';
+import { ManeuverLink, useManeuverModal } from '../components/maneuver_modal';
 import { Link } from 'react-router-dom';
 
 // Interface for skill slot used in the SkillTemplate
@@ -9,10 +10,10 @@ export interface SkillSlot {
   content: React.ReactNode;
 }
 
-// Interface for circle skill slots in row4 of the SkillTemplate
-export interface CircleSkillSlot {
+// Interface for mastery skill slots in row4 of the SkillTemplate
+export interface MasterySkillSlot {
   image?: string;
-  link?: string;
+  maneuver?: React.ReactNode;
   alt?: string;
 }
 
@@ -75,34 +76,61 @@ export const createPlaceholderRow = (count: number = 5): SkillSlot[] => {
 };
 
 /**
- * Creates a circle skill slot with an image and link to a subpage
- * @param imageUrl The URL of the image to display in the circle (usually from public/skills-images)
- * @param linkUrl The URL route to the subpage
- * @param altText Optional alt text for the image
- * @returns A CircleSkillSlot object
+ * Component to display mastery or maneuver image and open modal on click
  */
-export const createCircleSkillSlot = (
-  imageUrl: string,
-  linkUrl: string,
-  altText?: string
-): CircleSkillSlot => {
-  return {
-    image: imageUrl,
-    link: linkUrl,
-    alt: altText
-  };
+const MasteryImageLink: React.FC<{ data: any; imageUrl: string; alt?: string }> = ({ data, imageUrl, alt }) => {
+  const { openModal } = useManeuverModal();
+  return (
+    <img
+      src={imageUrl}
+      alt={alt || data.name}
+      className="mastery-image"
+      onClick={() => openModal({
+        id: data.id,
+        name: data.name,
+        description: data.description,
+        maneuverImage: data.masteryImage || data.maneuverImage,
+        category: data.category
+      })}
+    />
+  );
 };
 
 /**
- * Creates a row of circle skill slots
- * @param circleSlotsData Array of objects with image, link, and optional alt text
- * @returns An array of CircleSkillSlot objects
+ * Creates a mastery skill slot with an image and maneuver modal
+ * @param masteryId The ID of the mastery to display
+ * @param imageUrl The URL of the image to display in the mastery (usually from public/skills-images)
+ * @param altText Optional alt text for the image
+ * @returns A MasterySkillSlot object
  */
-export const createCircleRow = (
-  circleSlotsData: { imageUrl: string; linkUrl: string; altText?: string }[]
-): CircleSkillSlot[] => {
-  return circleSlotsData.map(({ imageUrl, linkUrl, altText }) => 
-    createCircleSkillSlot(imageUrl, linkUrl, altText)
+export const createMasterySkillSlot = (
+  masteryId: string,
+  imageUrl?: string,
+  altText?: string
+): MasterySkillSlot => {
+  // Search in mastery data first, then maneuvers
+  const mastery = masteryData.find(m => m.id === masteryId);
+  if (mastery) {
+    return { maneuver: <MasteryImageLink data={mastery} imageUrl={imageUrl || mastery.masteryImage} alt={altText} /> };
+  }
+  const maneuver = maneuverData.find(m => m.id === masteryId);
+  if (maneuver && imageUrl) {
+    return { maneuver: <MasteryImageLink data={maneuver} imageUrl={imageUrl} alt={altText} /> };
+  }
+  // Placeholder circle if no mastery or maneuver found
+  return {};
+};
+
+/**
+ * Creates a row of mastery skill slots
+ * @param masterySlotsData Array of objects with image, maneuver ID, and optional alt text
+ * @returns An array of MasterySkillSlot objects
+ */
+export const createMasteryRow = (
+  masterySlotsData: { imageUrl: string; maneuverId: string; altText?: string }[]
+): MasterySkillSlot[] => {
+  return masterySlotsData.map(({ imageUrl, maneuverId, altText }) => 
+    createMasterySkillSlot(maneuverId, imageUrl, altText)
   );
 };
 
