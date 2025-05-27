@@ -149,7 +149,7 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
         >
           <h2 style={{ margin: '0', fontSize: fontSize, fontWeight: 'normal' }}>{title}</h2>
           {masteryImage && (
-            <img src={masteryImage} alt="Mastery" style={{ height: '48px', width: '48px', objectFit: 'contain' }} />
+            <img src={masteryImage} alt="Mastery" style={{ height: '58px', width: '58px', objectFit: 'contain' }} />
           )}
         </div>
 
