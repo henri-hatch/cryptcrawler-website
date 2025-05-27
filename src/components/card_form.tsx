@@ -61,7 +61,15 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
       flavor,
       economy,
       actionCost,
-      special
+      special,
+      skillType,
+      skill1Title,
+      skill1Description,
+      skill2Title,
+      skill2Description,
+      skill3Title,
+      skill3Description,
+      masteryImage
     });
   };
 
@@ -105,156 +113,217 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
         />
       </label>
 
-      <label>
-        Action Type:
-        <select
-          value={economy}
-          onChange={(e) => setEconomy(e.target.value)}
-        >
-          <option value="Action">Action</option>
-          <option value="Bonus Action">Bonus Action</option>
-          <option value="Reaction">Reaction</option>
-          <option value="Free Action">Free Action</option>
-          <option value="Passive">Passive</option>
-          <option value="Short Rest">Short Rest</option>
-          <option value="Long Rest">Long Rest</option>
-        </select>
-      </label>
+      {usageType !== 'Mastery' && (
+        <>
+          <label>
+            Action Type:
+            <select
+              value={economy}
+              onChange={(e) => setEconomy(e.target.value)}
+            >
+              <option value="Action">Action</option>
+              <option value="Bonus Action">Bonus Action</option>
+              <option value="Reaction">Reaction</option>
+              <option value="Free Action">Free Action</option>
+              <option value="Passive">Passive</option>
+              <option value="Short Rest">Short Rest</option>
+              <option value="Long Rest">Long Rest</option>
+            </select>
+          </label>
 
-      <label>
-        Action Cost:
-        <input
-          type="text"
-          value={actionCost}
-          onChange={(e) => setActionCost(e.target.value)}
-          placeholder="e.g. 2 opportunity, 3 drama (optional)"
-        />
-      </label>
+          <label>
+            Action Cost:
+            <input
+              type="text"
+              value={actionCost}
+              onChange={(e) => setActionCost(e.target.value)}
+              placeholder="e.g. 2 opportunity, 3 drama (optional)"
+            />
+          </label>
 
-      <label>
-        Tags:
-        <input
-          type="text"
-          value={tags}
-          onChange={(e) => setTags(e.target.value)}
-          placeholder="e.g. Martial, Weapon, Melee (comma separated)"
-        />
-      </label>
+          <label>
+            Tags:
+            <input
+              type="text"
+              value={tags}
+              onChange={(e) => setTags(e.target.value)}
+              placeholder="e.g. Martial, Weapon, Melee (comma separated)"
+            />
+          </label>
 
-      <label>
-        Target:
-        <input
-          type="text"
-          value={target}
-          onChange={(e) => setTarget(e.target.value)}
-          placeholder="e.g. Melee, Ranged 30ft, etc. (optional)"
-        />
-      </label>
+          <label>
+            Target:
+            <input
+              type="text"
+              value={target}
+              onChange={(e) => setTarget(e.target.value)}
+              placeholder="e.g. Melee, Ranged 30ft, etc. (optional)"
+            />
+          </label>
 
-      {/* Add the new Saving Throw fields after the Target field */}
-      <label>
-        Saving Throw:
-        <div className="saving-throw-container">
-          <select
-            value={savingThrowActive}
-            onChange={(e) => setSavingThrowActive(e.target.value)}
-          >
-            {abilityScores.map(score => (
-              <option key={`active-${score}`} value={score}>{score}</option>
-            ))}
-          </select>
-          <span className="vs-text">vs DC</span>
-          <input
-            type="text"
-            value={savingThrowDC}
-            onChange={(e) => setSavingThrowDC(e.target.value)}
-            placeholder="17 or 'Spell Save'"
-          />
-        </div>
-      </label>
+          {/* Add the new Saving Throw fields after the Target field */}
+          <label>
+            Saving Throw:
+            <div className="saving-throw-container">
+              <select
+                value={savingThrowActive}
+                onChange={(e) => setSavingThrowActive(e.target.value)}
+              >
+                {abilityScores.map(score => (
+                  <option key={`active-${score}`} value={score}>{score}</option>
+                ))}
+              </select>
+              <span className="vs-text">vs DC</span>
+              <input
+                type="text"
+                value={savingThrowDC}
+                onChange={(e) => setSavingThrowDC(e.target.value)}
+                placeholder="17 or 'Spell Save'"
+              />
+            </div>
+          </label>
 
-      {/* Add the new Ability Check fields after the Saving Throw fields */}
-      <label>
-        Ability Check:
-        <div className="ability-check-container">
-          <select
-            value={abilityCheckActive}
-            onChange={(e) => setAbilityCheckActive(e.target.value)}
-          >
-            {abilityScores.map(score => (
-              <option key={`active-${score}`} value={score}>{score}</option>
-            ))}
-          </select>
-          <span className="vs-text">vs</span>
-          <select
-            value={abilityCheckAgainst}
-            onChange={(e) => setAbilityCheckAgainst(e.target.value)}
-          >
-            {abilityScores.map(score => (
-              <option key={`against-${score}`} value={score}>{score}</option>
-            ))}
-          </select>
-        </div>
-      </label>
+          {/* Add the new Ability Check fields after the Saving Throw fields */}
+          <label>
+            Ability Check:
+            <div className="ability-check-container">
+              <select
+                value={abilityCheckActive}
+                onChange={(e) => setAbilityCheckActive(e.target.value)}
+              >
+                {abilityScores.map(score => (
+                  <option key={`active-${score}`} value={score}>{score}</option>
+                ))}
+              </select>
+              <span className="vs-text">vs</span>
+              <select
+                value={abilityCheckAgainst}
+                onChange={(e) => setAbilityCheckAgainst(e.target.value)}
+              >
+                {abilityScores.map(score => (
+                  <option key={`against-${score}`} value={score}>{score}</option>
+                ))}
+              </select>
+            </div>
+          </label>
 
-      {/* Conditionally render trigger field only when Reaction is selected */}
-      {economy === 'Reaction' && (
-        <label>
-          Trigger:
-          <textarea
-            value={trigger}
-            onChange={(e) => setTrigger(e.target.value)}
-            placeholder="What triggers this reaction?"
-          />
-        </label>
+          {/* Conditionally render trigger field only when Reaction is selected */}
+          {economy === 'Reaction' && (
+            <label>
+              Trigger:
+              <textarea
+                value={trigger}
+                onChange={(e) => setTrigger(e.target.value)}
+                placeholder="What triggers this reaction?"
+              />
+            </label>
+          )}
+
+          <label>
+            Damage:
+            <input
+              type="text"
+              value={damage}
+              onChange={(e) => setDamage(e.target.value)}
+              placeholder="e.g. 2d6 + STR (optional)"
+            />
+          </label>
+
+          <label>
+            Hit:
+            <textarea
+              value={hitEffect}
+              onChange={(e) => setHitEffect(e.target.value)}
+              placeholder="What effect happens on a hit? (optional)"
+            />
+          </label>
+
+          {/* Add the new Success and Fail fields right after Hit */}
+          <label>
+            Success:
+            <textarea
+              value={success}
+              onChange={(e) => setSuccess(e.target.value)}
+              placeholder="What happens on a successful save? (optional)"
+            />
+          </label>
+
+          <label>
+            Fail:
+            <textarea
+              value={fail}
+              onChange={(e) => setFail(e.target.value)}
+              placeholder="What happens on a failed save? (optional)"
+            />
+          </label>
+
+          <label>
+            Special:
+            <textarea
+              value={special}
+              onChange={(e) => setSpecial(e.target.value)}
+              placeholder="Any special effects or additional information"
+            />
+          </label>
+        </>
       )}
 
-      <label>
-        Damage:
-        <input
-          type="text"
-          value={damage}
-          onChange={(e) => setDamage(e.target.value)}
-          placeholder="e.g. 2d6 + STR (optional)"
-        />
-      </label>
+      {usageType === 'Mastery' && (
+        <>
+          <label>
+            Skill Type:
+            <select value={skillType} onChange={(e) => setSkillType(e.target.value)}>
+              <option value="">Select Skill</option>
+              {[
+                'Acrobatics','Animal Handling','Appraisal','Athletics','Crafting','Deception',
+                'Endurance','History','Insight','Intimidation','Investigation','Lockpicking',
+                'Medicine','Perception','Performance','Persuasion','Pickpocketing','Stealth','Survival'
+              ].sort().map(skill => (
+                <option key={skill} value={skill}>{skill}</option>
+              ))}
+            </select>
+          </label>
 
-      <label>
-        Hit:
-        <textarea
-          value={hitEffect}
-          onChange={(e) => setHitEffect(e.target.value)}
-          placeholder="What effect happens on a hit? (optional)"
-        />
-      </label>
+          <label>
+            Skill 1 Title:
+            <input type="text" value={skill1Title} onChange={(e) => setSkill1Title(e.target.value)} />
+          </label>
+          <label>
+            Skill 1 Description:
+            <textarea value={skill1Description} onChange={(e) => setSkill1Description(e.target.value)} />
+          </label>
 
-      {/* Add the new Success and Fail fields right after Hit */}
-      <label>
-        Success:
-        <textarea
-          value={success}
-          onChange={(e) => setSuccess(e.target.value)}
-          placeholder="What happens on a successful save? (optional)"
-        />
-      </label>
+          <label>
+            Skill 2 Title:
+            <input type="text" value={skill2Title} onChange={(e) => setSkill2Title(e.target.value)} />
+          </label>
+          <label>
+            Skill 2 Description:
+            <textarea value={skill2Description} onChange={(e) => setSkill2Description(e.target.value)} />
+          </label>
 
-      <label>
-        Fail:
-        <textarea
-          value={fail}
-          onChange={(e) => setFail(e.target.value)}
-          placeholder="What happens on a failed save? (optional)"
-        />
-      </label>
+          <label>
+            Skill 3 Title:
+            <input type="text" value={skill3Title} onChange={(e) => setSkill3Title(e.target.value)} />
+          </label>
+          <label>
+            Skill 3 Description:
+            <textarea value={skill3Description} onChange={(e) => setSkill3Description(e.target.value)} />
+          </label>
 
-      <label>
-        Special:
-        <textarea
-          value={special}
-          onChange={(e) => setSpecial(e.target.value)}
-          placeholder="Any special effects or additional information"
-        />
-      </label>
+          <label>
+            Mastery Image:
+            <input type="file" onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (file) {
+                const reader = new FileReader();
+                reader.onloadend = () => setMasteryImage(reader.result as string);
+                reader.readAsDataURL(file);
+              }
+            }} />
+          </label>
+        </>
+      )}
 
       <button type="submit">Generate Card</button>
     </form>
