@@ -20,6 +20,14 @@ interface CardFormProps {
     economy: string;
     actionCost: string;
     special: string;
+    skillType?: string;
+    skill1Title?: string;
+    skill1Description?: string;
+    skill2Title?: string;
+    skill2Description?: string;
+    skill3Title?: string;
+    skill3Description?: string;
+    masteryImage?: string;
   }) => void;
 }
 
@@ -37,10 +45,19 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
   const [hitEffect, setHitEffect] = useState('');
   const [success, setSuccess] = useState('');
   const [fail, setFail] = useState('');
-  const [flavor, setFlavor] = useState('');
-  const [economy, setEconomy] = useState('Action');
+  const [flavor, setFlavor] = useState('');  const [economy, setEconomy] = useState('Action');
   const [actionCost, setActionCost] = useState('');
   const [special, setSpecial] = useState('');
+  
+  // Mastery fields
+  const [skillType, setSkillType] = useState('');
+  const [skill1Title, setSkill1Title] = useState('');
+  const [skill1Description, setSkill1Description] = useState('');
+  const [skill2Title, setSkill2Title] = useState('');
+  const [skill2Description, setSkill2Description] = useState('');
+  const [skill3Title, setSkill3Title] = useState('');
+  const [skill3Description, setSkill3Description] = useState('');
+  const [masteryImage, setMasteryImage] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -93,14 +110,14 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
         <select
           value={usageType}
           onChange={(e) => setUsageType(e.target.value)}
-        >
-          <option value="Feature">Feature</option>
+        >          <option value="Feature">Feature</option>
           <option value="At Will">At Will</option>
           <option value="1/turn">1/turn</option>
           <option value="1/encounter">1/encounter</option>
           <option value="2/encounter">2/encounter</option>
           <option value="1/day">1/day</option>
           <option value="1/week">1/week</option>
+          <option value="Mastery">Mastery</option>
         </select>
       </label>
 
