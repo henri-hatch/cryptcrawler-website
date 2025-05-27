@@ -63,10 +63,13 @@ import Perception from './subpages/skills/perception.tsx'
 import Insight from './subpages/skills/insight.tsx'
 import History from './subpages/skills/history.tsx'
 import Acrobatics from './subpages/skills/acrobatics.tsx'
+import Arcana from './subpages/skills/arcana.tsx'
+
 
 // Skills Subpages
 import ArcanaSpells from './subpages/skill_subpages/arcana_spells.tsx'
 import ArcanaSpells2 from './subpages/skill_subpages/arcana_spells_2.tsx'
+import ArcanaSpells3 from './subpages/skill_subpages/arcana_spells_3.tsx'
 
 // Masteries
 import LordGuyLol from './subpages/masteries/lord_guy_lol.tsx'
@@ -166,11 +169,13 @@ function App() {
                 <Route path="/skills/insight" element={<Insight />} />
                 <Route path="/skills/history" element={<History />} />
                 <Route path="/skills/acrobatics" element={<Acrobatics />} />
+                <Route path="/skills/arcana" element={<Arcana />} />
+
 
                 {/* Skills Subpages */}
                 <Route path="/skills/crafting/arcana-spells" element={<ArcanaSpells />} />
                 <Route path="/skills/crafting/arcana-spells-2" element={<ArcanaSpells2 />} />
-
+                <Route path="/skills/crafting/arcana-spells-3" element={<ArcanaSpells3 />} />
 
                 {/* Masteries */}
                 <Route path="/skills/persuasion/lord-guy-lol" element={<LordGuyLol />} />

@@ -9,6 +9,9 @@ const Acrobatics = () => {
         createManeuverSkillSlot ("trip-attack"),
         createTextSkillSlot ("+1d12 dodge rating"),
     ]
+    const row2 = [
+        createManeuverSkillSlot ("hit-and-run")
+    ]
     const row3 = [
         createManeuverSkillSlot ("evasion")
     ]
@@ -16,6 +19,7 @@ const Acrobatics = () => {
         <SkillTemplate 
             skillName="Acrobatics" 
             row1 = {row1}
+            row2 = {row2}
             row3 = {row3}
         />
     );

@@ -96,6 +96,15 @@ interface SkillData {
       category: ["skill"]
     },
     {
+      id: "arcana",
+      name: "Arcana",
+      description: "Weilding the laws of arcane magic, you can cast multiple arcane spells through the Arcana skill.",
+      imagePath: "/skills-images/arcana_logo.png",
+      pageRoute: "/skills/arcana",
+      skill_category: "reason",
+      category: ["skill"]
+    },
+    {
       id: "crafting",
       name: "Crafting",
       description: "Bombs are less of a science and more of an art. Increase your utility with the Crafting skill.",

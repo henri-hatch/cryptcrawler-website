@@ -22,6 +22,13 @@ const maneuverData: ManeuverData[] = [
     category: ["maneuver"]
   },
   {
+    id: "battle-feint",
+    name: "Battle Feint",
+    description: "Your sudden movements causes your opponent to flinch, opening up an opportunity for an ally to attack.",
+    maneuverImage: "/manuever-images/Battle Feint.png",
+    category: ["maneuver"]
+  },
+  {
     id: "bargainer",
     name: "Bargainer",
     description: "You know how to play the merchant's game.",
@@ -232,6 +239,13 @@ const maneuverData: ManeuverData[] = [
     category: ["maneuver"]
   },
   {
+    id: "hit-and-run",
+    name: "Hit and Run",
+    description: "With a deft strike you backflip out of harm's way.",
+    maneuverImage: "/manuever-images/Hit and Run.png",
+    category: ["maneuver"]
+  },
+  {
     id: "human-determination",
     name: "Human Determination",
     description: "Call upon your innate human resilience to push beyond your normal limits.",
@@ -400,6 +414,13 @@ const maneuverData: ManeuverData[] = [
     category: ["maneuver"]
   },
   {
+    id: "sunburst",
+    name: "Sunburst",
+    description: "Brilliant white sun flames shoot out around you, throwing your foes back.",
+    maneuverImage: "/manuever-images/Sunburst.png",
+    category: ["maneuver"]
+  },
+  {
     id: "sideswipe",
     name: "Sideswipe",
     description: "Some call it dishonorable, you call it winning.",
@@ -481,6 +502,13 @@ const maneuverData: ManeuverData[] = [
     name: "Tactical Invitation",
     description: "Create a distraction that disrupts enemy organization and lures them into a vulnerable position.",
     maneuverImage: "/manuever-images/Tactical Invitation.png",
+    category: ["maneuver"]
+  },
+  {
+    id: "terrifying-presence",
+    name: "Terrifying Presence",
+    description: "After seeing the damage you can do, weaker foes can't help but flee from you.",
+    maneuverImage: "/manuever-images/Terrifying Presence.png",
     category: ["maneuver"]
   },
   {

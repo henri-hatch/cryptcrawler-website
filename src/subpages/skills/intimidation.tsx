@@ -7,10 +7,15 @@ const Intimidation = () => {
         createTextSkillSlot ("+1 presence score"),
 
     ]
+    const row2 = [
+        createManeuverSkillSlot ("terrifying-presence"),
+
+    ]
     return (
         <SkillTemplate 
             skillName="Intimidation" 
             row1 = {row1}
+            row2 = {row2}
         />
     );
 };
