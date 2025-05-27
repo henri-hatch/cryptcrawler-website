@@ -22,6 +22,14 @@ interface CardData {
   economy: string;
   actionCost: string;
   special: string;
+  skillType?: string;
+  skill1Title?: string;
+  skill1Description?: string;
+  skill2Title?: string;
+  skill2Description?: string;
+  skill3Title?: string;
+  skill3Description?: string;
+  masteryImage?: string | null;
 }
 
 const ManeuverCreator: React.FC = () => {
@@ -97,6 +105,14 @@ const ManeuverCreator: React.FC = () => {
                   economy={cardData.economy}
                   actionCost={cardData.actionCost}
                   special={cardData.special}
+                  skillType={cardData.skillType}
+                  skill1Title={cardData.skill1Title}
+                  skill1Description={cardData.skill1Description}
+                  skill2Title={cardData.skill2Title}
+                  skill2Description={cardData.skill2Description}
+                  skill3Title={cardData.skill3Title}
+                  skill3Description={cardData.skill3Description}
+                  masteryImage={cardData.masteryImage}
                 />
               </div>
               <button onClick={handleDownload} style={{ marginTop: '1rem' }}>

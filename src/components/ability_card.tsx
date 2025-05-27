@@ -18,6 +18,14 @@ interface AbilityCardProps {
   economy?: string;
   actionCost?: string;
   special?: string;
+  skillType?: string;
+  skill1Title?: string;
+  skill1Description?: string;
+  skill2Title?: string;
+  skill2Description?: string;
+  skill3Title?: string;
+  skill3Description?: string;
+  masteryImage?: string | null;
 }
 
 const AbilityCard: React.FC<AbilityCardProps> = ({
@@ -38,6 +46,14 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
   economy,
   actionCost,
   special,
+  skillType,
+  skill1Title,
+  skill1Description,
+  skill2Title,
+  skill2Description,
+  skill3Title,
+  skill3Description,
+  masteryImage,
 }) => {
   const [cardWidth, setCardWidth] = useState('700px');
   const [fontSize, setFontSize] = useState('2.0rem');
@@ -62,8 +78,32 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
     };
   }, []);
 
-  // Get color based on usage type
+  // Get color based on usage type or skill type for Mastery
   const getHeaderColor = () => {
+    if (usageType === 'Mastery') {
+      const skillColors: Record<string, string> = {
+        'Deception': '#741b47ff',
+        'Intimidation': '#741b47ff',
+        'Performance': '#741b47ff',
+        'Persuasion': '#741b47ff',
+        'Acrobatics': '#666666ff',
+        'Lockpicking': '#666666ff',
+        'Pickpocketing': '#666666ff',
+        'Stealth': '#666666ff',
+        'Appraisal': '#0b5394ff',
+        'Crafting': '#0b5394ff',
+        'History': '#0b5394ff',
+        'Investigation': '#0b5394ff',
+        'Animal Handling': '#38761dff',
+        'Insight': '#38761dff',
+        'Medicine': '#38761dff',
+        'Perception': '#38761dff',
+        'Survival': '#38761dff',
+        'Endurance': '#bf8a00ff',
+        'Athletics': '#990000ff'
+      };
+      return skillColors[skillType ?? ''] || '#444';
+    }
     switch (usageType) {
       case 'At Will':
         return '#307f00'; // Forest Green
@@ -82,10 +122,83 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
     }
   };
 
+  if (usageType === 'Mastery') {
+    return (
+      <div
+        style={{
+          width: cardWidth,
+          border: '2px solid #444',
+          borderRadius: '0',
+          overflow: 'hidden',
+          backgroundColor: '#fff',
+          fontFamily: 'sans-serif',
+          maxWidth: '100%',
+          margin: '0 auto',
+        }}
+      >
+        <div
+          style={{
+            backgroundColor: getHeaderColor(),
+            color: '#fff',
+            padding: '8px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+          }}
+        >
+          <h2 style={{ margin: '0', fontSize: fontSize, fontWeight: 'normal' }}>{title}</h2>
+          {masteryImage && (
+            <img src={masteryImage} alt="Mastery" style={{ height: '58px', width: '58px', objectFit: 'contain' }} />
+          )}
+        </div>
+
+        {flavor && (
+          <div style={{ backgroundColor: '#cfc4a7', padding: '8px', fontStyle: 'italic' }}>
+            {flavor}
+          </div>
+        )}
+
+        <div style={{ padding: '8px' }}>
+          <div style={{ marginBottom: '8px' }}>
+            <strong>{skillType} ✦ Mastery</strong>
+          </div>
+
+          {skill1Title && (
+            <div style={{ marginBottom: skill2Title || skill3Title ? '8px' : '0' }}>
+              <strong>{skill1Title}</strong>
+              {skill1Description && (
+                <span dangerouslySetInnerHTML={{ __html: ' ' + skill1Description }} />
+              )}
+            </div>
+          )}
+
+          {skill2Title && (
+            <div style={{ marginBottom: skill3Title ? '8px' : '0' }}>
+              <strong>{skill2Title}</strong>
+              {skill2Description && (
+                <span dangerouslySetInnerHTML={{ __html: ' ' + skill2Description }} />
+              )}
+            </div>
+          )}
+
+          {skill3Title && (
+            <div>
+              <strong>{skill3Title}</strong>
+              {skill3Description && (
+                <span dangerouslySetInnerHTML={{ __html: ' ' + skill3Description }} />
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
       style={{
-        width: cardWidth, 
+        width: cardWidth,
         border: '2px solid #444',
         borderRadius: '0',
         overflow: 'hidden',
