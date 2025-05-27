@@ -12,7 +12,7 @@ const Persuasion = () => {
     ]
 
     const row4 = [
-        createCircleSkillSlot("/mastery-images/lordguylol.png", "/skills/persuasion/lord-guy-lol", "Lord Guy-Lol"),
+        createCircleSkillSlot("/mastery-images/ChargedAffairesMastery.png", "/skills/persuasion/lord-guy-lol", "Lord Guy-Lol"),
     ]
     return (
         <SkillTemplate 
