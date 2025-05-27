@@ -85,13 +85,7 @@ const MasteryImageLink: React.FC<{ data: any; imageUrl: string; alt?: string }> 
       src={imageUrl}
       alt={alt || data.name}
       className="mastery-image"
-      onClick={() => openModal({
-        id: data.id,
-        name: data.name,
-        description: data.description,
-        maneuverImage: data.masteryImage || data.maneuverImage,
-        category: data.category
-      })}
+      onClick={() => openModal(data.id)}
     />
   );
 };
