@@ -113,6 +113,13 @@ const maneuverData: ManeuverData[] = [
     category: ["maneuver"]
   },
   {
+    id: "counterpoint",
+    name: "Counterpoint",
+    description: "With a verbal retort you open up a creature's defenses to attack",
+    maneuverImage: "/manuever-images/Counterpoint.png",
+    category: ["maneuver"]
+  },
+  {
     id: "chromantic-orb",
     name: "Chromantic Orb",
     description: "An orb of arcane energy that shifts colors as it flies.",
@@ -215,6 +222,13 @@ const maneuverData: ManeuverData[] = [
     name: "Gadget Specialist",
     description: "As great as you are you can't be everywhere at once.",
     maneuverImage: "/manuever-images/Gadget Specialist.png",
+    category: ["maneuver"]
+  },
+  {
+    id: "gift-of-gab",
+    name: "Gift of Gab",
+    description: "Umm... I didn't mean that! Forget about it would ya?",
+    maneuverImage: "/manuever-images/Gift of Gab.png",
     category: ["maneuver"]
   },
   {
@@ -337,6 +351,13 @@ const maneuverData: ManeuverData[] = [
     category: ["maneuver"]
   },
   {
+    id: "look-over-there",
+    name: "Look! Over There!",
+    description: "It's the oldest trick in the book, but in combat there probably is something over there.",
+    maneuverImage: "/manuever-images/Look! Over There!.png",
+    category: ["maneuver"]
+  },
+  {
     id: "loot-goblin",
     name: "Loot Goblin",
     description: "Plundering is always more fun with friends!",
@@ -411,6 +432,13 @@ const maneuverData: ManeuverData[] = [
     name: "Sense Undead",
     description: "You always get an ominous feeling whenever undead are near.",
     maneuverImage: "/manuever-images/Sense Undead.png",
+    category: ["maneuver"]
+  },
+  {
+    id: "suggestion",
+    name: "Suggestion",
+    description: "With your powerful presence, you can convince a creature to follow your suggestion.",
+    maneuverImage: "/manuever-images/Suggestion.png",
     category: ["maneuver"]
   },
   {
