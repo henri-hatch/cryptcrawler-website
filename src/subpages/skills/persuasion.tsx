@@ -1,9 +1,10 @@
 import SkillTemplate from '../../components/skill_template';
-import { createMasterySkillSlot, createManeuverSkillSlot } from '../../utils/skill_utils';
+import { createMasterySkillSlot, createManeuverSkillSlot, createTextSkillSlot } from '../../utils/skill_utils';
 
 const Persuasion = () => {
     const row1 = [
         createManeuverSkillSlot("bargainer"),
+        createManeuverSkillSlot("disarming-smile"),
         createManeuverSkillSlot("he-called-you-ugly-too"),
         createManeuverSkillSlot("inspiration"),
         createManeuverSkillSlot("look-over-there"),
@@ -11,12 +12,18 @@ const Persuasion = () => {
 
     const row2 = [
        createManeuverSkillSlot("counterpoint"),
+       createManeuverSkillSlot("gift-of-gab"),
        createManeuverSkillSlot("i-know-a-guy"),
+       createManeuverSkillSlot("storming-shout"),
+       createManeuverSkillSlot("to-me!"),
     ]
 
     const row3 = [
-        createManeuverSkillSlot("gift-of-gab"),        
+        createManeuverSkillSlot("at-your-expense"), 
+        createManeuverSkillSlot("dramatic-intercession"),
+        createManeuverSkillSlot("laugh-it-off"),       
         createManeuverSkillSlot("suggestion"),
+        createTextSkillSlot("+1 presence score")
     ]
 
     const row4 = [

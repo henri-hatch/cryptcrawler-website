@@ -22,6 +22,13 @@ const maneuverData: ManeuverData[] = [
     category: ["maneuver"]
   },
   {
+    id: "at-your-expense",
+    name: "At Your Expense",
+    description: "A well-timed quip against a creature causes all of it's friends to be paralyzed with loud laughter.",
+    maneuverImage: "/manuever-images/At Your Expense.png",
+    category: ["maneuver"]
+  },
+  {
     id: "battle-feint",
     name: "Battle Feint",
     description: "Your sudden movements causes your opponent to flinch, opening up an opportunity for an ally to attack.",
@@ -162,12 +169,26 @@ const maneuverData: ManeuverData[] = [
     category: ["maneuver"]
   }, 
   {
+    id: "disarming-smile",
+    name: "Disarming Smile",
+    description: "You wouldn't ruin a charming face like mine? Right?",
+    maneuverImage: "/manuever-images/Disarming Smile.png",
+    category: ["maneuver"]
+  }, 
+  {
     id: "discovered-weakness",
     name: "Discovered Weakness",
     description: "Analyzing your enemy, you discover a hidden weakness.",
     maneuverImage: "/manuever-images/Discovered Weakness.png",
     category: ["maneuver"]
   }, 
+  {
+    id: "dramatic-intercession",
+    name: "Dramatic Intercession",
+    description: "At the last second, your shout wakes your friend out of their stupor and pushes them to keep fighting.",
+    maneuverImage: "/manuever-images/Dramatic Intercession.png",
+    category: ["maneuver"]
+  },  
   {
     id: "eureka!",
     name: "Eureka!",
@@ -344,6 +365,13 @@ const maneuverData: ManeuverData[] = [
     category: ["maneuver"]
   },
   {
+    id: "laugh-it-off",
+    name: "Laugh It Off",
+    description: "With a chuckle, you shrug off an attack, making the most mighty swing seem utterly pointless.",
+    maneuverImage: "/manuever-images/Laugh It Off.png",
+    category: ["maneuver"]
+  },
+  {
     id: "leopolds-magic-card",
     name: "Leopold's Magic Card",
     description: "Imbuing a playing card with chaotic energy, you can throw it at a foe.",
@@ -432,6 +460,13 @@ const maneuverData: ManeuverData[] = [
     name: "Sense Undead",
     description: "You always get an ominous feeling whenever undead are near.",
     maneuverImage: "/manuever-images/Sense Undead.png",
+    category: ["maneuver"]
+  },
+  {
+    id: "storming-shout",
+    name: "Storming Shout",
+    description: "With your powerful presence, you can convince a creature to follow your suggestion.",
+    maneuverImage: "/manuever-images/Storming Shout.png",
     category: ["maneuver"]
   },
   {
@@ -537,6 +572,13 @@ const maneuverData: ManeuverData[] = [
     name: "Terrifying Presence",
     description: "After seeing the damage you can do, weaker foes can't help but flee from you.",
     maneuverImage: "/manuever-images/Terrifying Presence.png",
+    category: ["maneuver"]
+  },
+  {
+    id: "to-me!",
+    name: "To Me!",
+    description: "With a rallying cry, you summon your allies from around the battlefield to yourself.",
+    maneuverImage: "/manuever-images/To Me!.png",
     category: ["maneuver"]
   },
   {
