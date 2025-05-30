@@ -42,6 +42,13 @@ const masteryData: MasteryData[] = [
         masteryImage: "/mastery-images/Midas Touch.png",
         category: ["mastery"]
     },
+    {
+        id: "toxicologist",
+        name: "Toxicologist",
+        description: "The best way to pursue a cure, is to understand the illness.",
+        masteryImage: "/mastery-images/Toxicologist.png",
+        category: ["mastery"]
+    },
 ];
 
 export default masteryData;

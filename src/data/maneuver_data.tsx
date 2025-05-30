@@ -50,6 +50,13 @@ const maneuverData: ManeuverData[] = [
     category: ["maneuver"]
   },
   {
+    id: "blackjacket-sting",
+    name: "Blackjacket Sting",
+    description: "Coating your weapon in a caustic substance you inject the toxin into your foe.",
+    maneuverImage: "/manuever-images/Blackjacket Sting.png",
+    category: ["maneuver"]
+  },
+  {
     id: "blade-dance",
     name: "Blade Dance",
     description: "With nimble dexterity, you can move and spin around your opponent as you fight.",
@@ -117,6 +124,13 @@ const maneuverData: ManeuverData[] = [
     name: "Confounding Strike",
     description: "With rapid and chaotic movements you cause your opponent to swing and hit their ally.",
     maneuverImage: "/manuever-images/Confounding Strike.png",
+    category: ["maneuver"]
+  },
+  {
+    id: "continual-recovery",
+    name: "Continual Recovery",
+    description: "You zealously monitor your patient's progress, accelerating their recovery.",
+    maneuverImage: "/manuever-images/Continual Recovery.png",
     category: ["maneuver"]
   },
   {
@@ -477,10 +491,24 @@ const maneuverData: ManeuverData[] = [
     category: ["maneuver"]
   },
   {
+    id: "prescient-planning",
+    name: "Prescient Planning",
+    description: "Thanks to your convoluted plans and foresight you have just the thing for this situation.",
+    maneuverImage: "/manuever-images/Prescient Planning.png",
+    category: ["maneuver"]
+  },
+  {
     id: "return-to-sender",
     name: "Return to Sender",
     description: "Here! Catch!",
     maneuverImage: "/manuever-images/Return to Sender.png",
+    category: ["maneuver"]
+  },
+  {
+    id: "scalpels-point",
+    name: "Scalpel's Point",
+    description: "With your precise anatomical knowledge, you are able to strike at a creature's weakest point.",
+    maneuverImage: "/manuever-images/Scalpel's Point.png",
     category: ["maneuver"]
   },
   {
@@ -614,6 +642,7 @@ const maneuverData: ManeuverData[] = [
     name: "Titan Kick",
     description: "With a roar from the depths of your soul, you drive your foot into your enemy’s chest — a brutal, earth-shaking kick that launches them like a broken gate through the air.",
     maneuverImage: "/manuever-images/Titan Kick.png",
+    category: ["maneuver"]
   },
   {
     id: "to-me!",

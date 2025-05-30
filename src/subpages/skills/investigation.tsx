@@ -6,6 +6,11 @@ const Investigation = () => {
         createManeuverSkillSlot("loot-goblin"),
 
     ]
+    const row2 = [
+        createManeuverSkillSlot("premeditation"),
+        createManeuverSkillSlot("prescient-planning"),
+
+    ]
     const row3 = [
         createManeuverSkillSlot("premeditation"),
 
@@ -14,6 +19,7 @@ const Investigation = () => {
         <SkillTemplate 
             skillName="Investigation" 
             row1={row1}
+            row2={row2}
             row3={row3} 
 
         />
