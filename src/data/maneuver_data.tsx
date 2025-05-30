@@ -127,6 +127,13 @@ const maneuverData: ManeuverData[] = [
     category: ["maneuver"]
   },
   {
+    id: "counterstrike",
+    name: "Counterstrike",
+    description: "You don’t block — you strike as your enemy commits, punishing their aggression.",
+    maneuverImage: "/manuever-images/Counterstrike.png",
+    category: ["maneuver"]
+  },
+  {
     id: "chromantic-orb",
     name: "Chromantic Orb",
     description: "An orb of arcane energy that shifts colors as it flies.",
@@ -159,6 +166,13 @@ const maneuverData: ManeuverData[] = [
     name: "Deep Pockets",
     description: "Your pockets can hold more than they should.",
     maneuverImage: "/manuever-images/Deep Pockets.png",
+    category: ["maneuver"]
+  },
+  {
+    id: "delayed-strike",
+    name: "Delayed Strike",
+    description: "Strike blindingly fast causing your blow to lingers in the air, hitting in spirit after your fist is gone.",
+    maneuverImage: "/manuever-images/Delayed Strike.png",
     category: ["maneuver"]
   },
   {
@@ -222,6 +236,13 @@ const maneuverData: ManeuverData[] = [
     name: "Feather Fall",
     description: "You gently stop your decent, allowing you to reach the ground unharmed.",
     maneuverImage: "/manuever-images/Feather Fall.png",
+    category: ["maneuver"]
+  },
+  {
+    id: "fisticuffs",
+    name: "Fisticuffs",
+    description: "You become a whirlwind of motion, raining down blows like a heavy storm.",
+    maneuverImage: "/manuever-images/Fisticuffs.png",
     category: ["maneuver"]
   },
   {
@@ -456,6 +477,13 @@ const maneuverData: ManeuverData[] = [
     category: ["maneuver"]
   },
   {
+    id: "return-to-sender",
+    name: "Return to Sender",
+    description: "Here! Catch!",
+    maneuverImage: "/manuever-images/Return to Sender.png",
+    category: ["maneuver"]
+  },
+  {
     id: "sense-undead",
     name: "Sense Undead",
     description: "You always get an ominous feeling whenever undead are near.",
@@ -561,6 +589,13 @@ const maneuverData: ManeuverData[] = [
     category: ["maneuver"]
   },
   {
+    id: "sucker-punch",
+    name: "Sucker Punch",
+    description: "You channel everything — precision, timing, fury — into one perfect strike. There’s no warning, no chance to brace. Just the sudden, soul-shaking impact of your fist, and silence.",
+    maneuverImage: "/manuever-images/Sucker Punch.png",
+    category: ["maneuver"]
+  },
+  {
     id: "tactical-invitation",
     name: "Tactical Invitation",
     description: "Create a distraction that disrupts enemy organization and lures them into a vulnerable position.",
@@ -573,6 +608,12 @@ const maneuverData: ManeuverData[] = [
     description: "After seeing the damage you can do, weaker foes can't help but flee from you.",
     maneuverImage: "/manuever-images/Terrifying Presence.png",
     category: ["maneuver"]
+  },
+  {
+    id: "titan-kick",
+    name: "Titan Kick",
+    description: "With a roar from the depths of your soul, you drive your foot into your enemy’s chest — a brutal, earth-shaking kick that launches them like a broken gate through the air.",
+    maneuverImage: "/manuever-images/Titan Kick.png",
   },
   {
     id: "to-me!",
@@ -593,6 +634,13 @@ const maneuverData: ManeuverData[] = [
     name: "Underdark Venom",
     description: "You coat your weapon with a powerful venom, the recipe of which is closely guarded.",
     maneuverImage: "/manuever-images/Underdark Venom.png",
+    category: ["maneuver"]
+  },
+  {
+    id: "wind-step-palm",
+    name: "Wind-Step Palm",
+    description: "You become a gust of wind — weightless, fluid, and unrelenting.",
+    maneuverImage: "/manuever-images/Wind-Step Palm.png",
     category: ["maneuver"]
   },
 ];
