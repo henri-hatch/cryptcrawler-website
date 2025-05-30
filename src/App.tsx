@@ -62,6 +62,7 @@ import Insight from './subpages/skills/insight.tsx'
 import History from './subpages/skills/history.tsx'
 import Acrobatics from './subpages/skills/acrobatics.tsx'
 import Arcana from './subpages/skills/arcana.tsx'
+import Unarmed from './subpages/skills/unarmed.tsx'
 
 
 // Skills Subpages
@@ -163,6 +164,7 @@ function App() {
                 <Route path="/skills/history" element={<History />} />
                 <Route path="/skills/acrobatics" element={<Acrobatics />} />
                 <Route path="/skills/arcana" element={<Arcana />} />
+                <Route path="/skills/unarmed" element={<Unarmed />} />                
 
 
                 {/* Skills Subpages */}

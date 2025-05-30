@@ -159,7 +159,44 @@ interface SkillData {
       pageRoute: "/skills/survival",
       skill_category: "intuition",
       category: ["skill"]
-    }
+    },
+    // Might skills
+    {
+      id: "athletics",
+      name: "Athletics",
+      description: "Some see trash, but you see treasure. Increase your purchasing power with the Appraisal skill.",
+      imagePath: "/skills-images/athletics_logo.png",
+      pageRoute: "/skills/athletics",
+      skill_category: "might",
+      category: ["skill"]
+    },
+    {
+      id: "heavy-armor",
+      name: "Heavy Armor",
+      description: "Some see trash, but you see treasure. Increase your purchasing power with the Appraisal skill.",
+      imagePath: "/skills-images/heavyarmor_logo.png",
+      pageRoute: "/skills/heavyarmor",
+      skill_category: "might",
+      category: ["skill"]
+    },
+    {
+      id: "heavy-weapons",
+      name: "Heavy Weapons",
+      description: "Some see trash, but you see treasure. Increase your purchasing power with the Appraisal skill.",
+      imagePath: "/skills-images/heavyweapons_logo.png",
+      pageRoute: "/skills/heavyweapons",
+      skill_category: "might",
+      category: ["skill"]
+    },
+    {
+      id: "unarmed",
+      name: "Unarmed",
+      description: "Some see trash, but you see treasure. Increase your purchasing power with the Appraisal skill.",
+      imagePath: "/skills-images/unarmed_logo.png",
+      pageRoute: "/skills/unarmed",
+      skill_category: "might",
+      category: ["skill"]
+    },
   ];
   
   export default skillData;
