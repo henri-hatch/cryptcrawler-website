@@ -293,8 +293,9 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
               <option value="">Select Skill</option>
               {[
                 'Acrobatics','Animal Handling','Appraisal','Athletics','Crafting','Deception',
-                'Endurance','History','Insight','Intimidation','Investigation','Lockpicking',
-                'Medicine','Perception','Performance','Persuasion','Pickpocketing','Stealth','Survival'
+                'Endurance','Heavy Armor','Heavy Weapons','History','Insight','Intimidation','Investigation',
+                'Light Weapons','Lockpicking','Light Armor','Medicine','Perception','Persuasion',
+                'Pickpocketing','Ranged Weapons','Stealth','Survival','Unarmed'
               ].sort().map(skill => (
                 <option key={skill} value={skill}>{skill}</option>
               ))}
