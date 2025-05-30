@@ -47,11 +47,9 @@ import Gnome from './subpages/ancestries/gnome.tsx'
 
 // Skills
 import Persuasion from './subpages/skills/persuasion.tsx'
-import Appraisal from './subpages/skills/appraisal.tsx'
 import Stealth from './subpages/skills/stealth.tsx'
 import Medicine from './subpages/skills/medicine.tsx'
 import Crafting from './subpages/skills/crafting.tsx'
-import Performance from './subpages/skills/performance.tsx'
 import Survival from './subpages/skills/survival.tsx'
 import Animal_Handling from './subpages/skills/animal_handling.tsx'
 import Lockpicking from './subpages/skills/lockpicking.tsx'
@@ -150,11 +148,9 @@ function App() {
 
                 {/* Skills */}
                 <Route path="/skills/persuasion" element={<Persuasion />} />
-                <Route path="/skills/appraisal" element={<Appraisal />} />
                 <Route path="/skills/stealth" element={<Stealth />} />
                 <Route path="/skills/medicine" element={<Medicine />} />
                 <Route path="/skills/crafting" element={<Crafting />} />
-                <Route path="/skills/performance" element={<Performance />} />
                 <Route path="/skills/survival" element={<Survival />} />
                 <Route path="/skills/animal_handling" element={<Animal_Handling />} />
                 <Route path="/skills/lockpicking" element={<Lockpicking />} />

@@ -84,13 +84,11 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
       const skillColors: Record<string, string> = {
         'Deception': '#741b47ff',
         'Intimidation': '#741b47ff',
-        'Performance': '#741b47ff',
         'Persuasion': '#741b47ff',
         'Acrobatics': '#666666ff',
         'Lockpicking': '#666666ff',
         'Pickpocketing': '#666666ff',
         'Stealth': '#666666ff',
-        'Appraisal': '#0b5394ff',
         'Crafting': '#0b5394ff',
         'History': '#0b5394ff',
         'Investigation': '#0b5394ff',
