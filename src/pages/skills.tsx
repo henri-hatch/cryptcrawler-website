@@ -8,6 +8,7 @@ const SkillsPage = () => {
   const finesseSkills = skillData.filter(skill => skill.skill_category === "finesse");
   const reasonSkills = skillData.filter(skill => skill.skill_category === "reason");
   const intuitionSkills = skillData.filter(skill => skill.skill_category === "intuition");
+  const mightSkills = skillData.filter(skill => skill.skill_category === "might"); 
   
   return (
     <>
@@ -30,6 +31,20 @@ const SkillsPage = () => {
       <h2>Finesse</h2>
       <div className="cards-container">
         {finesseSkills.map(skill => (
+          <ContentCard 
+            key={skill.id}
+            id={skill.id}
+            title={skill.name}
+            imagePath={skill.imagePath}
+            linkTo={skill.pageRoute}
+            description={skill.description}
+          />
+        ))}
+      </div>
+
+      <h2>Might</h2>
+      <div className="cards-container">
+        {mightSkills.map(skill => (
           <ContentCard 
             key={skill.id}
             id={skill.id}
