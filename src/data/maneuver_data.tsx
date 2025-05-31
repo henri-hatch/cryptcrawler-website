@@ -505,6 +505,13 @@ const maneuverData: ManeuverData[] = [
     category: ["maneuver"]
   },
   {
+    id: "resuscitation",
+    name: "Resuscitation",
+    description: "In case of an emergency, you can bring the recently deceased back to the world of the living.",
+    maneuverImage: "/manuever-images/Resuscitation.png",
+    category: ["maneuver"]
+  },
+  {
     id: "scalpels-point",
     name: "Scalpel's Point",
     description: "With your precise anatomical knowledge, you are able to strike at a creature's weakest point.",

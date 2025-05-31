@@ -8,6 +8,13 @@ interface MasteryData {
 
 const masteryData: MasteryData[] = [
     {
+        id: "aesculapius",
+        name: "Aesculapius",
+        description: "Surgery is more than just keeping a patient alive, you also take on the responsibility to make the patient stronger than before.",
+        masteryImage: "/mastery-images/Aesculapius.png",
+        category: ["mastery"],
+    },
+    {
         id: "contortionist",
         name: "Contortionist",
         description: "You are able to stretch, bend, and twist your body to absurd extents.",
@@ -27,6 +34,13 @@ const masteryData: MasteryData[] = [
         description: "Your honor I  am innocent!",
         masteryImage: "/mastery-images/Devils_Advocate.png",
         category: ["mastery"]
+    },
+    {
+        id: "flesh-sculptor",
+        name: "Flesh Sculptor",
+        description: "One should try not to get too sentimentally attached to their own skin.",
+        masteryImage: "/mastery-images/Flesh Sculptor.png",
+        category: ["mastery"],
     },
     {
         id: "lucid-dreamer",
