@@ -547,6 +547,13 @@ const maneuverData: ManeuverData[] = [
     category: ["maneuver"]
   },
   {
+    id: "surgeons-remedy",
+    name: "Surgeon's Remedy",
+    description: "With enough patience and some elbow grease, you can fully reanimate the dead in the right circumstances.",
+    maneuverImage: "/manuever-images/Surgeon's Remedy.png",
+    category: ["maneuver"]
+  },
+  {
     id: "sideswipe",
     name: "Sideswipe",
     description: "Some call it dishonorable, you call it winning.",

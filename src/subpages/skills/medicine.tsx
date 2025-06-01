@@ -6,14 +6,15 @@ const Medicine = () => {
         createManeuverSkillSlot("continual-recovery"),
         createManeuverSkillSlot("improvised-bandage"),
         createManeuverSkillSlot("scalpels-point"),
-        createTextSkillSlot("+10 max HP"),
     ]
     const row2 = [
         createManeuverSkillSlot("blackjacket-sting"),
         createManeuverSkillSlot("resuscitation"),
+        createTextSkillSlot("+10 max HP"),
     ]
     const row3 = [
-        createManeuverSkillSlot("resuscitation"),
+        createManeuverSkillSlot("surgeons-remedy"),
+        createTextSkillSlot("+10 max HP"),
     ]
     const row4 = [
         createMasterySkillSlot("aesculapius", "/mastery-images/mastery-logos/AesculapiusMastery.png", "Aesculapius"),
