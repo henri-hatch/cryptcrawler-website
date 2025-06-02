@@ -267,6 +267,13 @@ const maneuverData: ManeuverData[] = [
     category: ["maneuver"]
   },
   {
+    id: "foe-flail",
+    name: "Foe Flail",
+    description: "You don’t just beat your enemies — you beat other enemies with them.",
+    maneuverImage: "/manuever-images/Foe Flail.png",
+    category: ["maneuver"]
+  },
+  {
     id: "frenzied-charge",
     name: "Frenzied Charge",
     description: "Barreling forward you swing your weapon in a series of crazed arcs, hitting anything in your path.",
