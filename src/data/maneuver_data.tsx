@@ -8,6 +8,13 @@ interface ManeuverData {
 
 const maneuverData: ManeuverData[] = [
   {
+    id: "anesthetic-cloud",
+    name: "Anesthetic Cloud",
+    description: "You produce a concentrated cloud of anesthetic gas to put injured creatures to sleep.",
+    maneuverImage: "/manuever-images/Anesthetic Cloud.png",
+    category: ["maneuver"]
+  },
+  {
     id: "anticipated-defense",
     name: "Anticipated Defense",
     description: "Prepared for anything, you can nimbly avoid an oncoming attack.",
@@ -117,6 +124,13 @@ const maneuverData: ManeuverData[] = [
     name: "Command",
     description: "Issue a one-word command that a creature must obey if it fails its saving throw.",
     maneuverImage: "/manuever-images/Command.png",
+    category: ["maneuver"]
+  },
+  {
+    id: "concentrated-courage",
+    name: "Concentrated Courage",
+    description: "You inject a creature with a shot of concentrated courage, bolstering their feats in combat.",
+    maneuverImage: "/manuever-images/Concentrated Courage.png",
     category: ["maneuver"]
   },
   {
@@ -456,6 +470,13 @@ const maneuverData: ManeuverData[] = [
     category: ["maneuver"]
   },
   {
+    id: "miraculous-treatment",
+    name: "Miraculous Treatment",
+    description: "Your expert skill instantly rejuvenates those in your care.",
+    maneuverImage: "/manuever-images/Miraculous Treatment.png",
+    category: ["maneuver"]
+  },
+  {
     id: "misty-step",
     name: "Misty Step",
     description: "Stepping into the Astral Plane, you blink from one location to another.",
@@ -474,6 +495,13 @@ const maneuverData: ManeuverData[] = [
     name: "Parry",
     description: "Use your weapon to deflect an incoming attack, reducing the damage you take.",
     maneuverImage: "/manuever-images/Parry.png",
+    category: ["maneuver"]
+  },
+  {
+    id: "physician's-care",
+    name: "Physician's Care",
+    description: "Your extensive training allows you to care for your allies, pushing them to greater feats.",
+    maneuverImage: "/manuever-images/Physician's Care.png",
     category: ["maneuver"]
   },
   {
