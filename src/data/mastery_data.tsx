@@ -43,6 +43,13 @@ const masteryData: MasteryData[] = [
         category: ["mastery"],
     },
     {
+        id: "hercules",
+        name: "Hercules",
+        description: "Your immense strength makes you tower over foes, lifting and hurling them as if they weighed nothing.",
+        masteryImage: "/mastery-images/Hercules.png",
+        category: ["mastery"]
+    },
+    {
         id: "lucid-dreamer",
         name: "Lucid Dreamer",
         description: "Your perception has grown to such an extreme that you see the world for what it truly is.",
