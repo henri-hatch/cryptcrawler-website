@@ -6,6 +6,7 @@ import skillData from '../data/skill_data';
 import itemData from '../data/item_data';
 import maneuverData from '../data/maneuver_data';
 import masteryData from '../data/mastery_data';
+import originData from '../data/origin_data';
 import { useManeuverModal } from '../components/maneuver_modal';
 import '../components/content_card.css';
 import './search_database.css';
@@ -20,8 +21,11 @@ interface SearchableItem {
   pageRoute?: string;
   maneuverImage?: string;
   masteryImage?: string;
+  originImage?: string;
   gpCost?: number;
   weight?: number;
+  benefit?: string;
+  drawback?: string;
 }
 
 // Combine all searchable data
@@ -43,6 +47,7 @@ const SearchDatabasePage = () => {
       ...itemData.map(item => ({ ...item, dataSource: 'item' })),
       ...maneuverData.map(item => ({ ...item, dataSource: 'maneuver' })),
       ...masteryData.map(item => ({ ...item, dataSource: 'mastery' })),
+      ...originData.map(item => ({ ...item, dataSource: 'origin', imagePath: item.originImage })),
     ] as SearchableItem[];
   }, []);
   
@@ -108,8 +113,8 @@ const SearchDatabasePage = () => {
 
   // Handle card click for items and maneuvers
   const handleCardClick = (item: any) => {
-    if (item.dataSource === 'maneuver' || item.dataSource === 'mastery') {
-      // Use the global modal for maneuvers and masteries
+    if (item.dataSource === 'maneuver' || item.dataSource === 'mastery' || item.dataSource === 'origin') {
+      // Use the global modal for maneuvers, masteries, and origins
       openModal(item.id);
     } else if (item.dataSource === 'item' && !item.pageRoute) {
       // Keep the original modal for items
@@ -165,6 +170,7 @@ const SearchDatabasePage = () => {
               // Get the appropriate image path
               const imageSource = item.imagePath 
                 || (item.dataSource === 'mastery' ? item.masteryImage : item.maneuverImage) 
+                || (item.dataSource === 'origin' ? item.originImage : null)
                 || `/category-icons/${item.dataSource}.png`;
 
                return (
@@ -175,7 +181,7 @@ const SearchDatabasePage = () => {
                    imagePath={imageSource}
                    linkTo={item.pageRoute}
                    description={item.description}
-                   isSelectable={(item.dataSource === 'item' && !item.pageRoute) || item.dataSource === 'maneuver' || item.dataSource === 'mastery'}
+                   isSelectable={(item.dataSource === 'item' && !item.pageRoute) || item.dataSource === 'maneuver' || item.dataSource === 'mastery' || item.dataSource === 'origin'}
                    onSelect={() => handleCardClick(item)}
                    className={`search-card ${item.dataSource}-card ${item.dataSource === 'ancestry' ? 'race-card' : ''}`}
                 />

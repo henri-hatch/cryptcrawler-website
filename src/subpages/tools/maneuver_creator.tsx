@@ -30,10 +30,15 @@ interface CardData {
   skill3Title?: string;
   skill3Description?: string;
   masteryImage?: string | null;
+  // Origin-specific fields
+  benefit?: string;
+  drawback?: string;
+  originImage?: string | null;
 }
 
-const ManeuverCreator: React.FC = () => {
+const CardCreator: React.FC = () => {
   const [cardData, setCardData] = useState<CardData | null>(null);
+  const [activeTab, setActiveTab] = useState<'maneuver' | 'origin' | 'mastery'>('maneuver');
   const cardRef = useRef<HTMLDivElement>(null);
   
   // Add this effect to change the content container class
@@ -72,7 +77,83 @@ const ManeuverCreator: React.FC = () => {
 
   return (
     <div>
-      <h2 style={{ textAlign: 'center' }}>Maneuver Creator</h2>
+      <h2 style={{ textAlign: 'center' }}>Card Creator</h2>
+      
+      {/* Tab Navigation */}
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        marginBottom: '2rem',
+        borderBottom: '1px solid #ddd'
+      }}>
+        <button 
+          style={{
+            padding: '0.75rem 1.5rem',
+            border: 'none',
+            borderLeft: activeTab === 'maneuver' ? '2px solid #800000' : '2px solid #ddd',
+            borderRight: activeTab === 'maneuver' ? '2px solid #800000' : '2px solid #ddd',
+            borderBottom: activeTab === 'maneuver' ? '3px solid #800000' : 'none',
+            borderTop: 'none',
+            backgroundColor: activeTab === 'maneuver' ? '#fff' : '#f8f9fa',
+            color: activeTab === 'maneuver' ? '#800000' : '#333',
+            cursor: 'pointer',
+            fontSize: '1rem',
+            fontWeight: activeTab === 'maneuver' ? 'bold' : 'normal',
+            marginBottom: activeTab === 'maneuver' ? '-1px' : '0',
+            position: 'relative',
+            zIndex: activeTab === 'maneuver' ? '1' : '0',
+            borderRadius: '0'
+          }}
+          onClick={() => setActiveTab('maneuver')}
+        >
+          Maneuver Creator
+        </button>
+        <button 
+          style={{
+            padding: '0.75rem 1.5rem',
+            border: 'none',
+            borderLeft: activeTab === 'origin' ? '2px solid #800000' : '2px solid #ddd',
+            borderRight: activeTab === 'origin' ? '2px solid #800000' : '2px solid #ddd',
+            borderBottom: activeTab === 'origin' ? '3px solid #800000' : 'none',
+            borderTop: 'none',
+            backgroundColor: activeTab === 'origin' ? '#fff' : '#f8f9fa',
+            color: activeTab === 'origin' ? '#800000' : '#333',
+            cursor: 'pointer',
+            fontSize: '1rem',
+            fontWeight: activeTab === 'origin' ? 'bold' : 'normal',
+            marginBottom: activeTab === 'origin' ? '-1px' : '0',
+            position: 'relative',
+            zIndex: activeTab === 'origin' ? '1' : '0',
+            borderRadius: '0'
+          }}
+          onClick={() => setActiveTab('origin')}
+        >
+          Origin Creator
+        </button>
+        <button 
+          style={{
+            padding: '0.75rem 1.5rem',
+            border: 'none',
+            borderLeft: activeTab === 'mastery' ? '2px solid #800000' : '2px solid #ddd',
+            borderRight: activeTab === 'mastery' ? '2px solid #800000' : '2px solid #ddd',
+            borderBottom: activeTab === 'mastery' ? '3px solid #800000' : 'none',
+            borderTop: 'none',
+            backgroundColor: activeTab === 'mastery' ? '#fff' : '#f8f9fa',
+            color: activeTab === 'mastery' ? '#800000' : '#333',
+            cursor: 'pointer',
+            fontSize: '1rem',
+            fontWeight: activeTab === 'mastery' ? 'bold' : 'normal',
+            marginBottom: activeTab === 'mastery' ? '-1px' : '0',
+            position: 'relative',
+            zIndex: activeTab === 'mastery' ? '1' : '0',
+            borderRadius: '0'
+          }}
+          onClick={() => setActiveTab('mastery')}
+        >
+          Mastery Creator
+        </button>
+      </div>
+
       <div style={{ 
         display: 'flex', 
         flexWrap: 'wrap', 
@@ -80,7 +161,7 @@ const ManeuverCreator: React.FC = () => {
         justifyContent: 'center' 
       }}>
         <div style={{ flex: '0 0 auto', minWidth: '350px' }}>
-          <CardForm onSubmit={handleFormSubmit} />
+          <CardForm onSubmit={handleFormSubmit} cardType={activeTab} />
         </div>
 
         <div style={{ flex: '0 0 auto' }}>
@@ -113,6 +194,10 @@ const ManeuverCreator: React.FC = () => {
                   skill3Title={cardData.skill3Title}
                   skill3Description={cardData.skill3Description}
                   masteryImage={cardData.masteryImage}
+                  cardType={activeTab}
+                  benefit={cardData.benefit}
+                  drawback={cardData.drawback}
+                  originImage={cardData.originImage}
                 />
               </div>
               <button onClick={handleDownload} style={{ marginTop: '1rem' }}>
@@ -126,4 +211,4 @@ const ManeuverCreator: React.FC = () => {
   );
 };
 
-export default ManeuverCreator;
+export default CardCreator;

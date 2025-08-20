@@ -320,6 +320,39 @@
   margin: 0;
 }
 
+/* Origin cards container - same styling as ancestry cards */
+.origin-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 200px); /* Fixed width columns */
+  grid-auto-rows: max-content; /* This is crucial - allows rows to adjust height based on content */
+  justify-content: space-between; /* Distribute space between cards */
+  gap: var(--card-gap);
+  align-items: start;
+  width: 100%;
+  box-sizing: border-box;
+  max-height: 500px;
+  overflow-y: auto;
+  border: 1px solid var(--border-color);
+  border-radius: var(--card-radius);
+  background-color: var(--light-bg);
+  padding: 15px;
+}
+
+.origin-cards-container .content-card {
+  margin: 0;
+  width: 100%;
+  height: 300px; /* Fixed height for unexpanded cards */
+}
+
+.origin-cards-container .content-card:hover {
+  z-index: var(--z-hover);
+}
+
+.origin-cards-container .content-card.expanded {
+  height: auto; /* Allow height to grow */
+  z-index: var(--z-expanded);
+}
+
 /* Origin Step */
 .origin-selection-step {
   max-width: 1000px;
@@ -486,6 +519,10 @@
     max-height: 400px;
   }
   
+  .origin-cards-container {
+    max-height: 400px;
+  }
+  
   .skill-cards-container {
     justify-content: space-between;
   }
@@ -515,7 +552,8 @@
 
 @media (max-width: 480px) {
   .skill-card,
-  .ancestry-selection-step .content-card {
+  .ancestry-selection-step .content-card,
+  .origin-cards-container .content-card {
     width: 100%;
     margin: 5px 0;
   }

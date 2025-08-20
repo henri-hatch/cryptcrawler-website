@@ -8,10 +8,10 @@ const ToolsPage = () => {
       <h2>Tools & Resources</h2>
       <p>Helpful tools to enhance your CryptCrawler experience.</p>
       
-      <h3>Maneuver Creator</h3>
-      <p>Create new and custom spells and skills with ease.</p>
-      <button onClick={() => navigate('/tools/maneuver-creator')}>
-        Launch Maneuver Creator
+      <h3>Card Creator</h3>
+      <p>Create new and custom maneuvers, origins, and masteries with ease.</p>
+      <button onClick={() => navigate('/tools/card-creator')}>
+        Launch Card Creator
       </button>
 
       <h3>Dice Roller</h3>

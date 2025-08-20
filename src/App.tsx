@@ -71,7 +71,7 @@ import ArcanaSpells2 from './subpages/skill_subpages/arcana_spells_2.tsx'
 import ArcanaSpells3 from './subpages/skill_subpages/arcana_spells_3.tsx'
 
 // Tools
-import ManeuverCreator from './subpages/tools/maneuver_creator.tsx'
+import CardCreator from './subpages/tools/maneuver_creator.tsx'
 import DiceRoller from './subpages/tools/dice_roller.tsx'
 import CharacterCreator from './subpages/tools/character_creator.tsx'
 import CharacterManager from './subpages/tools/character_manager.tsx'
@@ -173,7 +173,8 @@ function App() {
                 <Route path="/skills/crafting/arcana-spells-3" element={<ArcanaSpells3 />} />
 
                 {/* Tools */}
-                <Route path="/tools/maneuver-creator" element={<ManeuverCreator />} />
+                <Route path="/tools/card-creator" element={<CardCreator />} />
+                <Route path="/tools/maneuver-creator" element={<CardCreator />} />  {/* Legacy route */}
                 <Route path="/tools/dice-roller" element={<DiceRoller />} />
                 <Route path="/tools/character-creator" element={<CharacterCreator />} />
                 <Route path="/tools/character-manager" element={<CharacterManager />} />

@@ -1,153 +1,41 @@
-import itemData from './item_data';
-
 interface OriginData { 
-    equipment: EquipmentOriginData[];
-    quirks: QuirkOriginData[];
-    histories: HistoryOriginData[];
-}
-
-// Simplified interface that references item IDs
-interface EquipmentOriginData {
-    id: string; // References an item ID in itemData
-    origin_cost: number; // Always 1 as per your requirement
-    type: "equipment";
-}
-
-interface QuirkOriginData {
     id: string;
     name: string;
-    origin_cost: number;
     description: string;
-    type: "quirk";
+    benefit: string;
+    drawback: string;
+    originImage: string;
+    category: string[];
 }
 
-interface HistoryOriginData {
-    id: string;
-    name: string;
-    origin_cost: number;
-    description: string;
-    type: "history";
-}
-
-const equipmentOriginData: EquipmentOriginData[] = [
+const originData: OriginData[] = [
     {
-        id: "abacus",
-        origin_cost: 1,
-        type: "equipment"
+        id: "invasive-premonitions",
+        name: "Invasive Premonitions",
+        description: "You sometimes experience disturbing visions of possible futures, giving you glimpses into what might come to pass.",
+        benefit: "Once per day, you may reroll any d20 roll you make, using the new result.",
+        drawback: "You occasionally suffer from vivid nightmares and hallucinations that leave you shaken. When you roll a natural 1 on any d20 roll, you become frightened until the end of your next turn.",
+        originImage: "path/to/image.jpg",
+        category: ["origin"]
     },
     {
-        id: "acid_vial",
-        origin_cost: 1,
-        type: "equipment"
+        id: "street-smart",
+        name: "Street Smart",
+        description: "You grew up on the rough streets, learning to survive through wit and cunning.",
+        benefit: "You gain a +2 bonus to Stealth and Pickpocketing checks.",
+        drawback: "Your rough upbringing makes you distrustful of authority. You have disadvantage on Persuasion checks when dealing with law enforcement or nobles.",
+        originImage: "path/to/street_image.jpg",
+        category: ["origin"]
     },
     {
-        id: "alchemist_fire",
-        origin_cost: 1,
-        type: "equipment"
-    },
-    {
-        id: "alchemist_supplies",
-        origin_cost: 1,
-        type: "equipment"
-    },
-    {
-        id: "antitoxin",
-        origin_cost: 1,
-        type: "equipment"
+        id: "noble-born",
+        name: "Noble Born",
+        description: "You were born into privilege and wealth, with access to the finest education and resources.",
+        benefit: "You start with an additional 100 gold pieces and gain a +2 bonus to History and Persuasion checks.",
+        drawback: "Your sheltered upbringing leaves you unprepared for hardship. You have disadvantage on Survival checks and take double damage from environmental hazards.",
+        originImage: "path/to/noble_image.jpg",
+        category: ["origin"]
     }
-];
-
-// No changes to quirks and histories
-const quirkOriginData: QuirkOriginData[] = [
-    {
-        id: "amnesia",
-        name: "Amnesia",
-        origin_cost: 1,
-        description: "AAA",
-        type: "quirk"
-    },
-    {
-        id: "strange_tattoo",
-        name: "Strange Tattoo",
-        origin_cost: 1,
-        description: "AAA",
-        type: "quirk"
-    },
-    {
-        id: "paranoid",
-        name: "Paranoid",
-        origin_cost: 1,
-        description: "AAA",
-        type: "quirk"
-    },
-    {
-        id: "voices_in_head",
-        name: "Voice(s) in your Head",
-        origin_cost: 1,
-        description: "AAA",
-        type: "quirk"
-    }
-];
-
-const historyOriginData: HistoryOriginData[] = [
-    {
-        id: "betrayed_by_close_friend",
-        name: "Betrayed by a Close Friend",
-        origin_cost: 1,
-        description: "AAA",
-        type: "history"
-    },
-    {
-        id: "parents_were_killed",
-        name: "Parents were Killed",
-        origin_cost: 1,
-        description: "AAA",
-        type: "history"
-    },
-    {
-        id: "inherited_family_wealth",
-        name: "Inherited Family Wealth",
-        origin_cost: 1,
-        description: "AAA",
-        type: "history"
-    },
-    {
-        id: "miraculous_experience",
-        name: "Miraculous Experience",
-        origin_cost: 1,
-        description: "AAA",
-        type: "history"
-    },
-    {
-        id: "discovered_a_secret",
-        name: "Discovered a Long-Lost Secret",
-        origin_cost: 1,
-        description: "AAA",
-        type: "history"
-    }
-];
-
-// Add a helper function to get full item details
-// This will help your UI display correct information
-export const getEquipmentDetails = (itemId: string) => {
-    const originItem = equipmentOriginData.find(item => item.id === itemId);
-    const itemDetails = itemData.find(item => item.id === itemId);
-    
-    if (!originItem || !itemDetails) return null;
-    
-    return {
-        id: itemId,
-        name: itemDetails.name,
-        origin_cost: originItem.origin_cost,
-        description: `${itemDetails.name} (${itemDetails.gpCost}gp, ${itemDetails.weight}lbs)`,
-        type: "equipment" as const
-    };
-};
-
-const originData: OriginData = {
-    equipment: equipmentOriginData,
-    quirks: quirkOriginData,
-    histories: historyOriginData
-};
+]
 
 export default originData;

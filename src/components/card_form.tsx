@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './card_form.css';
 
 interface CardFormProps {
+  cardType?: 'maneuver' | 'origin' | 'mastery';
   onSubmit: (values: {
     title: string;
     usageType: string;
@@ -28,10 +29,14 @@ interface CardFormProps {
     skill3Title?: string;
     skill3Description?: string;
     masteryImage?: string;
+    // Origin-specific fields
+    benefit?: string;
+    drawback?: string;
+    originImage?: string;
   }) => void;
 }
 
-const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
+const CardForm: React.FC<CardFormProps> = ({ onSubmit, cardType = 'maneuver' }) => {
   const [title, setTitle] = useState('');
   const [usageType, setUsageType] = useState('At Will');
   const [tags, setTags] = useState('');
@@ -58,6 +63,11 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
   const [skill3Title, setSkill3Title] = useState('');
   const [skill3Description, setSkill3Description] = useState('');
   const [masteryImage, setMasteryImage] = useState('');
+
+  // Origin fields
+  const [benefit, setBenefit] = useState('');
+  const [drawback, setDrawback] = useState('');
+  const [originImage, setOriginImage] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -86,7 +96,10 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
       skill2Description,
       skill3Title,
       skill3Description,
-      masteryImage
+      masteryImage,
+      benefit,
+      drawback,
+      originImage
     });
   };
 
@@ -105,21 +118,22 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
         />
       </label>
 
-      <label>
-        Usage Type:
-        <select
-          value={usageType}
-          onChange={(e) => setUsageType(e.target.value)}
-        >          <option value="Feature">Feature</option>
-          <option value="At Will">At Will</option>
-          <option value="1/turn">1/turn</option>
-          <option value="1/encounter">1/encounter</option>
-          <option value="2/encounter">2/encounter</option>
-          <option value="1/day">1/day</option>
-          <option value="1/week">1/week</option>
-          <option value="Mastery">Mastery</option>
-        </select>
-      </label>
+      {cardType === 'maneuver' && (
+        <label>
+          Usage Type:
+          <select
+            value={usageType}
+            onChange={(e) => setUsageType(e.target.value)}
+          >          <option value="Feature">Feature</option>
+            <option value="At Will">At Will</option>
+            <option value="1/turn">1/turn</option>
+            <option value="1/encounter">1/encounter</option>
+            <option value="2/encounter">2/encounter</option>
+            <option value="1/day">1/day</option>
+            <option value="1/week">1/week</option>
+          </select>
+        </label>
+      )}
 
       <label>
         Flavor Text:
@@ -130,7 +144,45 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
         />
       </label>
 
-      {usageType !== 'Mastery' && (
+      {/* Origin Creator Fields */}
+      {cardType === 'origin' && (
+        <>
+          <label>
+            Benefit:
+            <textarea
+              value={benefit}
+              onChange={(e) => setBenefit(e.target.value)}
+              placeholder="What benefit does this origin provide?"
+              required
+            />
+          </label>
+
+          <label>
+            Drawback:
+            <textarea
+              value={drawback}
+              onChange={(e) => setDrawback(e.target.value)}
+              placeholder="What drawback does this origin have?"
+              required
+            />
+          </label>
+
+          <label>
+            Origin Image:
+            <input type="file" onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (file) {
+                const reader = new FileReader();
+                reader.onloadend = () => setOriginImage(reader.result as string);
+                reader.readAsDataURL(file);
+              }
+            }} />
+          </label>
+        </>
+      )}
+
+      {/* Maneuver Creator Fields */}
+      {cardType === 'maneuver' && (
         <>
           <label>
             Action Type:
@@ -285,7 +337,8 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit }) => {
         </>
       )}
 
-      {usageType === 'Mastery' && (
+      {/* Mastery Creator Fields */}
+      {cardType === 'mastery' && (
         <>
           <label>
             Skill Type:

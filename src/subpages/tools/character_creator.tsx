@@ -3,7 +3,7 @@ import './character_creator.css';
 import ContentCard from '../../components/content_card';
 import ancestryData from '../../data/ancestry_data';
 import skillData from '../../data/skill_data';
-import originData, { getEquipmentDetails } from '../../data/origin_data';
+import originData from '../../data/origin_data';
 
 // Core data types
 interface CharacterStats {
@@ -39,7 +39,7 @@ interface Character {
   inventory: any[];
   inventory_capacity: number;
   current_inventory_weight: number;
-  origin: string[];
+  origin: string; // Changed from string[] to string since we now select one origin card
 }
 
 // Alignment data definition
@@ -85,7 +85,7 @@ const DEFAULT_CHARACTER: Character = {
   inventory: [],
   inventory_capacity: 50,
   current_inventory_weight: 0,
-  origin: []
+  origin: ''
 };
 
 const DEFAULT_ALLOCATED_STATS = {
@@ -102,7 +102,6 @@ const CharacterCreator: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [character, setCharacter] = useState<Character>(DEFAULT_CHARACTER);
   const [allocatedStats, setAllocatedStats] = useState<{[key: string]: number | null}>(DEFAULT_ALLOCATED_STATS);
-  const [originPoints, setOriginPoints] = useState(5);
   
   // UI state
   const [animating, setAnimating] = useState(false);
@@ -133,27 +132,9 @@ const CharacterCreator: React.FC = () => {
     };
   }, []);
 
-  // Helper function to find origin item by ID
-  const findOriginItem = (itemId: string) => {
-    // Check if it's equipment
-    if (originData.equipment.some(item => item.id === itemId)) {
-      const equipmentDetails = getEquipmentDetails(itemId);
-      return equipmentDetails ? { item: equipmentDetails, category: 'equipment' } : { item: null, category: null };
-    }
-    
-    // Check if it's a quirk
-    const quirk = originData.quirks.find(item => item.id === itemId);
-    if (quirk) {
-      return { item: quirk, category: 'quirk' };
-    }
-    
-    // Check if it's a history
-    const history = originData.histories.find(item => item.id === itemId);
-    if (history) {
-      return { item: history, category: 'history' };
-    }
-    
-    return { item: null, category: null };
+  // Helper function to find origin by ID
+  const findOriginById = (originId: string) => {
+    return originData.find(origin => origin.id === originId);
   };
 
   // Step validation
@@ -163,7 +144,7 @@ const CharacterCreator: React.FC = () => {
       case 1: return character.ancestry !== '';
       case 2: return character.alignment !== '';
       case 3: return Object.values(allocatedStats).every(val => val !== null);
-      case 4: return true;
+      case 4: return character.origin !== ''; // Validate origin selection
       case 5: return character.skills[0].skill_id !== '';
       default: return true;
     }
@@ -224,22 +205,11 @@ const CharacterCreator: React.FC = () => {
     }));
   };
   
-  const handleOriginItemSelect = (itemId: string, itemCost: number) => {
-    if (character.origin.includes(itemId)) {
-      // Deselect item
-      setCharacter(prev => ({
-        ...prev,
-        origin: prev.origin.filter(id => id !== itemId)
-      }));
-      setOriginPoints(prev => prev + itemCost);
-    } else if (originPoints >= itemCost) {
-      // Select item if enough points
-      setCharacter(prev => ({
-        ...prev,
-        origin: [...prev.origin, itemId]
-      }));
-      setOriginPoints(prev => prev - itemCost);
-    }
+  const handleOriginSelection = (originId: string) => {
+    setCharacter(prev => ({
+      ...prev,
+      origin: originId
+    }));
   };
   
   // Calculate available stat values
@@ -406,99 +376,47 @@ const CharacterCreator: React.FC = () => {
         );
       
       case 4: // Origin
-        // Render origin selection lists
-        const renderOriginItem = (item: any, category: string) => {
-          // For equipment items, get full details from item_data
-          if (category === 'equipment') {
-            const equipmentDetails = getEquipmentDetails(item.id);
-            if (!equipmentDetails) return null;
-            
-            return (
-              <div 
-                key={item.id} 
-                className={`origin-item ${character.origin.includes(item.id) ? 'selected' : ''}`}
-                onClick={() => handleOriginItemSelect(item.id, equipmentDetails.origin_cost)}
-              >
-                <div className="origin-item-content">
-                  <span className="origin-item-name">{equipmentDetails.name}</span>
-                  <span className="origin-item-cost">{equipmentDetails.origin_cost} point</span>
-                </div>
-                <div className="origin-item-tooltip">
-                  {equipmentDetails.description}
-                </div>
-                {character.origin.includes(item.id) && <div className="selection-indicator">✓</div>}
-              </div>
-            );
-          }
-          
-          return (
-            <div 
-              key={item.id} 
-              className={`origin-item ${character.origin.includes(item.id) ? 'selected' : ''}`}
-              onClick={() => handleOriginItemSelect(item.id, item.origin_cost)}
-            >
-              <div className="origin-item-content">
-                <span className="origin-item-name">{item.name}</span>
-                <span className="origin-item-cost">{item.origin_cost} {item.origin_cost === 1 ? 'point' : 'points'}</span>
-              </div>
-              <div className="origin-item-tooltip">
-                {item.description}
-              </div>
-              {character.origin.includes(item.id) && <div className="selection-indicator">✓</div>}
-            </div>
-          );
-        };
 
         return (
           <div className="form-step origin-selection-step">
-            <h2>Create Your Origin</h2>
-            <p className="points-display">
-              Origin Points: <span className="points-value">{originPoints}</span>
-            </p>
+            <h2>Choose Your Origin</h2>
+            <p>Select an origin that defines your character's background. Each origin provides both a benefit and a drawback.</p>
             
-            <div className="origin-lists-container">
-              {/* Equipment Column */}
-              <div className="origin-list">
-                <h3>Equipment</h3>
-                <div className="origin-items-container">
-                  {originData.equipment.map(item => renderOriginItem(item, 'equipment'))}
-                </div>
-              </div>
-              
-              {/* Quirks Column */}
-              <div className="origin-list">
-                <h3>Quirks</h3>
-                <div className="origin-items-container">
-                  {originData.quirks.map(item => renderOriginItem(item, 'quirks'))}
-                </div>
-              </div>
-              
-              {/* History Column */}
-              <div className="origin-list">
-                <h3>History</h3>
-                <div className="origin-items-container">
-                  {originData.histories.map(item => renderOriginItem(item, 'histories'))}
-                </div>
-              </div>
+            <div className="origin-cards-container">
+              {originData.map(origin => (
+                <ContentCard
+                  key={origin.id}
+                  id={origin.id}
+                  title={origin.name}
+                  imagePath={origin.originImage}
+                  description={origin.description}
+                  isSelectable={true}
+                  isSelected={character.origin === origin.id}
+                  onSelect={() => handleOriginSelection(origin.id)}
+                  className={`origin-card ${character.origin === origin.id ? 'selected' : ''}`}
+                />
+              ))}
             </div>
       
-            <div className="selected-origins">
-              <h4>Selected Origins:</h4>
-              <ul>
-                {character.origin.length > 0 ? (
-                  character.origin.map(itemId => {
-                    const { item, category } = findOriginItem(itemId);
-                    return item ? (
-                      <li key={itemId}>
-                        <strong>{item.name}</strong> ({category}) - {item.origin_cost} point
-                      </li>
-                    ) : null;
-                  })
-                ) : (
-                  <li>No origins selected</li>
-                )}
-              </ul>
-            </div>
+            {character.origin && (
+              <div className="selected-origin-details">
+                <h4>Selected Origin:</h4>
+                {(() => {
+                  const selectedOrigin = findOriginById(character.origin);
+                  return selectedOrigin ? (
+                    <div className="origin-details">
+                      <h5>{selectedOrigin.name}</h5>
+                      <div className="origin-benefit">
+                        <strong>Benefit:</strong> {selectedOrigin.benefit}
+                      </div>
+                      <div className="origin-drawback">
+                        <strong>Drawback:</strong> {selectedOrigin.drawback}
+                      </div>
+                    </div>
+                  ) : null;
+                })()}
+              </div>
+            )}
           </div>
         );
       
@@ -552,20 +470,20 @@ const CharacterCreator: React.FC = () => {
               <p><strong>Inventory Capacity:</strong> {character.inventory_capacity}</p>
               
               <h3>Origin:</h3>
-              <ul>
-                {character.origin.length > 0 ? (
-                  character.origin.map(itemId => {
-                    const { item, category } = findOriginItem(itemId);
-                    return item ? (
-                      <li key={itemId}>
-                        <strong>{item.name}</strong> ({category})
-                      </li>
-                    ) : null;
-                  })
-                ) : (
-                  <li>No origins selected</li>
-                )}
-              </ul>
+              {character.origin ? (
+                (() => {
+                  const selectedOrigin = findOriginById(character.origin);
+                  return selectedOrigin ? (
+                    <div className="origin-summary">
+                      <p><strong>{selectedOrigin.name}</strong></p>
+                      <p><em>Benefit:</em> {selectedOrigin.benefit}</p>
+                      <p><em>Drawback:</em> {selectedOrigin.drawback}</p>
+                    </div>
+                  ) : <p>Unknown origin</p>;
+                })()
+              ) : (
+                <p>No origin selected</p>
+              )}
             </div>
           </div>
         );

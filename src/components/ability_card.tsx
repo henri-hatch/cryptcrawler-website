@@ -26,6 +26,10 @@ interface AbilityCardProps {
   skill3Title?: string;
   skill3Description?: string;
   masteryImage?: string | null;
+  cardType?: 'maneuver' | 'origin' | 'mastery';
+  benefit?: string;
+  drawback?: string;
+  originImage?: string | null;
 }
 
 const AbilityCard: React.FC<AbilityCardProps> = ({
@@ -54,6 +58,10 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
   skill3Title,
   skill3Description,
   masteryImage,
+  cardType = 'maneuver',
+  benefit,
+  drawback,
+  originImage,
 }) => {
   const [cardWidth, setCardWidth] = useState('700px');
   const [fontSize, setFontSize] = useState('2.0rem');
@@ -80,7 +88,10 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
 
   // Get color based on usage type or skill type for Mastery
   const getHeaderColor = () => {
-    if (usageType === 'Mastery') {
+    if (cardType === 'origin') {
+      return '#7b6129'; // Origin card color
+    }
+    if (usageType === 'Mastery' || cardType === 'mastery') {
       const skillColors: Record<string, string> = {
         'Deception': '#741b47ff',
         'Intimidation': '#741b47ff',
@@ -120,7 +131,71 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
     }
   };
 
-  if (usageType === 'Mastery') {
+  // Origin Card Rendering
+  if (cardType === 'origin') {
+    return (
+      <div
+        style={{
+          width: cardWidth,
+          border: '2px solid #444',
+          borderRadius: '0',
+          overflow: 'hidden',
+          backgroundColor: '#fff',
+          fontFamily: 'sans-serif',
+          maxWidth: '100%',
+          margin: '0 auto',
+        }}
+      >
+        <div
+          style={{
+            backgroundColor: getHeaderColor(),
+            color: '#fff',
+            padding: '8px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+          }}
+        >
+          <h2
+            style={{ margin: '0', fontSize: fontSize, fontWeight: 'normal' }}
+            dangerouslySetInnerHTML={{ __html: title }}
+          />
+          {originImage && (
+            <img src={originImage} alt="Origin" style={{ height: '58px', width: '58px', objectFit: 'contain' }} />
+          )}
+        </div>
+
+        {flavor && (
+          <div style={{ backgroundColor: '#cfc4a7', padding: '8px', fontStyle: 'italic' }}>
+            {flavor}
+          </div>
+        )}
+
+        <div style={{ padding: '8px' }}>
+          <div style={{ marginBottom: '8px' }}>
+            <strong dangerouslySetInnerHTML={{ __html: `✦ Origin` }} />
+          </div>
+
+          {benefit && (
+            <div style={{ marginBottom: '8px' }}>
+              <strong>Benefit: </strong>
+              <span dangerouslySetInnerHTML={{ __html: benefit }} />
+            </div>
+          )}
+
+          {drawback && (
+            <div style={{ marginBottom: '0' }}>
+              <strong>Drawback: </strong>
+              <span dangerouslySetInnerHTML={{ __html: drawback }} />
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  if (usageType === 'Mastery' || cardType === 'mastery') {
     return (
       <div
         style={{

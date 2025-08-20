@@ -2,6 +2,7 @@ import React, { useState, createContext, useContext, ReactNode } from 'react';
 import './maneuver_modal.css';
 import maneuverData from '../data/maneuver_data';
 import masteryData from '../data/mastery_data';
+import originData from '../data/origin_data';
 
 // Interface for the Maneuver object
 interface Maneuver {
@@ -27,7 +28,20 @@ export const ManeuverModalProvider: React.FC<{ children: ReactNode }> = ({ child
   const [copySuccess, setCopySuccess] = useState(false);
 
   const openModal = (id: string) => {
-    // Try mastery first
+    // Try origin first
+    const origin = originData.find(o => o.id === id);
+    if (origin) {
+      setSelectedManeuver({
+        id: origin.id,
+        name: origin.name,
+        description: origin.description,
+        maneuverImage: origin.originImage,
+        category: origin.category
+      });
+      setShowModal(true);
+      return;
+    }
+    // Try mastery second
     const mastery = masteryData.find(m => m.id === id);
     if (mastery) {
       setSelectedManeuver({
@@ -47,7 +61,7 @@ export const ManeuverModalProvider: React.FC<{ children: ReactNode }> = ({ child
       setShowModal(true);
       return;
     }
-    console.warn(`No maneuver or mastery found for id: ${id}`);
+    console.warn(`No maneuver, mastery, or origin found for id: ${id}`);
   };
 
   const closeModal = () => {
