@@ -28,7 +28,8 @@ interface AbilityCardProps {
   masteryImage?: string | null;
   cardType?: 'maneuver' | 'origin' | 'mastery';
   benefit?: string;
-  drawback?: string;
+  titleType?: string;
+  titleText?: string;
   originImage?: string | null;
 }
 
@@ -59,8 +60,8 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
   skill3Description,
   masteryImage,
   cardType = 'maneuver',
-  benefit,
-  drawback,
+  titleType,
+  titleText,
   originImage,
 }) => {
   const [cardWidth, setCardWidth] = useState('700px');
@@ -174,22 +175,12 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
 
         <div style={{ padding: '8px' }}>
           <div style={{ marginBottom: '8px' }}>
-            <strong dangerouslySetInnerHTML={{ __html: `✦ Origin` }} />
-          </div>
-
-          {benefit && (
-            <div style={{ marginBottom: '8px' }}>
-              <strong>Benefit: </strong>
-              <span dangerouslySetInnerHTML={{ __html: benefit }} />
+              <strong dangerouslySetInnerHTML={{ __html: `Title ${'✦'} ${titleType || ''}` }} />
             </div>
-          )}
 
-          {drawback && (
-            <div style={{ marginBottom: '0' }}>
-              <strong>Drawback: </strong>
-              <span dangerouslySetInnerHTML={{ __html: drawback }} />
-            </div>
-          )}
+            {titleText && (
+              <div style={{ marginBottom: '0' }} dangerouslySetInnerHTML={{ __html: titleText }} />
+            )}
         </div>
       </div>
     );

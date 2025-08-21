@@ -29,10 +29,10 @@ interface CardFormProps {
     skill3Title?: string;
     skill3Description?: string;
     masteryImage?: string;
-    // Origin-specific fields
-    benefit?: string;
-    drawback?: string;
-    originImage?: string;
+  // Origin/Title-specific fields
+  titleType?: string;
+  titleText?: string;
+  originImage?: string;
   }) => void;
 }
 
@@ -64,14 +64,14 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit, cardType = 'maneuver' }) 
   const [skill3Description, setSkill3Description] = useState('');
   const [masteryImage, setMasteryImage] = useState('');
 
-  // Origin fields
-  const [benefit, setBenefit] = useState('');
-  const [drawback, setDrawback] = useState('');
+  // Origin / Title fields
+  const [titleType, setTitleType] = useState('');
+  const [titleText, setTitleText] = useState('');
   const [originImage, setOriginImage] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit({ 
+  onSubmit({ 
       title, 
       usageType, 
       tags, 
@@ -97,8 +97,8 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit, cardType = 'maneuver' }) 
       skill3Title,
       skill3Description,
       masteryImage,
-      benefit,
-      drawback,
+  titleType,
+  titleText,
       originImage
     });
   };
@@ -144,26 +144,25 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit, cardType = 'maneuver' }) 
         />
       </label>
 
-      {/* Origin Creator Fields */}
+      {/* Title Creator Fields (replaces Origin Creator inputs) */}
       {cardType === 'origin' && (
         <>
           <label>
-            Benefit:
-            <textarea
-              value={benefit}
-              onChange={(e) => setBenefit(e.target.value)}
-              placeholder="What benefit does this origin provide?"
-              required
+            Title Type:
+            <input
+              type="text"
+              value={titleType}
+              onChange={(e) => setTitleType(e.target.value)}
+              placeholder="e.g. Heritage, Origin, Background"
             />
           </label>
 
           <label>
-            Drawback:
+            Title Text (HTML allowed):
             <textarea
-              value={drawback}
-              onChange={(e) => setDrawback(e.target.value)}
-              placeholder="What drawback does this origin have?"
-              required
+              value={titleText}
+              onChange={(e) => setTitleText(e.target.value)}
+              placeholder="You can include HTML tags here, e.g. <strong>Benefit:</strong>"
             />
           </label>
 

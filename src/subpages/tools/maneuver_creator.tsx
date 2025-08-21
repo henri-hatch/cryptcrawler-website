@@ -22,6 +22,7 @@ interface CardData {
   economy: string;
   actionCost: string;
   special: string;
+  // Mastery-specific fields
   skillType?: string;
   skill1Title?: string;
   skill1Description?: string;
@@ -30,9 +31,9 @@ interface CardData {
   skill3Title?: string;
   skill3Description?: string;
   masteryImage?: string | null;
-  // Origin-specific fields
-  benefit?: string;
-  drawback?: string;
+  // Origin/Title-specific fields
+  titleType?: string;
+  titleText?: string;
   originImage?: string | null;
 }
 
@@ -86,7 +87,7 @@ const CardCreator: React.FC = () => {
         marginBottom: '2rem',
         borderBottom: '1px solid #ddd'
       }}>
-        <button 
+  <button 
           style={{
             padding: '0.75rem 1.5rem',
             border: 'none',
@@ -128,7 +129,7 @@ const CardCreator: React.FC = () => {
           }}
           onClick={() => setActiveTab('origin')}
         >
-          Origin Creator
+          Title Creator
         </button>
         <button 
           style={{
@@ -195,8 +196,8 @@ const CardCreator: React.FC = () => {
                   skill3Description={cardData.skill3Description}
                   masteryImage={cardData.masteryImage}
                   cardType={activeTab}
-                  benefit={cardData.benefit}
-                  drawback={cardData.drawback}
+                  titleType={cardData.titleType}
+                  titleText={cardData.titleText}
                   originImage={cardData.originImage}
                 />
               </div>

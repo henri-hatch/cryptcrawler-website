@@ -16,7 +16,7 @@ const originData: OriginData[] = [
         benefit: "Once per day, you may reroll any d20 roll you make, using the new result.",
         drawback: "You occasionally suffer from vivid nightmares and hallucinations that leave you shaken. When you roll a natural 1 on any d20 roll, you become frightened until the end of your next turn.",
         originImage: "path/to/image.jpg",
-        category: ["origin"]
+        category: ["origin", "title"]
     },
     {
         id: "street-smart",
@@ -25,7 +25,7 @@ const originData: OriginData[] = [
         benefit: "You gain a +2 bonus to Stealth and Pickpocketing checks.",
         drawback: "Your rough upbringing makes you distrustful of authority. You have disadvantage on Persuasion checks when dealing with law enforcement or nobles.",
         originImage: "path/to/street_image.jpg",
-        category: ["origin"]
+        category: ["origin", "title"]
     },
     {
         id: "noble-born",
@@ -34,7 +34,7 @@ const originData: OriginData[] = [
         benefit: "You start with an additional 100 gold pieces and gain a +2 bonus to History and Persuasion checks.",
         drawback: "Your sheltered upbringing leaves you unprepared for hardship. You have disadvantage on Survival checks and take double damage from environmental hazards.",
         originImage: "path/to/noble_image.jpg",
-        category: ["origin"]
+        category: ["origin", "title"]
     }
 ]
 
