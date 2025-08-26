@@ -108,7 +108,7 @@ const CharacterCreator: React.FC = () => {
   const [animationDirection, setAnimationDirection] = useState('forward');
   
   // Stats configuration
-  const availableStatValues = [3, 3, 2, 1, 1, 0];
+  const availableStatValues = [3, 2, 1, 1, 0, -1];
   
   // Update derived values when stats change
   useEffect(() => {
@@ -144,7 +144,7 @@ const CharacterCreator: React.FC = () => {
       case 1: return character.ancestry !== '';
       case 2: return character.alignment !== '';
       case 3: return Object.values(allocatedStats).every(val => val !== null);
-      case 4: return character.origin !== ''; // Validate origin selection
+      case 4: return character.origin !== '';
       case 5: return character.skills[0].skill_id !== '';
       default: return true;
     }
