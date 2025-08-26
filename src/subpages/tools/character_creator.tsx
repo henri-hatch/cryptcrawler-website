@@ -137,6 +137,12 @@ const CharacterCreator: React.FC = () => {
     return originData.find(origin => origin.id === originId);
   };
 
+  // Format a stat modifier so negatives display as "-1" instead of "+-1"
+  const formatModifier = (value: number | null | undefined) => {
+    if (value === null || value === undefined) return '';
+    return value >= 0 ? `+${value}` : `${value}`;
+  };
+
   // Step validation
   const validateCurrentStep = () => {
     switch (currentStep) {
@@ -331,7 +337,7 @@ const CharacterCreator: React.FC = () => {
               <div className="stat-values">
                 {[...new Set(availableStatValues)].map(value => (
                   <div key={value} className="stat-value">
-                    +{value} <span className="count">
+                    {formatModifier(value)} <span className="count">
                       × {availableCounts[value] || 0}
                     </span>
                   </div>
@@ -355,7 +361,7 @@ const CharacterCreator: React.FC = () => {
                             onClick={() => handleStatAllocation(statKey, value)}
                             disabled={isDisabled}
                           >
-                            +{value}
+                            {formatModifier(value)}
                           </button>
                         );
                       })}
@@ -462,7 +468,7 @@ const CharacterCreator: React.FC = () => {
               <h3>Stats:</h3>
               <ul>
                 {Object.entries(character.stats).map(([stat, value]) => (
-                  <li key={stat}><strong>{stat.charAt(0).toUpperCase() + stat.slice(1)}:</strong> +{value}</li>
+                  <li key={stat}><strong>{stat.charAt(0).toUpperCase() + stat.slice(1)}:</strong> {formatModifier(value as number)}</li>
                 ))}
               </ul>
               <p><strong>Starting Skill:</strong> {character.skills[0]?.skill_name}</p>
