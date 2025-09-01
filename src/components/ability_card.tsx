@@ -4,16 +4,7 @@ interface AbilityCardProps {
   title: string;
   usageType: string;
   tags: string;
-  target: string;
-  trigger?: string;
-  savingThrowActive?: string;
-  savingThrowDC?: string;
-  abilityCheckActive?: string;
-  abilityCheckAgainst?: string;
-  damage: string;
-  hitEffect: string;
-  success?: string;
-  fail?: string;
+  maneuverText?: string;
   flavor?: string;
   economy?: string;
   actionCost?: string;
@@ -37,16 +28,7 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
   title,
   usageType,
   tags,
-  target,
-  trigger,
-  savingThrowActive,
-  savingThrowDC,
-  abilityCheckActive,
-  abilityCheckAgainst,
-  damage,
-  hitEffect,
-  success,
-  fail,
+  maneuverText,
   flavor,
   economy,
   actionCost,
@@ -324,99 +306,17 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
           </div>
         )}
 
-        {/* Target (only if provided) */}
-        {target && (
-          <div style={{ marginBottom: (trigger || damage || hitEffect || special) ? '8px' : '0' }}>
-            <strong>Target:</strong> <span dangerouslySetInnerHTML={{ __html: target }} />
-          </div>
-        )}
-
-        {/* Trigger (only if provided and economy is Reaction) */}
-        {economy === 'Reaction' && trigger && (
-          <div style={{ marginBottom: (damage || hitEffect || special) ? '8px' : '0' }}>
-            <strong>Trigger:</strong> <span dangerouslySetInnerHTML={{ __html: trigger }} />
-          </div>
-        )}
-
-        {/* Saving Throw (only if both active and DC are provided) */}
-        {savingThrowActive && savingThrowDC && (
-          <div
-            style={{
-              color: '#720a02',
-              marginBottom: (success || fail) ? '8px' : (damage || hitEffect || special) ? '8px' : '0'
-            }}
-          >
-            <strong>Saving Throw:</strong>{' '}
-            <span dangerouslySetInnerHTML={{ __html: `${savingThrowActive} vs DC ${savingThrowDC}` }} />
-          </div>
-        )}
-        
-        {/* Ability Check (only if both active and against are provided) */}
-        {abilityCheckActive && abilityCheckAgainst && (
-          <div
-            style={{
-              color: '#720a02',
-              marginBottom: (success || fail) ? '8px' : (damage || hitEffect || special) ? '8px' : '0'
-            }}
-          >
-            <strong>Ability Check:</strong>{' '}
-            <span dangerouslySetInnerHTML={{ __html: `${abilityCheckActive} vs ${abilityCheckAgainst}` }} />
-          </div>
-        )}
-        
-        {/* Success (only if provided) - indented under Saving Throw or Ability Check */}
-        {success && (
-          <div
-            style={{
-              marginBottom: fail ? '8px' : (damage || hitEffect || special) ? '8px' : '0',
-              paddingLeft: '20px'
-            }}
-          >
-            <strong>Success:</strong>{' '}
-            <span dangerouslySetInnerHTML={{ __html: success }} />
-          </div>
-        )}
-
-        {/* Fail (only if provided) - indented under Saving Throw */}
-        {fail && (
-          <div
-            style={{
-              marginBottom: (damage || hitEffect || special) ? '8px' : '0',
-              paddingLeft: '20px'
-            }}
-          >
-            <strong>Fail:</strong>{' '}
-            <span dangerouslySetInnerHTML={{ __html: fail }} />
-          </div>
-        )}
-
-        {/* Damage (only if provided) */}
-        {damage && (
-          <div
-            style={{
-              color: '#720a02',
-              marginBottom: hitEffect || special ? '8px' : '0'
-            }}
-          >
-            <strong>Damage:</strong>{' '}
-            <span dangerouslySetInnerHTML={{ __html: damage }} />
-          </div>
-        )}
-
-        {/* Hit Effect (only if provided) */}
-        {hitEffect && (
-          <div style={{ marginBottom: special ? '8px' : '0' }}>
-            <strong>On Hit:</strong>{' '}
-            <span dangerouslySetInnerHTML={{ __html: hitEffect }} />
-          </div>
-        )}
-        
-        {/* Special (only if provided) */}
-        {special && (
-          <div>
-            <strong>Special:</strong>{' '}
-            <span dangerouslySetInnerHTML={{ __html: special }} />
-          </div>
+        {/* Maneuver Text (single HTML-capable field replacing target/saving/damage/etc) */}
+        {maneuverText ? (
+          <div style={{ marginBottom: '8px' }} dangerouslySetInnerHTML={{ __html: maneuverText }} />
+        ) : (
+          /* Fallback: if no maneuverText provided, optionally show Special */
+          special ? (
+            <div>
+              <strong>Special:</strong>{' '}
+              <span dangerouslySetInnerHTML={{ __html: special }} />
+            </div>
+          ) : null
         )}
       </div>
     </div>

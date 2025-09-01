@@ -7,20 +7,10 @@ interface CardFormProps {
     title: string;
     usageType: string;
     tags: string;
-    target: string;
-    trigger: string;
-    savingThrowActive: string;
-    savingThrowDC: string;
-    abilityCheckActive: string;
-    abilityCheckAgainst: string;
-    damage: string;
-    hitEffect: string;
-    success: string;
-    fail: string;
+    maneuverText?: string;
     flavor: string;
     economy: string;
-    actionCost: string;
-    special: string;
+    special?: string;
     skillType?: string;
     skill1Title?: string;
     skill1Description?: string;
@@ -29,30 +19,19 @@ interface CardFormProps {
     skill3Title?: string;
     skill3Description?: string;
     masteryImage?: string;
-  // Origin/Title-specific fields
-  titleType?: string;
-  titleText?: string;
-  originImage?: string;
-  }) => void;
+    // Origin/Title-specific fields
+    titleType?: string;
+    titleText?: string;
+    originImage?: string;
+    }) => void;
 }
 
 const CardForm: React.FC<CardFormProps> = ({ onSubmit, cardType = 'maneuver' }) => {
   const [title, setTitle] = useState('');
   const [usageType, setUsageType] = useState('At Will');
   const [tags, setTags] = useState('');
-  const [target, setTarget] = useState('');
-  const [trigger, setTrigger] = useState('');
-  const [savingThrowActive, setSavingThrowActive] = useState('');
-  const [savingThrowDC, setSavingThrowDC] = useState('');
-  const [abilityCheckActive, setAbilityCheckActive] = useState('');
-  const [abilityCheckAgainst, setAbilityCheckAgainst] = useState('');
-  const [damage, setDamage] = useState('');
-  const [hitEffect, setHitEffect] = useState('');
-  const [success, setSuccess] = useState('');
-  const [fail, setFail] = useState('');
+  const [maneuverText, setManeuverText] = useState('');
   const [flavor, setFlavor] = useState('');  const [economy, setEconomy] = useState('Action');
-  const [actionCost, setActionCost] = useState('');
-  const [special, setSpecial] = useState('');
   
   // Mastery fields
   const [skillType, setSkillType] = useState('');
@@ -75,20 +54,9 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit, cardType = 'maneuver' }) 
       title, 
       usageType, 
       tags, 
-      target, 
-      trigger,
-      savingThrowActive,
-      savingThrowDC,
-      abilityCheckActive,
-      abilityCheckAgainst,
-      damage, 
-      hitEffect,
-      success,
-      fail,
+      maneuverText,
       flavor,
       economy,
-      actionCost,
-      special,
       skillType,
       skill1Title,
       skill1Description,
@@ -104,7 +72,7 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit, cardType = 'maneuver' }) 
   };
 
   // Define the ability score options
-  const abilityScores = ['', 'MIG', 'FIN', 'REA', 'FOR', 'INT', 'PRE'];
+  // ability score options removed — maneuver text field used instead
 
   return (
     <form onSubmit={handleSubmit} className="card-form">
@@ -200,16 +168,6 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit, cardType = 'maneuver' }) 
           </label>
 
           <label>
-            Action Cost:
-            <input
-              type="text"
-              value={actionCost}
-              onChange={(e) => setActionCost(e.target.value)}
-              placeholder="e.g. 2 opportunity, 3 drama (optional)"
-            />
-          </label>
-
-          <label>
             Tags:
             <input
               type="text"
@@ -218,119 +176,12 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit, cardType = 'maneuver' }) 
               placeholder="e.g. Martial, Weapon, Melee (comma separated)"
             />
           </label>
-
           <label>
-            Target:
-            <input
-              type="text"
-              value={target}
-              onChange={(e) => setTarget(e.target.value)}
-              placeholder="e.g. Melee, Ranged 30ft, etc. (optional)"
-            />
-          </label>
-
-          {/* Add the new Saving Throw fields after the Target field */}
-          <label>
-            Saving Throw:
-            <div className="saving-throw-container">
-              <select
-                value={savingThrowActive}
-                onChange={(e) => setSavingThrowActive(e.target.value)}
-              >
-                {abilityScores.map(score => (
-                  <option key={`active-${score}`} value={score}>{score}</option>
-                ))}
-              </select>
-              <span className="vs-text">vs DC</span>
-              <input
-                type="text"
-                value={savingThrowDC}
-                onChange={(e) => setSavingThrowDC(e.target.value)}
-                placeholder="17 or 'Spell Save'"
-              />
-            </div>
-          </label>
-
-          {/* Add the new Ability Check fields after the Saving Throw fields */}
-          <label>
-            Ability Check:
-            <div className="ability-check-container">
-              <select
-                value={abilityCheckActive}
-                onChange={(e) => setAbilityCheckActive(e.target.value)}
-              >
-                {abilityScores.map(score => (
-                  <option key={`active-${score}`} value={score}>{score}</option>
-                ))}
-              </select>
-              <span className="vs-text">vs</span>
-              <select
-                value={abilityCheckAgainst}
-                onChange={(e) => setAbilityCheckAgainst(e.target.value)}
-              >
-                {abilityScores.map(score => (
-                  <option key={`against-${score}`} value={score}>{score}</option>
-                ))}
-              </select>
-            </div>
-          </label>
-
-          {/* Conditionally render trigger field only when Reaction is selected */}
-          {economy === 'Reaction' && (
-            <label>
-              Trigger:
-              <textarea
-                value={trigger}
-                onChange={(e) => setTrigger(e.target.value)}
-                placeholder="What triggers this reaction?"
-              />
-            </label>
-          )}
-
-          <label>
-            Damage:
-            <input
-              type="text"
-              value={damage}
-              onChange={(e) => setDamage(e.target.value)}
-              placeholder="e.g. 2d6 + STR (optional)"
-            />
-          </label>
-
-          <label>
-            Hit:
+            Maneuver Text (HTML allowed):
             <textarea
-              value={hitEffect}
-              onChange={(e) => setHitEffect(e.target.value)}
-              placeholder="What effect happens on a hit? (optional)"
-            />
-          </label>
-
-          {/* Add the new Success and Fail fields right after Hit */}
-          <label>
-            Success:
-            <textarea
-              value={success}
-              onChange={(e) => setSuccess(e.target.value)}
-              placeholder="What happens on a successful save? (optional)"
-            />
-          </label>
-
-          <label>
-            Fail:
-            <textarea
-              value={fail}
-              onChange={(e) => setFail(e.target.value)}
-              placeholder="What happens on a failed save? (optional)"
-            />
-          </label>
-
-          <label>
-            Special:
-            <textarea
-              value={special}
-              onChange={(e) => setSpecial(e.target.value)}
-              placeholder="Any special effects or additional information"
+              value={maneuverText}
+              onChange={(e) => setManeuverText(e.target.value)}
+              placeholder="Enter the combined maneuver text (can include HTML tags)"
             />
           </label>
         </>

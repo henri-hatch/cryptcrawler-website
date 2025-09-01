@@ -8,20 +8,11 @@ interface CardData {
   title: string;
   usageType: string;
   tags: string;
-  target: string;
-  trigger: string;
-  savingThrowActive: string;
-  savingThrowDC: string;
-  abilityCheckActive: string;
-  abilityCheckAgainst: string;
-  damage: string;
-  hitEffect: string;
-  success: string;
-  fail: string;
+  maneuverText?: string;
   flavor: string;
   economy: string;
-  actionCost: string;
-  special: string;
+  actionCost?: string;
+  special?: string;
   // Mastery-specific fields
   skillType?: string;
   skill1Title?: string;
@@ -173,19 +164,9 @@ const CardCreator: React.FC = () => {
                   title={cardData.title}
                   usageType={cardData.usageType}
                   tags={cardData.tags}
-                  target={cardData.target}
-                  trigger={cardData.trigger}
-                  savingThrowActive={cardData.savingThrowActive}
-                  savingThrowDC={cardData.savingThrowDC} // Changed from savingThrowPassive
-                  abilityCheckActive={cardData.abilityCheckActive}
-                  abilityCheckAgainst={cardData.abilityCheckAgainst}
-                  damage={cardData.damage}
-                  hitEffect={cardData.hitEffect}
-                  success={cardData.success}
-                  fail={cardData.fail}
+                  maneuverText={cardData.maneuverText}
                   flavor={cardData.flavor}
                   economy={cardData.economy}
-                  actionCost={cardData.actionCost}
                   special={cardData.special}
                   skillType={cardData.skillType}
                   skill1Title={cardData.skill1Title}
