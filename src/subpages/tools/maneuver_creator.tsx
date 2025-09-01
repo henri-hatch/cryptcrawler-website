@@ -13,6 +13,7 @@ interface CardData {
   economy: string;
   actionCost?: string;
   special?: string;
+  isPermanent?: boolean;
   // Mastery-specific fields
   skillType?: string;
   skill1Title?: string;
@@ -168,6 +169,7 @@ const CardCreator: React.FC = () => {
                   flavor={cardData.flavor}
                   economy={cardData.economy}
                   special={cardData.special}
+                  isPermanent={cardData.isPermanent}
                   skillType={cardData.skillType}
                   skill1Title={cardData.skill1Title}
                   skill1Description={cardData.skill1Description}

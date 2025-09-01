@@ -9,6 +9,7 @@ interface AbilityCardProps {
   economy?: string;
   actionCost?: string;
   special?: string;
+  isPermanent?: boolean;
   skillType?: string;
   skill1Title?: string;
   skill1Description?: string;
@@ -33,6 +34,7 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
   economy,
   actionCost,
   special,
+  isPermanent,
   skillType,
   skill1Title,
   skill1Description,
@@ -68,6 +70,12 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
+  // Helper function to get display title with star if needed
+  const getDisplayTitle = () => {
+    const shouldShowStar = cardType === 'origin' || cardType === 'mastery' || (cardType === 'maneuver' && isPermanent);
+    return shouldShowStar ? `★ ${title}` : title;
+  };
 
   // Get color based on usage type or skill type for Mastery
   const getHeaderColor = () => {
@@ -142,7 +150,7 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
         >
           <h2
             style={{ margin: '0', fontSize: fontSize, fontWeight: 'normal' }}
-            dangerouslySetInnerHTML={{ __html: title }}
+            dangerouslySetInnerHTML={{ __html: getDisplayTitle() }}
           />
           {originImage && (
             <img src={originImage} alt="Origin" style={{ height: '58px', width: '58px', objectFit: 'contain' }} />
@@ -195,7 +203,7 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
         >
           <h2
             style={{ margin: '0', fontSize: fontSize, fontWeight: 'normal' }}
-            dangerouslySetInnerHTML={{ __html: title }}
+            dangerouslySetInnerHTML={{ __html: getDisplayTitle() }}
           />
           {masteryImage && (
             <img src={masteryImage} alt="Mastery" style={{ height: '58px', width: '58px', objectFit: 'contain' }} />
@@ -275,7 +283,7 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
             fontSize: fontSize,
             fontWeight: 'normal'
           }}
-          dangerouslySetInnerHTML={{ __html: title }}
+          dangerouslySetInnerHTML={{ __html: getDisplayTitle() }}
         />
         <p style={{ 
           margin: '0',

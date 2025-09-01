@@ -11,6 +11,7 @@ interface CardFormProps {
     flavor: string;
     economy: string;
     special?: string;
+    isPermanent?: boolean;
     skillType?: string;
     skill1Title?: string;
     skill1Description?: string;
@@ -31,7 +32,9 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit, cardType = 'maneuver' }) 
   const [usageType, setUsageType] = useState('At Will');
   const [tags, setTags] = useState('');
   const [maneuverText, setManeuverText] = useState('');
-  const [flavor, setFlavor] = useState('');  const [economy, setEconomy] = useState('Action');
+  const [flavor, setFlavor] = useState('');
+  const [economy, setEconomy] = useState('Action');
+  const [isPermanent, setIsPermanent] = useState(false);
   
   // Mastery fields
   const [skillType, setSkillType] = useState('');
@@ -50,24 +53,25 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit, cardType = 'maneuver' }) 
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-  onSubmit({ 
-      title, 
-      usageType, 
-      tags, 
-      maneuverText,
-      flavor,
-      economy,
-      skillType,
-      skill1Title,
-      skill1Description,
-      skill2Title,
-      skill2Description,
-      skill3Title,
-      skill3Description,
-      masteryImage,
-  titleType,
-  titleText,
-      originImage
+    onSubmit({ 
+        title,
+        usageType,
+        tags,
+        maneuverText,
+        flavor,
+        economy,
+        isPermanent,
+        skillType,
+        skill1Title,
+        skill1Description,
+        skill2Title,
+        skill2Description,
+        skill3Title,
+        skill3Description,
+        masteryImage,
+        titleType,
+        titleText,
+        originImage
     });
   };
 
@@ -183,6 +187,16 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit, cardType = 'maneuver' }) 
               onChange={(e) => setManeuverText(e.target.value)}
               placeholder="Enter the combined maneuver text (can include HTML tags)"
             />
+          </label>
+
+          <label style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span>Permanent?
+            <input
+              type="checkbox"
+              checked={isPermanent}
+              onChange={(e) => setIsPermanent(e.target.checked)}
+            />
+            </span>
           </label>
         </>
       )}
