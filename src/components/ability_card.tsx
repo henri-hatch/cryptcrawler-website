@@ -58,7 +58,7 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
   titleText,
   originImage,
 }) => {
-  const [cardWidth, setCardWidth] = useState('700px');
+  const [cardWidth, setCardWidth] = useState('550px');
   const [fontSize, setFontSize] = useState('2.0rem');
   
   // Add responsive sizing based on screen width
@@ -68,7 +68,7 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
         setCardWidth('100%');
         setFontSize('1.5rem');
       } else {
-        setCardWidth('700px');
+        setCardWidth('550px');
         setFontSize('2.0rem');
       }
     };
@@ -168,19 +168,19 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
           style={{
             backgroundColor: getHeaderColor(),
             color: '#fff',
-            padding: '8px',
+            padding: '4px 8px',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
             flexWrap: 'wrap',
           }}
         >
-          <h2
-            style={{ margin: '0', fontSize: fontSize, fontWeight: 'normal' }}
+          <h4
+            style={{ margin: '0', fontSize: '1.2rem', fontWeight: 'normal' }}
             dangerouslySetInnerHTML={{ __html: getDisplayTitle() }}
           />
           {originImage && (
-            <img src={originImage} alt="Origin" style={{ height: '58px', width: '58px', objectFit: 'contain' }} />
+            <img src={originImage} alt="Origin" style={{ height: '40px', width: '40px', objectFit: 'contain' }} />
           )}
         </div>
 
@@ -297,25 +297,31 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
         style={{ 
           backgroundColor: getHeaderColor(), 
           color: '#fff', 
-          padding: '8px',
+          padding: '4px 8px',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          flexWrap: 'wrap',
+          gap: '8px',
         }}
       >
-        <h2
+        <h4
           style={{
             margin: '0',
-            fontSize: fontSize,
-            fontWeight: 'normal'
+            fontSize: '1.2rem',
+            fontWeight: 'normal',
+            flex: '1',
+            wordWrap: 'break-word',
+            overflowWrap: 'break-word',
+            hyphens: 'auto'
           }}
           dangerouslySetInnerHTML={{ __html: getDisplayTitle() }}
         />
         <p style={{ 
           margin: '0',
-          fontSize: fontSize,
-          fontWeight: 'normal'
+          fontSize: '1.2rem',
+          fontWeight: 'normal',
+          flexShrink: 0,
+          whiteSpace: 'nowrap'
         }}>{usageType}</p>
       </div>
 
