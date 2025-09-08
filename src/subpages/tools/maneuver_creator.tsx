@@ -4,6 +4,12 @@ import domtoimage from 'dom-to-image';
 import CardForm from '../../components/card_form';
 import AbilityCard from '../../components/ability_card';
 
+interface ManeuverField {
+  id: string;
+  keyword: string;
+  value: string;
+}
+
 interface CardData {
   title: string;
   usageType: string;
@@ -14,6 +20,8 @@ interface CardData {
   actionCost?: string;
   special?: string;
   isPermanent?: boolean;
+  tier?: string;
+  maneuverFields?: ManeuverField[];
   // Mastery-specific fields
   skillType?: string;
   skill1Title?: string;
@@ -170,6 +178,8 @@ const CardCreator: React.FC = () => {
                   economy={cardData.economy}
                   special={cardData.special}
                   isPermanent={cardData.isPermanent}
+                  tier={cardData.tier}
+                  maneuverFields={cardData.maneuverFields}
                   skillType={cardData.skillType}
                   skill1Title={cardData.skill1Title}
                   skill1Description={cardData.skill1Description}

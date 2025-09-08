@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
+interface ManeuverField {
+  id: string;
+  keyword: string;
+  value: string;
+}
+
 interface AbilityCardProps {
   title: string;
   usageType: string;
@@ -10,6 +16,8 @@ interface AbilityCardProps {
   actionCost?: string;
   special?: string;
   isPermanent?: boolean;
+  tier?: string;
+  maneuverFields?: ManeuverField[];
   skillType?: string;
   skill1Title?: string;
   skill1Description?: string;
@@ -35,6 +43,8 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
   actionCost,
   special,
   isPermanent,
+  tier,
+  maneuverFields,
   skillType,
   skill1Title,
   skill1Description,
@@ -71,10 +81,27 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
     };
   }, []);
 
-  // Helper function to get display title with star if needed
+  // Helper function to get display title with tier symbols and star if needed
   const getDisplayTitle = () => {
-    const shouldShowStar = cardType === 'origin' || cardType === 'mastery' || (cardType === 'maneuver' && isPermanent);
-    return shouldShowStar ? `★ ${title}` : title;
+    let tierSymbol = '';
+    if (cardType === 'maneuver' && tier) {
+      switch (tier) {
+        case 'Tier 1':
+          tierSymbol = '•󠁏 ';
+          break;
+        case 'Tier 2':
+          tierSymbol = '•• ';
+          break;
+        case 'Tier 3':
+          tierSymbol = '∴ ';
+          break;
+      }
+    }
+    
+    const shouldShowStar = cardType === 'origin' || cardType === 'mastery';
+    const starPrefix = shouldShowStar ? '★ ' : '';
+    
+    return `${tierSymbol}${starPrefix}${title}`;
   };
 
   // Get color based on usage type or skill type for Mastery
@@ -304,7 +331,7 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
       <div style={{ padding: '8px' }}>
         {/* Tags Row */}
         <div style={{ marginBottom: '8px' }}>
-          <strong dangerouslySetInnerHTML={{ __html: `${usageType} ✦ ${tags || 'None'}` }} />
+          <strong dangerouslySetInnerHTML={{ __html: `${usageType} ${isPermanent ? '✧' : '✦'} ${tags || 'None'}` }} />
         </div>
 
         {/* Economy (if provided) */}
@@ -314,17 +341,38 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
           </div>
         )}
 
-        {/* Maneuver Text (single HTML-capable field replacing target/saving/damage/etc) */}
-        {maneuverText ? (
-          <div style={{ marginBottom: '8px' }} dangerouslySetInnerHTML={{ __html: maneuverText }} />
-        ) : (
-          /* Fallback: if no maneuverText provided, optionally show Special */
-          special ? (
-            <div>
-              <strong>Special:</strong>{' '}
-              <span dangerouslySetInnerHTML={{ __html: special }} />
+        {/* Dynamic Maneuver Fields */}
+        {maneuverFields && maneuverFields.length > 0 ? (
+          maneuverFields.map((field, index) => (
+            <div 
+              key={field.id} 
+              style={{ 
+                marginBottom: index === maneuverFields.length - 1 ? '0' : '8px',
+                color: field.keyword === 'Damage' ? '#720a02' : 'inherit'
+              }}
+            >
+              <strong style={{ color: field.keyword === 'Damage' ? '#720a02' : 'inherit' }}>
+                {field.keyword}:
+              </strong>{' '}
+              <span 
+                dangerouslySetInnerHTML={{ __html: field.value }} 
+                style={{ color: field.keyword === 'Damage' ? '#720a02' : 'inherit' }}
+              />
             </div>
-          ) : null
+          ))
+        ) : (
+          /* Fallback: if no dynamic fields and maneuverText provided */
+          maneuverText ? (
+            <div style={{ marginBottom: '8px' }} dangerouslySetInnerHTML={{ __html: maneuverText }} />
+          ) : (
+            /* Final fallback: if no maneuverText or fields provided, optionally show Special */
+            special ? (
+              <div>
+                <strong>Special:</strong>{' '}
+                <span dangerouslySetInnerHTML={{ __html: special }} />
+              </div>
+            ) : null
+          )
         )}
       </div>
     </div>

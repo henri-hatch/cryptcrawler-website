@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import './card_form.css';
 
+interface ManeuverField {
+  id: string;
+  keyword: string;
+  value: string;
+}
+
 interface CardFormProps {
   cardType?: 'maneuver' | 'origin' | 'mastery';
   onSubmit: (values: {
@@ -12,6 +18,8 @@ interface CardFormProps {
     economy: string;
     special?: string;
     isPermanent?: boolean;
+    tier?: string;
+    maneuverFields?: ManeuverField[];
     skillType?: string;
     skill1Title?: string;
     skill1Description?: string;
@@ -31,10 +39,12 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit, cardType = 'maneuver' }) 
   const [title, setTitle] = useState('');
   const [usageType, setUsageType] = useState('At Will');
   const [tags, setTags] = useState('');
-  const [maneuverText, setManeuverText] = useState('');
   const [flavor, setFlavor] = useState('');
   const [economy, setEconomy] = useState('Action');
   const [isPermanent, setIsPermanent] = useState(false);
+  const [tier, setTier] = useState('Tier 1');
+  const [maneuverFields, setManeuverFields] = useState<ManeuverField[]>([]);
+  const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
   
   // Mastery fields
   const [skillType, setSkillType] = useState('');
@@ -57,10 +67,11 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit, cardType = 'maneuver' }) 
         title,
         usageType,
         tags,
-        maneuverText,
         flavor,
         economy,
         isPermanent,
+        tier,
+        maneuverFields,
         skillType,
         skill1Title,
         skill1Description,
@@ -73,6 +84,49 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit, cardType = 'maneuver' }) 
         titleText,
         originImage
     });
+  };
+
+  // Helper functions for maneuver fields
+  const addManeuverField = () => {
+    const newField: ManeuverField = {
+      id: Date.now().toString(),
+      keyword: 'Trigger',
+      value: ''
+    };
+    setManeuverFields([...maneuverFields, newField]);
+  };
+
+  const removeManeuverField = (id: string) => {
+    setManeuverFields(maneuverFields.filter(field => field.id !== id));
+  };
+
+  const updateManeuverField = (id: string, key: 'keyword' | 'value', newValue: string) => {
+    setManeuverFields(maneuverFields.map(field => 
+      field.id === id ? { ...field, [key]: newValue } : field
+    ));
+  };
+
+  const handleDragStart = (e: React.DragEvent, index: number) => {
+    setDraggedIndex(index);
+    e.dataTransfer.effectAllowed = 'move';
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+  };
+
+  const handleDrop = (e: React.DragEvent, dropIndex: number) => {
+    e.preventDefault();
+    if (draggedIndex === null) return;
+    
+    const newFields = [...maneuverFields];
+    const draggedField = newFields[draggedIndex];
+    newFields.splice(draggedIndex, 1);
+    newFields.splice(dropIndex, 0, draggedField);
+    
+    setManeuverFields(newFields);
+    setDraggedIndex(null);
   };
 
   // Define the ability score options
@@ -156,6 +210,18 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit, cardType = 'maneuver' }) 
       {cardType === 'maneuver' && (
         <>
           <label>
+            Tier:
+            <select
+              value={tier}
+              onChange={(e) => setTier(e.target.value)}
+            >
+              <option value="Tier 1">Tier 1</option>
+              <option value="Tier 2">Tier 2</option>
+              <option value="Tier 3">Tier 3</option>
+            </select>
+          </label>
+
+          <label>
             Action Type:
             <select
               value={economy}
@@ -180,14 +246,6 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit, cardType = 'maneuver' }) 
               placeholder="e.g. Martial, Weapon, Melee (comma separated)"
             />
           </label>
-          <label>
-            Maneuver Text (HTML allowed):
-            <textarea
-              value={maneuverText}
-              onChange={(e) => setManeuverText(e.target.value)}
-              placeholder="Enter the combined maneuver text (can include HTML tags)"
-            />
-          </label>
 
           <label style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <span>Permanent?
@@ -198,6 +256,106 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit, cardType = 'maneuver' }) 
             />
             </span>
           </label>
+
+          {/* Dynamic Fields */}
+          <div style={{ marginTop: '1rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+              <h4 style={{ margin: 0 }}>Fields</h4>
+              <button 
+                type="button" 
+                onClick={addManeuverField}
+                style={{
+                  backgroundColor: '#007acc',
+                  color: 'white',
+                  border: 'none',
+                  padding: '0.5rem 1rem',
+                  borderRadius: '4px',
+                  cursor: 'pointer'
+                }}
+              >
+                Add Field
+              </button>
+            </div>
+            
+            {maneuverFields.map((field, index) => (
+              <div 
+                key={field.id}
+                draggable
+                onDragStart={(e) => handleDragStart(e, index)}
+                onDragOver={handleDragOver}
+                onDrop={(e) => handleDrop(e, index)}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  marginBottom: '0.5rem',
+                  padding: '0.5rem',
+                  border: '1px solid #ddd',
+                  borderRadius: '4px',
+                  backgroundColor: field.keyword === 'Damage' ? '#fdf2f2' : '#fff'
+                }}
+              >
+                {/* Drag Handle */}
+                <div 
+                  style={{ 
+                    cursor: 'grab',
+                    padding: '0.25rem',
+                    color: '#666'
+                  }}
+                  title="Drag to reorder"
+                >
+                  ☰
+                </div>
+                
+                {/* Keyword Dropdown */}
+                <select
+                  value={field.keyword}
+                  onChange={(e) => updateManeuverField(field.id, 'keyword', e.target.value)}
+                  style={{
+                    flex: '0 0 120px',
+                    fontWeight: 'bold',
+                    color: field.keyword === 'Damage' ? '#720a02' : 'inherit'
+                  }}
+                >
+                  <option value="Trigger">Trigger</option>
+                  <option value="Range">Range</option>
+                  <option value="Effect">Effect</option>
+                  <option value="Special">Special</option>
+                  <option value="Damage">Damage</option>
+                </select>
+                
+                {/* Value Input */}
+                <input
+                  type="text"
+                  value={field.value}
+                  onChange={(e) => updateManeuverField(field.id, 'value', e.target.value)}
+                  placeholder="Enter value (HTML allowed)"
+                  style={{
+                    flex: 1,
+                    color: field.keyword === 'Damage' ? '#720a02' : 'inherit'
+                  }}
+                />
+                
+                {/* Remove Button */}
+                <button
+                  type="button"
+                  onClick={() => removeManeuverField(field.id)}
+                  style={{
+                    backgroundColor: '#dc3545',
+                    color: 'white',
+                    border: 'none',
+                    padding: '0.25rem 0.5rem',
+                    borderRadius: '4px',
+                    cursor: 'pointer',
+                    fontSize: '0.8rem'
+                  }}
+                  title="Remove field"
+                >
+                  🗑️
+                </button>
+              </div>
+            ))}
+          </div>
         </>
       )}
 
