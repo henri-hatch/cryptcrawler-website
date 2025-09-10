@@ -59,17 +59,14 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
   originImage,
 }) => {
   const [cardWidth, setCardWidth] = useState('550px');
-  const [fontSize, setFontSize] = useState('2.0rem');
   
   // Add responsive sizing based on screen width
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 768) {
         setCardWidth('100%');
-        setFontSize('1.5rem');
       } else {
         setCardWidth('550px');
-        setFontSize('2.0rem');
       }
     };
     
@@ -98,10 +95,8 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
       }
     }
     
-    const shouldShowStar = cardType === 'origin' || cardType === 'mastery';
-    const starPrefix = shouldShowStar ? '★ ' : '';
-    
-    return `${tierSymbol}${starPrefix}${title}`;
+    // No star for origin or mastery cards
+    return `${tierSymbol}${title}`;
   };
 
   // Get color based on usage type or skill type for Mastery
@@ -133,17 +128,17 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
     }
     switch (usageType) {
       case 'At Will':
-        return '#307f00'; // Forest Green
+        return '#38761d'; // Updated Green
       case '1/turn':
         return '#720a02'; // Dark Red
       case '1/encounter':
-        return '#720a02'; // Dark Red
+        return '#990000'; // Updated Red
       case 'Feature':
-        return '#324692'; // Dark Blue
+        return '#0b5394'; // Updated Blue
       case '2/encounter':
         return '#720a02'; // Dark Red
       case '1/day':
-        return '#4d4d4d'; // Dark Gray
+        return '#4a4a4a'; // Updated Gray
       case '1/week':
         return '#000000'; // Black
     }
@@ -172,11 +167,19 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            flexWrap: 'wrap',
+            gap: '8px',
           }}
         >
           <h4
-            style={{ margin: '0', fontSize: '1.2rem', fontWeight: 'normal' }}
+            style={{ 
+              margin: '0', 
+              fontSize: '1.2rem', 
+              fontWeight: 'normal',
+              flex: '1',
+              wordWrap: 'break-word',
+              overflowWrap: 'break-word',
+              hyphens: 'auto'
+            }}
             dangerouslySetInnerHTML={{ __html: getDisplayTitle() }}
           />
           {originImage && (
@@ -185,14 +188,14 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
         </div>
 
         {flavor && (
-          <div style={{ backgroundColor: '#cfc4a7', padding: '8px', fontStyle: 'italic' }}>
+          <div style={{ backgroundColor: '#fce5cd', padding: '8px', fontStyle: 'italic' }}>
             {flavor}
           </div>
         )}
 
         <div style={{ padding: '8px' }}>
           <div style={{ marginBottom: '8px' }}>
-              <strong dangerouslySetInnerHTML={{ __html: `Title ${'✦'} ${titleType || ''}` }} />
+              <strong dangerouslySetInnerHTML={{ __html: `Title ✧ ${titleType || ''}` }} />
             </div>
 
             {titleText && (
@@ -221,31 +224,39 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
           style={{
             backgroundColor: getHeaderColor(),
             color: '#fff',
-            padding: '8px',
+            padding: '4px 8px',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            flexWrap: 'wrap',
+            gap: '8px',
           }}
         >
-          <h2
-            style={{ margin: '0', fontSize: fontSize, fontWeight: 'normal' }}
+          <h4
+            style={{ 
+              margin: '0', 
+              fontSize: '1.2rem', 
+              fontWeight: 'normal',
+              flex: '1',
+              wordWrap: 'break-word',
+              overflowWrap: 'break-word',
+              hyphens: 'auto'
+            }}
             dangerouslySetInnerHTML={{ __html: getDisplayTitle() }}
           />
           {masteryImage && (
-            <img src={masteryImage} alt="Mastery" style={{ height: '58px', width: '58px', objectFit: 'contain' }} />
+            <img src={masteryImage} alt="Mastery" style={{ height: '40px', width: '40px', objectFit: 'contain' }} />
           )}
         </div>
 
         {flavor && (
-          <div style={{ backgroundColor: '#cfc4a7', padding: '8px', fontStyle: 'italic' }}>
+          <div style={{ backgroundColor: '#fce5cd', padding: '8px', fontStyle: 'italic' }}>
             {flavor}
           </div>
         )}
 
         <div style={{ padding: '8px' }}>
           <div style={{ marginBottom: '8px' }}>
-            <strong>{skillType} ✦ Mastery</strong>
+            <strong>Title ✧ {skillType}</strong>
           </div>
 
           {skill1Title && (
@@ -328,7 +339,7 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
       {/* Flavor text (if provided) */}
       {flavor && (
         <div
-          style={{ backgroundColor: '#cfc4a7', padding: '8px', fontStyle: 'italic' }}
+          style={{ backgroundColor: '#fce5cd', padding: '8px', fontStyle: 'italic' }}
           dangerouslySetInnerHTML={{ __html: flavor }}
         />
       )}
