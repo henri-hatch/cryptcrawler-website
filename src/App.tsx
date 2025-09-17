@@ -46,29 +46,7 @@ import Warforged from './subpages/ancestries/warforged.tsx'
 import Gnome from './subpages/ancestries/gnome.tsx'
 
 // Skills
-import Persuasion from './subpages/skills/persuasion.tsx'
-import Stealth from './subpages/skills/stealth.tsx'
-import Medicine from './subpages/skills/medicine.tsx'
-import Crafting from './subpages/skills/crafting.tsx'
-import Survival from './subpages/skills/survival.tsx'
-import Animal_Handling from './subpages/skills/animal_handling.tsx'
-import Lockpicking from './subpages/skills/lockpicking.tsx'
-import Deception from './subpages/skills/deception.tsx'
-import Investigation from './subpages/skills/investigation.tsx'
-import Pickpocketing from './subpages/skills/pickpocketing.tsx'
-import Intimidation from './subpages/skills/intimidation.tsx'
-import Perception from './subpages/skills/perception.tsx'
-import Insight from './subpages/skills/insight.tsx'
-import History from './subpages/skills/history.tsx'
-import Acrobatics from './subpages/skills/acrobatics.tsx'
-import Arcana from './subpages/skills/arcana.tsx'
 import Unarmed from './subpages/skills/unarmed.tsx'
-
-
-// Skills Subpages
-import ArcanaSpells from './subpages/skill_subpages/arcana_spells.tsx'
-import ArcanaSpells2 from './subpages/skill_subpages/arcana_spells_2.tsx'
-import ArcanaSpells3 from './subpages/skill_subpages/arcana_spells_3.tsx'
 
 // Tools
 import CardCreator from './subpages/tools/maneuver_creator.tsx'
@@ -148,33 +126,11 @@ function App() {
                 <Route path="/ancestries/gnome" element={<Gnome />} />
 
                 {/* Skills */}
-                <Route path="/skills/persuasion" element={<Persuasion />} />
-                <Route path="/skills/stealth" element={<Stealth />} />
-                <Route path="/skills/medicine" element={<Medicine />} />
-                <Route path="/skills/crafting" element={<Crafting />} />
-                <Route path="/skills/survival" element={<Survival />} />
-                <Route path="/skills/animal_handling" element={<Animal_Handling />} />
-                <Route path="/skills/lockpicking" element={<Lockpicking />} />
-                <Route path="/skills/deception" element={<Deception />} />
-                <Route path="/skills/investigation" element={<Investigation />} />
-                <Route path="/skills/pickpocketing" element={<Pickpocketing />} />
-                <Route path="/skills/intimidation" element={<Intimidation />} />
-                <Route path="/skills/perception" element={<Perception />} />
-                <Route path="/skills/insight" element={<Insight />} />
-                <Route path="/skills/history" element={<History />} />
-                <Route path="/skills/acrobatics" element={<Acrobatics />} />
-                <Route path="/skills/arcana" element={<Arcana />} />
-                <Route path="/skills/unarmed" element={<Unarmed />} />                
-
-
-                {/* Skills Subpages */}
-                <Route path="/skills/crafting/arcana-spells" element={<ArcanaSpells />} />
-                <Route path="/skills/crafting/arcana-spells-2" element={<ArcanaSpells2 />} />
-                <Route path="/skills/crafting/arcana-spells-3" element={<ArcanaSpells3 />} />
+                <Route path="/skills/unarmed" element={<Unarmed />} />
 
                 {/* Tools */}
                 <Route path="/tools/card-creator" element={<CardCreator />} />
-                <Route path="/tools/maneuver-creator" element={<CardCreator />} />  {/* Legacy route */}
+                <Route path="/tools/maneuver-creator" element={<CardCreator />} />
                 <Route path="/tools/dice-roller" element={<DiceRoller />} />
                 <Route path="/tools/character-creator" element={<CharacterCreator />} />
                 <Route path="/tools/character-manager" element={<CharacterManager />} />
