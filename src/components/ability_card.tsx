@@ -116,13 +116,16 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
         'Crafting': '#0b5394ff',
         'History': '#0b5394ff',
         'Investigation': '#0b5394ff',
+        'Abjuration': '#0b5394ff',
         'Animal Handling': '#38761dff',
         'Insight': '#38761dff',
         'Medicine': '#38761dff',
         'Perception': '#38761dff',
         'Survival': '#38761dff',
         'Endurance': '#bf8a00ff',
-        'Athletics': '#990000ff'
+        'Athletics': '#990000ff',
+        'Unarmed': '#990000ff',
+        'Heavy Weapons': '#990000ff',
       };
       return skillColors[skillType ?? ''] || '#444';
     }
