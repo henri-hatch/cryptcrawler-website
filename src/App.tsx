@@ -46,6 +46,8 @@ import Warforged from './subpages/ancestries/warforged.tsx'
 import Gnome from './subpages/ancestries/gnome.tsx'
 
 // Skills
+import Abjuration from './subpages/skills/abjuration.tsx'
+import HeavyWeapons from './subpages/skills/heavyweapons.tsx'
 import Unarmed from './subpages/skills/unarmed.tsx'
 
 // Tools
@@ -126,6 +128,8 @@ function App() {
                 <Route path="/ancestries/gnome" element={<Gnome />} />
 
                 {/* Skills */}
+                <Route path="/skills/abjuration" element={<Abjuration />} />
+                <Route path="/skills/heavyweapons" element={<HeavyWeapons />} />
                 <Route path="/skills/unarmed" element={<Unarmed />} />
 
                 {/* Tools */}
