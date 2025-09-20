@@ -232,7 +232,7 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit, cardType = 'maneuver' }) 
               <option value="Reaction">Reaction</option>
               <option value="Free Action">Free Action</option>
               <option value="Passive">Passive</option>
-              <option value="Short Rest">Short Rest</option>
+              <option value="Ritual">Ritual</option>
               <option value="Long Rest">Long Rest</option>
             </select>
           </label>
@@ -320,6 +320,7 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit, cardType = 'maneuver' }) 
                   <option value="Trigger">Trigger</option>
                   <option value="Range">Range</option>
                   <option value="Effect">Effect</option>
+                  <option value="Duration">Duration</option>
                   <option value="Special">Special</option>
                   <option value="Damage">Damage</option>
                 </select>

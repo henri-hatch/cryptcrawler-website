@@ -39,7 +39,7 @@ interface Character {
   inventory: any[];
   inventory_capacity: number;
   current_inventory_weight: number;
-  origin: string; // Changed from string[] to string since we now select one origin card
+  origin: string;
 }
 
 // Alignment data definition
