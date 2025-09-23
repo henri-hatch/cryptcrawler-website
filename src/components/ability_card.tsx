@@ -133,13 +133,13 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
       case 'At Will':
         return '#38761d'; // Updated Green
       case '1/turn':
-        return '#720a02'; // Dark Red
+        return '#990000'; // Dark Red
       case '1/encounter':
         return '#990000'; // Updated Red
       case 'Feature':
         return '#0b5394'; // Updated Blue
       case '2/encounter':
-        return '#720a02'; // Dark Red
+        return '#990000'; // Dark Red
       case '1/day':
         return '#4a4a4a'; // Updated Gray
       case '1/week':
