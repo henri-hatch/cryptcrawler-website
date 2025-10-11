@@ -23,7 +23,8 @@ interface CardData {
   tier?: string;
   maneuverFields?: ManeuverField[];
   // Mastery-specific fields
-  skillType?: string;
+  attributeType?: string;
+  skillName?: string;
   skill1Title?: string;
   skill1Description?: string;
   skill2Title?: string;
@@ -180,7 +181,8 @@ const CardCreator: React.FC = () => {
                   isPermanent={cardData.isPermanent}
                   tier={cardData.tier}
                   maneuverFields={cardData.maneuverFields}
-                  skillType={cardData.skillType}
+                  attributeType={cardData.attributeType}
+                  skillName={cardData.skillName}
                   skill1Title={cardData.skill1Title}
                   skill1Description={cardData.skill1Description}
                   skill2Title={cardData.skill2Title}

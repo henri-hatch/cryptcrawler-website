@@ -19,6 +19,8 @@ interface AbilityCardProps {
   tier?: string;
   maneuverFields?: ManeuverField[];
   skillType?: string;
+  attributeType?: string;
+  skillName?: string;
   skill1Title?: string;
   skill1Description?: string;
   skill2Title?: string;
@@ -46,6 +48,8 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
   tier,
   maneuverFields,
   skillType,
+  attributeType,
+  skillName,
   skill1Title,
   skill1Description,
   skill2Title,
@@ -99,35 +103,21 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
     return `${tierSymbol}${title}`;
   };
 
-  // Get color based on usage type or skill type for Mastery
+  // Get color based on usage type or attribute type for Mastery
   const getHeaderColor = () => {
     if (cardType === 'origin') {
       return '#7b6129'; // Origin card color
     }
     if (usageType === 'Mastery' || cardType === 'mastery') {
-      const skillColors: Record<string, string> = {
-        'Deception': '#741b47ff',
-        'Intimidation': '#741b47ff',
-        'Persuasion': '#741b47ff',
-        'Acrobatics': '#666666ff',
-        'Lockpicking': '#666666ff',
-        'Pickpocketing': '#666666ff',
-        'Stealth': '#666666ff',
-        'Crafting': '#0b5394ff',
-        'History': '#0b5394ff',
-        'Investigation': '#0b5394ff',
-        'Abjuration': '#0b5394ff',
-        'Animal Handling': '#38761dff',
-        'Insight': '#38761dff',
-        'Medicine': '#38761dff',
-        'Perception': '#38761dff',
-        'Survival': '#38761dff',
-        'Endurance': '#bf8a00ff',
-        'Athletics': '#990000ff',
-        'Unarmed': '#990000ff',
-        'Heavy Weapons': '#990000ff',
+      const attributeColors: Record<string, string> = {
+        'Might': '#990000ff',        // Red for physical strength
+        'Finesse': '#666666ff',      // Gray for dexterity/agility
+        'Fortitude': '#bf8a00ff',    // Orange for endurance/constitution
+        'Reason': '#0b5394ff',       // Blue for intelligence/logic
+        'Intuition': '#38761dff',    // Green for wisdom/perception
+        'Presence': '#741b47ff',     // Purple for charisma/social
       };
-      return skillColors[skillType ?? ''] || '#444';
+      return attributeColors[attributeType ?? ''] || '#444';
     }
     switch (usageType) {
       case 'At Will':
@@ -259,7 +249,7 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
 
         <div style={{ padding: '8px' }}>
           <div style={{ marginBottom: '8px' }}>
-            <strong>Title ✧ {skillType}</strong>
+            <strong>Title ✧ {skillName || skillType}</strong>
           </div>
 
           {skill1Title && (

@@ -20,7 +20,8 @@ interface CardFormProps {
     isPermanent?: boolean;
     tier?: string;
     maneuverFields?: ManeuverField[];
-    skillType?: string;
+    attributeType?: string;
+    skillName?: string;
     skill1Title?: string;
     skill1Description?: string;
     skill2Title?: string;
@@ -47,7 +48,8 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit, cardType = 'maneuver' }) 
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
   
   // Mastery fields
-  const [skillType, setSkillType] = useState('');
+  const [attributeType, setAttributeType] = useState('');
+  const [skillName, setSkillName] = useState('');
   const [skill1Title, setSkill1Title] = useState('');
   const [skill1Description, setSkill1Description] = useState('');
   const [skill2Title, setSkill2Title] = useState('');
@@ -72,7 +74,8 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit, cardType = 'maneuver' }) 
         isPermanent,
         tier,
         maneuverFields,
-        skillType,
+        attributeType,
+        skillName,
         skill1Title,
         skill1Description,
         skill2Title,
@@ -364,18 +367,26 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit, cardType = 'maneuver' }) 
       {cardType === 'mastery' && (
         <>
           <label>
-            Skill Type:
-            <select value={skillType} onChange={(e) => setSkillType(e.target.value)}>
-              <option value="">Select Skill</option>
-              {[
-                'Acrobatics','Animal Handling','Athletics','Crafting','Deception',
-                'Endurance','Heavy Armor','Heavy Weapons','History','Insight','Intimidation','Investigation',
-                'Light Weapons','Lockpicking','Light Armor','Medicine','Perception','Persuasion',
-                'Pickpocketing','Ranged Weapons','Stealth','Survival','Unarmed'
-              ].sort().map(skill => (
-                <option key={skill} value={skill}>{skill}</option>
-              ))}
+            Attribute Type:
+            <select value={attributeType} onChange={(e) => setAttributeType(e.target.value)}>
+              <option value="">Select Attribute</option>
+              <option value="Might">Might</option>
+              <option value="Finesse">Finesse</option>
+              <option value="Fortitude">Fortitude</option>
+              <option value="Reason">Reason</option>
+              <option value="Intuition">Intuition</option>
+              <option value="Presence">Presence</option>
             </select>
+          </label>
+
+          <label>
+            Skill Name:
+            <input 
+              type="text" 
+              value={skillName} 
+              onChange={(e) => setSkillName(e.target.value)}
+              placeholder="e.g. Heavy Weapons, Stealth, Persuasion"
+            />
           </label>
 
           <label>
