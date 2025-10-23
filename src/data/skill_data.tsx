@@ -12,7 +12,7 @@ interface SkillData {
     {
       id: "heavy-weapons",
       name: "Heavy Weapons",
-      description: "Some see trash, but you see treasure. Increase your purchasing power with the Appraisal skill.",
+      description: "Some say using raw force and large implements lacks 'skill' or is easily bested, you think not.",
       imagePath: "/skills-images/heavyweapons_logo.png",
       pageRoute: "/skills/heavyweapons",
       skill_category: "might",
@@ -21,7 +21,7 @@ interface SkillData {
     {
       id: "unarmed",
       name: "Unarmed",
-      description: "Some see trash, but you see treasure. Increase your purchasing power with the Appraisal skill.",
+      description: "The body is a tool lighter than any weapon, and in the right hands can be just as deadly.",
       imagePath: "/skills-images/unarmed_logo.png",
       pageRoute: "/skills/unarmed",
       skill_category: "might",

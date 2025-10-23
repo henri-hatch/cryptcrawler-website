@@ -56,7 +56,7 @@ const ALIGNMENTS = [
 ];
 
 // Skill categories
-const SKILL_CATEGORIES = ["presence", "finesse", "reason", "intuition"];
+const SKILL_CATEGORIES = ["might", "finesse", "fortitude", "reason", "intuition", "presence"];
 
 // Default character values
 const DEFAULT_CHARACTER: Character = {
