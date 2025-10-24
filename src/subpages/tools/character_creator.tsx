@@ -4,6 +4,7 @@ import ContentCard from '../../components/content_card';
 import ancestryData from '../../data/ancestry_data';
 import skillData from '../../data/skill_data';
 import originData from '../../data/origin_data';
+import { PDFDocument } from 'pdf-lib';
 
 // Core data types
 interface CharacterStats {
@@ -30,7 +31,6 @@ interface Character {
   block: string;
   max_hitpoints: number;
   current_hitpoints: number;
-  class: string;
   level: number;
   initiative: number;
   movement: number;
@@ -62,7 +62,7 @@ const SKILL_CATEGORIES = ["might", "finesse", "fortitude", "reason", "intuition"
 const DEFAULT_CHARACTER: Character = {
   name: '',
   ancestry: '',
-  alignment: 'True Neutral',
+  alignment: 'TN',
   stats: {
     might: 0,
     finesse: 0,
@@ -72,11 +72,10 @@ const DEFAULT_CHARACTER: Character = {
     presence: 0
   },
   skills: [{skill_id: '', skill_name: ''}],
-  dodge: '1d12',
-  block: '1d4',
+  dodge: '--',
+  block: '--',
   max_hitpoints: 25,
   current_hitpoints: 25,
-  class: 'hero',
   level: 1,
   initiative: 0,
   movement: 30,
@@ -245,23 +244,84 @@ const CharacterCreator: React.FC = () => {
     return availableCounts;
   };
   
-  // Export character data
-  const exportCharacter = () => {
-    const finalCharacter = {
-      ...character,
-      initiative: character.stats.finesse,
-      inventory_capacity: 50 + (10 * character.stats.might)
-    };
-    
-    const blob = new Blob([JSON.stringify(finalCharacter, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `${character.name.trim() || 'character'}.json`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
+  // Export character as PDF
+  const exportCharacterAsPDF = async () => {
+    try {
+      // Load the blank PDF form
+      const formUrl = '/CC_Character_Sheet.pdf';
+      const existingPdfBytes = await fetch(formUrl).then(res => res.arrayBuffer());
+      
+      // Load the PDF document
+      const pdfDoc = await PDFDocument.load(existingPdfBytes);
+      const form = pdfDoc.getForm();
+      
+      // Get ancestry and origin names
+      const selectedAncestry = ancestryData.find(a => a.id === character.ancestry);
+      const selectedOrigin = findOriginById(character.origin);
+      
+      // Get the alignment abbreviation for the PDF
+      const selectedAlignment = ALIGNMENTS.find(a => a.id === character.alignment);
+      const alignmentAbbreviation = selectedAlignment?.abbreviation || character.alignment;
+      
+      // Fill out the form fields
+      const fields: Record<string, string | number> = {
+        CharacterName: character.name,
+        Origin: selectedOrigin?.name || '',
+        Level: character.level.toString(),
+        Ancestry: selectedAncestry?.name || '',
+        Codex: '',
+        HP: character.current_hitpoints.toString(),
+        MaxHP: character.max_hitpoints.toString(),
+        AP: '', // Empty for now - TODO: Implement based on chosen starting armor (light, medium, heavy)
+        MaxAP: '', // Empty for now - TODO: Implement based on chosen starting armor (light, medium, heavy)
+        Speed: character.movement.toString(),
+        Surges: '0',
+        Initiative: character.initiative.toString(),
+        Alignment: alignmentAbbreviation,
+        StatusEffects: '', // Empty for now
+        Languages: '', // Empty for now - TODO: Implement
+        Block: character.block,
+        Dodge: character.dodge,
+        Might: formatModifier(character.stats.might),
+        Reason: formatModifier(character.stats.reason),
+        Finesse: formatModifier(character.stats.finesse),
+        Intuition: formatModifier(character.stats.intuition),
+        Fortitude: formatModifier(character.stats.fortitude),
+        Presence: formatModifier(character.stats.presence),
+        Inventory: '',
+        Capacity: character.current_inventory_weight.toString(),
+        MaxCapacity: character.inventory_capacity.toString(),
+        Marcs: '0', // Default starting gold
+        Fame: '0' // Default starting fame
+      };
+      
+      // Fill the text fields
+      Object.entries(fields).forEach(([fieldName, value]) => {
+        try {
+          const field = form.getTextField(fieldName);
+          field.setText(value.toString());
+        } catch (error) {
+          console.warn(`Could not find or fill field: ${fieldName}`);
+        }
+      });
+      
+      // Generate the PDF bytes
+      const pdfBytes = await pdfDoc.save();
+      
+      // Create download
+      const blob = new Blob([new Uint8Array(pdfBytes)], { type: 'application/pdf' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `${character.name.trim() || 'character'}_sheet.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      alert('There was an error generating the PDF. Please try again.');
+    }
   };
   
   // Render step content
@@ -551,10 +611,10 @@ const CharacterCreator: React.FC = () => {
           </button>
         ) : (
           <button 
-            onClick={exportCharacter}
+            onClick={exportCharacterAsPDF}
             className="button-finish"
           >
-            Finish
+            Download PDF
           </button>
         )}
       </div>
