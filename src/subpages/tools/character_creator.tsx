@@ -263,43 +263,111 @@ const CharacterCreator: React.FC = () => {
       const selectedAlignment = ALIGNMENTS.find(a => a.id === character.alignment);
       const alignmentAbbreviation = selectedAlignment?.abbreviation || character.alignment;
       
-      // Fill out the form fields
+      // Fill out the form fields TODO: Fix the dang PDF .undefined stuff (get rid of children fields)
       const fields: Record<string, string | number> = {
-        CharacterName: character.name,
-        Origin: selectedOrigin?.name || '',
-        Level: character.level.toString(),
-        Ancestry: selectedAncestry?.name || '',
-        Codex: '',
-        HP: character.current_hitpoints.toString(),
-        MaxHP: character.max_hitpoints.toString(),
-        AP: '', // Empty for now - TODO: Implement based on chosen starting armor (light, medium, heavy)
-        MaxAP: '', // Empty for now - TODO: Implement based on chosen starting armor (light, medium, heavy)
-        Speed: character.movement.toString(),
-        Surges: '0',
-        Initiative: character.initiative.toString(),
-        Alignment: alignmentAbbreviation,
-        StatusEffects: '', // Empty for now
-        Languages: '', // Empty for now - TODO: Implement
-        Block: character.block,
-        Dodge: character.dodge,
-        Might: formatModifier(character.stats.might),
-        Reason: formatModifier(character.stats.reason),
-        Finesse: formatModifier(character.stats.finesse),
-        Intuition: formatModifier(character.stats.intuition),
-        Fortitude: formatModifier(character.stats.fortitude),
-        Presence: formatModifier(character.stats.presence),
-        Inventory: '',
-        Capacity: character.current_inventory_weight.toString(),
-        MaxCapacity: character.inventory_capacity.toString(),
-        Marcs: '0', // Default starting gold
-        Fame: '0' // Default starting fame
+        // Basic character info (some with .undefined suffixes)
+        'CharacterName': character.name,
+        'Origin': selectedOrigin?.name || '',
+        'Ancestry': selectedAncestry?.name || '',
+        'Codex': '',
+        'Level': character.level.toString(),
+        
+        // Health and resources
+        'HP': character.current_hitpoints.toString(),
+        'MaxHP': character.max_hitpoints.toString(),
+        'AP': '', // Empty for now - TODO: Implement based on chosen starting armor
+        'MaxAP': '', // Empty for now - TODO: Implement based on chosen starting armor
+        'Speed': `${character.movement}ft`,
+        'Surges': '0',
+        'Initiative': formatModifier(character.initiative),
+        'Alignment': alignmentAbbreviation,
+        
+        // Status and effects
+        'StatusEffects': '',
+        'DmgResWeaknesses': '',
+        
+        // Combat stats
+        'Block': character.block,
+        'Dodge': character.dodge,
+        
+        // Ability scores
+        'Might': formatModifier(character.stats.might),
+        'Reason': formatModifier(character.stats.reason),
+        'Finesse': formatModifier(character.stats.finesse),
+        'Intuition': formatModifier(character.stats.intuition),
+        'Fortitude': formatModifier(character.stats.fortitude),
+        'Presence': formatModifier(character.stats.presence),
+        
+        // Inventory
+        'Capacity': character.current_inventory_weight.toString(),
+        'MaxCapacity': character.inventory_capacity.toString(),
+        'Marcs': '0', // Default starting gold
+        'Fame': '0', // Default starting fame
+        
+        // New inventory/equipment fields
+        'Backpack1': '',
+        'Backpack1.undefined': '',
+        'Backpack2': '',
+        
+        // Skills - put starting skill in Skills1
+        'Skills1': character.skills[0]?.skill_name ? `${character.skills[0].skill_name} +1` : '',
+        'Skills1.undefined': character.skills[0]?.skill_name ? `${character.skills[0].skill_name} +1` : '',
+        'Skills2': '',
+        
+        // Titles and background
+        'Titles1': '',
+        'Titles1.undefined': '',
+        'Titles2': '',
+        'Languages': '',
+        'Virtues': '',
+        'Virtues.undefined': '',
+        'Faults': '',
+        'Backstory': '',
+        
+        // Known maneuvers (empty for now - could be populated with starting skill maneuvers)
+        'KnownManeuvers1': '',
+        'KnownManeuvers1.undefined': '',
+        'KnownManeuvers2': '',
+        
+        // Maneuver text fields (empty for now)
+        'ManeuverText1': '',
+        'ManeuverText2': '',
+        'ManeuverText3': '',
+        'ManeuverText4': '',
+        'ManeuverText5': '',
+        'ManeuverText6': '',
+        'ManeuverText7': '',
+        'ManeuverText8': '',
+        'ManeuverText9': '',
+        'ManeuverText10': '',
+        'ManeuverText11': '',
+        'ManeuverText12': '',
+        'ManeuverText13': '',
+        'ManeuverText14': ''
       };
       
-      // Fill the text fields
+      // Fill the text fields with flexible field name matching
       Object.entries(fields).forEach(([fieldName, value]) => {
         try {
-          const field = form.getTextField(fieldName);
-          field.setText(value.toString());
+          // Try exact field name first
+          let field = null;
+          try {
+            field = form.getTextField(fieldName);
+          } catch {
+            // If exact name fails, try to find field containing the base name
+            const baseName = fieldName.replace('.undefined', '');
+            const allFields = form.getFields();
+            const matchingField = allFields.find(f => 
+              f.getName().includes(baseName) && f.constructor.name === 'PDFTextField'
+            );
+            if (matchingField) {
+              field = matchingField as any;
+            }
+          }
+          
+          if (field) {
+            field.setText(value.toString());
+          }
         } catch (error) {
           console.warn(`Could not find or fill field: ${fieldName}`);
         }
