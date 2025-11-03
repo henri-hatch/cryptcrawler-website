@@ -180,6 +180,7 @@ html, body {
   width: 1em;
   height: 1em;
   object-fit: contain;
+  transform: translateY(2px);
 }
 
 .damage-token__text {
