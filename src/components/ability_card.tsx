@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { formatDamageText } from '../utils/damage_formatting';
 
 interface ManeuverField {
   id: string;
@@ -100,7 +101,7 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
     }
     
     // No star for origin or mastery cards
-    return `${tierSymbol}${title}`;
+    return formatDamageText(`${tierSymbol}${title}`);
   };
 
   // Get color based on usage type or attribute type for Mastery
@@ -181,18 +182,24 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
         </div>
 
         {flavor && (
-          <div style={{ backgroundColor: '#fce5cd', padding: '8px', fontStyle: 'italic' }}>
-            {flavor}
-          </div>
+          <div
+            style={{ backgroundColor: '#fce5cd', padding: '8px', fontStyle: 'italic' }}
+            dangerouslySetInnerHTML={{ __html: formatDamageText(flavor) }}
+          />
         )}
 
         <div style={{ padding: '8px' }}>
           <div style={{ marginBottom: '8px' }}>
-              <strong dangerouslySetInnerHTML={{ __html: `Title ✧ ${titleType || ''}` }} />
+              <strong
+                dangerouslySetInnerHTML={{ __html: formatDamageText(`Title ✧ ${titleType || ''}`) }}
+              />
             </div>
 
             {titleText && (
-              <div style={{ marginBottom: '0' }} dangerouslySetInnerHTML={{ __html: titleText }} />
+              <div
+                style={{ marginBottom: '0' }}
+                dangerouslySetInnerHTML={{ __html: formatDamageText(titleText) }}
+              />
             )}
         </div>
       </div>
@@ -242,39 +249,48 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
         </div>
 
         {flavor && (
-          <div style={{ backgroundColor: '#fce5cd', padding: '8px', fontStyle: 'italic' }}>
-            {flavor}
-          </div>
+          <div
+            style={{ backgroundColor: '#fce5cd', padding: '8px', fontStyle: 'italic' }}
+            dangerouslySetInnerHTML={{ __html: formatDamageText(flavor) }}
+          />
         )}
 
         <div style={{ padding: '8px' }}>
           <div style={{ marginBottom: '8px' }}>
-            <strong>Title ✧ {skillName || skillType}</strong>
+            <strong
+              dangerouslySetInnerHTML={{ __html: formatDamageText(`Title ✧ ${skillName || skillType || ''}`) }}
+            />
           </div>
 
           {skill1Title && (
             <div style={{ marginBottom: skill2Title || skill3Title ? '8px' : '0' }}>
-              <strong>{skill1Title}</strong>
+              <strong dangerouslySetInnerHTML={{ __html: formatDamageText(skill1Title) }} />
               {skill1Description && (
-                <span dangerouslySetInnerHTML={{ __html: ' ' + skill1Description }} />
+                <span
+                  dangerouslySetInnerHTML={{ __html: ` ${formatDamageText(skill1Description)}` }}
+                />
               )}
             </div>
           )}
 
           {skill2Title && (
             <div style={{ marginBottom: skill3Title ? '8px' : '0' }}>
-              <strong>{skill2Title}</strong>
+              <strong dangerouslySetInnerHTML={{ __html: formatDamageText(skill2Title) }} />
               {skill2Description && (
-                <span dangerouslySetInnerHTML={{ __html: ' ' + skill2Description }} />
+                <span
+                  dangerouslySetInnerHTML={{ __html: ` ${formatDamageText(skill2Description)}` }}
+                />
               )}
             </div>
           )}
 
           {skill3Title && (
             <div>
-              <strong>{skill3Title}</strong>
+              <strong dangerouslySetInnerHTML={{ __html: formatDamageText(skill3Title) }} />
               {skill3Description && (
-                <span dangerouslySetInnerHTML={{ __html: ' ' + skill3Description }} />
+                <span
+                  dangerouslySetInnerHTML={{ __html: ` ${formatDamageText(skill3Description)}` }}
+                />
               )}
             </div>
           )}
@@ -333,7 +349,7 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
       {flavor && (
         <div
           style={{ backgroundColor: '#fce5cd', padding: '8px', fontStyle: 'italic' }}
-          dangerouslySetInnerHTML={{ __html: flavor }}
+          dangerouslySetInnerHTML={{ __html: formatDamageText(flavor) }}
         />
       )}
 
@@ -341,13 +357,21 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
       <div style={{ padding: '8px' }}>
         {/* Tags Row */}
         <div style={{ marginBottom: '8px' }}>
-          <strong dangerouslySetInnerHTML={{ __html: `${usageType} ${isPermanent ? '✧' : '✦'} ${tags || 'None'}` }} />
+          <strong
+            dangerouslySetInnerHTML={{
+              __html: formatDamageText(`${usageType} ${isPermanent ? '✧' : '✦'} ${tags || 'None'}`),
+            }}
+          />
         </div>
 
         {/* Economy (if provided) */}
         {economy && (
           <div style={{ marginBottom: '8px' }}>
-            <strong dangerouslySetInnerHTML={{ __html: `${economy}${actionCost ? ` [${actionCost}]` : ''}` }} />
+            <strong
+              dangerouslySetInnerHTML={{
+                __html: formatDamageText(`${economy}${actionCost ? ` [${actionCost}]` : ''}`),
+              }}
+            />
           </div>
         )}
 
@@ -365,7 +389,7 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
                 {field.keyword}:
               </strong>{' '}
               <span 
-                dangerouslySetInnerHTML={{ __html: field.value }} 
+                dangerouslySetInnerHTML={{ __html: formatDamageText(field.value) }} 
                 style={{ color: field.keyword === 'Damage' ? '#720a02' : 'inherit' }}
               />
             </div>
@@ -373,13 +397,16 @@ const AbilityCard: React.FC<AbilityCardProps> = ({
         ) : (
           /* Fallback: if no dynamic fields and maneuverText provided */
           maneuverText ? (
-            <div style={{ marginBottom: '8px' }} dangerouslySetInnerHTML={{ __html: maneuverText }} />
+            <div
+              style={{ marginBottom: '8px' }}
+              dangerouslySetInnerHTML={{ __html: formatDamageText(maneuverText) }}
+            />
           ) : (
             /* Final fallback: if no maneuverText or fields provided, optionally show Special */
             special ? (
               <div>
                 <strong>Special:</strong>{' '}
-                <span dangerouslySetInnerHTML={{ __html: special }} />
+                <span dangerouslySetInnerHTML={{ __html: formatDamageText(special) }} />
               </div>
             ) : null
           )

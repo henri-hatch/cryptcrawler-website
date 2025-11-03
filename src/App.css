@@ -167,3 +167,25 @@ html, body {
     margin: 2px 0;
   }
 }
+
+/* Inline damage token styling */
+.damage-token {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.25rem;
+  vertical-align: baseline;
+}
+
+.damage-token img {
+  width: 1em;
+  height: 1em;
+  object-fit: contain;
+}
+
+.damage-token__text {
+  display: inline;
+}
+
+.damage-token__text--status {
+  text-decoration: underline;
+}
