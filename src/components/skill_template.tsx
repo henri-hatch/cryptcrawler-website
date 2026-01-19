@@ -1,9 +1,11 @@
 import React, { ReactNode } from 'react';
+import { useManeuverModal } from './maneuver_modal';
 import './skill_template.css';
 
 interface SkillSlot {
   title: string;
   content: ReactNode;
+  maneuverId?: string;
 }
 
 interface MasterySkillSlot {
@@ -26,6 +28,7 @@ const SkillTemplate: React.FC<SkillTemplateProps> = ({
   row3 = Array(5).fill({ title: '', content: 'aa' }),
   row4 = Array(3).fill({})
 }) => {
+  const { openModal } = useManeuverModal();
   // Ensure each row has exactly 5 items
   const ensureRowLength = (row: SkillSlot[]) => {
     if (row.length < 5) {
@@ -56,10 +59,16 @@ const SkillTemplate: React.FC<SkillTemplateProps> = ({
         {/* Row 1 */}
         <div className="skill-row">
           {normalizedRow1.map((slot, index) => (
-            <div key={`row1-${index}`} className="skill-box">
+            <button
+              key={`row1-${index}`}
+              type="button"
+              className={`skill-box ${slot.maneuverId ? 'is-clickable' : ''}`}
+              aria-disabled={!slot.maneuverId}
+              onClick={() => slot.maneuverId && openModal(slot.maneuverId)}
+            >
               {slot.title && <h3 className="skill-box-title">{slot.title}</h3>}
               <div className="skill-box-content">{slot.content}</div>
-            </div>
+            </button>
           ))}
         </div>
         
@@ -69,10 +78,16 @@ const SkillTemplate: React.FC<SkillTemplateProps> = ({
         {/* Row 2 */}
         <div className="skill-row">
           {normalizedRow2.map((slot, index) => (
-            <div key={`row2-${index}`} className="skill-box">
+            <button
+              key={`row2-${index}`}
+              type="button"
+              className={`skill-box ${slot.maneuverId ? 'is-clickable' : ''}`}
+              aria-disabled={!slot.maneuverId}
+              onClick={() => slot.maneuverId && openModal(slot.maneuverId)}
+            >
               {slot.title && <h3 className="skill-box-title">{slot.title}</h3>}
               <div className="skill-box-content">{slot.content}</div>
-            </div>
+            </button>
           ))}
         </div>
         
@@ -82,10 +97,16 @@ const SkillTemplate: React.FC<SkillTemplateProps> = ({
         {/* Row 3 */}
         <div className="skill-row">
           {normalizedRow3.map((slot, index) => (
-            <div key={`row3-${index}`} className="skill-box">
+            <button
+              key={`row3-${index}`}
+              type="button"
+              className={`skill-box ${slot.maneuverId ? 'is-clickable' : ''}`}
+              aria-disabled={!slot.maneuverId}
+              onClick={() => slot.maneuverId && openModal(slot.maneuverId)}
+            >
               {slot.title && <h3 className="skill-box-title">{slot.title}</h3>}
               <div className="skill-box-content">{slot.content}</div>
-            </div>
+            </button>
           ))}
         </div>
       </div>

@@ -1,0 +1,16 @@
+@import '../../styles/variables.css';
+
+.codex-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.codex-intro {
+  max-width: 900px;
+}
+
+.codex-lore {
+  font-style: italic;
+  color: var(--dark-gray);
+}

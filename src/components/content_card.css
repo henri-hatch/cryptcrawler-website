@@ -191,6 +191,10 @@
   border-left: 4px solid var(--class-accent);
 }
 
+.codex-card {
+  border-left: 4px solid var(--class-accent);
+}
+
 .skill-card {
   border-left: 4px solid var(--skill-accent);
 }

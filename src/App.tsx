@@ -5,7 +5,7 @@ import { ManeuverModalProvider } from './components/maneuver_modal'
 // Import pages
 import HomePage from './pages/home.tsx'
 import SkillsPage from './pages/skills.tsx'
-import ClassesPage from './pages/classes.tsx'
+import CodicesPage from './pages/codices.tsx'
 import AncestriesPage from './pages/ancestries.tsx'
 import GameRulesPage from './pages/game_rules.tsx'
 import ToolsPage from './pages/tools.tsx'
@@ -13,14 +13,8 @@ import SearchDatabasePage from './pages/search_database.tsx'
 
 // Import subpages
 
-// Classes
-import Shadow from './subpages/classes/shadow.tsx'
-import Tactician from './subpages/classes/tactician.tsx'
-import Minstrel from './subpages/classes/minstrel.tsx'
-import Paragon from './subpages/classes/paragon.tsx'
-import Abnegate from './subpages/classes/abnegate.tsx'
-import Conduit from './subpages/classes/conduit.tsx'
-import Talent from './subpages/classes/talent.tsx'
+// Codices
+import CodexDetailPage from './subpages/codices/codex_detail.tsx'
 
 // Ancestries
 import Changeling from './subpages/ancestries/changeling.tsx'
@@ -71,7 +65,7 @@ function App() {
           <nav className="navbar">
             <NavLink to="/" className={({isActive}) => isActive ? "active" : ""}>Home</NavLink>
             <NavLink to="/skills" className={({isActive}) => isActive ? "active" : ""}>Skills</NavLink>
-            <NavLink to="/classes" className={({isActive}) => isActive ? "active" : ""}>Classes</NavLink>
+            <NavLink to="/codices" className={({isActive}) => isActive ? "active" : ""}>Codices</NavLink>
             <NavLink to="/ancestries" className={({isActive}) => isActive ? "active" : ""}>Ancestries</NavLink>
             <NavLink to="/game-rules" className={({isActive}) => isActive ? "active" : ""}>Game Rules</NavLink>
             <NavLink to="/tools" className={({isActive}) => isActive ? "active" : ""}>Tools</NavLink>
@@ -87,7 +81,7 @@ function App() {
                 
                 <Route path="/" element={<HomePage />} />
                 <Route path="/skills" element={<SkillsPage />} />
-                <Route path="/classes" element={<ClassesPage />} />
+                <Route path="/codices" element={<CodicesPage />} />
                 <Route path="/ancestries" element={<AncestriesPage />} />
                 <Route path="/game-rules" element={<GameRulesPage />} />
                 <Route path="/tools" element={<ToolsPage />} />
@@ -95,14 +89,8 @@ function App() {
 
                 {/* Subpages */}
 
-                {/* Classes */}
-                <Route path="/classes/shadow" element={<Shadow />} />
-                <Route path="/classes/tactician" element={<Tactician />} />
-                <Route path="/classes/minstrel" element={<Minstrel />} />
-                <Route path="/classes/paragon" element={<Paragon />} />
-                <Route path="/classes/abnegate" element={<Abnegate />} />
-                <Route path="/classes/conduit" element={<Conduit />} />
-                <Route path="/classes/talent" element={<Talent />} />
+                {/* Codices */}
+                <Route path="/codices/:codexId" element={<CodexDetailPage />} />
 
                 {/* Ancestries */}
                 <Route path="/ancestries/changeling" element={<Changeling />} />

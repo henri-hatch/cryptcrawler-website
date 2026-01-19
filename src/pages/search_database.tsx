@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import ContentCard from '../components/content_card';
 import ancestryData from '../data/ancestry_data';
-import classData from '../data/class_data';
+import codexData from '../data/codex_data';
 import skillData from '../data/skill_data';
 import itemData from '../data/item_data';
 import maneuverData from '../data/maneuver_data';
@@ -42,7 +42,7 @@ const SearchDatabasePage = () => {
   const allData = useMemo<SearchableItem[]>(() => {
     return [
       ...ancestryData.map(item => ({ ...item, dataSource: 'ancestry' })),
-      ...classData.map(item => ({ ...item, dataSource: 'class' })),
+      ...codexData.map(item => ({ ...item, dataSource: 'codex' })),
       ...skillData.map(item => ({ ...item, dataSource: 'skill' })),
       ...itemData.map(item => ({ ...item, dataSource: 'item' })),
       ...maneuverData.map(item => ({ ...item, dataSource: 'maneuver' })),
@@ -126,7 +126,7 @@ const SearchDatabasePage = () => {
   return (
     <div className="search-database-container">
       <h2>Search CryptCrawler Database</h2>
-      <p>Explore ancestries, classes, skills, items, masteries, and more in the CryptCrawler database.</p>
+      <p>Explore ancestries, codices, skills, items, masteries, and more in the CryptCrawler database.</p>
       
       <div className="search-controls">
         <div className="search-bar">

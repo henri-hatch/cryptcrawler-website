@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 export interface SkillSlot {
   title: string;
   content: React.ReactNode;
+  maneuverId?: string;
 }
 
 // Interface for mastery skill slots in row4 of the SkillTemplate
@@ -29,6 +30,7 @@ export const createManeuverSkillSlot = (maneuverId: string): SkillSlot => {
   return {
     // For maneuvers, we'll keep the title empty as the maneuver link itself contains the title
     title: '',
+    maneuverId,
     content: maneuver ? (
       <ManeuverLink maneuver={maneuver} />
     ) : `Maneuver "${maneuverId}" not found`
@@ -59,6 +61,7 @@ export const getManeuversByCategory = (category: string): SkillSlot[] => {
     .map(maneuver => ({
       // For maneuvers, we'll keep the title empty as the maneuver link itself contains the title
       title: '',
+      maneuverId: maneuver.id,
       content: <ManeuverLink maneuver={maneuver} />
     }));
 };
