@@ -14,7 +14,13 @@ import SearchDatabasePage from './pages/search_database.tsx'
 // Import subpages
 
 // Codices
-import CodexDetailPage from './subpages/codices/codex_detail.tsx'
+import Abnegate from './subpages/codices/abnegate.tsx'
+import Conduit from './subpages/codices/conduit.tsx'
+import Minstrel from './subpages/codices/minstrel.tsx'
+import Paragon from './subpages/codices/paragon.tsx'
+import Shadow from './subpages/codices/shadow.tsx'
+import Tactician from './subpages/codices/tactician.tsx'
+import Talent from './subpages/codices/talent.tsx'
 
 // Ancestries
 import Changeling from './subpages/ancestries/changeling.tsx'
@@ -90,7 +96,13 @@ function App() {
                 {/* Subpages */}
 
                 {/* Codices */}
-                <Route path="/codices/:codexId" element={<CodexDetailPage />} />
+                <Route path="/codices/abnegate" element={<Abnegate />} />
+                <Route path="/codices/conduit" element={<Conduit />} />
+                <Route path="/codices/minstrel" element={<Minstrel />} />
+                <Route path="/codices/paragon" element={<Paragon />} />
+                <Route path="/codices/shadow" element={<Shadow />} />
+                <Route path="/codices/tactician" element={<Tactician />} />
+                <Route path="/codices/talent" element={<Talent />} />
 
                 {/* Ancestries */}
                 <Route path="/ancestries/changeling" element={<Changeling />} />
