@@ -7,6 +7,12 @@ import './codex_tree.css';
 
 export type EdgeType = 'straight' | 'curved';
 export type CurveSide = 'left' | 'right' | 'auto';
+export type CurvePreset = 'C' | 'S' | 'HOOK' | 'ARC' | 'ZIG';
+
+export interface ControlPoint {
+  t: number;
+  n: number;
+}
 
 export interface NodeCard {
   label?: string;
@@ -22,9 +28,11 @@ export interface NodeDef {
 }
 
 export interface CurveDef {
-  side: CurveSide;
-  strength: number;
+  side?: CurveSide;
+  strength?: number;
   seed?: string;
+  preset?: CurvePreset;
+  points?: ControlPoint[];
 }
 
 export interface EdgeDef {
@@ -39,20 +47,20 @@ export interface SkillTreeConfig {
   useAdjacency?: boolean;
   defaultEdgeType?: EdgeType;
   defaultCurve?: CurveDef;
+  backgroundImage?: string;
 }
 
 export interface SkillTreeDefinition {
   gridSize: number;
   nodes: NodeDef[];
   edges: EdgeDef[];
+  backgroundImage?: string;
 }
 
 interface EdgeDetails {
   type?: EdgeType;
   curve?: CurveDef;
-  side?: CurveSide;
-  strength?: number;
-  seed?: string;
+  style?: CurvePreset;
 }
 
 export interface SkillTree {
@@ -66,6 +74,14 @@ interface CodexTreeProps {
 }
 
 const DEFAULT_CURVE: CurveDef = { side: 'auto', strength: 0.4 };
+const DEFAULT_CURVE_PRESET: CurvePreset = 'C';
+const MAX_CURVE_STRENGTH = 2;
+const MAX_CURVE_OFFSET = 0.85;
+
+type Vec2 = { x: number; y: number };
+type BezierSegment = { c1: Vec2; c2: Vec2; end: Vec2 };
+type NormalizedPoint = { t: number; n: number };
+type NormalizedSegment = { c1: NormalizedPoint; c2: NormalizedPoint; end: NormalizedPoint };
 
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
 
@@ -84,12 +100,133 @@ const resolveCurveSide = (side: CurveSide, seed: string) => {
   return hashString(seed) % 2 === 0 ? 'left' : 'right';
 };
 
+const PRESET_REGISTRY: Record<CurvePreset, NormalizedSegment[]> = {
+  C: [
+    {
+      c1: { t: 0.25, n: 0.35 },
+      c2: { t: 0.75, n: 0.35 },
+      end: { t: 1, n: 0 },
+    },
+  ],
+  S: [
+    {
+      c1: { t: 0.2, n: 0.35 },
+      c2: { t: 0.45, n: 0.35 },
+      end: { t: 0.5, n: 0 },
+    },
+    {
+      c1: { t: 0.55, n: -0.35 },
+      c2: { t: 0.8, n: -0.35 },
+      end: { t: 1, n: 0 },
+    },
+  ],
+  HOOK: [
+    {
+      c1: { t: 0.2, n: 0.2 },
+      c2: { t: 0.5, n: 0.25 },
+      end: { t: 0.65, n: 0.25 },
+    },
+    {
+      c1: { t: 0.72, n: 0.35 },
+      c2: { t: 0.9, n: 0.5 },
+      end: { t: 1, n: 0 },
+    },
+  ],
+  ARC: [
+    {
+      c1: { t: 0.15, n: 0.55 },
+      c2: { t: 0.85, n: 0.55 },
+      end: { t: 1, n: 0 },
+    },
+  ],
+  ZIG: [
+    {
+      c1: { t: 0.12, n: 0.3 },
+      c2: { t: 0.25, n: 0.3 },
+      end: { t: 0.33, n: 0.2 },
+    },
+    {
+      c1: { t: 0.4, n: -0.3 },
+      c2: { t: 0.55, n: -0.3 },
+      end: { t: 0.66, n: -0.2 },
+    },
+    {
+      c1: { t: 0.78, n: -0.2 },
+      c2: { t: 0.9, n: -0.1 },
+      end: { t: 1, n: 0 },
+    },
+  ],
+};
+
+const resolveSide = (curve: CurveDef, fromId: string, toId: string) => {
+  const side = curve.side ?? DEFAULT_CURVE.side ?? 'auto';
+  const seed = curve.seed ?? `${fromId}|${toId}`;
+  return resolveCurveSide(side, seed);
+};
+
+const basis = (a: Vec2, b: Vec2) => {
+  const dx = b.x - a.x;
+  const dy = b.y - a.y;
+  const dist = Math.hypot(dx, dy);
+  if (dist === 0) {
+    return { u: { x: 1, y: 0 }, p: { x: 0, y: 1 }, dist: 0 };
+  }
+  const ux = dx / dist;
+  const uy = dy / dist;
+  return { u: { x: ux, y: uy }, p: { x: -uy, y: ux }, dist };
+};
+
+const pointOnEdge = (a: Vec2, u: Vec2, dist: number, t: number) => ({
+  x: a.x + u.x * dist * t,
+  y: a.y + u.y * dist * t,
+});
+
+const offsetPoint = (point: Vec2, perp: Vec2, dist: number, n: number, sideSign: number) => ({
+  x: point.x + perp.x * dist * n * sideSign,
+  y: point.y + perp.y * dist * n * sideSign,
+});
+
+const clampOffset = (value: number) => clamp(value, -MAX_CURVE_OFFSET, MAX_CURVE_OFFSET);
+
+const normalizeControlPoints = (points: ControlPoint[]) =>
+  points
+    .filter((point) => Number.isFinite(point.t) && Number.isFinite(point.n))
+    .map((point) => ({
+      t: clamp(point.t, 0, 1),
+      n: clampOffset(point.n),
+    }))
+    .sort((a, b) => a.t - b.t);
+
+const catmullRomToBezier = (points: Vec2[]): BezierSegment[] => {
+  if (points.length < 2) {
+    return [];
+  }
+  const segments: BezierSegment[] = [];
+  for (let i = 0; i < points.length - 1; i += 1) {
+    const p0 = points[i - 1] ?? points[i];
+    const p1 = points[i];
+    const p2 = points[i + 1];
+    const p3 = points[i + 2] ?? points[i + 1];
+    const c1 = {
+      x: p1.x + (p2.x - p0.x) / 6,
+      y: p1.y + (p2.y - p0.y) / 6,
+    };
+    const c2 = {
+      x: p2.x - (p3.x - p1.x) / 6,
+      y: p2.y - (p3.y - p1.y) / 6,
+    };
+    segments.push({ c1, c2, end: p2 });
+  }
+  return segments;
+};
+
 const buildEdgeKey = (a: string, b: string) => (a < b ? `${a}|${b}` : `${b}|${a}`);
 
 class SkillTreeBuilder implements SkillTree {
   private config: Required<SkillTreeConfig>;
   private nodes: NodeDef[] = [];
   private manualEdges: EdgeDef[] = [];
+  private backgroundImage?: string;
 
   constructor(config: SkillTreeConfig) {
     const gridSize = Math.max(1, Math.floor(config.gridSize));
@@ -98,7 +235,9 @@ class SkillTreeBuilder implements SkillTree {
       useAdjacency: config.useAdjacency ?? true,
       defaultEdgeType: config.defaultEdgeType ?? 'straight',
       defaultCurve: config.defaultCurve ?? DEFAULT_CURVE,
+      backgroundImage: config.backgroundImage ?? '',
     };
+    this.backgroundImage = config.backgroundImage;
   }
 
   createNode(id: string, gx: number, gy: number, card: NodeCard): this {
@@ -174,26 +313,31 @@ class SkillTreeBuilder implements SkillTree {
       gridSize: this.config.gridSize,
       nodes: Array.from(nodeMap.values()),
       edges: Array.from(edgeMap.values()),
+      backgroundImage: this.backgroundImage,
     };
   }
 
   private normalizeEdge(from: string, to: string, details?: EdgeDetails): EdgeDef {
     const type = details?.type ?? this.config.defaultEdgeType ?? 'straight';
     if (type === 'curved') {
+      const hasExplicitPreset = details?.curve?.preset !== undefined;
       let curve: CurveDef = { ...this.config.defaultCurve };
       if (details?.curve) {
         curve = { ...curve, ...details.curve };
       }
-      if (details?.side) {
-        curve.side = details.side;
+      if (details?.style && !hasExplicitPreset) {
+        curve.preset = details.style;
       }
-      if (details?.strength !== undefined) {
-        curve.strength = details.strength;
+      if (curve.preset === undefined) {
+        curve.preset = DEFAULT_CURVE_PRESET;
       }
-      if (details?.seed !== undefined) {
-        curve.seed = details.seed;
-      }
-      return { from, to, type, curve: { ...curve, strength: clamp(curve.strength, 0, 1) } };
+      curve.side = curve.side ?? DEFAULT_CURVE.side;
+      curve.strength = clamp(
+        curve.strength ?? DEFAULT_CURVE.strength ?? 0,
+        0,
+        MAX_CURVE_STRENGTH,
+      );
+      return { from, to, type, curve };
     }
 
     return { from, to, type };
@@ -209,14 +353,62 @@ const resolveTree = (tree: SkillTreeDefinition | SkillTree): SkillTreeDefinition
   return tree as SkillTreeDefinition;
 };
 
+const buildBezierSegments = (start: Vec2, end: Vec2, edge: EdgeDef): BezierSegment[] => {
+  const curve: CurveDef = { ...DEFAULT_CURVE, ...(edge.curve ?? {}) };
+  const strength = clamp(
+    curve.strength ?? DEFAULT_CURVE.strength ?? 0,
+    0,
+    MAX_CURVE_STRENGTH,
+  );
+  const side = resolveSide(curve, edge.from, edge.to);
+  const sideSign = side === 'left' ? 1 : -1;
+  const { u, p, dist } = basis(start, end);
+  if (dist === 0) {
+    return [];
+  }
+
+  const toPoint = (point: NormalizedPoint): Vec2 => {
+    const t = clamp(point.t, 0, 1);
+    const n = clampOffset(point.n);
+    const scaledN = clampOffset(n * strength);
+    const base = pointOnEdge(start, u, dist, t);
+    return offsetPoint(base, p, dist, scaledN, sideSign);
+  };
+
+  if (curve.points?.length) {
+    const normalizedPoints = normalizeControlPoints(curve.points);
+    if (normalizedPoints.length > 0) {
+      const anchors = [start, ...normalizedPoints.map((point) => toPoint(point)), end];
+      return catmullRomToBezier(anchors);
+    }
+  }
+
+  const preset = curve.preset ?? DEFAULT_CURVE_PRESET;
+  const presetSegments = PRESET_REGISTRY[preset] ?? PRESET_REGISTRY[DEFAULT_CURVE_PRESET];
+  return presetSegments.map((segment) => ({
+    c1: toPoint(segment.c1),
+    c2: toPoint(segment.c2),
+    end: toPoint(segment.end),
+  }));
+};
+
 const CodexTree: React.FC<CodexTreeProps> = ({ tree }) => {
   const { openModal } = useManeuverModal();
   const stageRef = useRef<HTMLDivElement>(null);
   const nodeRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   const [paths, setPaths] = useState<Array<{ key: string; d: string }>>([]);
+  const [backgroundSrc, setBackgroundSrc] = useState<string>('');
 
   const resolvedTree = useMemo(() => resolveTree(tree), [tree]);
-  const { gridSize, nodes, edges } = resolvedTree;
+  const { gridSize, nodes, edges, backgroundImage } = resolvedTree;
+
+  useEffect(() => {
+    if (!backgroundImage) {
+      setBackgroundSrc('');
+      return;
+    }
+    setBackgroundSrc(`/codex-images/tree-background/${backgroundImage}`);
+  }, [backgroundImage]);
 
   const hasModalTarget = useCallback((id?: string) => {
     if (!id) {
@@ -275,31 +467,30 @@ const CodexTree: React.FC<CodexTreeProps> = ({ tree }) => {
       const start = { x: from.x + ux * from.radius, y: from.y + uy * from.radius };
       const end = { x: to.x - ux * to.radius, y: to.y - uy * to.radius };
 
-      const trimDx = end.x - start.x;
-      const trimDy = end.y - start.y;
-      const trimDist = Math.hypot(trimDx, trimDy);
+      const trimDist = Math.hypot(end.x - start.x, end.y - start.y);
       if (trimDist === 0) {
         return;
       }
 
       if (edge.type === 'curved') {
-        const curve = edge.curve ?? DEFAULT_CURVE;
-        const strength = clamp(curve.strength, 0, 1);
-        const side = resolveCurveSide(curve.side, curve.seed ?? `${edge.from}|${edge.to}`);
-        const uxTrim = trimDx / trimDist;
-        const uyTrim = trimDy / trimDist;
-        let px = -uyTrim;
-        let py = uxTrim;
-        if (side === 'right') {
-          px *= -1;
-          py *= -1;
+        const segments = buildBezierSegments(start, end, edge);
+        if (segments.length === 0) {
+          nextPaths.push({
+            key: buildEdgeKey(edge.from, edge.to),
+            d: `M ${start.x} ${start.y} L ${end.x} ${end.y}`,
+          });
+          return;
         }
-        const k = strength * trimDist * 0.35;
-        const c1 = { x: start.x + trimDx * 0.25 + px * k, y: start.y + trimDy * 0.25 + py * k };
-        const c2 = { x: start.x + trimDx * 0.75 + px * k, y: start.y + trimDy * 0.75 + py * k };
+        const d = segments.reduce((path, segment, index) => {
+          const command = `C ${segment.c1.x} ${segment.c1.y}, ${segment.c2.x} ${segment.c2.y}, ${segment.end.x} ${segment.end.y}`;
+          if (index === 0) {
+            return `M ${start.x} ${start.y} ${command}`;
+          }
+          return `${path} ${command}`;
+        }, '');
         nextPaths.push({
           key: buildEdgeKey(edge.from, edge.to),
-          d: `M ${start.x} ${start.y} C ${c1.x} ${c1.y}, ${c2.x} ${c2.y}, ${end.x} ${end.y}`,
+          d,
         });
       } else {
         nextPaths.push({
@@ -335,6 +526,19 @@ const CodexTree: React.FC<CodexTreeProps> = ({ tree }) => {
   return (
     <div className="codex-tree">
       <div className="codex-tree-stage" ref={stageRef} style={{ '--grid-size': gridSize } as React.CSSProperties}>
+        {backgroundSrc ? (
+          <img
+            className="codex-tree-background"
+            src={backgroundSrc}
+            alt=""
+            aria-hidden="true"
+            onError={() => {
+              if (backgroundImage && backgroundSrc.includes('/tree-background/')) {
+                setBackgroundSrc(`/codex-images/tree-backgrounds/${backgroundImage}`);
+              }
+            }}
+          />
+        ) : null}
         <svg className="codex-tree-lines" aria-hidden="true">
           {paths.map((path) => (
             <path key={path.key} d={path.d} />
@@ -344,11 +548,12 @@ const CodexTree: React.FC<CodexTreeProps> = ({ tree }) => {
         <div className="codex-tree-grid">
           {nodes.map((node) => {
             const nodeClickable = hasModalTarget(node.card.maneuverId);
+            const isMasteryNode = node.id === 'mastery';
             return (
               <button
                 key={node.id}
                 type="button"
-                className={`codex-node ${nodeClickable ? 'is-clickable' : 'is-placeholder'}`}
+                className={`codex-node ${nodeClickable ? 'is-clickable' : 'is-placeholder'}${isMasteryNode ? ' is-mastery' : ''}`}
                 onClick={() => handleNodeClick(node.card.maneuverId)}
                 ref={(element) => {
                   nodeRefs.current[node.id] = element;
