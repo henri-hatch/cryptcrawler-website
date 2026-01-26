@@ -82,6 +82,7 @@ type Vec2 = { x: number; y: number };
 type BezierSegment = { c1: Vec2; c2: Vec2; end: Vec2 };
 type NormalizedPoint = { t: number; n: number };
 type NormalizedSegment = { c1: NormalizedPoint; c2: NormalizedPoint; end: NormalizedPoint };
+type ResponsiveVars = { node: number; gap: number; stage?: number };
 
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
 
@@ -394,10 +395,13 @@ const buildBezierSegments = (start: Vec2, end: Vec2, edge: EdgeDef): BezierSegme
 
 const CodexTree: React.FC<CodexTreeProps> = ({ tree }) => {
   const { openModal } = useManeuverModal();
+  const treeRef = useRef<HTMLDivElement>(null);
+  const viewportRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const nodeRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   const [paths, setPaths] = useState<Array<{ key: string; d: string }>>([]);
   const [backgroundSrc, setBackgroundSrc] = useState<string>('');
+  const [responsiveVars, setResponsiveVars] = useState<ResponsiveVars | null>(null);
 
   const resolvedTree = useMemo(() => resolveTree(tree), [tree]);
   const { gridSize, nodes, edges, backgroundImage } = resolvedTree;
@@ -426,6 +430,77 @@ const CodexTree: React.FC<CodexTreeProps> = ({ tree }) => {
       openModal(id as string);
     }
   };
+
+  const computeMobileVars = useCallback(() => {
+    if (!treeRef.current || !viewportRef.current) {
+      return;
+    }
+
+    const treeStyle = window.getComputedStyle(treeRef.current);
+    const baseNode = parseFloat(treeStyle.getPropertyValue('--node-size'));
+    const baseGap = parseFloat(treeStyle.getPropertyValue('--grid-gap'));
+    const minNode = parseFloat(treeStyle.getPropertyValue('--node-size-min')) || baseNode;
+    const minGap = parseFloat(treeStyle.getPropertyValue('--grid-gap-min')) || baseGap;
+
+    if (!Number.isFinite(baseNode) || !Number.isFinite(baseGap)) {
+      return;
+    }
+
+    const viewportStyle = window.getComputedStyle(viewportRef.current);
+    const hasMaxHeight = viewportStyle.maxHeight !== 'none';
+    const viewportRect = viewportRef.current.getBoundingClientRect();
+    const width = viewportRect.width;
+    if (!width) {
+      return;
+    }
+
+    const clientHeight = viewportRef.current.clientHeight;
+    const stageSize =
+      hasMaxHeight && clientHeight > 0 && clientHeight < width ? clientHeight : undefined;
+
+    const padFactor = 0.96;
+    const availablePx = (stageSize ?? width) * padFactor;
+    const required = gridSize * (baseNode + baseGap);
+
+    let gap = baseGap;
+    let node = baseNode;
+
+    if (required > availablePx) {
+      const gapNeeded = availablePx / gridSize - baseNode;
+      if (gapNeeded >= minGap) {
+        gap = clamp(gapNeeded, minGap, baseGap);
+      } else {
+        gap = minGap;
+        const nodeNeeded = availablePx / gridSize - gap;
+        node = clamp(nodeNeeded, minNode, baseNode);
+      }
+    }
+
+    const next = {
+      node: Math.round(node * 100) / 100,
+      gap: Math.round(gap * 100) / 100,
+      stage: stageSize ? Math.round(stageSize * 100) / 100 : undefined,
+    };
+
+    setResponsiveVars((prev) => {
+      if (prev && prev.node === next.node && prev.gap === next.gap && prev.stage === next.stage) {
+        return prev;
+      }
+      return next;
+    });
+  }, [gridSize]);
+
+  const stageStyle = useMemo(() => {
+    const style = { '--grid-size': gridSize } as React.CSSProperties & Record<string, string | number>;
+    if (responsiveVars) {
+      style['--node-size'] = `${responsiveVars.node}px`;
+      style['--grid-gap'] = `${responsiveVars.gap}px`;
+      if (responsiveVars.stage !== undefined) {
+        style['--stage-size'] = `${responsiveVars.stage}px`;
+      }
+    }
+    return style;
+  }, [gridSize, responsiveVars]);
 
   const computePaths = useCallback(() => {
     if (!stageRef.current) {
@@ -505,7 +580,7 @@ const CodexTree: React.FC<CodexTreeProps> = ({ tree }) => {
 
   useLayoutEffect(() => {
     computePaths();
-  }, [computePaths, edges, nodes]);
+  }, [computePaths, edges, nodes, responsiveVars]);
 
   useEffect(() => {
     if (!stageRef.current) {
@@ -523,55 +598,77 @@ const CodexTree: React.FC<CodexTreeProps> = ({ tree }) => {
     };
   }, [computePaths]);
 
-  return (
-    <div className="codex-tree">
-      <div className="codex-tree-stage" ref={stageRef} style={{ '--grid-size': gridSize } as React.CSSProperties}>
-        {backgroundSrc ? (
-          <img
-            className="codex-tree-background"
-            src={backgroundSrc}
-            alt=""
-            aria-hidden="true"
-            onError={() => {
-              if (backgroundImage && backgroundSrc.includes('/tree-background/')) {
-                setBackgroundSrc(`/codex-images/tree-backgrounds/${backgroundImage}`);
-              }
-            }}
-          />
-        ) : null}
-        <svg className="codex-tree-lines" aria-hidden="true">
-          {paths.map((path) => (
-            <path key={path.key} d={path.d} />
-          ))}
-        </svg>
+  useLayoutEffect(() => {
+    computeMobileVars();
+  }, [computeMobileVars]);
 
-        <div className="codex-tree-grid">
-          {nodes.map((node) => {
-            const nodeClickable = hasModalTarget(node.card.maneuverId);
-            const isMasteryNode = node.id === 'mastery';
-            return (
-              <button
-                key={node.id}
-                type="button"
-                className={`codex-node ${nodeClickable ? 'is-clickable' : 'is-placeholder'}${isMasteryNode ? ' is-mastery' : ''}`}
-                onClick={() => handleNodeClick(node.card.maneuverId)}
-                ref={(element) => {
-                  nodeRefs.current[node.id] = element;
-                }}
-                disabled={!nodeClickable}
-                style={{ gridColumn: `${node.gx}`, gridRow: `${node.gy}` }}
-              >
-                {node.card.iconPath ? (
-                  <img
-                    src={node.card.iconPath}
-                    alt={node.card.label || 'Codex node'}
-                    className="codex-node-icon"
-                  />
-                ) : null}
-                {node.card.label ? <span className="codex-node-label">{node.card.label}</span> : null}
-              </button>
-            );
-          })}
+  useEffect(() => {
+    if (!viewportRef.current) {
+      return;
+    }
+
+    const handleResize = () => computeMobileVars();
+    const resizeObserver = new ResizeObserver(handleResize);
+    resizeObserver.observe(viewportRef.current);
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [computeMobileVars]);
+
+  return (
+    <div className="codex-tree" ref={treeRef}>
+      <div className="codex-tree-viewport" ref={viewportRef}>
+        <div className="codex-tree-stage" ref={stageRef} style={stageStyle}>
+          {backgroundSrc ? (
+            <img
+              className="codex-tree-background"
+              src={backgroundSrc}
+              alt=""
+              aria-hidden="true"
+              onError={() => {
+                if (backgroundImage && backgroundSrc.includes('/tree-background/')) {
+                  setBackgroundSrc(`/codex-images/tree-backgrounds/${backgroundImage}`);
+                }
+              }}
+            />
+          ) : null}
+          <svg className="codex-tree-lines" aria-hidden="true">
+            {paths.map((path) => (
+              <path key={path.key} d={path.d} />
+            ))}
+          </svg>
+
+          <div className="codex-tree-grid">
+            {nodes.map((node) => {
+              const nodeClickable = hasModalTarget(node.card.maneuverId);
+              const isMasteryNode = node.id === 'mastery';
+              return (
+                <button
+                  key={node.id}
+                  type="button"
+                  className={`codex-node ${nodeClickable ? 'is-clickable' : 'is-placeholder'}${isMasteryNode ? ' is-mastery' : ''}`}
+                  onClick={() => handleNodeClick(node.card.maneuverId)}
+                  ref={(element) => {
+                    nodeRefs.current[node.id] = element;
+                  }}
+                  disabled={!nodeClickable}
+                  style={{ gridColumn: `${node.gx}`, gridRow: `${node.gy}` }}
+                >
+                  {node.card.iconPath ? (
+                    <img
+                      src={node.card.iconPath}
+                      alt={node.card.label || 'Codex node'}
+                      className="codex-node-icon"
+                    />
+                  ) : null}
+                  {node.card.label ? <span className="codex-node-label">{node.card.label}</span> : null}
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
