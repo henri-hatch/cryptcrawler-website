@@ -97,6 +97,10 @@ html, body {
   width: 100%;
 }
 
+.main-layout-rules {
+  grid-template-columns: 1fr minmax(260px, 1160px) 1fr;
+}
+
 /* Sidebars */
 .left-sidebar,
 .right-sidebar {

@@ -1,0 +1,264 @@
+.game-rules-page {
+  --paper: #f7efe1;
+  --paper-edge: #e2d4ba;
+  --ink: #23170f;
+  --chapter-bg: #efe1c8;
+  --chapter-active: #d8c19b;
+  --book-shadow: 0 20px 45px rgba(50, 27, 5, 0.24);
+  --book-radius: 16px;
+  color: var(--ink);
+}
+
+.game-rules-header {
+  margin-bottom: 16px;
+}
+
+.game-rules-header h2 {
+  margin: 0;
+  font-size: clamp(1.4rem, 2.2vw, 2rem);
+}
+
+.game-rules-header p {
+  margin: 6px 0 0;
+}
+
+.rules-book-shell {
+  display: grid;
+  grid-template-columns: 210px minmax(0, 1fr);
+  gap: 16px;
+  height: clamp(480px, 72vh, 760px);
+  max-height: clamp(480px, 72vh, 760px);
+  align-items: stretch;
+}
+
+.rules-chapters {
+  background: linear-gradient(180deg, #f4e6cc 0%, #ebdbbf 100%);
+  border: 1px solid #ceb489;
+  border-radius: 14px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.rules-chapters h3 {
+  margin: 0 0 10px;
+  font-size: 1rem;
+}
+
+.rules-chapters-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-right: 4px;
+  overflow-y: auto;
+  min-height: 0;
+  flex: 1;
+}
+
+.rules-chapter-btn {
+  text-align: left;
+  border: 1px solid #b5986d;
+  background: var(--chapter-bg);
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+  font-family: inherit;
+  color: var(--ink);
+}
+
+.rules-chapter-btn:hover {
+  background: #e8d5b2;
+}
+
+.rules-chapter-btn.active {
+  background: var(--chapter-active);
+  border-color: #88673c;
+}
+
+.rules-book {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 12px;
+  background: linear-gradient(160deg, #d8b98d 0%, #c99f68 100%);
+  border-radius: var(--book-radius);
+  box-shadow: var(--book-shadow);
+  padding: 12px;
+  height: 100%;
+  min-height: 0;
+}
+
+.rules-book-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.rules-page-window {
+  position: relative;
+  overflow: hidden;
+  border-radius: calc(var(--book-radius) - 6px);
+  background: var(--paper);
+  border: 1px solid var(--paper-edge);
+  min-height: 0;
+}
+
+.rules-page {
+  position: absolute;
+  inset: 0;
+  padding: clamp(12px, 2vw, 26px);
+  overflow: hidden;
+  background: radial-gradient(circle at top right, #fdf7ec 0%, var(--paper) 48%, #f0dfc2 100%);
+}
+
+.rules-page.turn-next {
+  animation: turnNext 230ms ease;
+}
+
+.rules-page.turn-prev {
+  animation: turnPrev 230ms ease;
+}
+
+.rules-page-content {
+  height: 100%;
+  overflow: hidden;
+  font-size: clamp(0.92rem, 1.45vw, 1.05rem);
+  line-height: 1.55;
+}
+
+.rules-page-content h1,
+.rules-page-content h2,
+.rules-page-content h3,
+.rules-page-content h4 {
+  margin-top: 0;
+  margin-bottom: 0.55em;
+}
+
+.rules-page-content p,
+.rules-page-content ul,
+.rules-page-content ol {
+  margin-top: 0;
+  margin-bottom: 0.75em;
+}
+
+.rules-page-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 0.9em;
+}
+
+.rules-page-content th,
+.rules-page-content td {
+  border: 1px solid #5d4c34;
+  padding: 6px 8px;
+  vertical-align: top;
+}
+
+.rules-book-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.rules-book-controls button {
+  min-width: 110px;
+  border-radius: 10px;
+  border: 1px solid #6f4c1f;
+  background: #835722;
+  color: #fff4e0;
+  padding: 9px 12px;
+}
+
+.rules-book-controls button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.rules-page-measure {
+  position: absolute;
+  left: -100000px;
+  top: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.rules-page-measure-sizer {
+  position: static;
+  inset: auto;
+}
+
+@keyframes turnNext {
+  from {
+    opacity: 0;
+    transform: translateX(6%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes turnPrev {
+  from {
+    opacity: 0;
+    transform: translateX(-6%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 900px) {
+  .rules-book-shell {
+    grid-template-columns: minmax(105px, 30vw) minmax(0, 1fr);
+    gap: 10px;
+    height: clamp(460px, 70vh, 680px);
+    max-height: clamp(460px, 70vh, 680px);
+  }
+
+  .rules-book {
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    padding: 8px;
+  }
+
+  .rules-chapters {
+    padding: 8px;
+  }
+
+  .rules-chapter-btn {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+
+  .rules-book-controls button {
+    min-width: 84px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 540px) {
+  .rules-book-title {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .rules-page {
+    padding: 10px;
+  }
+
+  .rules-page-content {
+    font-size: 0.9rem;
+    line-height: 1.45;
+  }
+
+  .rules-book-controls {
+    font-size: 0.85rem;
+  }
+}

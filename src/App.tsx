@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, NavLink, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, NavLink, Navigate, useLocation } from 'react-router-dom'
 import './App.css'
 import { ManeuverModalProvider } from './components/maneuver_modal'
 
@@ -56,98 +56,103 @@ import DiceRoller from './subpages/tools/dice_roller.tsx'
 import CharacterCreator from './subpages/tools/character_creator.tsx'
 import CharacterManager from './subpages/tools/character_manager.tsx'
 
+function AppLayout() {
+  const location = useLocation()
+  const isGameRulesRoute = location.pathname === '/game-rules'
+
+  return (
+    <ManeuverModalProvider>
+      <div className="app-container">
+        {/* TOP BANNER */}
+        <header className="header">
+          <img src="/banner.png" alt="CryptCrawler 5e Banner" />
+          <img src="/CryptCrawlerLogo.png" alt="CryptCrawler Logo" className="logo-overlay" />
+        </header>
+
+        {/* NAVIGATION BAR */}
+        <nav className="navbar">
+          <NavLink to="/" className={({isActive}) => isActive ? 'active' : ''}>Home</NavLink>
+          <NavLink to="/skills" className={({isActive}) => isActive ? 'active' : ''}>Skills</NavLink>
+          <NavLink to="/codices" className={({isActive}) => isActive ? 'active' : ''}>Codices</NavLink>
+          <NavLink to="/ancestries" className={({isActive}) => isActive ? 'active' : ''}>Ancestries</NavLink>
+          <NavLink to="/game-rules" className={({isActive}) => isActive ? 'active' : ''}>Game Rules</NavLink>
+          <NavLink to="/tools" className={({isActive}) => isActive ? 'active' : ''}>Tools</NavLink>
+          <NavLink to="/search-database" className={({isActive}) => isActive ? 'active' : ''}>Search Database</NavLink>
+        </nav>
+
+        {/* MAIN CONTENT */}
+        <div className={`main-layout ${isGameRulesRoute ? 'main-layout-rules' : ''}`}>
+          <div className="left-sidebar"></div>
+          <div className="content">
+            <Routes>
+              {/* Main pages */}
+              <Route path="/" element={<HomePage />} />
+              <Route path="/skills" element={<SkillsPage />} />
+              <Route path="/codices" element={<CodicesPage />} />
+              <Route path="/ancestries" element={<AncestriesPage />} />
+              <Route path="/game-rules" element={<GameRulesPage />} />
+              <Route path="/tools" element={<ToolsPage />} />
+              <Route path="/search-database" element={<SearchDatabasePage />} />
+
+              {/* Codices */}
+              <Route path="/codices/abnegate" element={<Abnegate />} />
+              <Route path="/codices/conduit" element={<Conduit />} />
+              <Route path="/codices/minstrel" element={<Minstrel />} />
+              <Route path="/codices/paragon" element={<Paragon />} />
+              <Route path="/codices/shadow" element={<Shadow />} />
+              <Route path="/codices/tactician" element={<Tactician />} />
+              <Route path="/codices/talent" element={<Talent />} />
+
+              {/* Ancestries */}
+              <Route path="/ancestries/changeling" element={<Changeling />} />
+              <Route path="/ancestries/draeling" element={<Draeling />} />
+              <Route path="/ancestries/dragonborn" element={<Dragonborn />} />
+              <Route path="/ancestries/dwarf" element={<Dwarf />} />
+              <Route path="/ancestries/elf" element={<Elf />} />
+              <Route path="/ancestries/githyanki" element={<Githyanki />} />
+              <Route path="/ancestries/goblin" element={<Goblin />} />
+              <Route path="/ancestries/half-elf" element={<HalfElf />} />
+              <Route path="/ancestries/half-orc" element={<HalfOrc />} />
+              <Route path="/ancestries/hartkin" element={<Hartkin />} />
+              <Route path="/ancestries/harengon" element={<Harengon />} />
+              <Route path="/ancestries/hobgoblin" element={<Hobgoblin />} />
+              <Route path="/ancestries/human" element={<Human />} />
+              <Route path="/ancestries/kenku" element={<Kenku />} />
+              <Route path="/ancestries/kobold" element={<Kobold />} />
+              <Route path="/ancestries/lizardfolk" element={<Lizardfolk />} />
+              <Route path="/ancestries/mul" element={<Mul />} />
+              <Route path="/ancestries/orc" element={<Orc />} />
+              <Route path="/ancestries/tabaxi" element={<Tabaxi />} />
+              <Route path="/ancestries/warforged" element={<Warforged />} />
+              <Route path="/ancestries/gnome" element={<Gnome />} />
+
+              {/* Skills */}
+              <Route path="/skills/abjuration" element={<Abjuration />} />
+              <Route path="/skills/heavyweapons" element={<HeavyWeapons />} />
+              <Route path="/skills/unarmed" element={<Unarmed />} />
+
+              {/* Tools */}
+              <Route path="/tools/card-creator" element={<CardCreator />} />
+              <Route path="/tools/maneuver-creator" element={<CardCreator />} />
+              <Route path="/tools/dice-roller" element={<DiceRoller />} />
+              <Route path="/tools/character-creator" element={<CharacterCreator />} />
+              <Route path="/tools/character-manager" element={<CharacterManager />} />
+
+              {/* 404 */}
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </div>
+          <div className="right-sidebar"></div>
+        </div>
+      </div>
+    </ManeuverModalProvider>
+  )
+}
+
 function App() {
   return (
     <BrowserRouter>
-      <ManeuverModalProvider>
-        <div className="app-container">
-          {/* TOP BANNER */}
-          <header className="header">
-            <img src="/banner.png" alt="CryptCrawler 5e Banner" />
-            <img src="/CryptCrawlerLogo.png" alt="CryptCrawler Logo" className="logo-overlay" />
-          </header>
-
-          {/* NAVIGATION BAR */}
-          <nav className="navbar">
-            <NavLink to="/" className={({isActive}) => isActive ? "active" : ""}>Home</NavLink>
-            <NavLink to="/skills" className={({isActive}) => isActive ? "active" : ""}>Skills</NavLink>
-            <NavLink to="/codices" className={({isActive}) => isActive ? "active" : ""}>Codices</NavLink>
-            <NavLink to="/ancestries" className={({isActive}) => isActive ? "active" : ""}>Ancestries</NavLink>
-            <NavLink to="/game-rules" className={({isActive}) => isActive ? "active" : ""}>Game Rules</NavLink>
-            <NavLink to="/tools" className={({isActive}) => isActive ? "active" : ""}>Tools</NavLink>
-            <NavLink to="/search-database" className={({isActive}) => isActive ? "active" : ""}>Search Database</NavLink>
-          </nav>
-      
-          {/* MAIN CONTENT */}
-          <div className="main-layout">
-            <div className="left-sidebar"></div>
-            <div className="content">
-              <Routes>
-                {/* Main pages */}
-                
-                <Route path="/" element={<HomePage />} />
-                <Route path="/skills" element={<SkillsPage />} />
-                <Route path="/codices" element={<CodicesPage />} />
-                <Route path="/ancestries" element={<AncestriesPage />} />
-                <Route path="/game-rules" element={<GameRulesPage />} />
-                <Route path="/tools" element={<ToolsPage />} />
-                <Route path="/search-database" element={<SearchDatabasePage />} />
-
-                {/* Subpages */}
-
-                {/* Codices */}
-                <Route path="/codices/abnegate" element={<Abnegate />} />
-                <Route path="/codices/conduit" element={<Conduit />} />
-                <Route path="/codices/minstrel" element={<Minstrel />} />
-                <Route path="/codices/paragon" element={<Paragon />} />
-                <Route path="/codices/shadow" element={<Shadow />} />
-                <Route path="/codices/tactician" element={<Tactician />} />
-                <Route path="/codices/talent" element={<Talent />} />
-
-                {/* Ancestries */}
-                <Route path="/ancestries/changeling" element={<Changeling />} />
-                <Route path="/ancestries/draeling" element={<Draeling />} />
-                <Route path="/ancestries/dragonborn" element={<Dragonborn />} />
-                <Route path="/ancestries/dwarf" element={<Dwarf />} />
-                <Route path="/ancestries/elf" element={<Elf />} />
-                <Route path="/ancestries/githyanki" element={<Githyanki />} />
-                <Route path="/ancestries/goblin" element={<Goblin />} />
-                <Route path="/ancestries/half-elf" element={<HalfElf />} />
-                <Route path="/ancestries/half-orc" element={<HalfOrc />} />
-                <Route path="/ancestries/hartkin" element={<Hartkin />} />
-                <Route path="/ancestries/harengon" element={<Harengon />} />
-                <Route path="/ancestries/hobgoblin" element={<Hobgoblin />} />
-                <Route path="/ancestries/human" element={<Human />} />
-                <Route path="/ancestries/kenku" element={<Kenku />} />
-                <Route path="/ancestries/kobold" element={<Kobold />} />
-                <Route path="/ancestries/lizardfolk" element={<Lizardfolk />} />
-                <Route path="/ancestries/mul" element={<Mul />} />
-                <Route path="/ancestries/orc" element={<Orc />} />
-                <Route path="/ancestries/tabaxi" element={<Tabaxi />} />
-                <Route path="/ancestries/warforged" element={<Warforged />} />
-                <Route path="/ancestries/gnome" element={<Gnome />} />
-
-                {/* Skills */}
-                <Route path="/skills/abjuration" element={<Abjuration />} />
-                <Route path="/skills/heavyweapons" element={<HeavyWeapons />} />
-                <Route path="/skills/unarmed" element={<Unarmed />} />
-
-                {/* Tools */}
-                <Route path="/tools/card-creator" element={<CardCreator />} />
-                <Route path="/tools/maneuver-creator" element={<CardCreator />} />
-                <Route path="/tools/dice-roller" element={<DiceRoller />} />
-                <Route path="/tools/character-creator" element={<CharacterCreator />} />
-                <Route path="/tools/character-manager" element={<CharacterManager />} />
-
-                {/* 404 */}
-
-                <Route path="*" element={<Navigate to="/" replace />} />
-              </Routes>
-            </div>
-            <div className="right-sidebar"></div>
-          </div>
-        </div>
-      </ManeuverModalProvider>
+      <AppLayout />
     </BrowserRouter>
   )
 }
